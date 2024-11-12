@@ -1,47 +1,195 @@
-# Astro Starter Kit: Minimal
+# 🚀 Astro 5 + Shadcn/UI Starter Kit
 
-```sh
-npm create astro@latest -- --template minimal
+A lightning-fast starter template combining Astro's performance with Shadcn's beautiful components.
+
+## ⚡ Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/agentc-app/astro-shadcn-starter.git
+
+# Navigate to project
+cd astro-shadcn-starter
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+Visit `http://localhost:4321` - You're ready to go! 🎉
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🎨 Pre-installed Components
 
-## 🚀 Project Structure
+All Shadcn/UI components are pre-configured for Astro:
 
-Inside of your Astro project, you'll see the following folders and files:
+```astro
+---
+// Example usage in .astro file
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+---
+
+<Button>Click me!</Button>
+```
+
+### Available Components
+- ✅ Accordion
+- ✅ Alert Dialog
+- ✅ Avatar
+- ✅ Badge
+- ✅ Button
+- ✅ Card
+- ✅ Dialog
+- ... and more!
+
+## 🛠️ Project Structure
 
 ```text
-/
-├── public/
+your-project/
 ├── src/
+│   ├── components/
+│   │   └── ui/          # All Shadcn components
+│   ├── layouts/
+│   │   └── Layout.astro # Base layout
 │   └── pages/
-│       └── index.astro
-└── package.json
+│       └── index.astro  # Homepage
+├── astro.config.mjs     # Astro configuration
+└── tailwind.config.cjs  # Tailwind configuration
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🔧 Configuration
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+### Astro Setup
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config';
+import tailwind from '@astrojs/tailwind';
+import react from '@astrojs/react';
 
-Any static assets, like images, can be placed in the `public/` directory.
+export default defineConfig({
+  integrations: [
+    tailwind(),
+    react(), // Required for Shadcn components
+  ],
+  // Error suppression
+  vite: {
+    build: {
+      suppressWarnings: true,
+    }
+  }
+});
+```
 
-## 🧞 Commands
+### Using Components
 
-All commands are run from the root of the project, from a terminal:
+```astro
+---
+// src/pages/index.astro
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+<Card>
+  <CardHeader>
+    <CardTitle>Welcome to Astro + Shadcn!</CardTitle>
+  </CardHeader>
+  <Button client:load>Interactive Button</Button>
+</Card>
+```
 
-## 👀 Want to learn more?
+## 🚀 Development Workflow
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+1. **Start Development**
+   ```bash
+   npm run dev
+   ```
+
+2. **Using React Components in Astro**
+   ```astro
+   ---
+   // Always add client:load for interactive components
+   import { Dialog } from "@/components/ui/dialog"
+   ---
+   
+   <Dialog client:load>
+     <!-- Dialog content -->
+   </Dialog>
+   ```
+
+3. **Build for Production**
+   ```bash
+   npm run build
+   npm run preview # Test the production build
+   ```
+
+## 🔍 Troubleshooting
+
+### Common Issues Solved
+
+✅ **Component Hydration**: All interactive components use `client:load`
+✅ **Build Warnings**: Suppressed in configuration
+✅ **Path Aliases**: Pre-configured for easy imports
+✅ **React Integration**: Properly set up for Shadcn
+
+### Quick Fixes
+
+1. **Clear Cache**
+   ```bash
+   rm -rf dist node_modules .astro
+   npm install
+   ```
+
+2. **Restart Dev Server**
+   ```bash
+   # Kill the dev server and restart
+   npm run dev
+   ```
+
+## 💡 Pro Tips
+
+1. **Component Usage in Astro**
+   ```astro
+   ---
+   // Always import in the frontmatter
+   import { Button } from "@/components/ui/button"
+   ---
+   
+   <!-- Use in template -->
+   <Button client:load>Click me!</Button>
+   ```
+
+2. **Styling with Tailwind**
+   ```astro
+   <div class="dark:bg-slate-800">
+     <Button class="m-4">Styled Button</Button>
+   </div>
+   ```
+
+3. **Layout Usage**
+   ```astro
+   ---
+   import Layout from '../layouts/Layout.astro';
+   ---
+   
+   <Layout title="Home">
+     <!-- Your content -->
+   </Layout>
+   ```
+
+## 📚 Quick Links
+
+- [Astro Documentation](https://docs.astro.build)
+- [Shadcn/UI Components](https://ui.shadcn.com/docs/components/accordion)
+- [Tailwind CSS Docs](https://tailwindcss.com/docs)
+
+## 🤝 Need Help?
+
+- Join [Astro Discord](https://astro.build/chat)
+- Check [Astro Documentation](https://docs.astro.build)
+- File an [Issue on GitHub](https://github.com/yourusername/astro-shadcn-starter/issues)
+
+---
+
+Built with 🚀 Astro and 🎨 Shadcn/UI

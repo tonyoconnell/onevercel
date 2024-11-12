@@ -1,0 +1,72 @@
+---
+import "../styles/global.css";
+import { ModeToggle } from "@/components/ModeToggle";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { 
+  title,
+  description = "A beautiful landing page built with Astro and shadcn/ui"
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <script is:inline>
+      const getThemePreference = () => {
+        if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+          return localStorage.getItem("theme");
+        }
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+      };
+      const isDark = getThemePreference() === "dark";
+      document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+
+      if (typeof localStorage !== "undefined") {
+        const observer = new MutationObserver(() => {
+          const isDark = document.documentElement.classList.contains("dark");
+          localStorage.setItem("theme", isDark ? "dark" : "light");
+        });
+        observer.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
+      }
+    </script>
+  </head>
+  <body class="min-h-screen bg-background font-sans antialiased">
+    <div class="relative flex min-h-screen flex-col">
+      <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div class="container flex h-14 items-center justify-between">
+          <a href="/" class="flex items-center space-x-2">
+            <span class="font-bold">Astro + shadcn/ui</span>
+          </a>
+          <ModeToggle client:load />
+        </div>
+      </header>
+      <div class="flex-1">
+        <slot />
+      </div>
+      <footer class="border-t py-6 md:py-0">
+        <div class="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
+          <p class="text-center text-sm leading-loose text-muted-foreground md:text-left">
+            Built with <a href="https://astro.build" target="_blank" rel="noreferrer" class="font-medium underline underline-offset-4">Astro</a> and <a href="https://ui.shadcn.com" target="_blank" rel="noreferrer" class="font-medium underline underline-offset-4">shadcn/ui</a>.
+          </p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html> 
