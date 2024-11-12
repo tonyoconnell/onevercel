@@ -6,10 +6,10 @@ A lightning-fast starter template combining Astro's performance with Shadcn's be
 
 ```bash
 # Clone the repository
-git clone https://github.com/agentc-app/astro-shadcn-starter.git
+git clone https://github.com/agentc-app/astro-shadcn.git
 
 # Navigate to project
-cd astro-shadcn-starter
+cd astro-shadcn
 
 # Install dependencies
 npm install
@@ -61,7 +61,7 @@ your-project/
 
 ## 🔧 Configuration
 
-### Astro Setup
+### Astro is Setup
 ```js
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
