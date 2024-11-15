@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
+import { ModeToggle } from '@/components/ModeToggle'
 import { 
   MessageSquare, 
   Activity,
@@ -31,19 +32,20 @@ export function Sidebar({ navigation }: SidebarProps) {
   return (
     <aside 
       className="group fixed left-0 h-screen w-16 hover:w-60 
-                 bg-[hsl(var(--sidebar-bg))] border-r border-[hsl(var(--sidebar-border))]
-                 transition-[width] duration-200 ease-out z-50"
+                 bg-[#161616] hover:z-50
+                 transition-all duration-200 ease-out z-30
+                 flex flex-col"
     >
       {/* Logo */}
       <a 
         href="/"
-        className="h-16 flex items-center hover:bg-[hsl(var(--sidebar-hover))] transition-colors"
+        className="h-16 flex items-center hover:bg-[#222222] transition-colors"
       >
         <div className="min-w-[64px] flex items-center justify-center">
           <img 
             src="/logo.svg" 
             alt="Logo" 
-            className="w-8 h-8"
+            className="w-6 h-6"
           />
         </div>
         <span className="sidebar-text font-semibold">
@@ -52,7 +54,7 @@ export function Sidebar({ navigation }: SidebarProps) {
       </a>
 
       {/* Nav */}
-      <nav className="space-y-1 py-4">
+      <nav className="flex-1 space-y-1 py-4">
         {navigation?.map((item) => {
           const Icon = icons[item.icon]
           const isActive = activePath === item.path
@@ -62,14 +64,15 @@ export function Sidebar({ navigation }: SidebarProps) {
               key={item.path}
               href={item.path}
               className={cn(
-                "group flex items-center h-11 w-full hover:bg-[hsl(var(--sidebar-hover))]",
-                isActive && "bg-[hsl(var(--sidebar-active))]"
+                "group flex items-center h-11 w-full hover:bg-[#222222] relative overflow-hidden",
+                "before:absolute before:inset-0 before:bg-white/5 before:translate-x-[-100%] before:hover:translate-x-0 before:transition-transform before:duration-300",
+                isActive && "bg-[#1a1a1a]"
               )}
             >
-              <div className="min-w-[64px] flex items-center justify-center">
+              <div className="min-w-[64px] flex items-center justify-center relative z-10">
                 {Icon && <Icon className="sidebar-icon" />}
               </div>
-              <span className="sidebar-text">
+              <span className="sidebar-text relative z-10">
                 {item.title}
               </span>
               {isActive && (
@@ -79,6 +82,11 @@ export function Sidebar({ navigation }: SidebarProps) {
           )
         })}
       </nav>
+
+      {/* Theme Toggle at bottom */}
+      <div className="p-4">
+        <ModeToggle />
+      </div>
     </aside>
   )
 } 
