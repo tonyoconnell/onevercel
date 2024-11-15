@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { ModeToggle } from '@/components/ModeToggle'
 import { 
-  MessageSquare, 
-  Activity,
+  Home,
   FileText,
+  Scale,
   LayoutPanelTop,
   Menu,
   type LucideIcon 
@@ -13,9 +13,9 @@ import { useStore } from '@nanostores/react'
 import { layoutStore, setLayout, type LayoutType } from '@/stores/layout'
 
 const icons: Record<string, LucideIcon> = {
-  MessageSquare,
-  Activity,
+  Home,
   FileText,
+  Scale,
 }
 
 interface SidebarProps {

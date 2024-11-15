@@ -1,4 +1,10 @@
-MIT License
+---
+layout: ../layouts/TextLayout.astro
+title: MIT License
+description: A permissive license that allows for free use, modification, and distribution
+---
+
+# MIT License
 
 Copyright (c) 2024 Agent C https://agentc.app
 

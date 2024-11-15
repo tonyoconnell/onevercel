@@ -94,22 +94,47 @@
   }
 }
 
-/* Base content styles - no padding by default */
+/* Update the content styles */
 #main-content {
   transition: margin 200ms ease-out;
+  @apply flex flex-col min-h-screen;
+}
+
+#main-content main {
+  @apply flex-1 flex flex-col justify-center;
 }
 
 /* Only add margin AND padding when in sidebar layout */
 [data-layout="sidebar"] #main-content {
-  @apply ml-16 px-6;
+  @apply ml-16;
 }
 
-/* Adjust margin and padding when sidebar expands */
-[data-layout="sidebar"] .sidebar-expanded + #main-content {
-  @apply ml-64 px-6;
-}
-
-/* For header layout and mobile, container style */
+/* Add padding for header layout */
 [data-layout="header"] #main-content {
-  @apply container mx-auto px-6;
+  @apply pt-20; /* Adjust this value based on your header height */
+}
+
+/* Content container styles for both layouts */
+[data-layout="sidebar"] #main-content main,
+[data-layout="header"] #main-content main {
+  @apply w-full max-w-[900px] mx-auto px-6;
+}
+
+/* Adjust margin when sidebar expands */
+[data-layout="sidebar"] .sidebar-expanded + #main-content {
+  @apply ml-64;
+}
+
+/* Add styles for code blocks */
+.prose pre {
+  @apply bg-[var(--sidebar-bg)] !important;
+}
+
+.prose code {
+  @apply bg-[var(--sidebar-bg)] text-[hsl(var(--sidebar-fg))] !important;
+}
+
+/* Optional: Style inline code differently if needed */
+.prose :not(pre) > code {
+  @apply px-1.5 py-0.5 rounded-md;
 }
