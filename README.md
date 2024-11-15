@@ -192,4 +192,4 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 ---
 
-Built with 🚀 Astro and 🎨 Shadcn/UI
+Built with 🚀 Astro and 🎨 Shadcn/UI by [AgentC](https://agentc.app)

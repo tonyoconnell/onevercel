@@ -68,9 +68,9 @@ const {
     <div class="flex min-h-screen">
       <Sidebar navigation={navigation} client:load />
       
-      <div class="flex-1 ml-[60px]">
+      <div class="flex-1 ml-16">
         <header class="sticky top-0 z-20 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div class="flex h-14 items-center pr-5">
+          <div class="flex h-14 items-center px-5">
             <div class="flex-1" />
             <button class="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
               Download
@@ -78,7 +78,7 @@ const {
           </div>
         </header>
         
-        <main class="py-6 z-10 pr-5">
+        <main class="py-6 px-5">
           <slot />
         </main>
       </div>
