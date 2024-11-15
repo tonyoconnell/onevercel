@@ -188,7 +188,7 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 - Join [Astro Discord](https://astro.build/chat)
 - Check [Astro Documentation](https://docs.astro.build)
-- File an [Issue on GitHub](https://github.com/yourusername/astro-shadcn-starter/issues)
+- File an [Issue on GitHub](https://github.com/agentc-app/astro-shadcn/issues)
 
 ---
 
