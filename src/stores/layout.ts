@@ -1,8 +1,8 @@
 import { atom } from 'nanostores'
 
-type LayoutType = 'sidebar' | 'header'
+export type LayoutType = 'sidebar' | 'header'
 
-// Create the store
+// Create the store with proper typing
 export const layoutStore = atom<LayoutType>('sidebar')
 
 // Helper functions
@@ -21,6 +21,6 @@ export function initLayout() {
     return
   }
   
-  const savedLayout = localStorage.getItem('layoutPreference') as LayoutType
+  const savedLayout = localStorage.getItem('layoutPreference') as LayoutType | null
   setLayout(savedLayout || 'sidebar')
 } 

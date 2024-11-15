@@ -10,7 +10,7 @@ import {
   type LucideIcon 
 } from 'lucide-react'
 import { useStore } from '@nanostores/react'
-import { layoutStore, setLayout } from '@/stores/layout'
+import { layoutStore, setLayout, type LayoutType } from '@/stores/layout'
 
 const icons: Record<string, LucideIcon> = {
   MessageSquare,
@@ -28,12 +28,16 @@ interface SidebarProps {
   onLayoutChange?: (layout: 'sidebar' | 'header') => void
 }
 
+function isHeaderLayout(layout: unknown): layout is 'header' {
+  return layout === 'header'
+}
+
 export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutChange'>) {
   const [activePath, setActivePath] = useState('')
   const [isHovered, setIsHovered] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const currentLayout = useStore(layoutStore)
+  const currentLayout = useStore(layoutStore) as LayoutType
 
   useEffect(() => {
     const checkLayout = () => {
@@ -187,7 +191,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
       >
         <div className="flex items-center justify-center w-full">
           <img 
-            src={isHovered || currentLayout === 'header' ? "/logo.svg" : "/icon.svg"} 
+            src={isHovered || isHeaderLayout(currentLayout) ? "/logo.svg" : "/icon.svg"} 
             alt="Logo" 
             className={cn(
               "transition-all duration-200",
