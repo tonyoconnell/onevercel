@@ -86,9 +86,30 @@
   }
 
   .sidebar-text {
-    @apply ml-3 text-sm relative z-10;
+    @apply text-sm relative z-10;
     @apply text-[hsl(var(--sidebar-fg)_/_0.8)] group-hover:text-[hsl(var(--sidebar-fg))];
     @apply opacity-0 group-hover:opacity-100;
     @apply transition-opacity duration-200;
+    @apply whitespace-nowrap;
   }
+}
+
+/* Base content styles - no padding by default */
+#main-content {
+  transition: margin 200ms ease-out;
+}
+
+/* Only add margin AND padding when in sidebar layout */
+[data-layout="sidebar"] #main-content {
+  @apply ml-16 px-6;
+}
+
+/* Adjust margin and padding when sidebar expands */
+[data-layout="sidebar"] .sidebar-expanded + #main-content {
+  @apply ml-64 px-6;
+}
+
+/* For header layout and mobile, container style */
+[data-layout="header"] #main-content {
+  @apply container mx-auto px-6;
 }
