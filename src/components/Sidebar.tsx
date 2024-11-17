@@ -74,7 +74,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
           </button>
           
           <div className="flex-1 flex justify-center">
-            <img src="/logo.svg" alt="Logo" className="h-8" />
+            <img src="/logo.png" alt="Logo" className="h-8" />
           </div>
           
           <ModeToggle />
@@ -89,7 +89,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
           )}
         >
           <div className="h-16 flex items-center px-4">
-            <img src="/logo.svg" alt="Logo" className="h-8" />
+            <img src="/logo.png" alt="Logo" className="h-8" />
           </div>
           
           <nav className="flex-1 py-4">
@@ -134,7 +134,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
     return (
       <header className="fixed top-0 left-0 right-0 h-16 bg-[var(--sidebar-bg)] z-40 flex items-center px-5">
         <div className="flex items-center h-full">
-          <img src="/logo.svg" alt="Logo" className="h-8" />
+          <img src="/logo.png" alt="Logo" className="h-8" />
         </div>
         
         <nav className="flex items-center space-x-6 ml-8 flex-1">
@@ -191,7 +191,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
       >
         <div className="flex items-center justify-center w-full">
           <img 
-            src={isHovered || isHeaderLayout(currentLayout) ? "/logo.svg" : "/icon.svg"} 
+            src={isHovered || isHeaderLayout(currentLayout) ? "/logo.png" : "/icon.svg"} 
             alt="Logo" 
             className={cn(
               "transition-all duration-200",
