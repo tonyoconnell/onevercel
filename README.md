@@ -3,8 +3,8 @@
 A lightning-fast starter template combining Astro's performance with Shadcn's beautiful components.
 
 ### 🎨  Screenshots
-![Dark Mode](/screenshots/screenshot-dark.png)
-![Light Mode](/screenshots/screenshot-light.png)
+![Dark Mode](https://astro-shadcn.agentc.app/screenshots/screenshot-dark.png)
+![Light Mode](https://astro-shadcn.agentc.app/screenshots/screenshot-light.png)
 
 
 ## ⚡ Quick Start
