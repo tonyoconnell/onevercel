@@ -186,8 +186,8 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 ## 📊 Performance & Screenshots
 
 ### ⚡ Lighthouse Scores
-![Desktop Performance](/screenshots/lighthouse-desktop.png)
-![Mobile Performance](/screenshots/lighthouse-mobile.png)
+![Desktop Performance](https://astro-shadcn.agentc.app/screenshots/lighthouse-desktop.png)
+![Mobile Performance](https://astro-shadcn.agentc.app/screenshots/lighthouse-mobile.png)
 
 Perfect scores across all metrics:
 - 🚀 Performance: 100
