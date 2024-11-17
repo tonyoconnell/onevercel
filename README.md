@@ -2,6 +2,11 @@
 
 A lightning-fast starter template combining Astro's performance with Shadcn's beautiful components.
 
+### 🎨  Screenshots
+![Dark Mode](/screenshots/screenshot-dark.png)
+![Light Mode](/screenshots/screenshot-light.png)
+
+
 ## ⚡ Quick Start
 
 ```bash
@@ -177,6 +182,20 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
      <!-- Your content -->
    </Layout>
    ```
+
+## 📊 Performance & Screenshots
+
+### ⚡ Lighthouse Scores
+![Desktop Performance](/screenshots/lighthouse-desktop.png)
+![Mobile Performance](/screenshots/lighthouse-mobile.png)
+
+Perfect scores across all metrics:
+- 🚀 Performance: 100
+- ♿ Accessibility: 100
+- 🔧 Best Practices: 100
+- 🔍 SEO: 100
+
+
 
 ## 📚 Quick Links
 
