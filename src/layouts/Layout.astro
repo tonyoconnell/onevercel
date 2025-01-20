@@ -5,6 +5,7 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description?: string;
+  children: any;
 }
 
 const navigation = [
@@ -33,6 +34,7 @@ const navigation = [
 const { 
   title,
   description = "A beautiful dashboard built with Astro and shadcn/ui",
+  children
 } = Astro.props;
 
 // Critical CSS variables
@@ -76,16 +78,16 @@ const preloadAssets = [
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charSet="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="preconnect" href="/" crossorigin>
+    <link rel="preconnect" href="/" crossOrigin="anonymous">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
     <!-- Resource hints -->
     {preconnectUrls.map(url => (
-      <link rel="preconnect" href={url} crossorigin />
+      <link rel="preconnect" href={url} crossOrigin="anonymous" />
     ))}
     
     <!-- Preload critical assets -->
