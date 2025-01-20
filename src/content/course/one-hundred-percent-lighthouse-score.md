@@ -1,6 +1,7 @@
 ---
 title: "How to Get 100% Google Lighthouse Score"
 description: "Achieve perfect Lighthouse scores effortlessly with Astro's built-in optimizations"
+slug: "/courses/one-hundred-percent-lighthouse-score"
 date: 2024-11-21
 picture: "/screenshots/lighthouse-desktop.png"
 images:
@@ -13,8 +14,6 @@ images:
 ---
 
 Astro's architecture is designed for perfect performance out of the box. Here's why you'll get perfect Lighthouse scores without extra effort:
-
-## Built-in Performance Features
 
 1. **Zero JavaScript by Default**
    - Pages ship with no JavaScript
@@ -33,15 +32,7 @@ Astro's architecture is designed for perfect performance out of the box. Here's 
    - Efficient asset bundling
    - No configuration needed
 
-## Here's our results on desktop and mobile
-
-<Image 
-  src="/screenshots/lighthouse-desktop.png" 
-  alt="Perfect Lighthouse score showing 100 in all categories" 
-  width={800} 
-  height={400} 
-  format="webp"
-/>
+## Here's our results on mobile
 <Image 
   src="/screenshots/lighthouse-mobile.png" 
   alt="Perfect Lighthouse score showing 100 in all categories on mobile" 
@@ -50,12 +41,12 @@ Astro's architecture is designed for perfect performance out of the box. Here's 
   format="webp"
 />
 
-#### Why Astro Scores Perfect:
+## How to get 100% Lighthouse score
 
-- ✅ Static-first approach eliminates unnecessary JavaScript
-- ✅ Automatic asset optimization
-- ✅ Server-side rendering by default
-- ✅ Built-in SEO best practices
-- ✅ Intelligent code splitting
-- ✅ Native image optimization
-- ✅ Zero-config performance
+- ✅ Use Astro's static-first approach eliminates unnecessary JavaScript
+- ✅ Use Astro's sutomatic asset optimization
+- ✅ Use Astro's server-side rendering by default
+- ✅ Use Astro's built-in SEO best practices
+- ✅ Use Astro's intelligent code splitting
+- ✅ Use Astro's native image optimization
+- ✅ Use Astro's zero-config performance
