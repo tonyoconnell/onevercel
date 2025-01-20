@@ -1,7 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 
-// Define the stream schema
-const streamSchema = z.object({
+// Define the Course schema
+const CourseSchema = z.object({
 	title: z.string(),
 	description: z.string(),
 	date: z.date(),
@@ -10,16 +10,16 @@ const streamSchema = z.object({
 	image: z.string().optional()
 });
 
-// Define the stream collection schema
-const stream = defineCollection({
+// Define the Course collection schema
+const Course = defineCollection({
 	type: 'content',
-	schema: streamSchema,
+	schema: CourseSchema,
 });
 
 export const collections = {
-	'stream': stream
+	'Course': Course
 };
 
-// Export the stream schema type
-export type StreamSchema = z.infer<typeof streamSchema>;
+// Export the Course schema type
+export type CourseSchema = z.infer<typeof CourseSchema>;
 

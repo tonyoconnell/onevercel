@@ -14,8 +14,8 @@ const navigation = [
     icon: "Home"
   },
   {
-    title: "Stream",
-    path: "/stream",
+    title: "Course",
+    path: "/course",
     icon: "Waves"
   },
   {
@@ -89,17 +89,12 @@ const preloadAssets = [
     ))}
     
     <!-- Preload critical assets -->
-    {preloadAssets.map(({ url, as }) => (
-      <link rel="preload" href={url} as={as} fetchpriority="high" />
-    ))}
-    
-    <!-- Inline critical CSS -->
-    <style is:inline set:html={criticalStyles}></style>
+  
     
     <title>{title}</title>
 
     <!-- Defer non-critical JS -->
-    <script is:inline>
+    <script>
       // Theme initialization
       const theme = localStorage.getItem('theme') || 
         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -109,8 +104,8 @@ const preloadAssets = [
   <body class="min-h-screen bg-background font-sans antialiased">
     <div class="flex min-h-screen optimize-gpu">
       <Sidebar navigation={navigation} client:load />
-      <div id="main-content" class="flex-1 min-h-screen">
-        <main class="py-6 min-h-[calc(100vh-3rem)]">
+      <div id="main-content" class="flex-1 min-h-screen pl-[80px]">
+        <main class="py-6 min-h-[calc(100vh-3rem)] max-w-[1000px] mx-auto px-4">
           <slot />
         </main>
       </div>

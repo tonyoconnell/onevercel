@@ -1,12 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
-import StreamPost from '../../layouts/StreamPost.astro';
+import CoursePost from '../../layouts/Course.astro';
 import type { CollectionEntry } from 'astro:content';
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-	const posts = await getCollection('stream');
+	const posts = await getCollection('Course');
 	return posts.map((entry) => ({
 		params: { slug: entry.slug },
 		props: { entry },
@@ -14,15 +14,15 @@ export async function getStaticPaths() {
 }
 
 type Props = {
-	entry: CollectionEntry<'stream'>;
+	entry: CollectionEntry<'Course'>;
 };
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<StreamPost entry={entry}>
+<CoursePost entry={entry}>
 	<div class="px-4 sm:px-6">
 		<Content />
 	</div>
-</StreamPost>
+</coursePost>

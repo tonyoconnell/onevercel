@@ -1,24 +1,24 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { Card } from "@/components/ui/card";
 import type { CollectionEntry } from 'astro:content';
+import { Card } from "../../components/ui/card";
 
 // Type the collection entry
-type StreamEntry = CollectionEntry<'stream'>;
+type CourseEntry = CollectionEntry<'course'>;
 
 // Get and sort entries
-const entries = await getCollection('stream');
+const entries = await getCollection('course');
 const sortedEntries = entries.sort(
 	(a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
 );
 
 const pageData = {
-	title: "Stream",
+	title: "Course",
 	description: "Latest updates and content",
 };
 
-function formatStreamDate(date: Date) {
+function formatCourseEntryDate(date: Date) {
 	return {
 		day: date.getDate(),
 		month: date.toLocaleString("default", { month: "short" }),
@@ -30,7 +30,7 @@ function formatStreamDate(date: Date) {
 <Layout title={pageData.title} description={pageData.description}>
 	<div class="max-w-4xl mx-auto px-4 sm:px-6">
 		<header class="mb-12">
-			<h1 class="text-4xl font-bold">Stream</h1>
+			<h1 class="text-4xl font-bold">Course</h1>
 			<p class="mt-2 text-muted-foreground">
 				Latest updates, articles and resources
 			</p>
@@ -38,13 +38,13 @@ function formatStreamDate(date: Date) {
 
 		<div class="space-y-8">
 			{
-				sortedEntries.map((entry: StreamEntry) => {
-					const date = formatStreamDate(new Date(entry.data.date));
+				sortedEntries.map((entry: CourseEntry) => {
+					const date = formatCourseEntryDate(new Date(entry.data.date));
 
 					return (
 						<Card className="hover:shadow-md transition-shadow duration-200">
 							<a
-								href={`/stream/${entry.slug}`}
+								href={`/course/${entry.slug || entry.data.slug}`}
 								class="flex gap-6 p-6"
 							>
 								{/* Date Block */}
