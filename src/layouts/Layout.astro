@@ -37,57 +37,27 @@ const {
   children
 } = Astro.props;
 
-// Critical CSS variables
-const criticalStyles = `
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --radius: 0.5rem;
-  }
-  
-  /* Core layout styles */
-  body {
-    margin: 0;
-    min-height: 100vh;
-    opacity: 0;
-    animation: fadeIn 0.1s ease-in forwards;
-  }
-  
-  @keyframes fadeIn {
-    to { opacity: 1; }
-  }
-  
-  /* Critical layout classes */
-  .flex { display: flex }
-  .min-h-screen { min-height: 100vh }
-  .bg-background { background-color: hsl(var(--background)) }
-`;
-
 // Resource hints
 const preconnectUrls = [
   'https://fonts.googleapis.com',
   'https://fonts.gstatic.com'
 ];
 
-const preloadAssets = [
-  { url: '/icon.svg', as: 'image' },
-  { url: '/logo.png', as: 'image' }
-];
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charSet="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="preconnect" href="/" crossOrigin="anonymous">
+    <link rel="preconnect" href="/" crossorigin="anonymous">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
     <!-- Resource hints -->
     {preconnectUrls.map(url => (
-      <link rel="preconnect" href={url} crossOrigin="anonymous" />
+      <link rel="preconnect" href={url} crossorigin="anonymous" />
     ))}
     
     <!-- Preload critical assets -->
