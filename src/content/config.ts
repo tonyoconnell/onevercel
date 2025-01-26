@@ -17,7 +17,7 @@ const Course = defineCollection({
 });
 
 export const collections = {
-	'Course': Course
+	'course': Course
 };
 
 // Export the Course schema type

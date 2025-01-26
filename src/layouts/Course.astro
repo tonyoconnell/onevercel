@@ -28,11 +28,12 @@ const pageData = {
           {entry.data.description}
         </p>
       )}
-      {entry.data.picture && (
+      {entry.data.picture && entry.data.picture.trim() !== "" && (
         <img
           src={entry.data.picture}
-          alt=""
-          class="w-full aspect-video object-cover rounded-lg"
+          alt={entry.data.title}
+          class="w-full object-cover rounded-lg"
+          onerror="this.style.display='none'"
         />
       )}
     </header>
@@ -50,4 +51,4 @@ const pageData = {
     @apply prose-code:bg-muted prose-code:p-1 prose-code:rounded;
     @apply prose-pre:bg-muted;
   }
-</style> 
+</style>

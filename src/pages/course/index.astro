@@ -9,8 +9,9 @@ import type { CollectionEntry } from "astro:content";
 // Get all course entries
 const entries = await getCollection("course");
 
-// Get view mode from URL params, default to grid
-const viewMode = Astro.url.searchParams.get("view") || "grid";
+// Get view mode from URL params, default to list
+const viewMode = Astro.url.searchParams.get("view") || "list";
+const gridColumns = Astro.url.searchParams.get("columns") || "2";
 
 function formatDate(date: Date) {
 	return new Intl.DateTimeFormat("en-US", {
@@ -28,27 +29,53 @@ function formatDate(date: Date) {
 	<div class="max-w-4xl mx-auto">
 		<div class="flex justify-between items-center mb-8">
 			<h1 class="text-4xl font-bold">Course</h1>
-			<div class="flex gap-2">
-				<a
-					href="/course?view=grid"
-					class={`p-2 rounded-md hover:bg-accent ${viewMode === 'grid' ? 'bg-accent' : ''}`}
-					title="Grid view"
-				>
-					<Grid className="w-5 h-5" />
-				</a>
+			<div class="flex gap-2 items-center">
 				<a
 					href="/course?view=list"
-					class={`p-2 rounded-md hover:bg-accent ${viewMode === 'list' ? 'bg-accent' : ''}`}
+					class={`p-2 rounded-md hover:bg-accent hover:scale-110 transition-all duration-200 ${viewMode === 'list' ? 'bg-accent' : ''}`}
 					title="List view"
 				>
 					<List className="w-5 h-5" />
 				</a>
+				<a
+					href="/course?view=grid&columns=2"
+					class={`p-2 rounded-md hover:bg-accent hover:scale-110 transition-all duration-200 ${viewMode === 'grid' && gridColumns === '2' ? 'bg-accent' : ''}`}
+					title="2 columns grid"
+				>
+					<Grid className="w-5 h-5" />
+				</a>
+				<a
+					href="/course?view=grid&columns=3"
+					class={`p-2 rounded-md hover:bg-accent hover:scale-110 transition-all duration-200 ${viewMode === 'grid' && gridColumns === '3' ? 'bg-accent' : ''}`}
+					title="3 columns grid"
+				>
+					<div class="w-5 h-5 grid grid-cols-3 gap-0.5">
+						<div class="bg-current rounded-sm"></div>
+						<div class="bg-current rounded-sm"></div>
+						<div class="bg-current rounded-sm"></div>
+					</div>
+				</a>
+				<a
+					href="/course?view=grid&columns=4"
+					class={`p-2 rounded-md hover:bg-accent hover:scale-110 transition-all duration-200 ${viewMode === 'grid' && gridColumns === '4' ? 'bg-accent' : ''}`}
+					title="4 columns grid"
+				>
+					<div class="w-5 h-5 grid grid-cols-2 grid-rows-2 gap-0.5">
+						<div class="bg-current rounded-sm"></div>
+						<div class="bg-current rounded-sm"></div>
+						<div class="bg-current rounded-sm"></div>
+						<div class="bg-current rounded-sm"></div>
+					</div>
+				</a>
 			</div>
 		</div>
 		
-		<div class={viewMode === 'grid' ? 'grid gap-6 sm:grid-cols-2 lg:grid-cols-3' : 'space-y-6'}>
+		<div 
+			class={viewMode === 'grid' ? `grid gap-4 sm:gap-6 grid-cols-1 ${gridColumns === '2' ? 'sm:grid-cols-2' : gridColumns === '3' ? 'sm:grid-cols-3' : 'sm:grid-cols-4'}` : 'space-y-4 sm:space-y-6'}
+			transition:animate="slide"
+		>
 			{entries.map((entry: CollectionEntry<"course">) => (
-				<Card className={`overflow-hidden ${viewMode === 'list' ? 'flex' : ''}`}>
+				<Card className={`overflow-hidden transition-all duration-200 hover:shadow-lg ${viewMode === 'list' ? 'flex' : 'hover:-translate-y-1'}`}>
 					<a href={`/course/${entry.slug}`} class={`block hover:opacity-80 transition-opacity ${viewMode === 'list' ? 'flex flex-1' : ''}`}>
 						{entry.data.picture && viewMode === 'list' && (
 							<div class="w-48 shrink-0">

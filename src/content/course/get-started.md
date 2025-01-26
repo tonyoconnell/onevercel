@@ -3,12 +3,12 @@ title: "Getting Started with Astro + Shadcn/UI"
 description: "Learn how to set up and customize your high-performance Astro site with Shadcn/UI components"
 slug: "/courses/getting-started"
 date: 2024-03-21
-picture: "/screenshots/starter-homepage.png"
+picture: ""
 images:
-  - src: "/screenshots/dark-mode-demo.png"
-    alt: "Dark mode demonstration of the starter kit"
-  - src: "/screenshots/component-showcase.png"
-    alt: "Various Shadcn/UI components in action"
+  - src: ""
+    alt: ""
+  - src: ""
+    alt: ""
 ---
 
 Get started with our lightning-fast Astro + Shadcn/UI starter kit in minutes. This guide will walk you through setup, customization, and best practices.
