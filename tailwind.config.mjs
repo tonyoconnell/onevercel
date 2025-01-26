@@ -2,6 +2,13 @@
 export default {
     darkMode: ['class'],
     content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+    plugins: [
+        require("tailwindcss-animate"),
+        require("@assistant-ui/react/tailwindcss")({ 
+            components: ["thread"],
+            shadcn: true 
+        })
+    ],
 	theme: {
     	extend: {
     		borderRadius: {
@@ -87,6 +94,7 @@ export default {
     },
 	plugins: [
 		require("tailwindcss-animate"),
-		require("@tailwindcss/typography")
+		require("@tailwindcss/typography"),
+	    require("@assistant-ui/react/tailwindcss")({ shadcn: true })
 	],
 }

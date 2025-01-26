@@ -34,6 +34,7 @@
     --sidebar-hover: #222222;
     --sidebar-active: #1a1a1a;
     --sidebar-border: 220 10% 24%;
+    --aui-thread-max-width: infinity;
   }
 
   .dark {
