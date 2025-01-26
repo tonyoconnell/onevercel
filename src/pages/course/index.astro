@@ -1,100 +1,89 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import type { CollectionEntry } from 'astro:content';
-import { Card } from "../../components/ui/card";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Calendar, Grid, List } from "lucide-react";
+import type { CollectionEntry } from "astro:content";
 
-// Get and sort entries
-const entries = await getCollection('Course');
-const sortedEntries = entries.sort(
-	(a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
-);
+// Get all course entries
+const entries = await getCollection("course");
 
-const pageData = {
-	title: "Course",
-	description: "Latest updates and content",
-};
+// Get view mode from URL params, default to grid
+const viewMode = Astro.url.searchParams.get("view") || "grid";
 
-function formatCourseEntryDate(date: Date) {
-	return {
-		day: date.getDate(),
-		month: date.toLocaleString("default", { month: "short" }),
-		year: date.getFullYear(),
-	};
+function formatDate(date: Date) {
+	return new Intl.DateTimeFormat("en-US", {
+		year: "numeric",
+		month: "short",
+		day: "numeric",
+	}).format(date);
 }
 ---
 
-<Layout title={pageData.title} description={pageData.description}>
-	<div class="max-w-4xl mx-auto px-4 sm:px-6">
-		<header class="mb-12">
+<Layout
+	title="Course"
+	description="Browse all available lessons"
+>
+	<div class="max-w-4xl mx-auto">
+		<div class="flex justify-between items-center mb-8">
 			<h1 class="text-4xl font-bold">Course</h1>
-			<p class="mt-2 text-muted-foreground">
-				Latest updates, articles and resources
-			</p>
-		</header>
-
-		<div class="space-y-8">
-			{
-				sortedEntries.map((entry) => {
-					const date = formatCourseEntryDate(new Date(entry.data.date));
-
-					return (
-						<Card className="hover:shadow-md transition-shadow duration-200">
-							<a
-								href={`/course/${entry.id}`}
-								class="flex gap-6 p-6"
-							>
-								{/* Date Block */}
-								<div class="flex-shrink-0 w-16 text-center">
-									<div class="font-mono text-2xl font-bold text-primary">
-										{date.day}
-									</div>
-									<div class="text-sm text-muted-foreground uppercase tracking-wider">
-										{date.month}
-									</div>
-									<div class="text-xs text-muted-foreground/60 mt-1">
-										{date.year}
-									</div>
-								</div>
-
-								{/* Content */}
-								<div class="flex-1 min-w-0">
-									<div class="flex justify-between items-start gap-4">
-										<div>
-											<h2 class="text-xl font-semibold leading-tight line-clamp-2 hover:text-primary transition-colors">
-												{entry.data.title}
-											</h2>
-											<p class="mt-2 text-muted-foreground line-clamp-3">
-												{entry.data.description}
-											</p>
-										</div>
-
-										{entry.data.picture && (
-											<img
-												src={entry.data.picture}
-												alt=""
-												class="w-24 h-24 object-cover rounded-lg flex-shrink-0"
-												loading="lazy"
-											/>
-										)}
-									</div>
-								</div>
-							</a>
-						</Card>
-					);
-				})
-			}
+			<div class="flex gap-2">
+				<a
+					href="/course?view=grid"
+					class={`p-2 rounded-md hover:bg-accent ${viewMode === 'grid' ? 'bg-accent' : ''}`}
+					title="Grid view"
+				>
+					<Grid className="w-5 h-5" />
+				</a>
+				<a
+					href="/course?view=list"
+					class={`p-2 rounded-md hover:bg-accent ${viewMode === 'list' ? 'bg-accent' : ''}`}
+					title="List view"
+				>
+					<List className="w-5 h-5" />
+				</a>
+			</div>
+		</div>
+		
+		<div class={viewMode === 'grid' ? 'grid gap-6 sm:grid-cols-2 lg:grid-cols-3' : 'space-y-6'}>
+			{entries.map((entry: CollectionEntry<"course">) => (
+				<Card className={`overflow-hidden ${viewMode === 'list' ? 'flex' : ''}`}>
+					<a href={`/course/${entry.slug}`} class={`block hover:opacity-80 transition-opacity ${viewMode === 'list' ? 'flex flex-1' : ''}`}>
+						{entry.data.picture && viewMode === 'list' && (
+							<div class="w-48 shrink-0">
+								<img
+									src={entry.data.picture}
+									alt={entry.data.title}
+									class="w-full h-full object-cover"
+								/>
+							</div>
+						)}
+						<div class="p-6 flex-1">
+							<div class="flex items-center gap-2 mb-4">
+								<Badge variant="secondary" client:load>
+									{entry.data.type || "Course"}
+								</Badge>
+								<span class="text-sm text-muted-foreground flex items-center">
+									<Calendar className="w-4 h-4 mr-1" client:load />
+									{formatDate(new Date(entry.data.date))}
+								</span>
+							</div>
+							<h2 class="text-2xl font-bold mb-2">{entry.data.title}</h2>
+							<p class="text-muted-foreground">{entry.data.description}</p>
+						</div>
+						{entry.data.picture && viewMode === 'grid' && (
+							<div class="aspect-video w-full">
+								<img
+									src={entry.data.picture}
+									alt={entry.data.title}
+									class="w-full h-full object-cover"
+								/>
+							</div>
+						)}
+					</a>
+				</Card>
+			))}
 		</div>
 	</div>
 </Layout>
-
-<style>
-	/* Optional: Add hover effect to cards */
-	.card {
-		transition: transform 0.2s ease-in-out;
-	}
-	.card:hover {
-		transform: translateY(-2px);
-	}
-</style>
-
