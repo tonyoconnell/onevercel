@@ -1,13 +1,14 @@
 "use client";
 
 import {
+  CodeHeaderProps,
   MarkdownTextPrimitive,
   useIsMarkdownCodeBlock,
 } from "@assistant-ui/react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
-import { memo, useState } from "react";
+import { FC, memo, useState } from "react";
 import { CheckIcon, CopyIcon } from "lucide-react";
 
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
@@ -185,12 +186,7 @@ const MarkdownTextImpl = () => {
 
 export const MarkdownText = memo(MarkdownTextImpl);
 
-interface CodeHeaderProps {
-  language?: string;
-  code?: string;
-}
-
-const CodeHeader = ({ language, code }: CodeHeaderProps) => {
+const CodeHeader: FC<CodeHeaderProps> = ({ language, code }) => {
   const { isCopied, copyToClipboard } = useCopyToClipboard();
   const onCopy = () => {
     if (!code || isCopied) return;

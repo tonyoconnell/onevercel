@@ -7,7 +7,7 @@ import {
   MessagePrimitive,
   ThreadPrimitive,
 } from "@assistant-ui/react";
-import { type FC } from "react";
+import type { FC } from "react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -73,7 +73,7 @@ const MyThreadWelcome: FC = () => {
         <Avatar>
           <AvatarFallback>C</AvatarFallback>
         </Avatar>
-        <p className="mt-4 font-medium">How can I help you?</p>
+        <p className="mt-4 font-medium">How can I help you today?</p>
       </div>
     </ThreadPrimitive.Empty>
   );

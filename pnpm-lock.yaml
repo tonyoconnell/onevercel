@@ -225,6 +225,9 @@ importers:
       terser:
         specifier: ^5.37.0
         version: 5.37.0
+      vite:
+        specifier: ^6.0.11
+        version: 6.0.11(jiti@1.21.7)(terser@5.37.0)(yaml@2.7.0)
 
 packages:
 
