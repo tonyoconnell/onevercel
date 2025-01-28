@@ -5,18 +5,26 @@ import tailwind from '@astrojs/tailwind';
 import partytown from '@astrojs/partytown';
 import cloudflare from '@astrojs/cloudflare';
 
-// https://astro.build/config
 export default defineConfig({
   integrations: [react(), tailwind(), partytown()],
   markdown: {
-    // add markdown config here
+    // markdown config
   },
   vite: {
     assetsInclude: ['**/*.md'],
     build: {
       rollupOptions: {
-        external: ['@astrojs/cloudflare']
+        output: {  // <-- Moved manualChunks under output
+          manualChunks(id) {
+            if (id.includes('@assistant-ui/react')) {
+              return 'assistant-ui-chunk';
+            }
+          }
+        }
       }
+    },
+    ssr: {
+      noExternal: ['@assistant-ui/react']
     }
   },
   output: 'server',

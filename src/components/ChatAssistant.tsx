@@ -7,3 +7,4 @@ export function ChatAssistant() {
 
   return <AssistantModal runtime={runtime} />;
 }
+
