@@ -1,14 +1,15 @@
 "use client";
 
 import {
-  CodeHeaderProps,
+  type CodeHeaderProps,
   MarkdownTextPrimitive,
   useIsMarkdownCodeBlock,
 } from "@assistant-ui/react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
-import { FC, memo, useState } from "react";
+import type { FC } from "react";
+import { memo, useState } from "react";
 import { CheckIcon, CopyIcon } from "lucide-react";
 
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
