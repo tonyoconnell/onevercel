@@ -1,5 +1,6 @@
 ---
 import { Sidebar } from "@/components/Sidebar";
+import { ChatAssistant } from "@/components/ChatAssistant";
 import "../styles/global.css";
 
 interface Props {
@@ -17,7 +18,7 @@ const navigation = [
   {
     title: "Chat",
     path: "/chat",
-    icon: "Waves"
+    icon: "Chat"
   },
   {
     title: "README",
@@ -42,6 +43,10 @@ const preconnectUrls = [
   'https://fonts.gstatic.com'
 ];
 
+// Don't show chat assistant on these paths
+const hideChatPaths = ['/chat'];
+const currentPath = Astro.url.pathname;
+const showChatAssistant = !hideChatPaths.includes(currentPath);
 ---
 
 <!doctype html>
@@ -81,5 +86,10 @@ const preconnectUrls = [
         </main>
       </div>
     </div>
+    {showChatAssistant && (
+      <div class="fixed bottom-4 right-4 z-50">
+        <ChatAssistant client:load />
+      </div>
+    )}
   </body>
-</html> 
+</html>
