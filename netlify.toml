@@ -13,6 +13,3 @@
 
 [functions]
   node_bundler = "esbuild"
-
-[edge_functions]
-  bundle = true

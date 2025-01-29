@@ -28,7 +28,5 @@ export default defineConfig({
     }
   },
   output: 'server',
-  adapter: netlify({
-    edgeMiddleware: true // Enable edge middleware for better performance
-  })
+  adapter: netlify()
 });
