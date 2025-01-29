@@ -11,7 +11,7 @@ import {
   type LucideIcon 
 } from 'lucide-react'
 import { useStore } from '@nanostores/react'
-import { layoutStore, setLayout, type LayoutType } from '@/stores/layout'
+import { layoutStore, type LayoutState } from '@/stores/layout'
 
 const icons: Record<string, LucideIcon> = {
   Home,
@@ -30,8 +30,8 @@ interface SidebarProps {
   onLayoutChange?: (layout: 'sidebar' | 'header') => void
 }
 
-function isHeaderLayout(layout: unknown): layout is 'header' {
-  return layout === 'header'
+function isCollapsedLayout(state: LayoutState): boolean {
+  return !state.showLeft
 }
 
 export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutChange'>) {
@@ -39,7 +39,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
   const [isHovered, setIsHovered] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const currentLayout = useStore(layoutStore) as LayoutType
+  const currentLayout = useStore(layoutStore)
 
   useEffect(() => {
     const checkLayout = () => {
@@ -47,7 +47,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
       setIsMobile(isMobileView)
       
       if (isMobileView) {
-        setLayout('header')
+        layoutStore.set({ ...layoutStore.get(), showLeft: false })
       }
     }
 
@@ -132,7 +132,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
     )
   }
 
-  if (currentLayout === 'header') {
+  if (isCollapsedLayout(currentLayout)) {
     return (
       <header className="fixed top-0 left-0 right-0 h-16 bg-[var(--sidebar-bg)] z-40 flex items-center px-5">
         <div className="flex items-center h-full">
@@ -162,7 +162,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
 
         <div className="flex items-center space-x-4">
           <button
-            onClick={() => setLayout('sidebar')}
+            onClick={() => layoutStore.set({ ...layoutStore.get(), showLeft: true })}
             className="text-[hsl(var(--sidebar-fg)_/_0.8)] hover:text-[hsl(var(--sidebar-fg))]
                        p-2 hover:bg-[var(--sidebar-hover)] rounded-md transition-colors"
           >
@@ -193,7 +193,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
       >
         <div className="flex items-center justify-center w-full">
           <img 
-            src={isHovered || isHeaderLayout(currentLayout) ? "/logo.png" : "/icon.svg"} 
+            src={isHovered || isCollapsedLayout(currentLayout) ? "/logo.png" : "/icon.svg"} 
             alt="Logo" 
             className={cn(
               "transition-all duration-200",
@@ -236,7 +236,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
       {/* Layout Switcher and Theme Toggle */}
       <div className="py-4 border-t border-[var(--sidebar-hover)]">
         <button
-          onClick={() => setLayout('header')}
+          onClick={() => layoutStore.set({ ...layoutStore.get(), showLeft: false })}
           className={cn(
             "group flex items-center h-11 w-full hover:bg-[var(--sidebar-hover)] relative overflow-hidden",
             "before:absolute before:inset-0 before:bg-white/5 before:translate-x-[-100%] before:hover:translate-x-0 before:transition-transform before:duration-300"
@@ -265,4 +265,4 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
       </div>
     </aside>
   )
-} 
+}
