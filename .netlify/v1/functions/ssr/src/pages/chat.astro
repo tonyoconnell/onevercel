@@ -4,7 +4,9 @@ import { MyThread } from "../components/ChatThread";
 ---
 
 <Layout title="Chat">
-  <div class="w-[800px] h-[800px]">
-    <MyThread client:load />
+  <div class="fixed inset-0 -ml-[80px] flex justify-center">
+    <div class="w-full max-w-[800px]">
+      <MyThread client:load />
+    </div>
   </div>
 </Layout>

@@ -7,6 +7,7 @@ import {
   MessagePrimitive,
   ThreadPrimitive,
 } from "@assistant-ui/react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import type { FC } from "react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -29,25 +30,28 @@ import { cn } from "@/lib/utils";
 
 export const MyThread: FC = () => {
   return (
-    <ThreadPrimitive.Root className="bg-background h-full">
-      <ThreadPrimitive.Viewport className="flex h-full flex-col items-center overflow-y-scroll scroll-smooth bg-inherit px-4 pt-8">
-        <MyThreadWelcome />
+    <ThreadPrimitive.Root className="flex flex-col h-full w-full">
+      <ScrollArea className="flex-1 w-full">
+        <ThreadPrimitive.Viewport className="min-h-full w-full">
+          <div className="pb-36">
+            <MyThreadWelcome />
+            <ThreadPrimitive.Messages
+              components={{
+                UserMessage: MyUserMessage,
+                EditComposer: MyEditComposer,
+                AssistantMessage: MyAssistantMessage,
+              }}
+            />
+          </div>
+        </ThreadPrimitive.Viewport>
+      </ScrollArea>
 
-        <ThreadPrimitive.Messages
-          components={{
-            UserMessage: MyUserMessage,
-            EditComposer: MyEditComposer,
-            AssistantMessage: MyAssistantMessage,
-          }}
-        />
-
-        <div className="min-h-8 flex-grow" />
-
-        <div className="sticky bottom-0 mt-3 flex w-full max-w-2xl flex-col items-center justify-end rounded-t-lg bg-inherit pb-4">
+      <div className="fixed inset-x-0 bottom-0 bg-gradient-to-t from-background from-50% to-transparent">
+        <div className="px-6 pt-6 pb-4">
           <MyThreadScrollToBottom />
           <MyComposer />
         </div>
-      </ThreadPrimitive.Viewport>
+      </div>
     </ThreadPrimitive.Root>
   );
 };
@@ -73,7 +77,7 @@ const MyThreadWelcome: FC = () => {
         <Avatar>
           <AvatarFallback>C</AvatarFallback>
         </Avatar>
-        <p className="mt-4 font-medium">How can I help you today</p>
+        <p className="mt-4 font-medium">How can I help you today?</p>
       </div>
     </ThreadPrimitive.Empty>
   );
@@ -81,12 +85,12 @@ const MyThreadWelcome: FC = () => {
 
 const MyComposer: FC = () => {
   return (
-<ComposerPrimitive.Root className="flex w-full flex-wrap items-end rounded-full border bg-inherit px-4 shadow-sm transition-colors ease-in focus-within:border-ring/20">
+<ComposerPrimitive.Root className="flex items-end rounded-xl border bg-background shadow-lg transition-colors ease-in focus-within:border-ring/30 focus-within:shadow-md mx-auto max-w-[800px] w-full">
       <ComposerPrimitive.Input
         autoFocus
         placeholder="Write a message..."
         rows={1}
-        className="placeholder:text-muted-foreground max-h-40 flex-grow resize-none rounded-full border-none bg-transparent px-2 py-3 text-sm outline-none focus:ring-0 disabled:cursor-not-allowed"
+        className="placeholder:text-muted-foreground max-h-40 min-h-[56px] w-full resize-none rounded-lg border-none bg-transparent px-4 py-4 text-sm outline-none focus:ring-0 disabled:cursor-not-allowed"
       />
       <ThreadPrimitive.If running={false}>
         <ComposerPrimitive.Send asChild>
@@ -116,14 +120,20 @@ const MyComposer: FC = () => {
 
 const MyUserMessage: FC = () => {
   return (
-    <MessagePrimitive.Root className="grid w-full max-w-2xl auto-rows-auto grid-cols-[minmax(72px,1fr)_auto] gap-y-2 py-4">
-      <MyUserActionBar />
-
-      <div className="bg-muted text-foreground col-start-2 row-start-1 max-w-xl break-words rounded-3xl px-5 py-2.5">
-        <MessagePrimitive.Content />
+    <MessagePrimitive.Root className="group w-full py-6">
+      <div className="px-6">
+        <div className="flex justify-end items-start gap-6">
+          <MyUserActionBar />
+          <div className="bg-muted text-foreground min-w-0 max-w-[75%] rounded-2xl px-6 py-3.5">
+            <MessagePrimitive.Content />
+          </div>
+        </div>
+        <div className="flex justify-end mt-2">
+          <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+            <MyBranchPicker />
+          </div>
+        </div>
       </div>
-
-      <MyBranchPicker className="col-span-full col-start-1 row-start-2 -mr-1 justify-end" />
     </MessagePrimitive.Root>
   );
 };
@@ -133,7 +143,7 @@ const MyUserActionBar: FC = () => {
     <ActionBarPrimitive.Root
       hideWhenRunning
       autohide="not-last"
-      className="col-start-1 mr-3 mt-2.5 flex flex-col items-end"
+      className="opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center"
     >
       <ActionBarPrimitive.Edit asChild>
         <TooltipIconButton tooltip="Edit">
@@ -146,7 +156,7 @@ const MyUserActionBar: FC = () => {
 
 const MyEditComposer: FC = () => {
   return (
-    <ComposerPrimitive.Root className="bg-muted my-4 flex w-full max-w-2xl flex-col gap-2 rounded-xl">
+    <ComposerPrimitive.Root className="bg-muted my-4 container mx-auto flex flex-col gap-2 rounded-xl">
       <ComposerPrimitive.Input className="text-foreground flex h-8 w-full resize-none border-none bg-transparent p-4 pb-0 outline-none focus:ring-0" />
 
       <div className="mx-3 mb-3 flex items-center justify-center gap-2 self-end">
@@ -163,18 +173,23 @@ const MyEditComposer: FC = () => {
 
 const MyAssistantMessage: FC = () => {
   return (
-    <MessagePrimitive.Root className="relative grid w-full max-w-2xl grid-cols-[auto_auto_1fr] grid-rows-[auto_1fr] py-4">
-      <Avatar className="col-start-1 row-span-full row-start-1 mr-4">
-        <AvatarFallback>A</AvatarFallback>
-      </Avatar>
-
-      <div className="text-foreground col-span-2 col-start-2 row-start-1 my-1.5 max-w-xl break-words leading-7">
-        <MessagePrimitive.Content components={{ Text: MarkdownText }} />
+    <MessagePrimitive.Root className="group w-full py-6">
+      <div className="px-6">
+        <div className="flex gap-6">
+          <Avatar className="flex-shrink-0 mt-1">
+            <AvatarFallback>A</AvatarFallback>
+          </Avatar>
+          <div className="flex-1">
+            <div className="text-foreground leading-7">
+              <MessagePrimitive.Content components={{ Text: MarkdownText }} />
+            </div>
+            <div className="flex items-center gap-2 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              <MyBranchPicker />
+              <MyAssistantActionBar />
+            </div>
+          </div>
+        </div>
       </div>
-
-      <MyAssistantActionBar />
-
-      <MyBranchPicker className="col-start-2 row-start-2 -ml-2 mr-2" />
     </MessagePrimitive.Root>
   );
 };
@@ -185,7 +200,7 @@ const MyAssistantActionBar: FC = () => {
       hideWhenRunning
       autohide="not-last"
       autohideFloat="single-branch"
-      className="text-muted-foreground data-[floating]:bg-background col-start-3 row-start-2 -ml-1 flex gap-1 data-[floating]:absolute data-[floating]:rounded-md data-[floating]:border data-[floating]:p-1 data-[floating]:shadow-sm"
+      className="opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground flex gap-1.5 data-[floating]:bg-background data-[floating]:absolute data-[floating]:rounded-md data-[floating]:border data-[floating]:p-1 data-[floating]:shadow-sm"
     >
       <MessagePrimitive.If speaking={false}>
         <ActionBarPrimitive.Speak asChild>
@@ -263,3 +278,4 @@ const CircleStopIcon = () => {
     </svg>
   );
 };
+

@@ -1,9 +1,10 @@
 /* empty css                                     */
 import { c as createComponent, r as renderTemplate, a as renderComponent, m as maybeRenderHead } from '../chunks/astro/server_Drq0HSre.mjs';
-import { c as cn, B as Button, $ as $$Layout } from '../chunks/Layout_DRjY1juE.mjs';
-import { jsx, jsxs } from 'react/jsx-runtime';
+import { c as cn, B as Button, $ as $$Layout } from '../chunks/Layout_DARiigJU.mjs';
+import { jsxs, jsx } from 'react/jsx-runtime';
 import * as React from 'react';
 import { forwardRef } from 'react';
+import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import { ArrowDownIcon, SendHorizontalIcon, PencilIcon, AudioLinesIcon, StopCircleIcon, CheckIcon, CopyIcon, RefreshCwIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { makeMarkdownText } from '@assistant-ui/react-markdown';
@@ -12,6 +13,37 @@ import { coldarkDark } from 'react-syntax-highlighter/dist/cjs/styles/prism/inde
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import { T as ThreadPrimitiveRoot, a as ThreadPrimitiveViewport, b as ThreadPrimitiveMessages, d as ThreadPrimitiveScrollToBottom, e as ThreadPrimitiveEmpty, C as ComposerPrimitiveRoot, f as ComposerPrimitiveInput, g as ThreadPrimitiveIf, h as ComposerPrimitiveSend, i as ComposerPrimitiveCancel, M as MessagePrimitiveRoot, j as MessagePrimitiveContent, A as ActionBarPrimitiveRoot, k as ActionBarPrimitiveEdit, l as MessagePrimitiveIf, m as ActionBarPrimitiveSpeak, n as ActionBarPrimitiveStopSpeaking, o as ActionBarPrimitiveCopy, p as ActionBarPrimitiveReload, B as BranchPickerPrimitiveRoot, q as BranchPickerPrimitivePrevious, r as BranchPickerPrimitiveNumber, s as BranchPickerPrimitiveCount, t as BranchPickerPrimitiveNext, u as useEdgeRuntime, v as AssistantRuntimeProvider } from '../chunks/assistant-ui-chunk_C7cKFYmL.mjs';
 export { renderers } from '../renderers.mjs';
+
+const ScrollArea = React.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ jsxs(
+  ScrollAreaPrimitive.Root,
+  {
+    ref,
+    className: cn("relative overflow-hidden", className),
+    ...props,
+    children: [
+      /* @__PURE__ */ jsx(ScrollAreaPrimitive.Viewport, { className: "h-full w-full rounded-[inherit]", children }),
+      /* @__PURE__ */ jsx(ScrollBar, {}),
+      /* @__PURE__ */ jsx(ScrollAreaPrimitive.Corner, {})
+    ]
+  }
+));
+ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName;
+const ScrollBar = React.forwardRef(({ className, orientation = "vertical", ...props }, ref) => /* @__PURE__ */ jsx(
+  ScrollAreaPrimitive.ScrollAreaScrollbar,
+  {
+    ref,
+    orientation,
+    className: cn(
+      "flex touch-none select-none transition-colors",
+      orientation === "vertical" && "h-full w-2.5 border-l border-l-transparent p-[1px]",
+      orientation === "horizontal" && "h-2.5 flex-col border-t border-t-transparent p-[1px]",
+      className
+    ),
+    ...props,
+    children: /* @__PURE__ */ jsx(ScrollAreaPrimitive.ScrollAreaThumb, { className: "relative flex-1 rounded-full bg-border" })
+  }
+));
+ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName;
 
 const Avatar = React.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsx(
   AvatarPrimitive.Root,
@@ -110,24 +142,25 @@ const TooltipIconButton = forwardRef(({ children, tooltip, side = "bottom", clas
 TooltipIconButton.displayName = "TooltipIconButton";
 
 const MyThread$1 = () => {
-  return /* @__PURE__ */ jsx(ThreadPrimitiveRoot, { className: "bg-background h-full", children: /* @__PURE__ */ jsxs(ThreadPrimitiveViewport, { className: "flex h-full flex-col items-center overflow-y-scroll scroll-smooth bg-inherit px-4 pt-8", children: [
-    /* @__PURE__ */ jsx(MyThreadWelcome, {}),
-    /* @__PURE__ */ jsx(
-      ThreadPrimitiveMessages,
-      {
-        components: {
-          UserMessage: MyUserMessage,
-          EditComposer: MyEditComposer,
-          AssistantMessage: MyAssistantMessage
+  return /* @__PURE__ */ jsxs(ThreadPrimitiveRoot, { className: "flex flex-col h-full w-full", children: [
+    /* @__PURE__ */ jsx(ScrollArea, { className: "flex-1 w-full", children: /* @__PURE__ */ jsx(ThreadPrimitiveViewport, { className: "min-h-full w-full", children: /* @__PURE__ */ jsxs("div", { className: "pb-36", children: [
+      /* @__PURE__ */ jsx(MyThreadWelcome, {}),
+      /* @__PURE__ */ jsx(
+        ThreadPrimitiveMessages,
+        {
+          components: {
+            UserMessage: MyUserMessage,
+            EditComposer: MyEditComposer,
+            AssistantMessage: MyAssistantMessage
+          }
         }
-      }
-    ),
-    /* @__PURE__ */ jsx("div", { className: "min-h-8 flex-grow" }),
-    /* @__PURE__ */ jsxs("div", { className: "sticky bottom-0 mt-3 flex w-full max-w-2xl flex-col items-center justify-end rounded-t-lg bg-inherit pb-4", children: [
+      )
+    ] }) }) }),
+    /* @__PURE__ */ jsx("div", { className: "fixed inset-x-0 bottom-0 bg-gradient-to-t from-background from-50% to-transparent", children: /* @__PURE__ */ jsxs("div", { className: "px-6 pt-6 pb-4", children: [
       /* @__PURE__ */ jsx(MyThreadScrollToBottom, {}),
       /* @__PURE__ */ jsx(MyComposer, {})
-    ] })
-  ] }) });
+    ] }) })
+  ] });
 };
 const MyThreadScrollToBottom = () => {
   return /* @__PURE__ */ jsx(ThreadPrimitiveScrollToBottom, { asChild: true, children: /* @__PURE__ */ jsx(
@@ -143,18 +176,18 @@ const MyThreadScrollToBottom = () => {
 const MyThreadWelcome = () => {
   return /* @__PURE__ */ jsx(ThreadPrimitiveEmpty, { children: /* @__PURE__ */ jsxs("div", { className: "flex flex-grow flex-col items-center justify-center", children: [
     /* @__PURE__ */ jsx(Avatar, { children: /* @__PURE__ */ jsx(AvatarFallback, { children: "C" }) }),
-    /* @__PURE__ */ jsx("p", { className: "mt-4 font-medium", children: "How can I help you today" })
+    /* @__PURE__ */ jsx("p", { className: "mt-4 font-medium", children: "How can I help you today?" })
   ] }) });
 };
 const MyComposer = () => {
-  return /* @__PURE__ */ jsxs(ComposerPrimitiveRoot, { className: "flex w-full flex-wrap items-end rounded-full border bg-inherit px-4 shadow-sm transition-colors ease-in focus-within:border-ring/20", children: [
+  return /* @__PURE__ */ jsxs(ComposerPrimitiveRoot, { className: "flex items-end rounded-xl border bg-background shadow-lg transition-colors ease-in focus-within:border-ring/30 focus-within:shadow-md mx-auto max-w-[800px] w-full", children: [
     /* @__PURE__ */ jsx(
       ComposerPrimitiveInput,
       {
         autoFocus: true,
         placeholder: "Write a message...",
         rows: 1,
-        className: "placeholder:text-muted-foreground max-h-40 flex-grow resize-none rounded-full border-none bg-transparent px-2 py-3 text-sm outline-none focus:ring-0 disabled:cursor-not-allowed"
+        className: "placeholder:text-muted-foreground max-h-40 min-h-[56px] w-full resize-none rounded-lg border-none bg-transparent px-4 py-4 text-sm outline-none focus:ring-0 disabled:cursor-not-allowed"
       }
     ),
     /* @__PURE__ */ jsx(ThreadPrimitiveIf, { running: false, children: /* @__PURE__ */ jsx(ComposerPrimitiveSend, { asChild: true, children: /* @__PURE__ */ jsx(
@@ -178,11 +211,13 @@ const MyComposer = () => {
   ] });
 };
 const MyUserMessage = () => {
-  return /* @__PURE__ */ jsxs(MessagePrimitiveRoot, { className: "grid w-full max-w-2xl auto-rows-auto grid-cols-[minmax(72px,1fr)_auto] gap-y-2 py-4", children: [
-    /* @__PURE__ */ jsx(MyUserActionBar, {}),
-    /* @__PURE__ */ jsx("div", { className: "bg-muted text-foreground col-start-2 row-start-1 max-w-xl break-words rounded-3xl px-5 py-2.5", children: /* @__PURE__ */ jsx(MessagePrimitiveContent, {}) }),
-    /* @__PURE__ */ jsx(MyBranchPicker, { className: "col-span-full col-start-1 row-start-2 -mr-1 justify-end" })
-  ] });
+  return /* @__PURE__ */ jsx(MessagePrimitiveRoot, { className: "group w-full py-6", children: /* @__PURE__ */ jsxs("div", { className: "px-6", children: [
+    /* @__PURE__ */ jsxs("div", { className: "flex justify-end items-start gap-6", children: [
+      /* @__PURE__ */ jsx(MyUserActionBar, {}),
+      /* @__PURE__ */ jsx("div", { className: "bg-muted text-foreground min-w-0 max-w-[75%] rounded-2xl px-6 py-3.5", children: /* @__PURE__ */ jsx(MessagePrimitiveContent, {}) })
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: "flex justify-end mt-2", children: /* @__PURE__ */ jsx("div", { className: "opacity-0 group-hover:opacity-100 transition-opacity", children: /* @__PURE__ */ jsx(MyBranchPicker, {}) }) })
+  ] }) });
 };
 const MyUserActionBar = () => {
   return /* @__PURE__ */ jsx(
@@ -190,13 +225,13 @@ const MyUserActionBar = () => {
     {
       hideWhenRunning: true,
       autohide: "not-last",
-      className: "col-start-1 mr-3 mt-2.5 flex flex-col items-end",
+      className: "opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center",
       children: /* @__PURE__ */ jsx(ActionBarPrimitiveEdit, { asChild: true, children: /* @__PURE__ */ jsx(TooltipIconButton, { tooltip: "Edit", children: /* @__PURE__ */ jsx(PencilIcon, {}) }) })
     }
   );
 };
 const MyEditComposer = () => {
-  return /* @__PURE__ */ jsxs(ComposerPrimitiveRoot, { className: "bg-muted my-4 flex w-full max-w-2xl flex-col gap-2 rounded-xl", children: [
+  return /* @__PURE__ */ jsxs(ComposerPrimitiveRoot, { className: "bg-muted my-4 container mx-auto flex flex-col gap-2 rounded-xl", children: [
     /* @__PURE__ */ jsx(ComposerPrimitiveInput, { className: "text-foreground flex h-8 w-full resize-none border-none bg-transparent p-4 pb-0 outline-none focus:ring-0" }),
     /* @__PURE__ */ jsxs("div", { className: "mx-3 mb-3 flex items-center justify-center gap-2 self-end", children: [
       /* @__PURE__ */ jsx(ComposerPrimitiveCancel, { asChild: true, children: /* @__PURE__ */ jsx(Button, { variant: "ghost", children: "Cancel" }) }),
@@ -205,12 +240,16 @@ const MyEditComposer = () => {
   ] });
 };
 const MyAssistantMessage = () => {
-  return /* @__PURE__ */ jsxs(MessagePrimitiveRoot, { className: "relative grid w-full max-w-2xl grid-cols-[auto_auto_1fr] grid-rows-[auto_1fr] py-4", children: [
-    /* @__PURE__ */ jsx(Avatar, { className: "col-start-1 row-span-full row-start-1 mr-4", children: /* @__PURE__ */ jsx(AvatarFallback, { children: "A" }) }),
-    /* @__PURE__ */ jsx("div", { className: "text-foreground col-span-2 col-start-2 row-start-1 my-1.5 max-w-xl break-words leading-7", children: /* @__PURE__ */ jsx(MessagePrimitiveContent, { components: { Text: MarkdownText } }) }),
-    /* @__PURE__ */ jsx(MyAssistantActionBar, {}),
-    /* @__PURE__ */ jsx(MyBranchPicker, { className: "col-start-2 row-start-2 -ml-2 mr-2" })
-  ] });
+  return /* @__PURE__ */ jsx(MessagePrimitiveRoot, { className: "group w-full py-6", children: /* @__PURE__ */ jsx("div", { className: "px-6", children: /* @__PURE__ */ jsxs("div", { className: "flex gap-6", children: [
+    /* @__PURE__ */ jsx(Avatar, { className: "flex-shrink-0 mt-1", children: /* @__PURE__ */ jsx(AvatarFallback, { children: "A" }) }),
+    /* @__PURE__ */ jsxs("div", { className: "flex-1", children: [
+      /* @__PURE__ */ jsx("div", { className: "text-foreground leading-7", children: /* @__PURE__ */ jsx(MessagePrimitiveContent, { components: { Text: MarkdownText } }) }),
+      /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2 mt-2 opacity-0 group-hover:opacity-100 transition-opacity", children: [
+        /* @__PURE__ */ jsx(MyBranchPicker, {}),
+        /* @__PURE__ */ jsx(MyAssistantActionBar, {})
+      ] })
+    ] })
+  ] }) }) });
 };
 const MyAssistantActionBar = () => {
   return /* @__PURE__ */ jsxs(
@@ -219,7 +258,7 @@ const MyAssistantActionBar = () => {
       hideWhenRunning: true,
       autohide: "not-last",
       autohideFloat: "single-branch",
-      className: "text-muted-foreground data-[floating]:bg-background col-start-3 row-start-2 -ml-1 flex gap-1 data-[floating]:absolute data-[floating]:rounded-md data-[floating]:border data-[floating]:p-1 data-[floating]:shadow-sm",
+      className: "opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground flex gap-1.5 data-[floating]:bg-background data-[floating]:absolute data-[floating]:rounded-md data-[floating]:border data-[floating]:p-1 data-[floating]:shadow-sm",
       children: [
         /* @__PURE__ */ jsx(MessagePrimitiveIf, { speaking: false, children: /* @__PURE__ */ jsx(ActionBarPrimitiveSpeak, { asChild: true, children: /* @__PURE__ */ jsx(TooltipIconButton, { tooltip: "Read aloud", children: /* @__PURE__ */ jsx(AudioLinesIcon, {}) }) }) }),
         /* @__PURE__ */ jsx(MessagePrimitiveIf, { speaking: true, children: /* @__PURE__ */ jsx(ActionBarPrimitiveStopSpeaking, { asChild: true, children: /* @__PURE__ */ jsx(TooltipIconButton, { tooltip: "Stop", children: /* @__PURE__ */ jsx(StopCircleIcon, {}) }) }) }),
@@ -279,7 +318,7 @@ function MyThread() {
 }
 
 const $$Chat = createComponent(($$result, $$props, $$slots) => {
-  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "Chat" }, { "default": ($$result2) => renderTemplate` ${maybeRenderHead()}<div class="w-[800px] h-[800px]"> ${renderComponent($$result2, "MyThread", MyThread, { "client:load": true, "client:component-hydration": "load", "client:component-path": "/Users/toc/Server/ONE/local/astro-shadcn/src/components/ChatThread", "client:component-export": "MyThread" })} </div> ` })}`;
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "Chat" }, { "default": ($$result2) => renderTemplate` ${maybeRenderHead()}<div class="fixed inset-0 -ml-[80px] flex justify-center"> <div class="w-full max-w-[800px]"> ${renderComponent($$result2, "MyThread", MyThread, { "client:load": true, "client:component-hydration": "load", "client:component-path": "/Users/toc/Server/ONE/local/astro-shadcn/src/components/ChatThread", "client:component-export": "MyThread" })} </div> </div> ` })}`;
 }, "/Users/toc/Server/ONE/local/astro-shadcn/src/pages/chat.astro", undefined);
 
 const $$file = "/Users/toc/Server/ONE/local/astro-shadcn/src/pages/chat.astro";

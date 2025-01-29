@@ -1,6 +1,6 @@
 /* empty css                                     */
 import { c as createComponent, r as renderTemplate, a as renderComponent, m as maybeRenderHead } from '../chunks/astro/server_Drq0HSre.mjs';
-import { $ as $$Layout } from '../chunks/Layout_DRjY1juE.mjs';
+import { $ as $$Layout } from '../chunks/Layout_DARiigJU.mjs';
 import { jsx } from 'react/jsx-runtime';
 import { u as useEdgeRuntime, w as assistant_modal_default } from '../chunks/assistant-ui-chunk_C7cKFYmL.mjs';
 export { renderers } from '../renderers.mjs';

@@ -1,6 +1,6 @@
 /* empty css                                     */
 import { c as createComponent, r as renderTemplate, m as maybeRenderHead, u as unescapeHTML, a as renderComponent, b as createAstro } from '../chunks/astro/server_Drq0HSre.mjs';
-import { $ as $$Layout } from '../chunks/Layout_DRjY1juE.mjs';
+import { $ as $$Layout } from '../chunks/Layout_DARiigJU.mjs';
 import 'clsx';
 export { renderers } from '../renderers.mjs';
 
