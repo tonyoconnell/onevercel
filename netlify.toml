@@ -7,9 +7,12 @@
 
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/ssr"
+  to = "/.netlify/functions/entry"
   status = 200
+  force = true
 
 [functions]
   node_bundler = "esbuild"
-  included_files = ["dist/**"]
+
+[edge_functions]
+  bundle = true
