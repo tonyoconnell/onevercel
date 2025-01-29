@@ -2,10 +2,10 @@ import { atom } from 'nanostores';
 
 /** Layout right panel size options */
 export const RightSize = {
-  Full: 'full',
-  Half: 'half',
-  Quarter: 'quarter',
-  Closed: 'closed'
+  Full: "Full",
+  Half: "Half",
+  Quarter: "Quarter",
+  Closed: "Closed"
 } as const;
 
 export type RightSizeType = typeof RightSize[keyof typeof RightSize];
