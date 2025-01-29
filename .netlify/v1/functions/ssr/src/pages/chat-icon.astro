@@ -1,0 +1,11 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { ChatAssistant } from "../components/ChatAssistant";
+export const prerender = false;
+---
+
+<Layout title="Chat">
+  <div>
+    <ChatAssistant client:load />
+  </div>
+</Layout>
