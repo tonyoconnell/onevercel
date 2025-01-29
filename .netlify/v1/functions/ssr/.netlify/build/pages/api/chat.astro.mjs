@@ -1,5 +1,5 @@
 import { openai } from '@ai-sdk/openai';
-import { c as createEdgeRuntimeAPI } from '../../chunks/assistant-ui-chunk_Crc0Mnfx.mjs';
+import { c as createEdgeRuntimeAPI } from '../../chunks/assistant-ui-chunk_C7cKFYmL.mjs';
 export { renderers } from '../../renderers.mjs';
 
 const handler = createEdgeRuntimeAPI({

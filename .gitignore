@@ -2,6 +2,9 @@
 dist/
 # generated types
 .astro/
+.netlify/
+.vercel/
+.wrangler/
 
 # dependencies
 node_modules/

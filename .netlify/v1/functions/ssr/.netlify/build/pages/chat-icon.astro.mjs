@@ -1,8 +1,8 @@
 /* empty css                                     */
 import { c as createComponent, r as renderTemplate, a as renderComponent, m as maybeRenderHead } from '../chunks/astro/server_Drq0HSre.mjs';
-import { $ as $$Layout } from '../chunks/Layout_Dv0_qXyB.mjs';
+import { $ as $$Layout } from '../chunks/Layout_DRjY1juE.mjs';
 import { jsx } from 'react/jsx-runtime';
-import { u as useEdgeRuntime, a as assistant_modal_default } from '../chunks/assistant-ui-chunk_Crc0Mnfx.mjs';
+import { u as useEdgeRuntime, w as assistant_modal_default } from '../chunks/assistant-ui-chunk_C7cKFYmL.mjs';
 export { renderers } from '../renderers.mjs';
 
 function ChatAssistant() {

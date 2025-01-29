@@ -1,8 +1,8 @@
 /* empty css                                     */
 import { c as createComponent, r as renderTemplate, a as renderComponent, b as createAstro, m as maybeRenderHead, d as addAttribute, e as renderTransition } from '../chunks/astro/server_Drq0HSre.mjs';
-import { c as cn, $ as $$Layout } from '../chunks/Layout_Dv0_qXyB.mjs';
+import { c as cn, $ as $$Layout } from '../chunks/Layout_DRjY1juE.mjs';
 import { g as getCollection } from '../chunks/_astro_content_DfUrMGMT.mjs';
-import { C as Card } from '../chunks/card_CCySLVYD.mjs';
+import { C as Card } from '../chunks/card_CMzYUb9x.mjs';
 import { jsx } from 'react/jsx-runtime';
 import 'react';
 import { cva } from 'class-variance-authority';

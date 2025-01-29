@@ -1,5 +1,7 @@
-import { Thread, useEdgeRuntime } from "@assistant-ui/react";
-import { MarkdownText } from "./assistant-ui/markdown-text";
+"use client";
+
+import { useEdgeRuntime, AssistantRuntimeProvider } from "@assistant-ui/react";
+import { MyThread as CustomThread } from "@/components/assistant-ui/thread";
 
 export function MyThread() {
   const runtime = useEdgeRuntime({
@@ -8,10 +10,9 @@ export function MyThread() {
 
   return (
     <div className="h-full">
-      <Thread 
-        runtime={runtime} 
-        assistantMessage={{ components: { Text: MarkdownText } }}
-      />
+      <AssistantRuntimeProvider runtime={runtime}>
+        <CustomThread />
+      </AssistantRuntimeProvider>
     </div>
   );
 }
