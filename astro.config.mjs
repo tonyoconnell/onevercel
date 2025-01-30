@@ -12,11 +12,18 @@ export default defineConfig({
   vite: {
     assetsInclude: ['**/*.md'],
     build: {
+      chunkSizeWarningLimit: 1800,
       rollupOptions: {
-        output: {  // <-- Moved manualChunks under output
+        output: {
           manualChunks(id) {
             if (id.includes('@assistant-ui/react')) {
               return 'assistant-ui-chunk';
+            }
+            if (id.includes('node_modules')) {
+              return 'vendor';
+            }
+            if (id.includes('components/ui/')) {
+              return 'ui-components';
             }
           }
         }
