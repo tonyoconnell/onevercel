@@ -10,14 +10,6 @@ interface Props {
   children: any;
 }
 
-const navigation = [
-  { title: "Home", path: "/", icon: "Home" },
-  { title: "Software", path: "/software", icon: "Software" },
-  { title: "Chat", path: "/chat", icon: "Chat" },
-  { title: "README", path: "/readme", icon: "FileText" },
-  { title: "License", path: "/mit-license", icon: "Scale" },
-];
-
 const {
   title,
   description = "A beautiful dashboard built with Astro and shadcn/ui",
@@ -48,8 +40,8 @@ const {
 
   <body class="min-h-screen bg-background font-sans antialiased">
     <div class="flex h-screen optimize-gpu">
-      <div id="left-sidebar" class="w-[80px] shrink-0 border-r transition-all">
-        <Sidebar navigation={navigation} client:load />
+      <div id="left-sidebar" class="w-[64px] shrink-0 border-r transition-all">
+        <Sidebar client:load />
       </div>
 
       <div class="flex-1 flex flex-col min-w-0">
