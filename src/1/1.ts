@@ -4,83 +4,46 @@ import { z } from "zod";
 const navigationItemSchema = z.object({
   title: z.string(),
   path: z.string(),
-  icon: z.string()
-});
-
-// Logo schema
-export const logoSchema = z.object({
-  default: z.string(),
-  dark: z.string(),
-  light: z.string(),
-});
-
-// Favicon schema
-export const faviconSchema = z.object({
-  ico: z.string(),
-  png: z.string(),
-  svg: z.string(),
-  sizes: z.array(z.number()),
-});
-
-// Colors schema
-export const colorsSchema = z.object({
-  primary: z.string(),
-  secondary: z.string(),
-  accent: z.string(),
-  background: z.string(),
-  text: z.string(),
-  light: z.record(z.string()),
-  dark: z.record(z.string()),
-});
-
-// Fonts schema
-export const fontsSchema = z.object({
-  heading: z.string(),
-  body: z.string(),
-  code: z.string(),
-  system: z.object({
-    sans: z.string(),
-    serif: z.string(),
-    mono: z.string(),
-  }),
+  icon: z.string().optional()
 });
 
 // Contact schema
 export const contactSchema = z.object({
   email: z.string(),
-  phone: z.string(),
-  whatsapp: z.string(),
-  telegram: z.string(),
+  phone: z.string().optional(),
+  website: z.string().optional(),
+  whatsapp: z.string().optional(),
+  telegram: z.string().optional(),
   address: z.object({
     street: z.string(),
-    area: z.string(),
+    area: z.string().optional(),
     city: z.string(),
-    county: z.string(),
     country: z.string(),
-  }),
+    zip: z.string().optional(),
+  }).optional(),
   social: z.object({
-    github: z.string(),
-    twitter: z.string(),
-    linkedin: z.string(),
-    instagram: z.string(),
-    youtube: z.string(),
-    discord: z.string(),
+    github: z.string().optional(),
+    twitter: z.string().optional(),
+    linkedin: z.string().optional(),
+    instagram: z.string().optional(),
+    youtube: z.string().optional(),
+    discord: z.string().optional(),
     medium: z.string().nullable(),
-    facebook: z.string(),
+    facebook: z.string().optional(),
     tiktok: z.string().nullable(),
     threads: z.string().nullable(),
     mastodon: z.string().nullable(),
-    slack: z.string(),
-    telegram_channel: z.string(),
-  }),
+    slack: z.string().optional(),
+    telegram_channel: z.string().optional(),
+  }).optional(),
 });
 
 // SEO schema
 export const seoSchema = z.object({
   canonical: z.string().url(),
   title: z.string().min(1).max(70),
-  metaTitle: z.string().min(1).max(70),
-  metaDescription: z.string().min(1).max(200),
+  metaTitle: z.string().min(1).max(70).optional(),
+  metaDescription: z.string().min(1).max(200).optional(),
   metaKeywords: z.array(z.string()),
   metaRobots: z.string().default("index, follow"),
   openGraph: z.object({
@@ -130,15 +93,15 @@ export const seoSchema = z.object({
 // Navigation schema
 export const navigationSchema = z.object({
   top: z.object({
-    logo: z.string(),
-    favicon: z.string(),
+    logo: z.string().optional(),
+    favicon: z.string().optional(),
     items: z.array(navigationItemSchema),
-    buttons: z.array(navigationItemSchema),
+    buttons: z.array(navigationItemSchema).optional(),
   }),
-  sidebar: z.array(navigationItemSchema),
+  sidebar: z.array(navigationItemSchema).optional(),
   footer: z.object({
-    columns: z.array(z.object({
-      title: z.string(),
+    columns: z.array(z.object({ 
+      title: z.string().optional(),
       links: z.array(navigationItemSchema),
     })),
     bottom: z.object({
@@ -150,43 +113,35 @@ export const navigationSchema = z.object({
 
 // Layout schema
 export const layoutSchema = z.object({
-  showLeft: z.boolean(),
-  showRight: z.boolean(),
-  showTop: z.boolean(),
-  showBottom: z.boolean(),
+  showLeft: z.boolean().optional().default(true),
+  showRight: z.boolean().optional().default(true),
+  showTop: z.boolean().optional().default(true),
+  showBottom: z.boolean().optional().default(true),
   rightSize: z.enum(['Full', 'Half', 'Quarter', 'Closed'])
 });
-
-// Runtime enum
-export const RuntimeEnum = z.enum([
-  'Edge',
-  'VercelAISDKRSC',
-  'VercelAISDKuseAssistant',
-  'VercelAISDKuseChat',
-  'LangGraphCloud',
-  'LangChainLangServe',
-  'ExternalStore',
-  'CustomRESTAPI'
-]);
 
 // AI schema
 export const aiSchema = z.object({
   provider: z.string(),
   model: z.string(),
-  apiEndpoint: z.string().url(),
-  runtime: RuntimeEnum,
-  temperature: z.number(),
-  maxTokens: z.number(),
-  systemPrompt: z.record(z.string()), // Customized for different page types
-  userPrompt: z.string(), // Uses content from the page
+  apiEndpoint: z.string(),
+  runtime: z.string(),
+  temperature: z.number().optional().default(0.7),
+  maxTokens: z.number().optional().default(2000),
+  systemPrompt: z.string().optional(),
+  userPrompt: z.string().optional(),
   welcome: z.object({
-    center: z.string(), // The centered content
-    avatar: z.string(), // The avatar URL
     message: z.string(),
+    center: z.boolean().optional().default(true),
+    avatar: z.string().optional(),
     suggestions: z.array(z.object({
       label: z.string(),
       prompt: z.string()
-    }))
+    })).optional().default([])
+  }).optional().default({
+    message: "How can I help you today?",
+    center: true,
+    suggestions: []
   })
 });
 
@@ -197,12 +152,6 @@ export const ConfigSchema = z.object({
     description: z.string(),
     contact: contactSchema,
     seo: seoSchema
-  }),
-  brand: z.object({
-    logo: logoSchema,
-    favicon: faviconSchema,
-    colors: colorsSchema,
-    fonts: fontsSchema
   }),
   page: z.object({
     layout: layoutSchema,

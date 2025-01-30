@@ -22,8 +22,8 @@ APIEndpoint
 Runtime
 SystemPropmpt
 UserPrompt
-ThreadWelcome.Center
-ThreadWelcome.Avatar
-ThreadWelcome.Message
-ThreadWelcome.Suggestions
+Welcome.Center
+Welcome.Avatar
+Welcome.Message
+Welcome.Suggestions
 

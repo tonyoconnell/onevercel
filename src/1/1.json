@@ -6,12 +6,13 @@
       "email": "hello@one.ie",
       "phone": "+353 1 234 5678",
       "whatsapp": "+353 87 123 4567",
+      "website": "https://one.ie",
       "telegram": "@onedotie",
       "address": {
         "street": "123 Main Street",
         "area": "Silicon Docks",
         "city": "Dublin",
-        "county": "Dublin",
+        "zip": "D02 X285",
         "country": "Ireland"
       },
       "social": {
@@ -34,7 +35,6 @@
       "canonical": "https://one.ie",
       "title": "ONE - AI-Powered Solutions",
       "metaTitle": "ONE - Transform Your Business with AI",
-      "metaDescription": "Leverage the power of AI to transform your business with ONE's innovative solutions.",
       "metaKeywords": ["AI", "Machine Learning", "Business Solutions", "Digital Transformation"],
       "metaRobots": "index, follow",
       "openGraph": {
@@ -58,44 +58,6 @@
         "card": "summary_large_image",
         "site": "@onedotie",
         "creator": "@tonyoconnell"
-      }
-    }
-  },
-  "brand": {
-    "logo": {
-      "default": "/logo.svg",
-      "dark": "/logo-dark.svg",
-      "light": "/logo-light.svg"
-    },
-    "favicon": {
-      "ico": "/favicon.ico",
-      "png": "/favicon.png",
-      "svg": "/favicon.svg",
-      "sizes": [16, 32, 64, 128]
-    },
-    "colors": {
-      "primary": "#007AFF",
-      "secondary": "#5856D6",
-      "accent": "#FF2D55",
-      "background": "#FFFFFF",
-      "text": "#000000",
-      "light": {
-        "background": "#FFFFFF",
-        "text": "#000000"
-      },
-      "dark": {
-        "background": "#000000",
-        "text": "#FFFFFF"
-      }
-    },
-    "fonts": {
-      "heading": "'Inter', sans-serif",
-      "body": "'Inter', sans-serif",
-      "code": "'Fira Code', monospace",
-      "system": {
-        "sans": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial",
-        "serif": "Georgia, Cambria, 'Times New Roman', Times, serif",
-        "mono": "Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace"
       }
     }
   },
@@ -198,20 +160,15 @@
     "provider": "openai",
     "model": "gpt-4-turbo",
     "apiEndpoint": "https://api.openai.com/v1",
-    "runtime": "Edge",
+    "runtime": "edge",
     "temperature": 0.7,
     "maxTokens": 2000,
-    "systemPrompt": {
-      "default": "You are a helpful AI assistant.",
-      "chat": "You are a conversational AI assistant.",
-      "blog": "You are an AI writing assistant specializing in blog content.",
-      "docs": "You are an AI documentation assistant."
-    },
-    "userPrompt": "{content}",
+    "systemPrompt": "You are a helpful AI assistant.",
+    "userPrompt": "What would you like help with?",
     "welcome": {
-      "center": "Welcome to ONE AI Assistant",
-      "avatar": "/ai-avatar.png",
       "message": "How can I assist you today?",
+      "center": true,
+      "avatar": "/logo.svg",
       "suggestions": [
         {
           "label": "Tell me about ONE",
