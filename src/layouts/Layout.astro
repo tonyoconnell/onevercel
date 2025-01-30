@@ -1,8 +1,8 @@
 ---
+import { Menu, MessageSquare, Square, LayoutGrid, SquareStack, X } from 'lucide-react';
 import { Sidebar } from "@/components/Sidebar";
 import { MyThread } from "../components/ChatThread";
 import { LayoutInit } from "@/components/LayoutInit";
-import { Menu, Square, LayoutGrid, X, AlignJustify, SquareStack } from "lucide-react";
 import "../styles/global.css";
 
 interface Props {
@@ -63,7 +63,13 @@ const {
               class="h-10 hidden dark:block"
             />
           </div>
-          <button id="toggle-right" class="p-2 hover:bg-accent rounded-lg"><AlignJustify className="h-4 w-4" /></button>
+          <button 
+            id="toggle-right" 
+            class="p-2 hover:bg-accent rounded-lg"
+            onclick="document.getElementById('right-panel').classList.remove('right-panel-closed'); document.getElementById('right-panel').classList.add('right-panel-quarter', 'right-panel-enter');"
+          >
+            <MessageSquare className="h-4 w-4" />
+          </button>
         </header>
 
         <main class="flex-1 p-6">
