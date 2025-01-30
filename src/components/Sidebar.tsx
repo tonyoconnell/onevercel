@@ -107,7 +107,7 @@ const MobileHeader = () => {
           onClick={() => setIsOpen(true)}
           className="text-[hsl(var(--sidebar-fg))] p-2"
         >
-          <Menu className="w-6 h-6" />
+          <Menu className="w-5 h-5" />
         </button>
 
         <div className="flex-1 flex justify-center">

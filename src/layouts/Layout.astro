@@ -2,6 +2,7 @@
 import { Sidebar } from "@/components/Sidebar";
 import { MyThread } from "../components/ChatThread";
 import { LayoutInit } from "@/components/LayoutInit";
+import { Menu, Square, LayoutGrid, X, AlignJustify, SquareStack } from "lucide-react";
 import "../styles/global.css";
 
 interface Props {
@@ -49,7 +50,7 @@ const {
           id="top-header"
           class="h-16 min-h-[64px] max-h-[64px] border-b flex items-center px-6 gap-4 bg-background"
         >
-          <button id="toggle-left" class="p-2 hover:bg-accent rounded-lg">≡</button>
+          <button id="toggle-left" class="p-2 hover:bg-accent rounded-lg"><Menu className="h-4 w-4" /></button>
           <div class="flex-1 flex justify-center">
             <img
               src="/logo-dark.png"
@@ -62,7 +63,7 @@ const {
               class="h-10 hidden dark:block"
             />
           </div>
-          <button id="toggle-right" class="p-2 hover:bg-accent rounded-lg">☰</button>
+          <button id="toggle-right" class="p-2 hover:bg-accent rounded-lg"><AlignJustify className="h-4 w-4" /></button>
         </header>
 
         <main class="flex-1 p-6">
@@ -79,15 +80,15 @@ const {
 
       <div
         id="right-panel"
-        class="border-l flex flex-col w-[400px]"
+        class="border-l flex flex-col w-[400px] transition-all duration-300 ease-in-out transform"
       >
         <div class="p-4 flex justify-end gap-2 border-b">
-          <button id="right-full" class="p-2 hover:bg-accent rounded-lg">⬜</button>
-          <button id="right-half" class="p-2 hover:bg-accent rounded-lg">½</button>
-          <button id="right-quarter" class="p-2 hover:bg-accent rounded-lg">❏</button>
-          <button id="right-close" class="p-2 hover:bg-accent rounded-lg">✕</button>
+          <button id="right-full" class="p-2 hover:bg-accent rounded-lg"><Square className="h-4 w-4" /></button>
+          <button id="right-half" class="p-2 hover:bg-accent rounded-lg"><LayoutGrid className="h-4 w-4" /></button>
+          <button id="right-quarter" class="p-2 hover:bg-accent rounded-lg"><SquareStack className="h-4 w-4" /></button>
+          <button id="right-close" class="p-2 hover:bg-accent rounded-lg"><X className="h-4 w-4" /></button>
         </div>
-        <MyThread client:load />
+        <MyThread client:visible />
       </div>
     </div>
 
