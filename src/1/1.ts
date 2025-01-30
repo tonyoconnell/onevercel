@@ -157,13 +157,31 @@ export const layoutSchema = z.object({
   rightSize: z.enum(['Full', 'Half', 'Quarter', 'Closed'])
 });
 
+// Runtime enum
+export const RuntimeEnum = z.enum([
+  'Edge',
+  'VercelAISDKRSC',
+  'VercelAISDKuseAssistant',
+  'VercelAISDKuseChat',
+  'LangGraphCloud',
+  'LangChainLangServe',
+  'ExternalStore',
+  'CustomRESTAPI'
+]);
+
 // AI schema
 export const aiSchema = z.object({
   provider: z.string(),
   model: z.string(),
+  apiEndpoint: z.string().url(),
+  runtime: RuntimeEnum,
   temperature: z.number(),
   maxTokens: z.number(),
+  systemPrompt: z.record(z.string()), // Customized for different page types
+  userPrompt: z.string(), // Uses content from the page
   welcome: z.object({
+    center: z.string(), // The centered content
+    avatar: z.string(), // The avatar URL
     message: z.string(),
     suggestions: z.array(z.object({
       label: z.string(),
