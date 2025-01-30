@@ -458,8 +458,3 @@ const preconnectUrls = [
    - Dark mode support
 
 5. **Performance**
-   - Class-based transitions
-   - Optimized DOM updates
-   - Efficient state updates
-
-The architecture provides a complete, type-safe layout management system while maintaining simplicity and elegance.
