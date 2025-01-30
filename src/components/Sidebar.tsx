@@ -36,7 +36,7 @@ const DesktopSidebar = () => {
   return (
     <aside
       className={cn(
-        "fixed left-0 h-screen bg-[var(--sidebar-bg)] z-30",
+        "fixed left-0 h-screen bg-[var(--sidebar-bg)] z-[60]",
         "transition-all duration-300 ease-out flex flex-col group",
         "w-[64px] hover:w-64" // Fixed width for non-open state
       )}
