@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { cn } from '@/lib/utils'
 import { ModeToggle } from '@/components/ModeToggle'
 import { 
@@ -13,11 +13,17 @@ import {
 import { useStore } from '@nanostores/react'
 import { layoutStore, type LayoutState } from '@/stores/layout'
 
+const MOBILE_BREAKPOINT = 768
+const SIDEBAR_WIDTH = 64
+const SIDEBAR_EXPANDED_WIDTH = 256
+
 const icons: Record<string, LucideIcon> = {
   Home,
   FileText,
   Scale,
   Waves,
+  Software: FileText,
+  Chat: Waves
 }
 
 interface SidebarProps {
@@ -41,28 +47,62 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const currentLayout = useStore(layoutStore)
 
-  useEffect(() => {
-    const checkLayout = () => {
-      const isMobileView = window.innerWidth < 768
-      setIsMobile(isMobileView)
-      
-      if (isMobileView) {
-        layoutStore.set({ ...layoutStore.get(), showLeft: false })
-      }
+  const checkLayout = useCallback(() => {
+    const isMobileView = window.innerWidth < MOBILE_BREAKPOINT
+    setIsMobile(isMobileView)
+    
+    if (isMobileView && currentLayout.showLeft) {
+      layoutStore.set({ ...layoutStore.get(), showLeft: false })
     }
+  }, [currentLayout.showLeft])
 
+  useEffect(() => {
     checkLayout()
-    window.addEventListener('resize', checkLayout)
-    return () => window.removeEventListener('resize', checkLayout)
-  }, [])
+    const debouncedCheckLayout = debounce(checkLayout, 250)
+    window.addEventListener('resize', debouncedCheckLayout)
+    return () => {
+      window.removeEventListener('resize', debouncedCheckLayout)
+      debouncedCheckLayout.cancel()
+    }
+  }, [checkLayout])
 
   useEffect(() => {
     setActivePath(window.location.pathname)
-  }, [])
+    
+    const handleRouteChange = () => {
+      setActivePath(window.location.pathname)
+      if (isMobile) {
+        setIsMobileMenuOpen(false)
+      }
+    }
+
+    window.addEventListener('popstate', handleRouteChange)
+    return () => window.removeEventListener('popstate', handleRouteChange)
+  }, [isMobile])
 
   useEffect(() => {
     setIsHovered(false)
   }, [currentLayout])
+
+  // Debounce function implementation
+  function debounce<T extends (...args: any[]) => any>(func: T, wait: number) {
+    let timeout: NodeJS.Timeout
+
+    const debounced = (...args: Parameters<T>) => {
+      const later = () => {
+        timeout = null as any
+        func(...args)
+      }
+      clearTimeout(timeout)
+      timeout = setTimeout(later, wait)
+    }
+
+    debounced.cancel = () => {
+      clearTimeout(timeout)
+    }
+
+    return debounced
+  }
 
   if (isMobile) {
     return (
@@ -76,7 +116,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
           </button>
           
           <div className="flex-1 flex justify-center">
-            <img src="/logo.png" alt="Logo" className="h-8" />
+            <img src="/logo.svg" alt="Logo" />
           </div>
           
           <ModeToggle />
@@ -91,7 +131,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
           )}
         >
           <div className="h-16 flex items-center px-4">
-            <img src="/logo.png" alt="Logo" className="h-8" />
+            <img src="/logo.svg" alt="Logo" className="h-20" />
           </div>
           
           <nav className="flex-1 py-4">
@@ -109,7 +149,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
                     isActive && "bg-[var(--sidebar-active)] text-[hsl(var(--sidebar-fg))]"
                   )}
                 >
-                  {Icon && <Icon className="w-5 h-5 mr-3" />}
+                  {Icon && <Icon className="w-8 h-8 mr-3" />}
                   <span>{item.title}</span>
                 </a>
               )
@@ -136,7 +176,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
     return (
       <header className="fixed top-0 left-0 right-0 h-16 bg-[var(--sidebar-bg)] z-40 flex items-center px-5">
         <div className="flex items-center h-full">
-          <img src="/logo.png" alt="Logo" className="h-8" />
+          <img src="/logo.svg" alt="Logo" className="h-8" />
         </div>
         
         <nav className="flex items-center space-x-6 ml-8 flex-1">
@@ -153,7 +193,7 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
                   isActive && "text-[hsl(var(--sidebar-fg))] bg-[var(--sidebar-active)]"
                 )}
               >
-                {Icon && <Icon className="w-5 h-5 mr-2" />}
+                {Icon && <Icon className="w-6 h-6 mr-2" />}
                 <span>{item.title}</span>
               </a>
             )
@@ -189,15 +229,15 @@ export function Sidebar({ navigation }: Omit<SidebarProps, 'layout' | 'onLayoutC
       {/* Logo */}
       <a 
         href="/"
-        className="h-16 flex items-center hover:bg-[var(--sidebar-hover)] transition-colors px-4"
+        className="h-16 flex items-center hover:bg-[var(--sidebar-hover)] transition-colors px-4 bg-black-400"
       >
         <div className="flex items-center justify-center w-full">
           <img 
-            src={isHovered || isCollapsedLayout(currentLayout) ? "/logo.png" : "/icon.svg"} 
+            src={isHovered || isCollapsedLayout(currentLayout) ? "/logo.svg" : "/icon.svg"} 
             alt="Logo" 
             className={cn(
-              "transition-all duration-200",
-              isHovered ? "h-8" : "h-6"
+              "transition-all duration-200 ease-in-out transform",
+              isHovered ? "h-8 scale-100" : "h-8 scale-100"
             )}
           />
         </div>
