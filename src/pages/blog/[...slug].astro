@@ -1,28 +1,28 @@
 ---
 import { getCollection } from 'astro:content';
-import CoursePost from '../../layouts/Course.astro';
+import BlogPost from '../../layouts/Blog.astro';
 import type { CollectionEntry } from 'astro:content';
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-	const posts = await getCollection('course');
-	return posts.map((entry: CollectionEntry<'course'>) => ({
+	const posts = await getCollection('Blog');
+	return posts.map((entry: CollectionEntry<'Blog'>) => ({
 		params: { slug: entry.slug },
 		props: { entry },
 	}));
 }
 
 type Props = {
-	entry: CollectionEntry<'Course'>;
+	entry: CollectionEntry<'Blog'>;
 };
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<CoursePost entry={entry}>
+<BlogPost entry={entry}>
 	<div class="px-4 sm:px-6">
 		<Content />
 	</div>
-</CoursePost>
+</BlogPost>
