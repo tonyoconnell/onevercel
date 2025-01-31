@@ -10,7 +10,6 @@ import {
 import { Sidebar } from "@/components/Sidebar";
 import { MyThread } from "../components/ChatThread";
 import { LayoutInit } from "@/components/LayoutInit";
-import { layoutActions } from "@/stores/layout";
 import "../styles/global.css";
 
 interface Props {
@@ -129,10 +128,7 @@ const {
       document.addEventListener('touchend', (e) => {
         const touchEndX = e.changedTouches[0].clientX;
         const touchEndY = e.changedTouches[0].clientY;
-        const xDiff = touchEndX - touchStartX;
-        const yDiff = touchEndY - touchStartY;
-        // Implement swipe logic here
-      });
+    });
     </script>
 
     <LayoutInit client:load />

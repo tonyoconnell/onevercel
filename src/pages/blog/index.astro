@@ -7,7 +7,7 @@ import { Calendar, Grid, List } from "lucide-react";
 import type { CollectionEntry } from "astro:content";
 
 // Get all Blog entries
-const entries = await getCollection("Blog");
+const entries = await getCollection("blog");
 
 // Get view mode from URL params, default to list
 const viewMode = Astro.url.searchParams.get("view") || "list";

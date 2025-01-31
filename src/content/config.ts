@@ -11,13 +11,13 @@ const BlogSchema = z.object({
 });
 
 // Define the Blog collection schema
-const Blog = defineCollection({
+const blog = defineCollection({
   type: 'content',
   schema: BlogSchema,
 });
 
 export const collections = {
-  'Blog': Blog
+  'blog': blog
 };
 
 // Export the Blog schema type
