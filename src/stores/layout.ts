@@ -16,6 +16,7 @@ export interface LayoutState {
   showTop: boolean;
   showRight: boolean;
   showBottom: boolean;
+  isMobile: boolean;
   rightSize: RightSizeType;
 }
 
@@ -24,6 +25,7 @@ const defaultLayout: LayoutState = {
   showLeft: true,
   showTop: true,
   showRight: false,
+  isMobile: false,
   showBottom: true,
   rightSize: RightSize.Closed
 };
@@ -66,6 +68,11 @@ export const layoutActions = {
     const current = store.get();
     store.set({ ...current, showBottom: !current.showBottom });
   },
+
+    setMobile(isMobile: boolean) {
+      const current = store.get();
+      store.set({ ...current, isMobile });
+    },
 
   initLayout() {
     const saved = localStorage.getItem('layoutPreference');

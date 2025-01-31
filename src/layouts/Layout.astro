@@ -47,13 +47,13 @@ const {
     </script>
   </head>
 
-  <body class="min-h-screen bg-background font-sans antialiased">
+  <body class="min-h-screen bg-background font-sans antialiased touch-none">
     <div class="flex h-screen optimize-gpu overflow-auto">
-      <div id="left-sidebar" class="w-[64px] shrink-0 border-r">
+      <div id="left-sidebar" class="w-[64px] shrink-0 border-r mobile:fixed mobile:z-50 mobile:transition-transform mobile:duration-300 mobile:translate-x-[-64px] mobile:data-[open=true]:translate-x-0">
         <Sidebar client:load />
       </div>
 
-      <div class="flex-1 flex flex-col min-w-0">
+      <div class="flex-1 flex flex-col min-w-0 mobile:pl-0">
         <header
           id="top-header"
           class="h-16 min-h-[64px] max-h-[64px] border-b flex items-center px-6 gap-4 bg-background"
@@ -92,7 +92,7 @@ const {
 
       <div
         id="right-panel"
-        class="border-l flex flex-col w-[400px] transition-all duration-300 ease-in-out transform"
+        class="border-l flex flex-col w-[400px] transition-all duration-300 ease-in-out transform mobile:fixed mobile:right-0 mobile:top-0 mobile:bottom-0 mobile:z-50 mobile:w-full mobile:translate-x-full mobile:data-[open=true]:translate-x-0"
       >
         <div class="p-4 flex justify-end gap-2 border-b">
           <button id="right-full" class="p-2 hover:bg-accent rounded-lg"
@@ -115,6 +115,25 @@ const {
         </div>
       </div>
     </div>
+
+    <script is:inline>
+      // Mobile swipe gestures
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      document.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      });
+
+      document.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const xDiff = touchEndX - touchStartX;
+        const yDiff = touchEndY - touchStartY;
+        // Implement swipe logic here
+      });
+    </script>
 
     <LayoutInit client:load />
   </body>
