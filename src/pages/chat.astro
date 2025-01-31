@@ -4,9 +4,24 @@ import { MyThread } from "../components/ChatThread";
 ---
 
 <Layout title="Chat">
-  <div class="fixed inset-0 -ml-[80px] flex justify-center">
-    <div class="w-full max-w-[800px]">
+  <div class="fixed inset-0 -ml-[80px] flex justify-center" id="chat-container">
+    <div class="w-full max-w-[900px] pt-28 pl-32">
       <MyThread client:load />
     </div>
   </div>
 </Layout>
+
+<script>
+  // Ensure right panel stays closed on chat page
+  document.addEventListener('DOMContentLoaded', () => {
+    const rightPanel = document.getElementById('right-panel');
+    if (rightPanel) {
+      rightPanel.classList.add('right-panel-closed');
+    }
+    // Hide the toggle button
+    const toggleRight = document.getElementById('toggle-right');
+    if (toggleRight) {
+      toggleRight.style.display = 'none';
+    }
+  });
+</script>

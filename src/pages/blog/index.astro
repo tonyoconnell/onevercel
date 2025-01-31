@@ -76,7 +76,7 @@ function formatDate(date: Date) {
 		>
 			{entries.map((entry: CollectionEntry<"Blog">) => (
 				<Card className={`overflow-hidden transition-all duration-200 hover:shadow-lg ${viewMode === 'list' ? 'flex' : 'hover:-translate-y-1'}`}>
-					<a href={`/Blog/${entry.slug}`} class={`block hover:opacity-80 transition-opacity ${viewMode === 'list' ? 'flex flex-1' : ''}`}>
+					<a href={`/blog/${entry.slug}`} class={`block hover:opacity-80 transition-opacity ${viewMode === 'list' ? 'flex flex-1' : ''}`}>
 						{entry.data.picture && viewMode === 'list' && (
 							<div class="w-48 shrink-0">
 								<img
