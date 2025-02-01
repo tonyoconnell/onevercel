@@ -20,6 +20,9 @@ importers:
       '@assistant-ui/react-syntax-highlighter':
         specifier: ^0.7.9
         version: 0.7.9(@assistant-ui/react-markdown@0.7.11(@assistant-ui/react@0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17))(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17))(@assistant-ui/react@0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17))(@types/react-syntax-highlighter@15.5.13)(@types/react@18.3.18)(react-syntax-highlighter@15.6.1(react@18.3.1))(react@18.3.1)
+      '@assistant-ui/react-ui':
+        specifier: ^0.0.18
+        version: 0.0.18(@assistant-ui/react@0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17))(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@astrojs/check':
         specifier: ^0.9.4
         version: 0.9.4(typescript@5.7.3)
@@ -179,6 +182,11 @@ importers:
       react-syntax-highlighter:
         specifier: ^15.6.1
         version: 15.6.1(react@18.3.1)
+      "react-ui\n":
+        specifier: |
+          link:@assistant-ui/react-ui
+        version: |
+          link:@assistant-ui/react-ui
       recharts:
         specifier: ^2.15.1
         version: 2.15.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -255,6 +263,16 @@ packages:
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
 
+  '@assistant-ui/react-markdown@0.0.5':
+    resolution: {integrity: sha512-nevoTd4GlnH9mYa4qeeT7Hn05eAwHoNRNF1GtolLzz7yU5RoidKZ3iSgNJgvW/2Nnoc8/EuUtFNpqfdxzMBpyA==}
+    peerDependencies:
+      '@assistant-ui/react': ^0.3.5
+      '@types/react': '*'
+      react: ^18
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
   '@assistant-ui/react-markdown@0.7.11':
     resolution: {integrity: sha512-r6PopVoY1NYh6Oeyk87nWC4fC+Yanc6IVsxstAAXo2E7IBuVIfGWz/h2XEMr4GiwtXcNQO2Jnxwm/XSTAYzaQw==}
     peerDependencies:
@@ -281,6 +299,17 @@ packages:
       '@types/react':
         optional: true
       '@types/react-syntax-highlighter':
+        optional: true
+
+  '@assistant-ui/react-ui@0.0.18':
+    resolution: {integrity: sha512-yej0JGhUtqUpAJ7z4QUvXuyiIxRxE5RufgXvokFl5KR1J4upBW8lG3jesCIsRHQL6ZT1JSsSe9Z3Fl0h1XBQ5w==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+    peerDependencies:
+      '@assistant-ui/react': ^0.3.5
+      '@types/react': '*'
+      react: ^18
+    peerDependenciesMeta:
+      '@types/react':
         optional: true
 
   '@assistant-ui/react@0.7.58':
@@ -2681,6 +2710,11 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
+  lucide-react@0.400.0:
+    resolution: {integrity: sha512-rpp7pFHh3Xd93KHixNgB0SqThMHpYNzsGUu69UaQbSZ75Q/J3m5t6EhKyMT3m4w2WOxmJ2mY0tD3vebnXqQryQ==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   lucide-react@0.456.0:
     resolution: {integrity: sha512-DIIGJqTT5X05sbAsQ+OhA8OtJYyD4NsEMCA/HQW/Y6ToPQ7gwbtujIoeAaup4HpHzV35SQOarKAWH8LYglB6eA==}
     peerDependencies:
@@ -4050,6 +4084,18 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
 
+  '@assistant-ui/react-markdown@0.0.5(@assistant-ui/react@0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17))(@types/react@18.3.18)(react@18.3.1)':
+    dependencies:
+      '@assistant-ui/react': 0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17)
+      '@radix-ui/react-slot': 1.1.1(@types/react@18.3.18)(react@18.3.1)
+      '@radix-ui/react-use-callback-ref': 1.1.0(@types/react@18.3.18)(react@18.3.1)
+      react: 18.3.1
+      react-markdown: 9.0.3(@types/react@18.3.18)(react@18.3.1)
+    optionalDependencies:
+      '@types/react': 18.3.18
+    transitivePeerDependencies:
+      - supports-color
+
   '@assistant-ui/react-markdown@0.7.11(@assistant-ui/react@0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17))(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17)':
     dependencies:
       '@assistant-ui/react': 0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17)
@@ -4077,6 +4123,27 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.18
       '@types/react-syntax-highlighter': 15.5.13
+
+  '@assistant-ui/react-ui@0.0.18(@assistant-ui/react@0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17))(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@assistant-ui/react': 0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17)
+      '@assistant-ui/react-markdown': 0.0.5(@assistant-ui/react@0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17))(@types/react@18.3.18)(react@18.3.1)
+      '@radix-ui/react-avatar': 1.1.2(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@radix-ui/react-primitive': 2.0.1(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@radix-ui/react-slot': 1.1.1(@types/react@18.3.18)(react@18.3.1)
+      '@radix-ui/react-tooltip': 1.1.7(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@radix-ui/react-use-callback-ref': 1.1.0(@types/react@18.3.18)(react@18.3.1)
+      class-variance-authority: 0.7.1
+      lucide-react: 0.400.0(react@18.3.1)
+      postcss: 8.5.1
+      react: 18.3.1
+      react-syntax-highlighter: 15.6.1(react@18.3.1)
+    optionalDependencies:
+      '@types/react': 18.3.18
+    transitivePeerDependencies:
+      - '@types/react-dom'
+      - react-dom
+      - supports-color
 
   '@assistant-ui/react@0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17)':
     dependencies:
@@ -6674,6 +6741,10 @@ snapshots:
   lru-cache@5.1.1:
     dependencies:
       yallist: 3.1.1
+
+  lucide-react@0.400.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
 
   lucide-react@0.456.0(react@18.3.1):
     dependencies:
