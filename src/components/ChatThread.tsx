@@ -1,5 +1,6 @@
 import { useEdgeRuntime, AssistantRuntimeProvider } from "@assistant-ui/react";
 import { MyThread as CustomThread, type WelcomeConfig } from "@/components/assistant-ui/thread";
+import { useEffect } from "react";
 
 export interface RuntimeConfig {
   model: string;
@@ -27,13 +28,12 @@ export function MyThread({
 }: MyThreadProps) {
   const runtimeOptions = {
     api: "/api/chat",
-    model,
-    apiEndpoint,
-    runtime,
-    temperature,
-    maxTokens,
-    systemPrompt,
-    userPrompt,
+    initialMessages: systemPrompt ? [{ role: 'system', content: systemPrompt }] : [],
+    body: {
+      model,
+      temperature,
+      maxTokens,
+    }
   };
 
   const runtimeInstance = useEdgeRuntime(runtimeOptions);
