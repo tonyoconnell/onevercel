@@ -1,15 +1,14 @@
 ---
 import {
-  Menu,
+  Maximize2,
   MessageSquare,
-  Square,
-  LayoutGrid,
-  SquareStack,
+  PanelLeftClose,
   X,
 } from "lucide-react";
 import { Sidebar } from "@/components/Sidebar";
-import { MyThread } from "../components/ChatThread";
+import { MyThread } from "@/components/ChatThread";
 import { LayoutInit } from "@/components/LayoutInit";
+import ThemeInit from "@/components/ThemeInit.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -34,16 +33,7 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
 
-    <script is:inline>
-      const theme =
-        localStorage.getItem("theme") ||
-        (window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light");
-      document.documentElement.classList[theme === "dark" ? "add" : "remove"](
-        "dark",
-      );
-    </script>
+<ThemeInit />
   </head>
 
   <body class="min-h-screen bg-background font-sans antialiased touch-none">
@@ -87,16 +77,15 @@ const {
         id="right-panel"
         class="border-l flex flex-col w-[400px] transition-all duration-300 ease-in-out transform mobile:fixed mobile:right-0 mobile:top-0 mobile:bottom-0 mobile:z-50 mobile:w-full mobile:translate-x-full mobile:data-[open=true]:translate-x-0"
       >
-        <div class="p-4 flex justify-end gap-2 border-b">
-          <button id="right-full" class="p-2 hover:bg-accent rounded-lg"
-            ><Square className="h-4 w-4" /></button
-          >
-          <button id="right-half" class="p-2 hover:bg-accent rounded-lg"
-            ><LayoutGrid className="h-4 w-4" /></button
-          >
-          <button id="right-quarter" class="p-2 hover:bg-accent rounded-lg"
-            ><SquareStack className="h-4 w-4" /></button
-          >
+        <div class="p-4 flex justify-between border-b">
+          <div class="flex gap-2">
+            <button id="right-full" class="p-2 hover:bg-accent rounded-lg"
+              ><Maximize2 className="h-4 w-4" /></button
+            >
+            <button id="right-half" class="p-2 hover:bg-accent rounded-lg"
+              ><PanelLeftClose className="h-4 w-4" /></button
+            >
+          </div>
           <button id="right-close" class="p-2 hover:bg-accent rounded-lg"
             ><X className="h-4 w-4" /></button
           >

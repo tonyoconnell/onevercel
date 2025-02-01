@@ -3,18 +3,18 @@ import { cn } from '@/lib/utils'
 import { ModeToggle } from '@/components/ModeToggle'
 import {
   Home,
-  Code2,
   MessageSquare,
   FileText,
-  Scale
+  Scale,
+  Book
 } from 'lucide-react'
 
 const navigation = [
   { title: "Home", path: "/", icon: Home },
-  { title: "Software", path: "/software", icon: Code2 },
+  { title: "Blog", path: "/blog", icon: Book },
   { title: "Chat", path: "/chat", icon: MessageSquare },
   { title: "README", path: "/readme", icon: FileText },
-  { title: "License", path: "/mit-license", icon: Scale },
+  { title: "License", path: "/mit-license", icon: Scale }
 ] as const
 
 // Components

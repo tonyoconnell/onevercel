@@ -7,7 +7,7 @@ export function initRightPanel() {
   const quarterButton = document.getElementById('right-quarter');
   const closeButton = document.getElementById('right-close');
 
-  if (!rightPanel || !fullButton || !halfButton || !quarterButton || !closeButton) return;
+  if (!rightPanel || !fullButton || !halfButton || !closeButton) return;
 
   const setSize = (size: 'full' | 'half' | 'quarter' | 'closed') => {
     rightPanel.classList.remove('right-panel-full', 'right-panel-half', 'right-panel-quarter', 'right-panel-closed');
@@ -28,6 +28,6 @@ export function initRightPanel() {
 
   fullButton.addEventListener('click', () => setSize('full'));
   halfButton.addEventListener('click', () => setSize('half'));
-  quarterButton.addEventListener('click', () => setSize('quarter'));
+  quarterButton?.addEventListener('click', () => setSize('quarter'));
   closeButton.addEventListener('click', () => setSize('closed'));
 }
