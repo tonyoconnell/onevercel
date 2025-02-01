@@ -1,17 +1,47 @@
-"use client";
-
 import { useEdgeRuntime, AssistantRuntimeProvider } from "@assistant-ui/react";
-import { MyThread as CustomThread } from "@/components/assistant-ui/thread";
+import { MyThread as CustomThread, type WelcomeConfig } from "@/components/assistant-ui/thread";
 
-export function MyThread() {
-  const runtime = useEdgeRuntime({
+export interface RuntimeConfig {
+  model: string;
+  apiEndpoint: string;
+  runtime: string;
+  temperature: number;
+  maxTokens: number;
+  systemPrompt: string;
+  userPrompt: string;
+}
+
+export type MyThreadProps = RuntimeConfig & {
+  welcome?: WelcomeConfig;
+}
+
+export function MyThread({
+  model,
+  apiEndpoint,
+  runtime,
+  temperature,
+  maxTokens,
+  systemPrompt,
+  userPrompt,
+  welcome,
+}: MyThreadProps) {
+  const runtimeOptions = {
     api: "/api/chat",
-  });
+    model,
+    apiEndpoint,
+    runtime,
+    temperature,
+    maxTokens,
+    systemPrompt,
+    userPrompt,
+  };
+
+  const runtimeInstance = useEdgeRuntime(runtimeOptions);
 
   return (
     <div className="h-full">
-      <AssistantRuntimeProvider runtime={runtime}>
-        <CustomThread />
+      <AssistantRuntimeProvider runtime={runtimeInstance}>
+        <CustomThread welcome={welcome} />
       </AssistantRuntimeProvider>
     </div>
   );

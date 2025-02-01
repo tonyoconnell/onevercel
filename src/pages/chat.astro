@@ -1,12 +1,36 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { MyThread } from "../components/ChatThread";
+
+const chatConfig = {
+  model: "gpt-4o-mini",
+  apiEndpoint: "https://api.openai.com/v1",
+  runtime: "edge",
+  temperature: 0.7,
+  maxTokens: 2000,
+  systemPrompt: "You are ONE AI assistant.",
+  userPrompt: "main content of the markdown file below",
+  welcome: {
+    message: "I am Agent ONE. How can I help you today?",
+    avatar: "/icon.svg",
+    suggestions: [
+      {
+        label: "Tell me about ONE",
+        prompt: "What is ONE and how can it help me?"
+      },
+      {
+        label: "Get Started", 
+        prompt: "How do I get started with ONE?"
+      }
+    ]
+  }
+};
 ---
 
 <Layout title="Chat">
   <div class="fixed inset-0 -ml-[80px] flex justify-center" id="chat-container">
     <div class="w-full max-w-[900px] pt-28 pl-32">
-      <MyThread client:load />
+      <MyThread client:load {...chatConfig} />
     </div>
   </div>
 </Layout>

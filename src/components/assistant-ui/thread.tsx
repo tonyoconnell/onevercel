@@ -6,9 +6,11 @@ import {
   ComposerPrimitive,
   MessagePrimitive,
   ThreadPrimitive,
+  useThreadRuntime,
 } from "@assistant-ui/react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import type { FC } from "react";
+import { useCallback } from "react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -28,13 +30,26 @@ import { MarkdownText } from "@/components/assistant-ui/markdown-text";
 import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
 import { cn } from "@/lib/utils";
 
-export const MyThread: FC = () => {
+export interface WelcomeConfig {
+  message: string;
+  avatar: string;
+  suggestions: Array<{
+    label: string;
+    prompt: string;
+  }>;
+}
+
+interface MyThreadProps {
+  welcome?: WelcomeConfig;
+}
+
+export const MyThread: FC<MyThreadProps> = ({ welcome }) => {
   return (
     <ThreadPrimitive.Root className="flex flex-col h-full w-full">
       <ScrollArea className="flex-1 w-full">
         <ThreadPrimitive.Viewport className="min-h-full w-full">
           <div className="pb-36">
-            <MyThreadWelcome />
+            <MyThreadWelcome welcome={welcome} />
             <ThreadPrimitive.Messages
               components={{
                 UserMessage: MyUserMessage,
@@ -70,14 +85,51 @@ const MyThreadScrollToBottom: FC = () => {
   );
 };
 
-const MyThreadWelcome: FC = () => {
+interface MyThreadWelcomeProps {
+  welcome?: WelcomeConfig;
+}
+
+const MyThreadWelcome: FC<MyThreadWelcomeProps> = ({ welcome }) => {
+  const threadRuntime = useThreadRuntime();
+
+  const handleSuggestionClick = useCallback((prompt: string) => {
+    if (threadRuntime) {
+      threadRuntime.append({
+        role: 'user',
+        content: [{
+          type: 'text',
+          text: prompt
+        }]
+      });
+    }
+  }, [threadRuntime]);
+
   return (
     <ThreadPrimitive.Empty>
       <div className="flex flex-grow flex-col items-center justify-center">
         <Avatar>
-          <AvatarFallback>C</AvatarFallback>
+          <AvatarFallback>
+            {welcome?.avatar ? (
+              <img src={welcome.avatar} alt="Assistant Avatar" className="w-full h-full object-cover" />
+            ) : (
+              'A'
+            )}
+          </AvatarFallback>
         </Avatar>
-        <p className="mt-4 font-medium">How can I help you today?</p>
+        <p className="mt-4 font-medium">{welcome?.message || "How can I help you today?"}</p>
+        {welcome?.suggestions && welcome.suggestions.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2 justify-center">
+            {welcome.suggestions.map((suggestion, index) => (
+              <Button
+                key={index}
+                variant="outline"
+                onClick={() => handleSuggestionClick(suggestion.prompt)}
+              >
+                {suggestion.label}
+              </Button>
+            ))}
+          </div>
+        )}
       </div>
     </ThreadPrimitive.Empty>
   );
@@ -85,7 +137,7 @@ const MyThreadWelcome: FC = () => {
 
 const MyComposer: FC = () => {
   return (
-<ComposerPrimitive.Root className="flex items-end rounded-xl border bg-background shadow-lg transition-colors ease-in focus-within:border-ring/30 focus-within:shadow-md mx-auto max-w-[800px] w-full">
+    <ComposerPrimitive.Root className="flex items-end rounded-xl border bg-background shadow-lg transition-colors ease-in focus-within:border-ring/30 focus-within:shadow-md mx-auto max-w-[800px] w-full">
       <ComposerPrimitive.Input
         autoFocus
         placeholder="Write a message..."
@@ -265,17 +317,14 @@ const MyBranchPicker: FC<BranchPickerPrimitive.Root.Props> = ({
   );
 };
 
-const CircleStopIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 16 16"
-      fill="currentColor"
-      width="16"
-      height="16"
-    >
-      <rect width="10" height="10" x="3" y="3" rx="2" />
-    </svg>
-  );
-};
-
+const CircleStopIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 16 16"
+    fill="currentColor"
+    width="16"
+    height="16"
+  >
+    <rect width="10" height="10" x="3" y="3" rx="2" />
+  </svg>
+);
