@@ -1,15 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { MyThread } from "../components/ChatThread";
+import { ChatConfigSchema } from '../lib/chatConfig';
 
-const chatConfig = {
-  model: "gpt-4o-mini",
-  apiEndpoint: "https://api.openai.com/v1",
-  runtime: "edge",
-  temperature: 0.7,
-  maxTokens: 2000,
-  systemPrompt: "reply in irish language",
-  userPrompt: "tell a joke",
+// You can override any default values here
+const chatConfig = ChatConfigSchema.parse({
+  systemPrompt: [{
+    type: "text" as const,
+    text: "reply in irish language"
+  }],
   welcome: {
     message: "I am Agent ONE. How can I help you today?",
     avatar: "/icon.svg",
@@ -19,18 +18,18 @@ const chatConfig = {
         prompt: "What is ONE and how can it help me?"
       },
       {
-        label: "Get Started", 
+        label: "Get Started",
         prompt: "How do I get started with ONE?"
       }
     ]
   }
-};
+});
 ---
 
 <Layout title="Chat">
   <div class="fixed inset-0 -ml-[80px] flex justify-center" id="chat-container">
     <div class="w-full max-w-[900px] pt-28 pl-32">
-      <MyThread client:load {...chatConfig} />
+      <MyThread client:load config={chatConfig} />
     </div>
   </div>
 </Layout>

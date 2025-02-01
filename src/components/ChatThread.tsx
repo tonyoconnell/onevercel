@@ -1,47 +1,39 @@
-import { useEdgeRuntime, AssistantRuntimeProvider } from "@assistant-ui/react";
-import { MyThread as CustomThread, type WelcomeConfig } from "@/components/assistant-ui/thread";
-import { useEffect } from "react";
-
-export interface RuntimeConfig {
-  model: string;
-  apiEndpoint: string;
-  runtime: string;
-  temperature: number;
-  maxTokens: number;
-  systemPrompt: string;
-  userPrompt: string;
-}
-
-export type MyThreadProps = RuntimeConfig & {
-  welcome?: WelcomeConfig;
-}
+import { AssistantRuntimeProvider } from "@assistant-ui/react";
+import { useVercelUseChatRuntime } from "@assistant-ui/react-ai-sdk";
+import { MyThread as CustomThread } from "@/components/assistant-ui/thread";
+import { type ChatConfig, createDefaultConfig } from "@/lib/chatConfig";
+import { useChat } from "ai/react";
+import { nanoid } from 'nanoid';
 
 export function MyThread({
-  model,
-  apiEndpoint,
-  runtime,
-  temperature,
-  maxTokens,
-  systemPrompt,
-  userPrompt,
-  welcome,
-}: MyThreadProps) {
-  const runtimeOptions = {
-    api: "/api/chat",
-    initialMessages: systemPrompt ? [{ role: 'system', content: systemPrompt }] : [],
-    body: {
-      model,
-      temperature,
-      maxTokens,
-    }
-  };
+  config = createDefaultConfig()
+}: {
+  config?: ChatConfig
+}) {
+  // Ensure we always have a valid config
+  const safeConfig = config || createDefaultConfig();
 
-  const runtimeInstance = useEdgeRuntime(runtimeOptions);
+  const chat = useChat({
+    api: "/api/chat",
+    initialMessages: safeConfig.systemPrompt ? [
+      {
+        id: nanoid(),
+        role: "system",
+        // Convert content parts array to string for AI SDK
+        content: safeConfig.systemPrompt.map(part => part.text).join('\n')
+      }
+    ] : [],
+    body: {
+      config: safeConfig
+    }
+  });
+
+  const runtime = useVercelUseChatRuntime(chat);
 
   return (
     <div className="h-full">
-      <AssistantRuntimeProvider runtime={runtimeInstance}>
-        <CustomThread welcome={welcome} />
+      <AssistantRuntimeProvider runtime={runtime}>
+        <CustomThread welcome={safeConfig.welcome} />
       </AssistantRuntimeProvider>
     </div>
   );

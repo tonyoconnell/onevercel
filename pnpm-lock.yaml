@@ -14,6 +14,9 @@ importers:
       '@assistant-ui/react':
         specifier: ^0.7.58
         version: 0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17)(use-sync-external-store@1.4.0(react@18.3.1))
+      '@assistant-ui/react-ai-sdk':
+        specifier: ^0.7.13
+        version: 0.7.13(@assistant-ui/react@0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17)(use-sync-external-store@1.4.0(react@18.3.1)))(@types/react@18.3.18)(react@18.3.1)(use-sync-external-store@1.4.0(react@18.3.1))
       '@assistant-ui/react-markdown':
         specifier: ^0.7.11
         version: 0.7.11(@assistant-ui/react@0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17)(use-sync-external-store@1.4.0(react@18.3.1)))(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17)
@@ -161,6 +164,9 @@ importers:
       marked:
         specifier: ^15.0.6
         version: 15.0.6
+      nanoid:
+        specifier: ^5.0.9
+        version: 5.0.9
       nanostores:
         specifier: ^0.11.3
         version: 0.11.3
@@ -299,6 +305,16 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@assistant-ui/react-ai-sdk@0.7.13':
+    resolution: {integrity: sha512-REeAMTkDnZCRHF4j4GCPuwhb0OCx+tmiWags2/ihcB+Z+8SH0Pob6VhifBsLzcatxmnIjyX0yP5j1J3duwoJrA==}
+    peerDependencies:
+      '@assistant-ui/react': ^0.7.56
+      '@types/react': '*'
+      react: ^18 || ^19 || ^19.0.0-rc
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
 
   '@assistant-ui/react-markdown@0.0.5':
     resolution: {integrity: sha512-nevoTd4GlnH9mYa4qeeT7Hn05eAwHoNRNF1GtolLzz7yU5RoidKZ3iSgNJgvW/2Nnoc8/EuUtFNpqfdxzMBpyA==}
@@ -4192,6 +4208,21 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
+
+  '@assistant-ui/react-ai-sdk@0.7.13(@assistant-ui/react@0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17)(use-sync-external-store@1.4.0(react@18.3.1)))(@types/react@18.3.18)(react@18.3.1)(use-sync-external-store@1.4.0(react@18.3.1))':
+    dependencies:
+      '@ai-sdk/react': 1.1.8(react@18.3.1)(zod@3.24.1)
+      '@ai-sdk/ui-utils': 1.1.8(zod@3.24.1)
+      '@assistant-ui/react': 0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17)(use-sync-external-store@1.4.0(react@18.3.1))
+      '@radix-ui/react-use-callback-ref': 1.1.0(@types/react@18.3.18)(react@18.3.1)
+      react: 18.3.1
+      zod: 3.24.1
+      zustand: 5.0.3(@types/react@18.3.18)(react@18.3.1)(use-sync-external-store@1.4.0(react@18.3.1))
+    optionalDependencies:
+      '@types/react': 18.3.18
+    transitivePeerDependencies:
+      - immer
+      - use-sync-external-store
 
   '@assistant-ui/react-markdown@0.0.5(@assistant-ui/react@0.7.58(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.17)(use-sync-external-store@1.4.0(react@18.3.1)))(@types/react@18.3.18)(react@18.3.1)':
     dependencies:
