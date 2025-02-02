@@ -13,7 +13,7 @@ export const ChatConfigSchema = z.object({
   maxTokens: z.number().min(1).max(4000).default(2000),
   systemPrompt: z.array(ContentPart).default([{
     type: 'text',
-    text: 'You are a helpful assistant.'
+    text: 'I am Agent ONE. How can I help you today?'
   }]),
   userPrompt: z.array(ContentPart).optional(),
   welcome: z.object({
