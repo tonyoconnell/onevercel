@@ -73,9 +73,7 @@ const DesktopSidebar = () => {
       <div className="p-4">
         <div className="flex items-center gap-4">
           <ModeToggle />
-          <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Toggle Theme
-          </span>
+         
         </div>
       </div>
     </aside>
