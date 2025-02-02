@@ -24,8 +24,8 @@ import {
   SendHorizontalIcon,
   StopCircleIcon,
 } from "lucide-react";
-import { MarkdownText } from "@/components/assistant-ui/markdown-text";
-import { TooltipIconButton } from "@/components/assistant-ui/tooltip-icon-button";
+import { MarkdownText } from "./markdown-text";
+import { TooltipIconButton } from "./tooltip-icon-button";
 import { cn } from "@/lib/utils";
 
 export interface WelcomeConfig {

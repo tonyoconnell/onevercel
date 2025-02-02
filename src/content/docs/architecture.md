@@ -10,10 +10,7 @@ ONE is an a framework for building AI Agents with Astro.
 Tech stack is Astro, React, Assistant UI, Vercel AI SDK
 
 We have built a system where anybody can understand the page 
-
 Every page will have an AI Agent. 
-The settings will be in the yml at the top of the file and the prompt will be the main content 
-for example 
 
 "provider": "openai",
     "model": "gpt-4o-mini",
