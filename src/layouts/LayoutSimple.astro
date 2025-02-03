@@ -60,11 +60,21 @@ const {
     }
   
     .center-grid {
-      margin-right: var(--right-panel-width);
-      transition: margin-right 0.2s ease;
-      width: calc(100% - var(--right-panel-width));
+      transition: margin-right 0.2s ease, width 0.2s ease;
       position: relative;
       z-index: 10;
+    }
+  
+    /* Add new class for when right panel is not in icon mode */
+    .center-grid:not(.icon-mode) {
+      margin-right: var(--right-panel-width);
+      width: calc(100% - var(--right-panel-width));
+    }
+  
+    /* When in icon mode, expand to full width */
+    .center-grid.icon-mode {
+      margin-right: 0;
+      width: 100%;
     }
   
     @media (max-width: 768px) {
@@ -113,7 +123,7 @@ const {
     <div class="main-grid">
       {left && <Left client:only="react" initialSize={initialLeftSize} />}
       
-      <div class="center-grid">
+      <div class={`center-grid ${initialRightSize === 'icon' ? 'icon-mode' : ''}`} id="center-grid">
         {header && <Header client:only="react" showLeft={left} showRight={right} />}
         
         <main class="p-4">
@@ -125,5 +135,27 @@ const {
     </div>
   
     {right && <Right client:only="react" initialSize={initialRightSize} />}
+  
+    <script>
+      // Add client-side listener to update icon-mode class
+      document.addEventListener('DOMContentLoaded', () => {
+        const centerGrid = document.getElementById('center-grid');
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+              const rightPanelWidth = getComputedStyle(document.documentElement)
+                .getPropertyValue('--right-panel-width')
+                .trim();
+              centerGrid?.classList.toggle('icon-mode', rightPanelWidth === '3rem' || rightPanelWidth === '48px');
+            }
+          });
+        });
+  
+        observer.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['style']
+        });
+      });
+    </script>
   </body>
 </html>
