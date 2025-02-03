@@ -59,7 +59,7 @@ export const MyThread: FC<MyThreadProps> = ({ welcome }) => {
         </ThreadPrimitive.Viewport>
       </ScrollArea>
 
-      <div className="fixed inset-x-0 bottom-0 bg-gradient-to-t from-background from-50% to-transparent">
+      <div className="bg-gradient-to-t from-background from-50% to-transparent">
         <div className="px-6 pt-6 pb-4">
           <MyThreadScrollToBottom />
           <MyComposer />
@@ -135,19 +135,19 @@ const MyThreadWelcome: FC<MyThreadWelcomeProps> = ({ welcome }) => {
 
 const MyComposer: FC = () => {
   return (
-    <ComposerPrimitive.Root className="flex items-end rounded-xl border bg-background shadow-lg transition-colors ease-in focus-within:border-ring/30 focus-within:shadow-md mx-auto max-w-[800px] w-full">
+    <ComposerPrimitive.Root className="flex items-end rounded-[24px] border bg-muted shadow-lg transition-colors ease-in focus-within:border-ring/30 focus-within:shadow-md mx-auto max-w-[800px] w-full">
       <ComposerPrimitive.Input
         autoFocus
         placeholder="Write a message..."
         rows={1}
-        className="placeholder:text-muted-foreground max-h-40 min-h-[56px] w-full resize-none rounded-lg border-none bg-transparent px-4 py-4 text-sm outline-none focus:ring-0 disabled:cursor-not-allowed"
+        className="placeholder:text-muted-foreground max-h-40 min-h-[64px] w-full resize-none rounded-[24px] border-none bg-transparent px-6 py-5 text-sm outline-none focus:ring-0 disabled:cursor-not-allowed"
       />
       <ThreadPrimitive.If running={false}>
         <ComposerPrimitive.Send asChild>
           <TooltipIconButton
             tooltip="Send"
             variant="default"
-            className="my-2.5 size-8 p-2 transition-opacity ease-in"
+            className="my-3 mr-3 size-9 p-2 transition-opacity ease-in bg-blue-600 hover:bg-blue-700 text-white rounded-full"
           >
             <SendHorizontalIcon />
           </TooltipIconButton>
@@ -158,7 +158,7 @@ const MyComposer: FC = () => {
           <TooltipIconButton
             tooltip="Cancel"
             variant="default"
-            className="my-2.5 size-8 p-2 transition-opacity ease-in"
+            className="my-3 mr-3 size-9 p-2 transition-opacity ease-in bg-blue-600 hover:bg-blue-700 text-white rounded-full"
           >
             <CircleStopIcon />
           </TooltipIconButton>
