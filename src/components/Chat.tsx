@@ -16,28 +16,22 @@ export function MyThread({
 
   const chat = useChat({
     api: "/api/chat",
-    initialMessages: [
-      // System prompt
-      ...(safeConfig.systemPrompt ? [{
-        id: nanoid(),
-        role: "system" as const,
-        content: safeConfig.systemPrompt[0].text
-      }] : []),
-      // Initial user message
-      ...(safeConfig.userPrompt ? [{
-        id: nanoid(),
-        role: "user" as const,
-        content: safeConfig.userPrompt[0].text
-      }] : []),
-      // Initial assistant response
-      ...(safeConfig.userPrompt ? [{
-        id: nanoid(),
-        role: "assistant" as const,
-        content: "👋 Hello! I'm excited to help you explore and learn about ONE. What would you like to know more about?"
-      }] : [])
-    ] satisfies Message[],
     body: {
-      config: safeConfig
+      config: safeConfig,
+      messages: [
+        // System prompt
+        ...(safeConfig.systemPrompt ? [{
+          id: nanoid(),
+          role: "system" as const,
+          content: safeConfig.systemPrompt[0].text
+        }] : []),
+        // Initial user message if provided
+        ...(safeConfig.userPrompt ? [{
+          id: nanoid(),
+          role: "user" as const,
+          content: safeConfig.userPrompt[0].text
+        }] : [])
+      ]
     }
   });
 
