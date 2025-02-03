@@ -146,7 +146,9 @@ const Right = ({ initialSize = 'full', chatConfig }: RightProps) => {
           </div>
 
       
+            <div className="h-full mx-auto w-full max-w-[900px]">
               <MyThread config={chatConfig} />
+            </div>
           
         </>
       )}
