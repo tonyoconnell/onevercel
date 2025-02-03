@@ -28,7 +28,9 @@ const {
   </head>
   <body class="min-h-screen bg-background font-sans antialiased">
     <SidebarWrapper client:load>
-      <slot />
+      <main class="p-6">
+        <slot />
+      </main>
     </SidebarWrapper>
   </body>
 </html>

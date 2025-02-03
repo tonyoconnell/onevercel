@@ -4,7 +4,7 @@ import {
   MessageSquare,
   X,
 } from "lucide-react";
-import { SidebarWrapper, HeaderWithSidebar } from "@/components/SidebarWrapper";
+import { SidebarWrapper } from "@/components/SidebarWrapper";
 import { MyThread } from "@/components/Chat";
 import { LayoutInit } from "@/components/LayoutInit";
 import ThemeInit from "@/components/ThemeInit.astro";
@@ -69,10 +69,8 @@ const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
         id="top-header"
         class="h-16 min-h-[64px] max-h-[64px] border-b flex items-center px-6 bg-background"
       >
-        <HeaderWithSidebar>
           <img src="/logo-dark.png" alt="ONE" class="h-8 w-auto dark:hidden" />
           <img src="/logo.png" alt="ONE" class="h-8 w-auto hidden dark:block" />
-        </HeaderWithSidebar>
       </header>
 
       <div class="flex-1 flex">
