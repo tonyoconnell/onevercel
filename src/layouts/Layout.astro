@@ -9,7 +9,6 @@ import { Sidebar } from "@/components/Sidebar";
 import { MyThread } from "@/components/Chat";
 import { LayoutInit } from "@/components/LayoutInit";
 import ThemeInit from "@/components/ThemeInit.astro";
-import { type ChatConfig, createDefaultConfig } from "@/lib/chatConfig";
 import { ChatConfigSchema } from '../lib/chatConfig';
 
 import "../styles/global.css";
@@ -18,15 +17,17 @@ interface Props {
   title: string;
   description?: string;
   children: any;
+  chatConfig?: any;
 }
 
 const {
   title,
   description = "ONE",
+  chatConfig: providedConfig,
 } = Astro.props;
 
-// You can override any default values here
-const chatConfig = ChatConfigSchema.parse({
+// Default chat config that can be overridden
+const defaultChatConfig = {
   systemPrompt: [{
     type: "text" as const,
     text: "Say XXX as every reply "
@@ -45,7 +46,9 @@ const chatConfig = ChatConfigSchema.parse({
       }
     ]
   }
-});
+};
+
+const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
 ---
 
 <!doctype html>

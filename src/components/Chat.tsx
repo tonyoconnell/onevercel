@@ -3,7 +3,6 @@ import { useVercelUseChatRuntime } from "@assistant-ui/react-ai-sdk";
 import { MyThread as CustomThread } from "@/components/chat/thread";
 import { type ChatConfig, createDefaultConfig } from "@/lib/chatConfig";
 import { useChat } from "ai/react";
-import type { Message } from "ai";
 import { nanoid } from 'nanoid';
 
 export function MyThread({
