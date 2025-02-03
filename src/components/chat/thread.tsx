@@ -104,7 +104,7 @@ const MyThreadWelcome: FC<MyThreadWelcomeProps> = ({ welcome }) => {
 
   return (
     <ThreadPrimitive.Empty>
-      <div className="flex flex-grow flex-col items-center justify-center">
+      <div className="flex flex-grow flex-col items-center justify-center px-6 py-4">
         <Avatar>
           <AvatarFallback>
             {welcome?.avatar ? (
@@ -116,12 +116,13 @@ const MyThreadWelcome: FC<MyThreadWelcomeProps> = ({ welcome }) => {
         </Avatar>
         <p className="mt-4 font-medium">{welcome?.message || "How can I help you today?"}</p>
         {welcome?.suggestions && welcome.suggestions.length > 0 && (
-          <div className="mt-4 flex flex-wrap gap-2 justify-center">
+          <div className="mt-6 flex flex-wrap gap-2 justify-center">
             {welcome.suggestions.map((suggestion, index) => (
               <Button
                 key={index}
                 variant="outline"
                 onClick={() => handleSuggestionClick(suggestion.prompt)}
+                className="bg-muted hover:bg-blue-600/90 hover:text-white transition-colors"
               >
                 {suggestion.label}
               </Button>

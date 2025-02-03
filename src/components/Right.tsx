@@ -91,7 +91,7 @@ const Right = ({ initialSize = 'full', chatConfig }: RightProps) => {
       ) : (
         // Regular view
         <>
-          <div className="flex-none border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full">
+          <div className="flex-none border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full mb-6">
             <div className="p-4 pb-5 max-w-[100vw] flex items-center relative">
               {!isMobile && (
                 <div className="flex gap-2 z-10">
