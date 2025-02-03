@@ -9,9 +9,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "./ui/sidebar"
+} from "@/components/ui/sidebar"
 
-// Menu items.
+// Menu items
 const items = [
   {
     title: "Home",
