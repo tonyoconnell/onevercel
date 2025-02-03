@@ -1,0 +1,125 @@
+---
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Left from '../components/Left';
+import Right from '../components/Right';
+
+interface Props {
+  header?: boolean;
+  footer?: boolean;
+  left?: boolean;
+  leftSize?: 'expanded' | 'collapsed';
+  right?: boolean;
+  rightSize?: 'full' | 'half' | 'quarter' | 'icon';
+  title?: string;
+}
+
+const {
+  header = true,
+  footer = true,
+  left = true,
+  leftSize: initialLeftSize = 'expanded',
+  right = true,
+  rightSize: initialRightSize = 'quarter',
+  title = 'Layout'
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <style>
+    :root {
+      --right-panel-width: var(--right-width-full);
+      --right-width-full: calc(100% - var(--left-sidebar-width) - 1px);
+      --right-width-half: 50%;
+      --right-width-quarter: 25%;
+      --right-width-icon: 48px;
+      --left-sidebar-width: 240px;
+      --header-height: 60px;
+    }
+  
+    .main-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      min-height: 100vh;
+    }
+  
+    .right-sidebar {
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100vh;
+      width: var(--right-panel-width);
+      transition: width 0.2s ease;
+      z-index: 50;
+    }
+  
+    .center-grid {
+      margin-right: var(--right-panel-width);
+      transition: margin-right 0.2s ease;
+      width: calc(100% - var(--right-panel-width));
+    }
+  
+    @media (max-width: 768px) {
+      .right-sidebar {
+        transform: translateX(100%);
+        width: 100% !important;
+      }
+  
+      .right-sidebar.sidebar-active {
+        transform: translateX(0);
+      }
+  
+      .center-grid {
+        margin-right: 0;
+        width: 100%;
+      }
+    }
+  
+    /* Add smooth scrolling to the whole page */
+    html {
+      scroll-behavior: smooth;
+    }
+  
+    /* Improve the scrollbar appearance */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+  
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  
+    ::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      border-radius: 4px;
+    }
+  
+    ::-webkit-scrollbar-thumb:hover {
+      background: #9ca3af;
+    }
+  </style>
+  
+  <body>
+    <div class="main-grid">
+      {left && <Left client:only="react" initialSize={initialLeftSize} />}
+      
+      <div class="center-grid">
+        {header && <Header client:only="react" showLeft={left} showRight={right} />}
+        
+        <main class="p-4">
+          <slot />
+        </main>
+  
+        {footer && <Footer client:only="react" />}
+      </div>
+    </div>
+  
+    {right && <Right client:only="react" initialSize={initialRightSize} />}
+  </body>
+</html>

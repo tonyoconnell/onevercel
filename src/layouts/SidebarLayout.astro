@@ -1,5 +1,4 @@
 ---
-import { ViewTransitions } from "astro:transitions";
 import "../styles/global.css";
 import ThemeInit from "@/components/ThemeInit.astro";
 import { SidebarWrapper } from "@/components/SidebarWrapper";
@@ -23,7 +22,6 @@ const {
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
-    <ViewTransitions />
     <ThemeInit />
   </head>
   <body class="min-h-screen bg-background font-sans antialiased">

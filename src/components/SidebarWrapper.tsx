@@ -1,7 +1,7 @@
 import React from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
-import { Header } from "@/components/Header";
+import { Header } from "@/components/HeaderWithSidebar";
 
 interface SidebarWrapperProps {
   children: React.ReactNode;
