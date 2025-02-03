@@ -34,7 +34,7 @@ const {
   <style>
     :root {
       --right-panel-width: var(--right-width-full);
-      --right-width-full: calc(100% - var(--left-sidebar-width) - 1px);
+      --right-width-full: 100vw;
       --right-width-half: 50%;
       --right-width-quarter: 25%;
       --right-width-icon: 48px;
@@ -46,6 +46,8 @@ const {
       display: grid;
       grid-template-columns: auto 1fr;
       min-height: 100vh;
+      position: relative;
+      z-index: 10;
     }
   
     .right-sidebar {
@@ -55,19 +57,21 @@ const {
       height: 100vh;
       width: var(--right-panel-width);
       transition: width 0.2s ease;
-      z-index: 50;
     }
   
     .center-grid {
       margin-right: var(--right-panel-width);
       transition: margin-right 0.2s ease;
       width: calc(100% - var(--right-panel-width));
+      position: relative;
+      z-index: 10;
     }
   
     @media (max-width: 768px) {
       .right-sidebar {
         transform: translateX(100%);
         width: 100% !important;
+        z-index: 50;
       }
   
       .right-sidebar.sidebar-active {
