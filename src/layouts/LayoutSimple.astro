@@ -1,14 +1,11 @@
 ---
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Left from '../components/Left';
 import Right from '../components/Right';
 
 interface Props {
   header?: boolean;
   footer?: boolean;
-  left?: boolean;
-  leftSize?: 'expanded' | 'collapsed';
   right?: boolean;
   rightSize?: 'full' | 'half' | 'quarter' | 'icon';
   title?: string;
@@ -17,8 +14,6 @@ interface Props {
 const {
   header = true,
   footer = true,
-  left = true,
-  leftSize: initialLeftSize = 'expanded',
   right = true,
   rightSize: initialRightSize = 'quarter',
   title = 'Layout'
@@ -38,13 +33,12 @@ const {
       --right-width-half: 50%;
       --right-width-quarter: 25%;
       --right-width-icon: 48px;
-      --left-sidebar-width: 240px;
       --header-height: 60px;
     }
   
     .main-grid {
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: 1fr;
       min-height: 100vh;
       position: relative;
       z-index: 10;
@@ -121,10 +115,8 @@ const {
   
   <body>
     <div class="main-grid">
-      {left && <Left client:only="react" initialSize={initialLeftSize} />}
-      
       <div class={`center-grid ${initialRightSize === 'icon' ? 'icon-mode' : ''}`} id="center-grid">
-        {header && <Header client:only="react" showLeft={left} showRight={right} />}
+        {header && <Header client:only="react" showLeft={true} showRight={right} />}
         
         <main class="p-4">
           <slot />

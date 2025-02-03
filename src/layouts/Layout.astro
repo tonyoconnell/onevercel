@@ -1,14 +1,34 @@
 ---
-import {
-  Maximize2,
-  MessageSquare,
-  X,
-} from "lucide-react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Right from "../components/Right";
 import { SidebarWrapper } from "@/components/SidebarWrapper";
-import { MyThread } from "@/components/Chat";
-import { LayoutInit } from "@/components/LayoutInit";
 import ThemeInit from "@/components/ThemeInit.astro";
-import { ChatConfigSchema } from '../lib/chatConfig';
+
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  children: any;
+  chatConfig?: any;
+  header?: boolean;
+  footer?: boolean;
+  left?: boolean;
+  leftSize?: "expanded" | "collapsed";
+  right?: boolean;
+  rightSize?: "full" | "half" | "quarter" | "icon";
+}
+
+const {
+  header = true,
+  footer = true,
+  left = true,
+  right = true,
+  rightSize: initialRightSize = "quarter",
+} = Astro.props;
+
+import { ChatConfigSchema } from "../lib/chatConfig";
 
 import "../styles/global.css";
 
@@ -19,32 +39,30 @@ interface Props {
   chatConfig?: any;
 }
 
-const {
-  title,
-  description = "ONE",
-  chatConfig: providedConfig,
-} = Astro.props;
+const { title, description = "ONE", chatConfig: providedConfig } = Astro.props;
 
 // Default chat config that can be overridden
 const defaultChatConfig = {
-  systemPrompt: [{
-    type: "text" as const,
-    text: "Say XXX as every reply "
-  }],
+  systemPrompt: [
+    {
+      type: "text" as const,
+      text: "Say XXX as every reply ",
+    },
+  ],
   welcome: {
     message: "I am Agent ONE. How can I help you today?",
     avatar: "/icon.svg",
     suggestions: [
       {
         label: "Tell me about ONE",
-        prompt: "What is ONE and how can it help me?"
+        prompt: "What is ONE and how can it help me?",
       },
       {
         label: "Get Started",
-        prompt: "How do I get started with ONE?"
-      }
-    ]
-  }
+        prompt: "How do I get started with ONE?",
+      },
+    ],
+  },
 };
 
 const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
@@ -54,58 +72,150 @@ const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={description} />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-
     <ThemeInit />
-  </head>
+    <style>
+      :root {
+        --right-panel-width: var(--right-width-full);
+        --right-width-full: 100vw;
+        --right-width-half: 50%;
+        --right-width-quarter: 25%;
+        --right-width-icon: 48px;
+        --left-sidebar-width: 240px;
+        --header-height: 60px;
+      }
 
-  <body class="min-h-screen bg-background font-sans antialiased touch-none">
+      .main-grid {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        min-height: 100vh;
+        position: relative;
+        z-index: 10;
+      }
+
+      .right-sidebar {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100vh;
+        width: var(--right-panel-width);
+        transition: width 0.2s ease;
+      }
+
+      .center-grid {
+        transition:
+          margin-right 0.2s ease,
+          width 0.2s ease;
+        position: relative;
+        z-index: 10;
+      }
+
+      /* Add new class for when right panel is not in icon mode */
+      .center-grid:not(.icon-mode) {
+        margin-right: var(--right-panel-width);
+        width: calc(100% - var(--right-panel-width));
+      }
+
+      /* When in icon mode, expand to full width */
+      .center-grid.icon-mode {
+        margin-right: 0;
+        width: 100%;
+      }
+
+      @media (max-width: 768px) {
+        .right-sidebar {
+          transform: translateX(100%);
+          width: 100% !important;
+          z-index: 50;
+        }
+
+        .right-sidebar.sidebar-active {
+          transform: translateX(0);
+        }
+
+        .center-grid {
+          margin-right: 0;
+          width: 100%;
+        }
+      }
+
+      /* Add smooth scrolling to the whole page */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Improve the scrollbar appearance */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #d1d5db;
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: #9ca3af;
+      }
+    </style>
+  </head><body>
     <SidebarWrapper client:load>
-      <header
-        id="top-header"
-        class="h-16 min-h-[64px] max-h-[64px] border-b flex items-center px-6 bg-background"
-      >
-          <img src="/logo-dark.png" alt="ONE" class="h-8 w-auto dark:hidden" />
-          <img src="/logo.png" alt="ONE" class="h-8 w-auto hidden dark:block" />
-      </header>
+      <div class="main-grid">
+        <div
+          class={`center-grid ${initialRightSize === "icon" ? "icon-mode" : ""}`}
+          id="center-grid"
+        >
+          {
+            header && (
+              <Header client:load showLeft={left} showRight={right} />
+            )
+          }
 
-      <div class="flex-1 flex">
-        <div class="flex-1 overflow-auto">
-          <main class="flex-1 py-8 px-6">
+          <main class="p-4">
             <slot />
           </main>
-          <footer class="py-6 px-6 text-center text-sm text-muted-foreground border-t">
-            © 2025 Your Company Name
-          </footer>
-        </div>
 
-        <div
-          id="right-panel"
-          class="border-l flex flex-col w-[400px] transition-all duration-300 ease-in-out transform mobile:fixed mobile:right-0 mobile:top-0 mobile:bottom-0 mobile:z-50 mobile:w-full mobile:translate-x-full mobile:data-[open=true]:translate-x-0"
-        >
-          <div class="p-4 flex justify-between border-b">
-            <div class="flex gap-2">
-              <button id="right-full" class="p-2 hover:bg-accent rounded-lg"
-                ><Maximize2 className="h-4 w-4" /></button
-              >
-            </div>
-            <button id="right-close" class="p-2 hover:bg-accent rounded-lg"
-              ><X className="h-4 w-4" /></button
-            >
-          </div>
-          <div class="chat-window flex justify-center">
-            <div class="w-full max-w-[900px] pt-8">
-              <MyThread client:load config={chatConfig} />
-            </div>
-          </div>
+          {footer && <Footer client:only="react" />}
         </div>
       </div>
 
-      <LayoutInit client:load />
+      {right && <Right client:only="react" initialSize={initialRightSize} chatConfig={chatConfig} />}
     </SidebarWrapper>
+
+    <script>
+      // Add client-side listener to update icon-mode class
+      document.addEventListener("DOMContentLoaded", () => {
+        const centerGrid = document.getElementById("center-grid");
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            if (
+              mutation.type === "attributes" &&
+              mutation.attributeName === "style"
+            ) {
+              const rightPanelWidth = getComputedStyle(
+                document.documentElement,
+              )
+                .getPropertyValue("--right-panel-width")
+                .trim();
+              centerGrid?.classList.toggle(
+                "icon-mode",
+                rightPanelWidth === "3rem" || rightPanelWidth === "48px",
+              );
+            }
+          });
+        });
+
+        observer.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ["style"],
+        });
+      });
+    </script>
   </body>
 </html>

@@ -3,6 +3,8 @@ import { cn } from '@/lib/utils';
 import { useStore } from '@nanostores/react';
 import { rightSize, setRightSize, isRightVisible } from '../stores/layout-store';
 import { useEffect, useLayoutEffect, useState } from 'react';
+import { Maximize2, Minimize2, PanelRightClose, LayoutPanelLeft } from 'lucide-react';
+import { MyThread } from "@/components/Chat";
 
 const sizeMap: Record<'full' | 'half' | 'quarter' | 'icon', string> = {
   full: 'var(--right-width-full)',
@@ -11,7 +13,12 @@ const sizeMap: Record<'full' | 'half' | 'quarter' | 'icon', string> = {
   icon: 'var(--right-width-icon)'
 };
 
-const Right = ({ initialSize = 'full' }: { initialSize?: 'full' | 'half' | 'quarter' | 'icon' }) => {
+interface RightProps {
+  initialSize?: 'full' | 'half' | 'quarter' | 'icon';
+  chatConfig?: any;
+}
+
+const Right = ({ initialSize = 'full', chatConfig }: RightProps) => {
   const currentSize = useStore(rightSize);
   const visible = useStore(isRightVisible);
   const [isMobile, setIsMobile] = useState(false);
@@ -85,33 +92,41 @@ const Right = ({ initialSize = 'full' }: { initialSize?: 'full' | 'half' | 'quar
               {!isMobile && (
                 <div className="flex gap-2">
                   <button
-                    onClick={() => setRightSize('quarter')}
+                    onClick={() => setRightSize('full')}
                     className={cn(
-                      "p-1.5 rounded text-xs",
-                      currentSize === 'quarter' ? "bg-blue-100 text-blue-700" : "hover:bg-gray-100"
+                      "p-1.5 rounded",
+                      currentSize === 'full' ? "bg-blue-100 text-blue-700" : "hover:bg-gray-100"
                     )}
-                    aria-label="Quarter width"
+                    aria-label="Full width"
                   >
-                    25%
+                    <Maximize2 size={14} />
                   </button>
                   <button
                     onClick={() => setRightSize('half')}
                     className={cn(
-                      "p-1.5 rounded text-xs",
+                      "p-1.5 rounded",
                       currentSize === 'half' ? "bg-blue-100 text-blue-700" : "hover:bg-gray-100"
                     )}
                     aria-label="Half width"
                   >
-                    50%
+                    <LayoutPanelLeft size={14} />
+                  </button>
+                  <button
+                    onClick={() => setRightSize('quarter')}
+                    className={cn(
+                      "p-1.5 rounded",
+                      currentSize === 'quarter' ? "bg-blue-100 text-blue-700" : "hover:bg-gray-100"
+                    )}
+                    aria-label="Quarter width"
+                  >
+                    <Minimize2 size={14} />
                   </button>
                   <button
                     onClick={() => setRightSize('icon')}
                     className="p-1.5 rounded hover:bg-gray-100"
                     aria-label="Minimize"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
+                    <PanelRightClose size={14} />
                   </button>
                 </div>
               )}
@@ -119,34 +134,40 @@ const Right = ({ initialSize = 'full' }: { initialSize?: 'full' | 'half' | 'quar
           </div>
 
           <div className="flex-1 overflow-y-auto w-full">
-            <div className="p-4 space-y-4">
-              <div className="bg-gray-50 rounded-lg p-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
-                    AI
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm text-gray-800">
-                      Hello! I'm your AI assistant. How can I help you today?
-                    </p>
+            {chatConfig ? (
+              <MyThread config={chatConfig} />
+            ) : (
+              <div className="p-4 space-y-4">
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                      AI
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm text-gray-800">
+                        Hello! I'm your AI assistant. How can I help you today?
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
 
-          <div className="flex-none border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-4 w-full">
-            <div className="flex gap-2">
-              <input
-                type="text"
-                placeholder="Ask me anything..."
-                className="flex-1 rounded-lg border px-3 py-2 text-sm"
-              />
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
-                Send
-              </button>
+          {!chatConfig && (
+            <div className="flex-none border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-4 w-full">
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  placeholder="Ask me anything..."
+                  className="flex-1 rounded-lg border px-3 py-2 text-sm"
+                />
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                  Send
+                </button>
+              </div>
             </div>
-          </div>
+          )}
         </>
       )}
     </aside>

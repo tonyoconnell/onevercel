@@ -1,47 +1,47 @@
 import React from "react";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/AppSidebar";
-import { Header } from "@/components/HeaderWithSidebar";
+import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/Sidebar";
+import Header from "@/components/Header";
 
 interface SidebarWrapperProps {
   children: React.ReactNode;
 }
 
-interface HeaderWithSidebarProps {
-  children: React.ReactNode;
-}
-
-// Cookie name for persisting sidebar state
-const SIDEBAR_COOKIE_NAME = "sidebar:state"
-
 export function SidebarWrapper({ children }: SidebarWrapperProps) {
-  // Get the initial state from cookie if available
-  const [defaultOpen] = React.useState(() => {
-    if (typeof document !== 'undefined') {
-      const cookie = document.cookie
-        .split('; ')
-        .find(row => row.startsWith(`${SIDEBAR_COOKIE_NAME}=`))
-      return cookie ? cookie.split('=')[1] === 'true' : true
-    }
-    return true
-  })
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  // Add click outside handler
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const sidebar = document.querySelector('[data-sidebar="sidebar"]');
+      if (sidebar && !sidebar.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <SidebarProvider defaultOpen={defaultOpen}>
+    <SidebarProvider 
+      defaultOpen={false} 
+      open={isOpen}
+      onOpenChange={setIsOpen}
+    >
       <div className="flex min-h-screen">
-        <AppSidebar />
+        <div onMouseEnter={() => setIsOpen(true)}>
+          <Sidebar variant="floating" collapsible="icon">
+            <AppSidebar />
+          </Sidebar>
+        </div>
         <div className="flex-1">
-          <div className="flex items-center h-16 px-6 border-b">
-            <SidebarTrigger />
-          </div>
+          <Header showLeft={true} showRight={false} />
           {children}
         </div>
       </div>
     </SidebarProvider>
   );
-}
-
-// Export HeaderWithSidebar as a named component
-export function HeaderWithSidebar({ children }: HeaderWithSidebarProps) {
-  return <Header>{children}</Header>
 }
