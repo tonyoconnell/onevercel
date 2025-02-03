@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 import { useStore } from '@nanostores/react';
 import { rightSize, setRightSize, isRightVisible } from '../stores/layout-store';
 import { useEffect, useLayoutEffect, useState } from 'react';
-import { Maximize2, Minimize2, PanelRightClose, LayoutPanelLeft } from 'lucide-react';
+import { Maximize2, Minimize2, X, Layout, Columns } from 'lucide-react';
 import { MyThread } from "@/components/Chat";
 
 const sizeMap: Record<'full' | 'half' | 'quarter' | 'icon', string> = {
@@ -87,87 +87,62 @@ const Right = ({ initialSize = 'full', chatConfig }: RightProps) => {
         // Regular view
         <>
           <div className="flex-none border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full">
-            <div className="p-4 max-w-[100vw] flex justify-between items-center">
-              <h2 className="font-semibold">AI Assistant</h2>
+            <div className="p-4 max-w-[100vw] flex items-center">
               {!isMobile && (
-                <div className="flex gap-2">
+                <div className="flex gap-2 mr-4">
                   <button
                     onClick={() => setRightSize('full')}
                     className={cn(
-                      "p-1.5 rounded",
-                      currentSize === 'full' ? "bg-blue-100 text-blue-700" : "hover:bg-gray-100"
+                      "p-1.5 rounded transition-colors",
+                      currentSize === 'full' ? "bg-blue-600 text-white" : "hover:bg-gray-100"
                     )}
                     aria-label="Full width"
                   >
-                    <Maximize2 size={14} />
+                    <Maximize2 size={16} />
                   </button>
                   <button
                     onClick={() => setRightSize('half')}
                     className={cn(
-                      "p-1.5 rounded",
-                      currentSize === 'half' ? "bg-blue-100 text-blue-700" : "hover:bg-gray-100"
+                      "p-1.5 rounded transition-colors",
+                      currentSize === 'half' ? "bg-blue-600 text-white" : "hover:bg-gray-100"
                     )}
                     aria-label="Half width"
                   >
-                    <LayoutPanelLeft size={14} />
+                    <Layout size={16} />
                   </button>
                   <button
                     onClick={() => setRightSize('quarter')}
                     className={cn(
-                      "p-1.5 rounded",
-                      currentSize === 'quarter' ? "bg-blue-100 text-blue-700" : "hover:bg-gray-100"
+                      "p-1.5 rounded transition-colors",
+                      currentSize === 'quarter' ? "bg-blue-600 text-white" : "hover:bg-gray-100"
                     )}
                     aria-label="Quarter width"
                   >
-                    <Minimize2 size={14} />
-                  </button>
-                  <button
-                    onClick={() => setRightSize('icon')}
-                    className="p-1.5 rounded hover:bg-gray-100"
-                    aria-label="Minimize"
-                  >
-                    <PanelRightClose size={14} />
+                    <Columns size={16} />
                   </button>
                 </div>
+              )}
+              
+              <h2 className="font-semibold text-lg flex-1">AI Assistant</h2>
+              
+              {!isMobile && (
+                <button
+                  onClick={() => setRightSize('icon')}
+                  className={cn(
+                    "p-1.5 rounded transition-colors",
+                    "hover:bg-gray-100"
+                  )}
+                  aria-label="Minimize"
+                >
+                  <X size={16} />
+                </button>
               )}
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto w-full">
-            {chatConfig ? (
+      
               <MyThread config={chatConfig} />
-            ) : (
-              <div className="p-4 space-y-4">
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
-                      AI
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm text-gray-800">
-                        Hello! I'm your AI assistant. How can I help you today?
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {!chatConfig && (
-            <div className="flex-none border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-4 w-full">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  placeholder="Ask me anything..."
-                  className="flex-1 rounded-lg border px-3 py-2 text-sm"
-                />
-                <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
-                  Send
-                </button>
-              </div>
-            </div>
-          )}
+          
         </>
       )}
     </aside>
