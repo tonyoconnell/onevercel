@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
-import { writeFile } from 'node:fs/promises';
+import { writeFile } from 'fs/promises';
+import { join } from 'path';
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -15,10 +16,11 @@ export const POST: APIRoute = async ({ request }) => {
         status: 200,
         headers: { 'Content-Type': 'application/json' }
       });
-    } else {
-      // Local development
-      await writeFile('public/saved-content.txt', content as string);
     }
+
+    // Local development
+    const filePath = join(process.cwd(), 'public', 'saved-content.txt');
+    await writeFile(filePath, content as string);
 
     return new Response(JSON.stringify({
       success: true,

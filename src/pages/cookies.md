@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/LayoutText.astro
+layout: ../layouts/Layout.astro
 title: Cookie Policy
 description: Transparent Cookie Usage
 ---
