@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { openai } from "@ai-sdk/openai";
 import { createEdgeRuntimeAPI } from "@assistant-ui/react/edge";
-import { type ChatConfig, createDefaultConfig } from '@/lib/chatConfig';
+import { type ChatConfig, createDefaultConfig } from '@/schema/chat';
 import type { Message } from 'ai';
 
 interface ChatRequest {

@@ -1,4 +1,4 @@
-import { ChatConfigSchema } from './lib/chatConfig';
+import { ChatConfigSchema } from './schema/chat';
 import type { Message } from 'ai';
 
 async function testChatRequest() {

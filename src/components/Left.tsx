@@ -1,35 +1,47 @@
-// src/components/Left.tsx
-import { cn } from '@/lib/utils';
-import { useStore } from '@nanostores/react';
-import { isLeftExpanded, toggleLeft } from '../stores/layout-store';
-import { useLayoutEffect } from 'react';
+import React from "react";
+import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/Sidebar";
+import Header from "@/components/Header";
 
-const Left = ({ initialSize = 'expanded' }: { initialSize?: 'expanded' | 'collapsed' }) => {
-  const expanded = useStore(isLeftExpanded);
-  
-  useLayoutEffect(() => {
-    isLeftExpanded.set(initialSize === 'expanded');
-  }, [initialSize]);
+interface SidebarWrapperProps {
+  children: React.ReactNode;
+}
+
+export function SidebarWrapper({ children }: SidebarWrapperProps) {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  // Add click outside handler
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const sidebar = document.querySelector('[data-sidebar="sidebar"]');
+      if (sidebar && !sidebar.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <aside className={cn(
-      "left-sidebar bg-background border-r",
-      "md:block",
-      expanded ? "w-[var(--left-width-expanded)]" : "w-[var(--left-width-collapsed)]",
-      expanded ? "sidebar-active" : "translate-x-[-100%] md:translate-x-0"
-    )}>
-      <nav className="p-4">
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <button onClick={toggleLeft} aria-label="Close menu">
-              ✕
-            </button>
-            {expanded && <span>Navigation</span>}
-          </div>
+    <SidebarProvider 
+      defaultOpen={false} 
+      open={isOpen}
+      onOpenChange={setIsOpen}
+    >
+      <div className="flex min-h-screen">
+        <div onMouseEnter={() => setIsOpen(true)}>
+          <Sidebar variant="floating" collapsible="icon">
+            <AppSidebar />
+          </Sidebar>
         </div>
-      </nav>
-    </aside>
+        <div className="flex-1">
+          <Header showLeft={true} showRight={false} />
+          {children}
+        </div>
+      </div>
+    </SidebarProvider>
   );
-};
-
-export default Left;
+}

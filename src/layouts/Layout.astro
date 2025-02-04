@@ -1,12 +1,12 @@
 ---
+import "../styles/global.css";
+import ThemeInit from "@/components/Theme.astro";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { SidebarWrapper } from "@/components/Left";
 import Right from "../components/Right";
-import { SidebarWrapper } from "@/components/SidebarWrapper";
-import ThemeInit from "@/components/ThemeInit.astro";
 
-import "../styles/global.css";
-import { ChatConfigSchema } from "../lib/chatConfig";
+import { ChatConfigSchema } from "../schema/chat";
 
 interface Props {
   title: string;
@@ -162,11 +162,7 @@ const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
           class={`center-grid ${initialRightSize === "icon" ? "icon-mode" : ""}`}
           id="center-grid"
         >
-          {
-            header && (
-              <Header client:load showLeft={left} showRight={right} />
-            )
-          }
+          {header && <Header client:load showLeft={left} showRight={right} />}
 
           <main class="p-4">
             <slot />
@@ -176,7 +172,15 @@ const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
         </div>
       </div>
 
-      {right && <Right client:only="react" initialSize={initialRightSize} chatConfig={chatConfig} />}
+      {
+        right && (
+          <Right
+            client:only="react"
+            initialSize={initialRightSize}
+            chatConfig={chatConfig}
+          />
+        )
+      }
     </SidebarWrapper>
 
     <script>
@@ -189,9 +193,7 @@ const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
               mutation.type === "attributes" &&
               mutation.attributeName === "style"
             ) {
-              const rightPanelWidth = getComputedStyle(
-                document.documentElement,
-              )
+              const rightPanelWidth = getComputedStyle(document.documentElement)
                 .getPropertyValue("--right-panel-width")
                 .trim();
               centerGrid?.classList.toggle(

@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/TextLayout.astro
+layout: ../layouts/Text.astro
 title: "Todo"
 description: "Things to do"
 ---

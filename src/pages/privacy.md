@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/TextLayout.astro
+layout: ../layouts/Text.astro
 title: "Privacy Policy"
 description: "Your Privacy is Our Priority"
 ---

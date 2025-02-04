@@ -1,6 +1,5 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ReadmeContent from '../../README.md';
+import Layout from "../layouts/Landing.astro";
 import { MyThread } from "../components/Chat";
 import { ChatConfigSchema } from '../schema/chat';
 
@@ -30,17 +29,8 @@ const chatConfig = ChatConfigSchema.parse({
 });
 ---
 
-<Layout title="README" description="Astro + Shadcn UI Documentation">
-  
-  
-  <div id="center" class="center">
+<Layout title="Chat">
+  <div id="center" class="center" style="max-width: 800px;">
     <MyThread client:load config={chatConfig} />
   </div>
-
-  <div id="right" class="right prose dark:prose-invert max-w-none">
-    <article>
-      <ReadmeContent />
-    </article>
-  </div>
-
 </Layout>
