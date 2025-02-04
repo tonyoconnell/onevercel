@@ -4,7 +4,8 @@ import { isRightVisible, toggleRight, layoutState } from '../stores/layout-store
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 import { Suspense } from 'react';
 import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { computed } from 'nanostores';
 
 interface HeaderProps {
   showLeft?: boolean;
@@ -16,65 +17,67 @@ function HeaderContent({ showLeft = true, showRight = true }: HeaderProps) {
   const { rightPanelSize } = useStore(layoutState);
   const isIcon = rightPanelSize === 'icon';
   
-  // Add this to ensure the component only renders when sidebar context is available
-  try {
-    useSidebar();
-  } catch {
-    return null;
-  }
+  const sidebar = useSidebar();
 
-  return (
+  // Add mobile visibility check
+  const isMobile = useStore(computed(layoutState, s => 
+    s.rightPanelSize === 'icon' && window.innerWidth < 768
+  ));
+
+  return isMobile ? null : (
     <header 
       className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
       style={{ height: 'var(--header-height)' }}
     >
-      <div className="container flex h-full items-center justify-between px-4">
+      <div className="container flex h-full items-center">
         {/* Left section */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           {showLeft && (
             <SidebarTrigger 
               data-sidebar-trigger="true"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-md hover:bg-accent"
-            />
+              className="inline-flex h-10 w-10 items-center justify-center rounded-md hover:bg-accent"
+            >
+              <Menu className="h-6 w-6" />
+            </SidebarTrigger>
           )}
-          <a href="/" className="flex items-center gap-2 md:gap-3">
+          <a href="/" className="flex items-center gap-2">
             <img 
               src="/logo.svg" 
               alt="Logo"
-              className="h-6 w-auto md:h-8"
+              className="h-8 w-auto"
               width={32}
               height={32}
             />
-            <span className="hidden font-semibold md:inline-block">
-              Your Brand
+            <span className="hidden font-semibold sm:inline-block">
+              ONE
             </span>
           </a>
         </div>
 
         {/* Center section - Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="mx-auto hidden md:flex items-center gap-6">
           <a 
             href="/features" 
-            className="text-sm font-medium text-muted-foreground hover:text-foreground"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
             Features
           </a>
           <a 
             href="/docs" 
-            className="text-sm font-medium text-muted-foreground hover:text-foreground"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
             Documentation
           </a>
           <a 
             href="/pricing" 
-            className="text-sm font-medium text-muted-foreground hover:text-foreground"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
             Pricing
           </a>
         </nav>
 
         {/* Right section */}
-        <div className="flex items-center gap-4">
+        <div className="ml-auto flex items-center gap-2">
           {showRight && !isIcon && (
             <Button
               variant="ghost"
@@ -84,25 +87,25 @@ function HeaderContent({ showLeft = true, showRight = true }: HeaderProps) {
               aria-label={rightVisible ? 'Close AI panel' : 'Open AI panel'}
             >
               {rightVisible ? (
-                <X className="h-4 w-4" />
+                <X className="h-5 w-5" />
               ) : (
                 <span className="font-semibold">AI</span>
               )}
             </Button>
           )}
-          <Button 
-            variant="outline" 
-            size="sm"
-            className="hidden md:inline-flex"
-          >
-            Sign In
-          </Button>
-          <Button 
-            size="sm"
-            className="hidden md:inline-flex"
-          >
-            Get Started
-          </Button>
+          <div className="hidden md:flex items-center gap-2">
+            <Button 
+              variant="ghost" 
+              size="sm"
+            >
+              Sign In
+            </Button>
+            <Button 
+              size="sm"
+            >
+              Get Started
+            </Button>
+          </div>
         </div>
       </div>
     </header>
