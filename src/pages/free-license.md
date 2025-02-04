@@ -1,19 +1,19 @@
 ---
 layout: ../layouts/Layout.astro
-title: "ONE Free License"
-description: "Maximum Freedom With Minimal Requirements"
+title: "ONE License"
+description: "Maximum Freedom. Zero Restrictions"
 ---
 
 <div class="prose prose-slate max-w-3xl mx-auto px-4 py-8">
 
-# ONE Free License (Version 1.0)
-## Maximum Freedom for Brand Recognition
+# ONE License (Version 1.0)
+## Maximum Freedom. Zero Restrictions. 
 
 <div class="text-sm text-slate-600">
-Copyright (c) 2024 ONE (https://one.ie/)
+Copyright (c) 2025 ONE (https://one.ie/)
 </div>
 
-This license empowers you with complete commercial freedom to use, reuse, modify, sell and resell the software, AI and data, at any price you wish. No usage limits. No royalty fees. Just pure, unrestricted ability to innovate and profit from the software.
+This license empowers you with complete commercial freedom to use, reuse, modify, sell and resell the software, AI and data, at any price you wish. Use your own keys. No usage limits. No royalty fees. Just pure, unrestricted ability to innovate and profit from the software.
 
 You are free to run ONE locally, on your own servers, in the cloud and at the edge.
 
@@ -49,7 +49,7 @@ These rights are granted in perpetuity and are irrevocable, provided the brand r
 The Software is provided "AS IS". We bear no liability for its use.
 
 ## 7. Termination
-This license only terminates if you remove or hide our brand assets. Reinstatement is available through written permission.
+This license terminates if you remove or hide our brand assets. 
 
 ## 8. Dispute Resolution
 - Resolved through good faith negotiation
@@ -61,8 +61,8 @@ The only obligations are to:
 - Register for free at https://one.ie
 - Display the ONE logo linked to https://one.ie visibly in your application
 
-## 10. Need More?
-Complete white-labeling rights and removal of logo is available to select partners, see our [Whitelabel License](https://one.ie/whitelabel)
+## 10. White-Label
+Want to brand ONE as your own product? Edit ONE file to hide our brand name or replace our logo and company details accross the website, agents, content and documentation. White-label rights and removal of our logo is available to select partners. If you want to partner email Agent ONE at agent@one.ie 
 
 ---
 
