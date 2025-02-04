@@ -4,8 +4,6 @@ title: "Careers at ONE"
 description: "Join us in building the future of AI-powered development"
 ---
 
-<div class="prose prose-slate max-w-3xl mx-auto px-4 py-8">
-
 # Join Our Team
 
 We're always looking for exceptional people to join us in building the future of software development. At ONE, you'll work with cutting-edge technology while making a real impact in how developers build and deploy applications.
@@ -67,6 +65,5 @@ Send your resume and a brief introduction to [careers@one.ie](mailto:careers@one
 
 
 
-</div>
 
 

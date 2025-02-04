@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/history-of-ai-agents.md",
+                "file": "prompts/ui-design-assistant.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "history-of-ai-agents"
+              "title": "ui-design-assistant"
             }
           }
         ]
@@ -140,13 +140,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "blog/history-of-ai-agents.md",
+                "file": "prompts/ui-design-assistant.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of history-of-ai-agents"
+              "title": "Outline of ui-design-assistant"
             }
           },
           {
@@ -179,14 +179,18 @@
   },
   "active": "fd4b9d08dd4d9b08",
   "lastOpenFiles": [
+    "prompts/shadcn-astro.md",
+    "prompts/layout.md",
+    "prompts/code-review-assistant.md",
+    "docs/chat.md",
     "docs/architecture.md",
+    "blog/history-of-ai-agents.md",
     "blog/get-started.md",
     "blog/the-story-of-truth-terminal.md",
     "blog/the-meme-machines.md",
     "blog/the-ai-traders.md",
     "blog/open-source-ai-powered-chat-framework-for-websites.md",
     "blog/one-hundred-percent-lighthouse-score.md",
-    "blog/history-of-ai-agents.md",
     "src/content/blog/one-hundred-percent-lighthouse-score copy.md",
     "src/content/blog/one-hundred-percent-lighthouse-score.md",
     "src/content/blog/history-of-ai-agents.md",
@@ -220,10 +224,6 @@
     "blocks/prompts/marketing-capabilities.md",
     "blocks/prompts/marketing-agent.md",
     "blocks/prompts/agentc.md",
-    "src/content/stream/ai-applications.md",
-    "OpenAI.md",
-    "blocks/prompts/-Task.md",
-    "blocks/prompts/-ONE.md",
-    "CODE_OF_CONDUCT.md"
+    "src/content/stream/ai-applications.md"
   ]
 }

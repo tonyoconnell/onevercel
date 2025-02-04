@@ -4,8 +4,6 @@ title: "Terms of Service"
 description: "Fair, Simple, and Human"
 ---
 
-<div class="prose prose-slate max-w-3xl mx-auto px-4 py-8">
-
 # Terms of Service
 ## Built on Trust and Transparency
 
@@ -90,4 +88,3 @@ We're committed to:
   <p class="text-green-800">These terms reflect our commitment to building a platform that serves your needs while maintaining the trust you place in us.</p>
 </div>
 
-</div> 

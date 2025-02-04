@@ -1,10 +1,8 @@
 ---
-layout: ../layouts/Layout.astro
-title: "Cookie Policy"
-description: "Transparent Cookie Usage"
+layout: ../layouts/LayoutText.astro
+title: Cookie Policy
+description: Transparent Cookie Usage
 ---
-
-<div class="prose prose-slate max-w-3xl mx-auto px-4 py-8">
 
 # Cookie Policy
 ## Clear, Minimal, and Necessary
@@ -85,4 +83,3 @@ Need more information about our cookie practices?
 - Email: [ai@one.ie](mailto:ai@one.ie)
 - Response Time: < 24 hours
 
-</div> 

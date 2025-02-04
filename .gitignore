@@ -37,3 +37,14 @@ pnpm-debug.log*
 # Sensitive data
 .env.*
 !.env.example
+
+# First ignore all .obsidian folders completely
+**/.obsidian/
+
+# Then explicitly allow plugins in the three specific vault locations
+!/.obsidian/plugins/
+!/src/.obsidian/plugins/
+!/src/content/.obsidian/plugins/
+
+# Ignore plugin data/caches in all allowed plugin folders
+**/.obsidian/plugins/*/data.json

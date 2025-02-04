@@ -4,8 +4,6 @@ title: "Privacy Policy"
 description: "Your Privacy is Our Priority"
 ---
 
-<div class="prose prose-slate max-w-3xl mx-auto px-4 py-8">
-
 # Privacy Policy
 ## Simple, Transparent, and User-First
 
@@ -89,4 +87,3 @@ We're committed to being worthy of your trust. If you have suggestions for impro
   <p class="text-blue-800">We treat your data with the same care we'd want for our own. That's not just a policy—it's our core belief.</p>
 </div>
 
-</div> 
