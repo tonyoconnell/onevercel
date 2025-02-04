@@ -5,27 +5,24 @@ import { atom, computed } from 'nanostores';
 interface LayoutState {
   rightPanelSize: 'full' | 'half' | 'quarter' | 'icon';
   rightVisible: boolean;
-  sidebarOpen: boolean;
+  leftExpanded: boolean;
   theme: 'light' | 'dark';
 }
 
-const initialState: LayoutState = {
+export const layoutState = atom<LayoutState>({
   rightPanelSize: 'quarter',
   rightVisible: true,
-  sidebarOpen: false,
-  theme: 'light'
-};
-
-// Main store
-export const layoutState = atom<LayoutState>(initialState);
+  leftExpanded: false,
+  theme: 'light',
+});
 
 // Try to restore persisted state
 try {
   const savedTheme = localStorage.getItem('theme');
-  if (savedTheme) {
+  if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
     layoutState.set({
-      ...initialState,
-      theme: savedTheme as 'light' | 'dark'
+      ...layoutState.get(),
+      theme: savedTheme
     });
   }
 } catch (e) {
@@ -35,41 +32,32 @@ try {
 // Computed values with memoization
 export const rightSize = computed(layoutState, state => state.rightPanelSize);
 export const isRightVisible = computed(layoutState, state => state.rightVisible);
-export const isSidebarOpen = computed(layoutState, state => state.sidebarOpen);
+export const isLeftExpanded = computed(layoutState, state => state.leftExpanded);
 export const currentTheme = computed(layoutState, state => state.theme);
 
 // Action creators with error handling
 export function setRightSize(size: LayoutState['rightPanelSize']) {
-  try {
-    layoutState.set({
-      ...layoutState.get(),
-      rightPanelSize: size
-    });
-  } catch (e) {
-    console.error('Failed to update right panel size:', e);
-  }
+  layoutState.set({
+    ...layoutState.get(),
+    rightPanelSize: size,
+    rightVisible: size !== 'icon'
+  });
 }
 
 export function toggleRight() {
-  try {
-    layoutState.set({
-      ...layoutState.get(),
-      rightVisible: !layoutState.get().rightVisible
-    });
-  } catch (e) {
-    console.error('Failed to toggle right panel:', e);
-  }
+  const state = layoutState.get();
+  layoutState.set({
+    ...state,
+    rightVisible: !state.rightVisible
+  });
 }
 
-export function toggleSidebar() {
-  try {
-    layoutState.set({
-      ...layoutState.get(),
-      sidebarOpen: !layoutState.get().sidebarOpen
-    });
-  } catch (e) {
-    console.error('Failed to toggle sidebar:', e);
-  }
+export function toggleLeft() {
+  const state = layoutState.get();
+  layoutState.set({
+    ...state,
+    leftExpanded: !state.leftExpanded
+  });
 }
 
 export function setTheme(theme: LayoutState['theme']) {
@@ -81,5 +69,25 @@ export function setTheme(theme: LayoutState['theme']) {
     localStorage.setItem('theme', theme);
   } catch (e) {
     console.error('Failed to set theme:', e);
+  }
+}
+
+// Utility to handle mobile/responsive states
+export function handleResponsiveLayout(width: number) {
+  const state = layoutState.get();
+  
+  if (width < 768) {
+    // Mobile layout
+    layoutState.set({
+      ...state,
+      rightPanelSize: 'icon',
+      leftExpanded: false
+    });
+  } else if (width < 1024) {
+    // Tablet layout
+    layoutState.set({
+      ...state,
+      rightPanelSize: 'quarter'
+    });
   }
 }

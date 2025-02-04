@@ -2,63 +2,50 @@ import React from "react";
 import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/Sidebar";
 
-interface SidebarWrapperProps {
-  children: React.ReactNode;
-}
-
-export function SidebarWrapper({ children }: SidebarWrapperProps) {
+export function SidebarWrapper({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  // Use ResizeObserver to handle viewport changes
+  // Single effect for all sidebar management
   React.useEffect(() => {
+    // Handle resize
     const observer = new ResizeObserver((entries) => {
-      const width = entries[0]?.contentRect.width;
-      if (width && width < 768) {
+      if (entries[0]?.contentRect.width < 768) {
         setIsOpen(false);
       }
     });
 
     observer.observe(document.documentElement);
-    return () => observer.disconnect();
-  }, []);
 
-  // Enhanced click outside detection
-  React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    // Handle click outside
+    const handleClickOutside = (e: MouseEvent) => {
       const sidebar = document.querySelector('[data-sidebar="true"]');
       const trigger = document.querySelector('[data-sidebar-trigger="true"]');
       
       if (
+        isOpen && 
         sidebar && 
-        !sidebar.contains(event.target as Node) && 
+        !sidebar.contains(e.target as Node) && 
         trigger && 
-        !trigger.contains(event.target as Node)
+        !trigger.contains(e.target as Node)
       ) {
         setIsOpen(false);
       }
     };
 
-    if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, [isOpen]);
 
   return (
-    <SidebarProvider 
-      defaultOpen={false} 
-      open={isOpen}
-      onOpenChange={setIsOpen}
-    >
+    <SidebarProvider defaultOpen={false} open={isOpen} onOpenChange={setIsOpen}>
       <div className="flex min-h-screen">
-        <div 
-          data-sidebar="true"
-          className="transition-transform duration-200"
-        >
-          <Sidebar variant="floating" collapsible="icon">
-            <AppSidebar />
-          </Sidebar>
-        </div>
+        <Sidebar variant="floating" collapsible="icon">
+          <AppSidebar />
+        </Sidebar>
         <div className="flex-1">
           {children}
         </div>
