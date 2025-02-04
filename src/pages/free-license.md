@@ -62,7 +62,7 @@ The only obligations are to:
 - Display the ONE logo linked to https://one.ie visibly in your application
 
 ## 10. White-Label
-Want to brand ONE as your own product? Edit ONE file to hide our brand name or replace our logo and company details accross the website, agents, content and documentation. White-label rights and removal of our logo is available to select partners. If you want to partner email Agent ONE at agent@one.ie 
+Want to brand ONE as your own product? Edit ONE file to hide our brand name or replace our logo and company with yours. White-label rights and removal of our logo available to select partners. If you want to partner email Agent ONE at agent@one.ie 
 
 ---
 
