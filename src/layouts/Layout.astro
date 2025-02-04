@@ -8,7 +8,7 @@ import Right from "../components/Right";
 import { ErrorBoundaryWrapper } from "@/components/ErrorBoundaryWrapper";
 import { ChatConfigSchema } from "../schema/chat";
 
-interface Props {
+interface LayoutProps {
   title: string;
   description?: string;
   children: any;
@@ -71,14 +71,8 @@ const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
     <style is:inline>
       :root {
         --layout-timing: 200ms ease-in-out;
-        --right-panel-width: var(--right-width-quarter);
-        --right-width-full: min(600px, 100vw);
-        --right-width-half: min(50%, 500px);
-        --right-width-quarter: min(400px, 90vw);
-        --right-width-icon: 48px;
-        --left-sidebar-width: 240px;
-        --header-height: 60px;
-        --layout-gap: clamp(1rem, 2vw, 2rem);
+        --right-panel-width: 0px;
+        --main-width: 100%;
       }
 
       .layout-grid {
@@ -89,36 +83,62 @@ const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
       }
 
       .center-grid {
-        transition: margin-right 0.2s ease;
+        width: var(--main-width);
+        transition: width var(--layout-timing);
+        position: relative;
+        min-height: 100vh;
+        margin-right: var(--right-panel-width); /* This pushes content left when panel opens */
       }
 
-      .center-grid:not(.icon-mode) {
-        margin-right: var(--right-panel-width);
+      /* When right panel is full, hide overflow on main content */
+      .center-grid[data-panel-size="full"] {
+        overflow: hidden;
       }
 
-      .center-grid.icon-mode {
-        margin-right: 0;
+      .right-panel {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: var(--right-panel-width);
+        transition: width var(--layout-timing), transform var(--layout-timing);
+        background: var(--background);
+        border-left: 1px solid var(--border);
+        z-index: 50;
       }
 
-      @media (max-width: 768px) {
+      /* Mobile styles */
+      @media (max-width: 767px) {
+        .right-panel:not(.right-panel-icon) {
+          width: 100vw;
+        }
         .center-grid {
-          margin-right: 0 !important;
+          width: 100% !important;
+          margin-right: 48px; /* Fixed margin for icon mode */
+        }
+        .center-grid:not([data-panel-size="icon"]) {
+          margin-right: 0;
         }
       }
 
-      /* Add smooth scrolling to the whole page */
-      html {
-        scroll-behavior: smooth;
+      /* Desktop styles */
+      @media (min-width: 768px) {
+        .center-grid {
+          width: calc(100% - var(--right-panel-width)) !important;
+          margin-right: var(--right-panel-width);
+        }
+        /* Hide main content when panel is full */
+        .center-grid[data-panel-size="full"] {
+          opacity: 0;
+          pointer-events: none;
+          width: 0 !important;
+        }
       }
 
-      /* Improve the scrollbar appearance */
+      /* Scrollbar styles */
       ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: transparent;
       }
 
       ::-webkit-scrollbar-thumb {
@@ -144,6 +164,7 @@ const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
               "center-grid",
               { "icon-mode": initialRightSize === "icon" }
             ]}
+            data-panel-size={initialRightSize}
           >
             {header && <Header client:load showLeft={left} showRight={right} />}
 

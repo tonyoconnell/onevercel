@@ -76,7 +76,6 @@
     --sidebar-width-collapsed: 48px;
     
     /* Panel sizes */
-    --right-panel-width: var(--right-width-quarter);
     --right-width-full: min(600px, 100vw);
     --right-width-half: min(50%, 500px); 
     --right-width-quarter: min(400px, 90vw);
@@ -279,4 +278,67 @@
 
 .backdrop-blur {
   backdrop-filter: blur(8px);
+}
+
+/* Layout System */
+:root {
+  /* Core layout variables */
+  --layout-timing: 200ms ease-in-out;
+  --right-width: min(400px, 90vw);
+  --header-height: 60px;
+  --z-index: 50;
+}
+
+/* Base Layout */
+.layout-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+}
+
+/* Main Content */
+.center-grid {
+  width: 100%;
+  transition: width var(--layout-timing);
+  min-height: 100vh;
+}
+
+
+
+/* Desktop Adjustments */
+@media (min-width: 768px) {
+  .center-grid:not(.icon-mode) {
+    width: calc(100% - var(--right-width));
+  }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 767px) {
+  .right-panel:not(.right-panel-icon) {
+    width: 100vw;
+  }
+
+  #main-content {
+    margin: 0;
+    padding: 1rem;
+  }
+}
+
+/* Animations */
+.slide-enter {
+  animation: slideIn var(--layout-timing) forwards;
+}
+
+.slide-exit {
+  animation: slideOut var(--layout-timing) forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideOut {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
 }

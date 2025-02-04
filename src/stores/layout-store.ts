@@ -37,11 +37,18 @@ export const currentTheme = computed(layoutState, state => state.theme);
 
 // Action creators with error handling
 export function setRightSize(size: LayoutState['rightPanelSize']) {
-  layoutState.set({
+  const newState = {
     ...layoutState.get(),
     rightPanelSize: size,
     rightVisible: size !== 'icon'
-  });
+  };
+  
+  layoutState.set(newState);
+  
+  // Update CSS variables
+  const { rightWidth, mainWidth } = calculateLayoutWidths();
+  document.documentElement.style.setProperty('--right-panel-width', rightWidth);
+  document.documentElement.style.setProperty('--main-width', mainWidth);
 }
 
 export function toggleRight() {
@@ -89,5 +96,53 @@ export function handleResponsiveLayout(width: number) {
       ...state,
       rightPanelSize: 'quarter'
     });
+  }
+}
+
+// Add new function to handle width calculations
+export function calculateLayoutWidths() {
+  const state = layoutState.get();
+  const isMobile = window.innerWidth < 768;
+
+  if (isMobile) {
+    return {
+      rightWidth: state.rightPanelSize === 'icon' ? '48px' : '100vw',
+      mainWidth: '100%'
+    };
+  }
+
+  if (!state.rightVisible) {
+    return {
+      rightWidth: '0px',
+      mainWidth: '100%'
+    };
+  }
+
+  switch (state.rightPanelSize) {
+    case 'full':
+      return {
+        rightWidth: '100%',
+        mainWidth: '0%'
+      };
+    case 'half':
+      return {
+        rightWidth: '50%',
+        mainWidth: '50%'
+      };
+    case 'quarter':
+      return {
+        rightWidth: 'min(400px, 90vw)',
+        mainWidth: 'calc(100% - min(400px, 90vw))'
+      };
+    case 'icon':
+      return {
+        rightWidth: '48px',
+        mainWidth: '100%'
+      };
+    default:
+      return {
+        rightWidth: '0px',
+        mainWidth: '100%'
+      };
   }
 }

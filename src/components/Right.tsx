@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { useStore } from '@nanostores/react';
 import { layoutState, setRightSize } from '../stores/layout-store';
 import { MyThread } from "@/components/Chat";
+import { Maximize2, PanelRightClose, X } from 'lucide-react';
 
 interface RightProps {
   initialSize?: 'full' | 'half' | 'quarter' | 'icon';
@@ -17,18 +18,39 @@ const Right = ({ initialSize = 'quarter', chatConfig }: RightProps) => {
   useLayoutEffect(() => {
     setMounted(true);
     setRightSize(initialSize);
+    
+    // Handle initial mobile view
+    if (window.innerWidth < 768) {
+      setRightSize('icon');
+    }
+  }, []);
 
-    const handleResize = () => {
-      if (window.innerWidth < 768 && state.rightPanelSize !== 'icon') {
-        setRightSize('icon');
-      }
+  useLayoutEffect(() => {
+    const sizes = {
+      full: { right: '100%', main: '0%' },
+      half: { right: '50%', main: '50%' },
+      quarter: { right: '400px', main: 'calc(100% - 400px)' },
+      icon: { right: '48px', main: '100%' }
     };
 
-    window.addEventListener('resize', handleResize);
-    handleResize();
+    const size = sizes[state.rightPanelSize];
+    const isMobile = window.innerWidth < 768;
     
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    if (!state.rightVisible) {
+      document.documentElement.style.setProperty('--right-panel-width', '0px');
+      document.documentElement.style.setProperty('--main-width', '100%');
+    } else if (isMobile) {
+      // On mobile, main content is always full width
+      document.documentElement.style.setProperty('--right-panel-width', 
+        state.rightPanelSize === 'icon' ? '48px' : '100%');
+      document.documentElement.style.setProperty('--main-width', '100%');
+    } else {
+      // On desktop, use the size mappings
+      document.documentElement.style.setProperty('--right-panel-width', size.right);
+      document.documentElement.style.setProperty('--main-width', size.main);
+    }
+
+  }, [state.rightPanelSize, state.rightVisible]);
 
   if (!mounted) return null;
 
@@ -37,19 +59,16 @@ const Right = ({ initialSize = 'quarter', chatConfig }: RightProps) => {
   return (
     <aside 
       className={cn(
-        "fixed right-0 top-0 h-full bg-background/95 backdrop-blur",
-        "border-l shadow-lg transition-all duration-200",
+        "right-panel",
         {
-          'w-full md:w-[600px]': state.rightPanelSize === 'full',
-          'w-1/2': state.rightPanelSize === 'half',
-          'w-[400px]': state.rightPanelSize === 'quarter',
-          'w-12 h-12 bottom-4 right-4 top-auto rounded-full border': isIcon
+          'right-panel-full': state.rightPanelSize === 'full',
+          'right-panel-half': state.rightPanelSize === 'half',
+          'right-panel-quarter': state.rightPanelSize === 'quarter',
+          'right-panel-icon': isIcon,
+          'slide-enter': state.rightVisible,
+          'slide-exit': !state.rightVisible && !isIcon
         }
       )}
-      style={{
-        transform: state.rightVisible || isIcon ? 'none' : 'translateX(100%)',
-        zIndex: isIcon ? 20 : 50
-      }}
     >
       {isIcon ? (
         <button 
@@ -63,14 +82,28 @@ const Right = ({ initialSize = 'quarter', chatConfig }: RightProps) => {
       ) : (
         <div className="h-full flex flex-col">
           <div className="flex-none p-4 border-b">
-            <div className="flex justify-between items-center">
-              <h2 className="font-semibold">Agent ONE</h2>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setRightSize('full')}
+                className="p-2 hover:bg-accent rounded-md"
+                aria-label="Expand to full screen"
+              >
+                <Maximize2 className="h-4 w-4" />
+              </button>
+              <button
+                onClick={() => setRightSize('half')}
+                className="p-2 hover:bg-accent rounded-md"
+                aria-label="Half screen"
+              >
+                <PanelRightClose className="h-4 w-4" />
+              </button>
+              <h2 className="font-semibold flex-1 text-center">Agent ONE</h2>
               <button
                 onClick={() => setRightSize('icon')}
-                className="p-2 hover:bg-accent rounded-full"
-                aria-label="Minimize"
+                className="p-2 hover:bg-accent rounded-md"
+                aria-label="Close"
               >
-                —
+                <X className="h-4 w-4" />
               </button>
             </div>
           </div>
