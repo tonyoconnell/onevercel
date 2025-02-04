@@ -14,7 +14,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "verbatimModuleSyntax": true,
-    "types": ["vite/client", "astro/client"],
+    "types": ["vite/client", "astro/client", "node"],
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "bundler",

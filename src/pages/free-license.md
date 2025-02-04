@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/Layout.astro
 title: "ONE Free License"
-description: "Maximum Freedom for Brand Recognition"
+description: "Maximum Freedom With Minimal Requirements"
 ---
 
 <div class="prose prose-slate max-w-3xl mx-auto px-4 py-8">
@@ -30,7 +30,7 @@ Including, but not limited to:
 - Open source applications and integrations
 
 ## 3. License Compatibility
-This license is compatible with all major open-source licenses, including:
+This license is designed to be compatible with all major open-source licenses, including:
 - MIT License
 - Apache License 2.0
 - GNU General Public License (GPL)
@@ -56,17 +56,17 @@ This license only terminates if you remove or hide our brand assets. Reinstateme
 - Mediation if needed
 - Binding arbitration as last resort
 
-## 9. Brand Requirements
-The only obligation is to:
-- Display the ONE logo visibly in your application
-- Maintain the original logo design linked to https://one.ie
+## 9. Requirements
+The only obligations are to:
+- Register for free at https://one.ie
+- Display the ONE logo linked to https://one.ie visibly in your application
 
 ## 10. Need More?
-For complete white-labeling rights and removal of brand requirements, so you can sell ONE as your own product, see our [Whitelabel License](https://one.ie/whitelabel)
+Complete white-labeling rights and removal of logo is available to select partners, see our [Whitelabel License](https://one.ie/whitelabel)
 
 ---
 
-<div class="mt-8 text-slate-700">
+<div class="mt-8">
 This license is designed to maximize freedom to innovate and profit from AI. It's designed for broad compatibility with open-source ecosystems and enterprise use.
 
 For strategic inquiries: <a href="mailto:ai@one.ie" class="text-blue-600 hover:text-blue-800">ai@one.ie</a>

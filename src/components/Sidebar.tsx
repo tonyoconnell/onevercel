@@ -1,4 +1,26 @@
-import { Calendar, ChevronDown, ChevronUp, Home, Inbox, Plus, Search, Settings, User2 } from "lucide-react"
+import { 
+  Calendar, 
+  ChevronDown, 
+  ChevronUp, 
+  Home, 
+  Inbox, 
+  Plus, 
+  Search, 
+  Settings, 
+  User2,
+  BookOpen,
+  Mic,
+  MessageSquare,
+  Code2,
+  Bot,
+  Globe,
+  FileText,
+  Lightbulb,
+  GraduationCap,
+  Users,
+  Moon,
+  Sun,
+} from "lucide-react"
 import {
   SidebarContent,
   SidebarFooter,
@@ -20,64 +42,103 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 // Menu items for the main navigation
-const navItems = [
+const think = [
   {
-    title: "Home",
-    url: "#",
-    icon: Home,
+    title: "Chat",
+    url: "/chat",
+    icon: MessageSquare,
   },
   {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
+    title: "Stream",
+    url: "/stream",
+    icon: BookOpen,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
+    title: "Podcast",
+    url: "/podcast",
+    icon: Mic,
   },
   {
-    title: "Search",
-    url: "#",
-    icon: Search,
+    title: "Blog",
+    url: "/blog",
+    icon: MessageSquare,
   },
   {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
+    title: "Prompts",
+    url: "/prompts",
+    icon: MessageSquare,
+  },
+  {
+    title: "Docs",
+    url: "/docs",
+    icon: FileText,
   },
 ]
 
-// Workspace options
-const workspaces = [
-  { name: "Personal" },
-  { name: "Team A" },
-  { name: "Team B" },
+const build = [
+  {
+    title: "Software",
+    url: "/software",
+    icon: Code2,
+  },
+  {
+    title: "Projects",
+    url: "/projects",
+    icon: Plus,
+  },
+  {
+    title: "Agents",
+    url: "/agents",
+    icon: Bot,
+  },
+  {
+    title: "Websites",
+    url: "/websites",
+    icon: Globe,
+  },
+  {
+    title: "Content",
+    url: "/content",
+    icon: FileText,
+  },
+]
+
+const grow = [
+  {
+    title: "License",
+    url: "/free-license",
+    icon: FileText,
+  },
+  {
+    title: "Framework",
+    url: "/framework",
+    icon: Lightbulb,
+  },
+  {
+    title: "Education",
+    url: "/education",
+    icon: GraduationCap,
+  },
+  {
+    title: "Partners",
+    url: "/partners",
+    icon: Users,
+  },
 ]
 
 export function AppSidebar() {
   return (
     <>
-      {/* Header with workspace selector */}
+      {/* Header with ONE logo */}
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
-                  <User2 className="h-6 w-6" />
-                  <span>Select Workspace</span>
-                  <ChevronDown className="ml-auto h-4 w-4" />
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-[--radix-popper-anchor-width]">
-                {workspaces.map((workspace) => (
-                  <DropdownMenuItem key={workspace.name}>
-                    <span>{workspace.name}</span>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <SidebarMenuButton asChild>
+              <a href="/">
+                <img src="/icon.svg" alt="ONE" className="h-6 w-6" />
+                <span>ONE</span>
+              </a>
+            </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
@@ -85,12 +146,12 @@ export function AppSidebar() {
       <SidebarSeparator />
 
       {/* Main sidebar content */}
-      <SidebarContent>
+      <SidebarContent className="scrollbar-thin scrollbar-track-transparent scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-800">
         <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+          <SidebarGroupLabel>Think</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navItems.map((item) => (
+              {think.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
@@ -107,29 +168,54 @@ export function AppSidebar() {
         <SidebarSeparator />
 
         <SidebarGroup>
-          <SidebarGroupLabel>Projects</SidebarGroupLabel>
+          <SidebarGroupLabel>Build</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton>
-                  <Plus className="h-6 w-6" />
-                  <span>Add Project</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              {build.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <a href={item.url}>
+                      <item.icon className="h-6 w-6" />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarSeparator />
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Grow</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {grow.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <a href={item.url}>
+                      <item.icon className="h-6 w-6" />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
 
-      {/* Footer with user menu */}
+      {/* Footer with theme toggle */}
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton>
-                  <User2 className="h-6 w-6" />
-                  <span>John Doe</span>
+                  <Sun className="h-6 w-6 dark:hidden" />
+                  <Moon className="hidden h-6 w-6 dark:block" />
+                  <span>Theme</span>
                   <ChevronUp className="ml-auto h-4 w-4" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
@@ -138,13 +224,12 @@ export function AppSidebar() {
                 className="w-[--radix-popper-anchor-width]"
               >
                 <DropdownMenuItem>
-                  <span>Profile</span>
+                  <Sun className="mr-2 h-4 w-4" />
+                  <span>Light</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <span>Settings</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span>Sign out</span>
+                  <Moon className="mr-2 h-4 w-4" />
+                  <span>Dark</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
