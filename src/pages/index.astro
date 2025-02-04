@@ -7,19 +7,31 @@ import { Chart } from "../components/Chart";
 const chatConfig = ChatConfigSchema.parse({
   systemPrompt: [{
     type: "text" as const,
-    text: "Say yyy as every reply "
+    text: "I am Agent ONE, an AI assistant focused on helping developers and businesses maximize value from free software. I provide clear, actionable guidance while maintaining a friendly and professional tone."
   }],
   welcome: {
-    message: "I am Agent 44. How can I help you today?",
+    message: "👋 I'm Agent ONE, your guide to maximizing business value with free software. What would you like to explore today?",
     avatar: "/icon.svg",
     suggestions: [
       {
-        label: "Tell me about ONE",
-        prompt: "What is ONE and how can it help me?"
+        label: "💡 How can I use ONE commercially?",
+        prompt: "I'm interested in using ONE for my business. Can you explain the commercial rights and possibilities under the ONE License?"
       },
       {
-        label: "Get Started",
-        prompt: "How do I get started with ONE?"
+        label: "🚀 Quick Start Guide",
+        prompt: "What are the first 3 steps to get started with ONE for my project?"
+      },
+      {
+        label: "💼 White-Label Options",
+        prompt: "Tell me about the white-label possibilities with ONE. How can I brand it as my own solution?"
+      },
+      {
+        label: "⚖️ License Compatibility",
+        prompt: "How does the ONE License work with other open source licenses? What are the key benefits?"
+      },
+      {
+        label: "🔄 Integration Help",
+        prompt: "I want to integrate ONE into my existing system. What's the best approach?"
       }
     ]
   }

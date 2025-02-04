@@ -1,50 +1,163 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { MyThread } from "../components/Chat";
 import { ChatConfigSchema } from '../lib/chatConfig';
+import { Chart } from "../components/Chart";
 
-// You can override any default values here
 const chatConfig = ChatConfigSchema.parse({
   systemPrompt: [{
     type: "text" as const,
-    text: "Say XXX as every reply "
+    text: "I am Agent ONE, an AI assistant focused on helping developers and businesses maximize value from free software. I provide clear, actionable guidance while maintaining a friendly and professional tone."
   }],
   welcome: {
-    message: "I am Agent ONE. How can I help you today?",
+    message: "👋 I'm Agent ONE, your guide to maximizing business value with free software. What would you like to explore today?",
     avatar: "/icon.svg",
     suggestions: [
       {
-        label: "Tell me about ONE",
-        prompt: "What is ONE and how can it help me?"
+        label: "💡 Quick Demo",
+        prompt: "Show me what makes ONE special in a quick demo"
       },
       {
-        label: "Get Started",
-        prompt: "How do I get started with ONE?"
+        label: "🚀 Integration Guide",
+        prompt: "How can I integrate ONE into my website?"
+      },
+      {
+        label: "💼 Business Use Cases",
+        prompt: "What are the main business applications for ONE?"
       }
     ]
   }
 });
 ---
 
-<Layout title="Chat">
-  <div class="fixed inset-0 -ml-[80px] flex justify-center" id="chat-container">
-    <div class="w-full max-w-900px] pt-28 pl-32 max-w-900px">
-      <MyThread client:load config={chatConfig} />
-    </div>
-  </div>
-</Layout>
+<Layout title="ONE - AI Agents for Every Page" chatConfig={chatConfig}>
+	<section class="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
+		<div class="max-w-[64rem] flex flex-col items-center gap-4 text-center mx-auto">
+			<h1
+				class="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl"
+			>
+				Transform Your Website with <span class="text-blue-600">Intelligent AI Agents</span>
+			</h1>
+			<p
+				class="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8"
+			>
+				ONE makes it simple to add powerful AI assistants to every page on your website. Built on Vercel AI SDK and Assistant UI, it's the fastest way to give your visitors 24/7 intelligent support.
+			</p>
+			<div class="space-x-4">
+				<a
+					href="#demo"
+					class="inline-flex items-center justify-center rounded-md bg-blue-600 px-6 py-3 text-sm font-medium text-white shadow transition-colors hover:bg-blue-700"
+				>
+					Try Live Demo
+				</a>
+				<a
+					href="#features"
+					class="inline-flex items-center justify-center rounded-md border border-input bg-background px-6 py-3 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+				>
+					Explore Features
+				</a>
+			</div>
+		</div>
+	</section>
 
-<script>
-  // Ensure right panel stays closed on chat page
-  document.addEventListener('DOMContentLoaded', () => {
-    const rightPanel = document.getElementById('right-panel');
-    if (rightPanel) {
-      rightPanel.classList.add('right-panel-closed');
-    }
-    // Hide the toggle button
-    const toggleRight = document.getElementById('toggle-right');
-    if (toggleRight) {
-      toggleRight.style.display = 'none';
-    }
-  });
-</script>
+	<section id="features" class="py-20 bg-slate-50 dark:bg-slate-900">
+		<div class="container mx-auto px-4">
+			<h2 class="text-3xl font-bold text-center mb-12">Everything You Need for AI-Powered Support</h2>
+			<div class="grid md:grid-cols-3 gap-8">
+				<div class="p-6 bg-white dark:bg-slate-800 rounded-lg shadow-lg">
+					<div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold mb-2">Lightning Fast Integration</h3>
+					<p class="text-muted-foreground">Add AI agents to any page with just a few lines of code. Built on Vercel AI SDK for optimal performance.</p>
+				</div>
+
+				<div class="p-6 bg-white dark:bg-slate-800 rounded-lg shadow-lg">
+					<div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold mb-2">Advanced Conversation Features</h3>
+					<p class="text-muted-foreground">Real-time streaming, message branches, voice synthesis, and markdown support built-in.</p>
+				</div>
+
+				<div class="p-6 bg-white dark:bg-slate-800 rounded-lg shadow-lg">
+					<div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold mb-2">Fully Customizable</h3>
+					<p class="text-muted-foreground">Customize the look, behavior and AI capabilities to match your brand and use case perfectly.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20">
+		<div class="container mx-auto px-4">
+			<div class="flex flex-col md:flex-row items-center gap-12">
+				<div class="flex-1">
+					<h2 class="text-3xl font-bold mb-6">Powerful Features That Convert</h2>
+					<ul class="space-y-4">
+						<li class="flex items-start gap-3">
+							<svg class="w-6 h-6 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+							</svg>
+							<div>
+								<h3 class="font-semibold">Smart Suggestions</h3>
+								<p class="text-muted-foreground">Guide users with contextual suggestions that boost engagement</p>
+							</div>
+						</li>
+						<li class="flex items-start gap-3">
+							<svg class="w-6 h-6 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+							</svg>
+							<div>
+								<h3 class="font-semibold">Message History & Branches</h3>
+								<p class="text-muted-foreground">Never lose context with full conversation history and branching</p>
+							</div>
+						</li>
+						<li class="flex items-start gap-3">
+							<svg class="w-6 h-6 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+							</svg>
+							<div>
+								<h3 class="font-semibold">Voice Synthesis</h3>
+								<p class="text-muted-foreground">Natural text-to-speech makes interactions more engaging</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="flex-1">
+					<div class="rounded-lg shadow-2xl overflow-hidden">
+						<img src="/chat-demo.png" alt="ONE Chat Interface" class="w-full" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="py-20 bg-blue-600 text-white">
+		<div class="container mx-auto px-4 text-center">
+			<h2 class="text-3xl font-bold mb-6">Ready to Transform Your Website?</h2>
+			<p class="text-xl mb-8 opacity-90">Start adding intelligent AI agents to your pages in minutes</p>
+			<div class="flex justify-center gap-4">
+				<a
+					href="/docs/quickstart"
+					class="inline-flex items-center justify-center rounded-md bg-white text-blue-600 px-6 py-3 text-sm font-medium shadow transition-colors hover:bg-blue-50"
+				>
+					Get Started
+				</a>
+				<a
+					href="/pricing"
+					class="inline-flex items-center justify-center rounded-md border-2 border-white px-6 py-3 text-sm font-medium shadow transition-colors hover:bg-blue-700"
+				>
+					View Pricing
+				</a>
+			</div>
+		</div>
+	</section>
+</Layout>

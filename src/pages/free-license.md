@@ -7,69 +7,83 @@ description: "Maximum Freedom. Zero Restrictions"
 <div class="prose prose-slate max-w-3xl mx-auto px-4 py-8">
 
 # ONE License (Version 1.0)
-## Maximum Freedom. Zero Restrictions. 
+## Unlimited Commercial Freedom
 
 <div class="text-sm text-slate-600">
 Copyright (c) 2025 ONE (https://one.ie/)
 </div>
 
-This license empowers you with complete commercial freedom to use, reuse, modify, sell and resell the software, AI and data, at any price you wish. Use your own keys. No usage limits. No royalty fees. Just pure, unrestricted ability to innovate and profit from the software.
+ONE License gives you complete commercial freedom. Build products, create services, and generate revenue without restrictions. No usage limits. No royalty fees. Just pure business potential.
 
-You are free to run ONE locally, on your own servers, in the cloud and at the edge.
+## Key Benefits
 
-## 1. Unlimited Rights
-You have unrestricted rights to use, modify, license, sublicense, distribute, and monetize the Software, subject only to maintaining our brand presence.
+- **✨ 100% Commercial Rights** - Sell products and services at any price point
+- **🚀 Full Modification Rights** - Customize and adapt the software freely
+- **💼 White-Label Ready** - Brand as your own solution
+- **🔄 Perpetual Usage** - Rights never expire
+- **🤝 Enterprise-Friendly** - Compatible with all major licenses
 
-## 2. Permitted Actions
-Including, but not limited to:
-- Commercial use and integration into any systems
-- Creation and sale of derivative works
-- Providing software as a service
-- AI training and content generation
-- Patenting innovations based on the Software
-- Open source applications and integrations
+## Core Freedoms
 
-## 3. License Compatibility
-This license is designed to be compatible with all major open-source licenses, including:
-- MIT License
-- Apache License 2.0
-- GNU General Public License (GPL)
-- BSD Licenses
-- Mozilla Public License
+1. **Commercial Use**
+   - Build commercial products
+   - Create SaaS offerings
+   - Integrate into any system
+   - No revenue sharing required
 
-## 4. Perpetual Rights
-These rights are granted in perpetuity and are irrevocable, provided the brand requirements are maintained.
+2. **Technical Freedom**
+   - Run anywhere (cloud, local, edge)
+   - Modify source code
+   - Create derivative works
+   - Use with AI and ML systems
 
-## 5. Intellectual Property
-- You own any modifications you make
-- We retain ownership of the original Software
-- No trademark rights are granted beyond display rights
+3. **Business Freedom**
+   - Set your own pricing
+   - Choose your business model
+   - Distribute as you wish
+   - Patent your innovations
 
-## 6. Liability and Warranty
-The Software is provided "AS IS". We bear no liability for its use.
+## Simple Requirements
 
-## 7. Termination
-This license terminates if you remove or hide our brand assets. 
+Just two easy steps:
+1. Register for free at [one.ie](https://one.ie)
+2. Display the ONE logo with a link to one.ie in your application
 
-## 8. Dispute Resolution
-- Resolved through good faith negotiation
-- Mediation if needed
-- Binding arbitration as last resort
+## White-Label Options
 
-## 9. Requirements
-The only obligations are to:
-- Register for free at https://one.ie
-- Display the ONE logo linked to https://one.ie visibly in your application
+Want to remove our branding? We offer white-label rights for qualified partners.
+Contact [agent@one.ie](mailto:agent@one.ie) to discuss partnership opportunities.
 
-## 10. White-Label
-Want to brand ONE as your own product? Edit ONE file to hide our brand name or replace our logo and company with yours. White-label rights and removal of our logo available to select partners. If you want to partner email Agent ONE at agent@one.ie 
+## Legal Protection
+
+- **Perpetual Rights** - Your rights cannot be revoked if you follow the requirements
+- **IP Clarity** - You own your modifications
+- **License Compatibility** - Works with MIT, Apache 2.0, GPL, BSD, and Mozilla licenses
+- **Clear Dispute Resolution** - Simple three-step process:
+  1. Good faith negotiation
+  2. Mediation if needed
+  3. Binding arbitration as last resort
+
+## Enterprise Support
+
+Need additional rights or support? We offer:
+- Custom licensing terms
+- Priority support
+- Strategic partnerships
+- Enterprise deployments
+
+Contact [ai@one.ie](mailto:ai@one.ie) for enterprise inquiries.
 
 ---
 
-<div class="mt-8">
-This license is designed to maximize freedom to innovate and profit from AI. It's designed for broad compatibility with open-source ecosystems and enterprise use.
-
-For strategic inquiries: <a href="mailto:ai@one.ie" class="text-blue-600 hover:text-blue-800">ai@one.ie</a>
+<div class="mt-8 text-center">
+<p class="text-xl font-semibold">Ready to innovate without limits?</p>
+<p class="mt-2">Start building with ONE today - maximum freedom, zero restrictions.</p>
+<p class="mt-4">
+<a href="https://one.ie/register" class="inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors">
+Get Started Free
+</a>
+</p>
 </div>
 
 </div>
