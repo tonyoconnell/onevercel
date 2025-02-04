@@ -179,6 +179,8 @@
   },
   "active": "fd4b9d08dd4d9b08",
   "lastOpenFiles": [
+    "blog/open-source-ai-powered-chat-framework-for-websites.md",
+    "blog/one-hundred-percent-lighthouse-score copy.md",
     "prompts/shadcn-astro.md",
     "prompts/layout.md",
     "prompts/code-review-assistant.md",
@@ -189,7 +191,6 @@
     "blog/the-story-of-truth-terminal.md",
     "blog/the-meme-machines.md",
     "blog/the-ai-traders.md",
-    "blog/open-source-ai-powered-chat-framework-for-websites.md",
     "blog/one-hundred-percent-lighthouse-score.md",
     "src/content/blog/one-hundred-percent-lighthouse-score copy.md",
     "src/content/blog/one-hundred-percent-lighthouse-score.md",
@@ -223,7 +224,6 @@
     "blocks/prompts/marketing-journey.md",
     "blocks/prompts/marketing-capabilities.md",
     "blocks/prompts/marketing-agent.md",
-    "blocks/prompts/agentc.md",
-    "src/content/stream/ai-applications.md"
+    "blocks/prompts/agentc.md"
   ]
 }

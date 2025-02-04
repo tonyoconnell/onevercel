@@ -48,3 +48,6 @@ pnpm-debug.log*
 
 # Ignore plugin data/caches in all allowed plugin folders
 **/.obsidian/plugins/*/data.json
+
+# Ignore chat histories in any directory
+**/.smtcmp_chat_histories
