@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { SidebarWrapper } from "@/components/Left";
 import Right from "../components/Right";
-
+import { ErrorBoundaryWrapper } from "@/components/ErrorBoundaryWrapper";
 import { ChatConfigSchema } from "../schema/chat";
 
 interface Props {
@@ -66,15 +66,27 @@ const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
     <meta name="description" content={description} />
     <title>{title}</title>
     <ThemeInit />
-    <style>
+    
+    <!-- Critical CSS -->
+    <style is:inline>
       :root {
-        --right-panel-width: var(--right-width-full);
-        --right-width-full: 100vw;
-        --right-width-half: 50%;
-        --right-width-quarter: 25%;
+        --layout-timing: 200ms ease-in-out;
+        --right-panel-width: var(--right-width-quarter);
+        --right-width-full: min(600px, 100vw);
+        --right-width-half: min(50%, 500px);
+        --right-width-quarter: min(400px, 90vw);
         --right-width-icon: 48px;
         --left-sidebar-width: 240px;
         --header-height: 60px;
+        --layout-gap: clamp(1rem, 2vw, 2rem);
+      }
+
+      .layout-grid {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        min-height: 100vh;
+        position: relative;
+        isolation: isolate;
       }
 
       .main-grid {
@@ -155,59 +167,65 @@ const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
         background: #9ca3af;
       }
     </style>
-  </head><body>
-    <SidebarWrapper client:load>
-      <div class="main-grid">
-        <div
-          class={`center-grid ${initialRightSize === "icon" ? "icon-mode" : ""}`}
-          id="center-grid"
-        >
-          {header && <Header client:load showLeft={left} showRight={right} />}
 
-          <main class="p-4">
-            <slot />
-          </main>
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/logo.svg" as="image" />
+  </head>
+  
+  <body>
+    <ErrorBoundaryWrapper client:load>
+      <SidebarWrapper client:load>
+        <div class="layout-grid">
+          <div 
+            class:list={[
+              "center-grid",
+              "transition-all duration-200",
+              { "icon-mode": initialRightSize === "icon" }
+            ]}
+            style={{
+              marginRight: `var(--right-panel-width)`,
+              width: `calc(100% - var(--right-panel-width))`
+            }}
+          >
+            {header && <Header client:load showLeft={left} showRight={right} />}
 
-          {footer && <Footer client:only="react" />}
+            <main class="p-4">
+              <slot />
+            </main>
+
+            {footer && <Footer client:visible />}
+          </div>
         </div>
-      </div>
 
-      {
-        right && (
-          <Right
-            client:only="react"
-            initialSize={initialRightSize}
-            chatConfig={chatConfig}
-          />
-        )
-      }
-    </SidebarWrapper>
+        {
+          right && (
+            <Right
+              client:only="react"
+              initialSize={initialRightSize}
+              chatConfig={chatConfig}
+            />
+          )
+        }
+      </SidebarWrapper>
+    </ErrorBoundaryWrapper>
 
     <script>
-      // Add client-side listener to update icon-mode class
-      document.addEventListener("DOMContentLoaded", () => {
-        const centerGrid = document.getElementById("center-grid");
-        const observer = new MutationObserver((mutations) => {
-          mutations.forEach((mutation) => {
-            if (
-              mutation.type === "attributes" &&
-              mutation.attributeName === "style"
-            ) {
-              const rightPanelWidth = getComputedStyle(document.documentElement)
-                .getPropertyValue("--right-panel-width")
-                .trim();
-              centerGrid?.classList.toggle(
-                "icon-mode",
-                rightPanelWidth === "3rem" || rightPanelWidth === "48px",
-              );
-            }
+      // Hydration helpers
+      document.addEventListener("astro:page-load", () => {
+        // Initialize layout state
+        const centerGrid = document.querySelector(".center-grid");
+        if (centerGrid) {
+          const observer = new ResizeObserver(() => {
+            const rightWidth = getComputedStyle(document.documentElement)
+              .getPropertyValue("--right-panel-width")
+              .trim();
+            centerGrid.classList.toggle(
+              "icon-mode",
+              rightWidth === "48px" || rightWidth === "3rem"
+            );
           });
-        });
-
-        observer.observe(document.documentElement, {
-          attributes: true,
-          attributeFilter: ["style"],
-        });
+          observer.observe(document.documentElement);
+        }
       });
     </script>
   </body>

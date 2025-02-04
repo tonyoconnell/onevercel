@@ -1,35 +1,38 @@
 // src/components/Left.tsx
-import { cn } from '@/lib/utils';
+import * as React from "react";
 import { useStore } from '@nanostores/react';
-import { isLeftExpanded, toggleLeft } from '../stores/layout-store';
-import { useLayoutEffect } from 'react';
+import { layoutState, toggleSidebar } from '../stores/layout-store';
+import { cn } from "@/lib/utils";
 
-const Left = ({ initialSize = 'expanded' }: { initialSize?: 'expanded' | 'collapsed' }) => {
-  const expanded = useStore(isLeftExpanded);
-  
-  useLayoutEffect(() => {
-    isLeftExpanded.set(initialSize === 'expanded');
-  }, [initialSize]);
+interface LeftSimpleProps {
+  children: React.ReactNode;
+}
+
+export function LeftSimple({ children }: LeftSimpleProps) {
+  const state = useStore(layoutState);
 
   return (
-    <aside className={cn(
-      "left-sidebar bg-background border-r",
-      "md:block",
-      expanded ? "w-[var(--left-width-expanded)]" : "w-[var(--left-width-collapsed)]",
-      expanded ? "sidebar-active" : "translate-x-[-100%] md:translate-x-0"
-    )}>
-      <nav className="p-4">
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <button onClick={toggleLeft} aria-label="Close menu">
-              ✕
-            </button>
-            {expanded && <span>Navigation</span>}
-          </div>
+    <div 
+      className={cn(
+        "fixed left-0 top-0 h-full w-[var(--left-sidebar-width)]",
+        "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
+        "border-r transition-transform duration-200",
+        !state.sidebarOpen && "-translate-x-full",
+        "md:translate-x-0"
+      )}
+    >
+      <div className="flex h-full flex-col">
+        <div className="flex-1 overflow-y-auto">
+          {children}
         </div>
-      </nav>
-    </aside>
+        <button
+          onClick={() => toggleSidebar()}
+          className="absolute -right-10 top-4 p-2 md:hidden"
+          aria-label="Toggle sidebar"
+        >
+          {state.sidebarOpen ? '✕' : '☰'}
+        </button>
+      </div>
+    </div>
   );
-};
-
-export default Left;
+}

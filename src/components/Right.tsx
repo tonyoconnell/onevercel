@@ -1,156 +1,75 @@
 // src/components/Right.tsx
+import { useLayoutEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useStore } from '@nanostores/react';
-import { rightSize, setRightSize, isRightVisible } from '../stores/layout-store';
-import { useEffect, useLayoutEffect, useState } from 'react';
-import { Maximize2, X, Layout, Columns } from 'lucide-react';
+import { layoutState, setRightSize } from '../stores/layout-store';
 import { MyThread } from "@/components/Chat";
-
-const sizeMap: Record<'full' | 'half' | 'quarter' | 'icon', string> = {
-  full: 'var(--right-width-full)',
-  half: 'var(--right-width-half)',
-  quarter: 'var(--right-width-quarter)',
-  icon: 'var(--right-width-icon)'
-};
 
 interface RightProps {
   initialSize?: 'full' | 'half' | 'quarter' | 'icon';
   chatConfig?: any;
 }
 
-const Right = ({ initialSize = 'full', chatConfig }: RightProps) => {
-  const currentSize = useStore(rightSize);
-  const visible = useStore(isRightVisible);
-  const [isMobile, setIsMobile] = useState(false);
+const Right = ({ initialSize = 'quarter', chatConfig }: RightProps) => {
+  const state = useStore(layoutState);
+  const [mounted, setMounted] = useState(false);
 
+  // Initialize size and handle resize
   useLayoutEffect(() => {
-    // Initialize the visibility state
-    isRightVisible.set(true);
-    // Initialize the size based on screen size
-    const isMobileView = window.innerWidth < 640;
-    setRightSize(isMobileView ? 'icon' : initialSize);
-  }, [initialSize]);
+    setMounted(true);
+    if (initialSize !== state.rightPanelSize) {
+      setRightSize(initialSize);
+    }
 
-  useEffect(() => {
-    const checkMobile = () => {
-      const isMobileView = window.innerWidth < 640;
-      setIsMobile(isMobileView);
-      // Update size when switching between mobile and desktop
-      if (isMobileView && currentSize !== 'icon' && currentSize !== 'full') {
+    const handleResize = () => {
+      const isMobile = window.innerWidth < 768;
+      if (isMobile && state.rightPanelSize !== 'icon') {
         setRightSize('icon');
       }
     };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, [currentSize]);
 
-  const handleIconClick = () => {
-    setRightSize('full');
-  };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [initialSize, state.rightPanelSize]);
 
-  useEffect(() => {
-    document.documentElement.style.setProperty(
-      '--right-panel-width',
-      sizeMap[currentSize]
-    );
-  }, [currentSize]);
+  if (!mounted) return null;
 
   return (
     <aside 
       className={cn(
-        "right-sidebar bg-background border-l shadow-lg",
-        visible ? "sidebar-active" : "",
-        "fixed",
-        // Adjust positioning based on size
-        currentSize === 'full' && "top-0 left-0 w-full h-full z-30",
-        currentSize === 'half' && "top-0 right-0 h-full z-20",
-        currentSize === 'quarter' && "top-0 right-0 h-full z-20 min-w-[320px]",
-        currentSize === 'icon' && "bottom-4 right-4 w-12 h-12 rounded-full z-10",
-        "transition-all duration-200",
-        "flex flex-col"
+        "fixed right-0 top-0 h-full",
+        "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
+        "border-l shadow-lg",
+        "transition-all duration-200 ease-in-out",
+        {
+          'z-50 w-full md:w-[600px]': state.rightPanelSize === 'full',
+          'z-40 w-1/2': state.rightPanelSize === 'half',
+          'z-30 w-[400px]': state.rightPanelSize === 'quarter',
+          'z-20 w-12 h-12 top-auto bottom-4 right-4 rounded-full': state.rightPanelSize === 'icon'
+        }
       )}
       style={{
-        width: currentSize === 'full' ? '100%' : 
-               currentSize === 'half' ? '50%' : 
-               currentSize === 'quarter' ? '25%' : 
-               '3rem',
-        minWidth: currentSize === 'quarter' ? '320px' : undefined
+        transform: state.rightVisible ? 'translateX(0)' : 'translateX(100%)'
       }}
     >
-      {currentSize === 'icon' ? (
-        // Icon view
+      {state.rightPanelSize === 'icon' ? (
         <button 
-          onClick={handleIconClick}
-          className="w-full h-full bg-blue-500 rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-colors"
+          onClick={() => setRightSize('quarter')}
+          className="w-full h-full bg-primary rounded-full flex items-center justify-center text-primary-foreground hover:bg-primary/90"
           aria-label="Open AI Assistant"
         >
           AI
         </button>
       ) : (
-        // Regular view
-        <>
-          <div className="flex-none border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 w-full mb-6">
-            <div className="p-4 pb-5 max-w-[100vw] flex items-center relative">
-              {!isMobile && (
-                <div className="flex gap-2 z-10">
-                  <button
-                    onClick={() => setRightSize('full')}
-                    className={cn(
-                      "p-1.5 rounded transition-colors",
-                      currentSize === 'full' ? "bg-blue-600/50 text-white" : "hover:bg-blue-600/90"
-                    )}
-                    aria-label="Full width"
-                  >
-                    <Maximize2 size={16} />
-                  </button>
-                  <button
-                    onClick={() => setRightSize('half')}
-                    className={cn(
-                      "p-1.5 rounded transition-colors",
-                      currentSize === 'half' ? "bg-blue-600/50 text-white" : "hover:bg-blue-600/90"
-                    )}
-                    aria-label="Half width"
-                  >
-                    <Layout size={16} />
-                  </button>
-                  <button
-                    onClick={() => setRightSize('quarter')}
-                    className={cn(
-                      "p-1.5 rounded transition-colors",
-                      currentSize === 'quarter' ? "bg-blue-600/50 text-white" : "hover:bg-blue-600"
-                    )}
-                    aria-label="Quarter width"
-                  >
-                    <Columns size={16} />
-                  </button>
-                </div>
-              )}
-              
-              <h2 className="font-semibold text-lg absolute left-1/2 -translate-x-1/2">Agent ONE</h2>
-              
-              {!isMobile && (
-                <button
-                  onClick={() => setRightSize('icon')}
-                  className={cn(
-                    "p-1.5 rounded transition-colors ml-auto z-10",
-                    "hover:bg-blue-600/90"
-                  )}
-                  aria-label="Minimize"
-                >
-                  <X size={16} />
-                </button>
-              )}
-            </div>
+        <div className="h-full flex flex-col">
+          <div className="flex-none p-4 border-b">
+            <h2 className="font-semibold text-lg text-center">Agent ONE</h2>
           </div>
-
-      
-            <div className="h-full mx-auto w-full max-w-[900px]">
-              <MyThread config={chatConfig} />
-            </div>
-          
-        </>
+          <div className="flex-1 overflow-auto">
+            <MyThread config={chatConfig} />
+          </div>
+        </div>
       )}
     </aside>
   );

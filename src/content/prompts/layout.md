@@ -1,11 +1,119 @@
 ---
 title: "Layout Generator"
 description: "A sophisticated mobile-first layout system for Astro pages with responsive sidebars and dynamic panels"
-tags: ["layout", "astro", "react", "shadcn-ui", "responsive"]
+tags: ["layout", "astro", "react", "shadcn-ui", "responsive", "performance"]
 date: 2024-02-03
 ---
 
 # Advanced Layout System
+
+## Architectural Principles
+
+1. **Zero Layout Shifts**: Uses CSS grid + fixed positioning for stable render
+2. **Device-Specific Optimization**: 
+   - Mobile: Full-width single column
+   - Tablet: Adaptive sidebars
+   - Desktop: Fluid three-column layout
+3. **Performance First**:
+   - Astro Islands architecture
+   - React components hydrated only when visible
+   - CSS containment for isolated rendering
+4. **Synchronized Components**:
+   - Shared state management via nanostores
+   - Coordinated breakpoint handling
+   - Unified animation timing
+
+## Enhanced Component Sync
+
+### Header-Sidebar Coordination
+```typescript
+// Header.tsx
+<header className="...">
+  {showLeft && <SidebarTrigger />} // Only renders when needed
+  <img src="/logo.svg" className="mx-auto" /> // Perfectly centered
+</header>
+
+// Left.tsx
+<SidebarProvider 
+  defaultOpen={false}
+  onOpenChange={updateNavState} // Syncs with global store
+>
+```
+
+### Right Panel Adaptive Sizing
+```typescript
+// Right.tsx
+const Right = () => {
+  const currentSize = useStore(rightSize); // Shared across components
+  // Maintains chat history during resizing
+  return <MyThread config={chatConfig} /> 
+}
+```
+
+## Performance Optimization Guide
+
+### Astro Directives Usage
+```astro
+// Layout.astro
+<Header client:load /> // Hydrate on load
+<Footer client:visible /> // Hydrate when scrolled into view
+<Right client:only="react" /> // Only in React-enabled sites
+```
+
+### Lighthouse 100% Strategy
+
+1. **Critical CSS Inlining**:
+   ```astro
+   <style>
+     /* Grid system + font faces */
+   </style>
+   ```
+
+2. **Resource Prioritization**:
+   ```html
+   <link rel="preload" href="/logo.svg" as="image">
+   ```
+
+3. **Image Optimization**:
+   ```astro
+   <Image 
+     src="/hero.jpg"
+     alt="Hero"
+     widths={[400, 800, 1200]}
+     formats={['avif', 'webp']}
+     loading="eager"
+   />
+   ```
+
+## Responsive Whitespace System
+
+| Breakpoint   | Padding | Gap     | Max Width |
+|--------------|---------|---------|-----------|
+| <768px (Mobile) | 1rem    | 1rem    | 100%      |
+| 768-1024px (Tablet) | 1.5rem | 1.5rem  | 90%       |
+| >1024px (Desktop) | 2rem   | 2rem    | 80ch      |
+
+```css
+.main-content {
+  padding: var(--space);
+  gap: var(--gap);
+  max-width: var(--max-width);
+}
+```
+
+## Component Sync Diagram
+
+```
+[Left Sidebar] ↔ [Layout Grid] ↔ [Right Panel]
+      ↑                   ↑                ↑
+   [Header]          [Main Content]     [Footer]
+```
+
+Key synchronization points:
+1. Mobile menu state shared between Header/Left
+2. Right panel size syncs with viewport breakpoints
+3. Shared theme context across all components
+4. Coordinated loading states
 
 This layout system provides a highly configurable, mobile-first design for Astro pages that adapts beautifully across mobile, tablet, and desktop views.
 
@@ -228,3 +336,201 @@ The chat interface appears in the Right Panel component and adapts to all panel 
 - Icon mode: Click to expand
 
 The chat maintains state and history across size changes and remains functional in all responsive breakpoints.
+
+## Component Loading Strategy
+
+### Dynamic Imports
+For optimal performance, components are loaded based on their priority:
+
+```astro
+---
+// Critical path components - load immediately
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
+// Async components - load when needed
+const Chart = await import("../components/Chart").then(mod => mod.Chart);
+---
+
+<Layout>
+  <Header client:load /> <!-- Critical UI -->
+  <Chart client:visible /> <!-- Load when visible -->
+  <Footer client:idle /> <!-- Load during idle time -->
+</Layout>
+```
+
+### Hydration Directives
+
+| Directive | Usage | Example |
+|-----------|--------|---------|
+| client:load | Critical UI components | Header, Navigation |
+| client:visible | Below-fold content | Charts, Data tables |
+| client:idle | Non-critical features | Footer, Social links |
+| client:media | Device-specific | Mobile menu |
+| client:only | Framework-specific | React components |
+
+### Error Handling
+
+Always implement fallbacks for dynamic imports:
+
+```typescript
+const Chart = async () => {
+  try {
+    const mod = await import("../components/Chart");
+    return mod.Chart;
+  } catch (error) {
+    console.error("Chart failed to load:", error);
+    return () => <div>Chart unavailable</div>;
+  }
+};
+```
+
+## Performance Optimization
+
+### 1. Component Loading
+- Use `client:visible` for below-fold content
+- Implement loading states
+- Provide fallback UI
+- Handle failed imports gracefully
+
+### 2. Asset Loading
+```astro
+---
+import { Image } from "astro:assets";
+---
+
+<Image 
+  src={import("../assets/hero.jpg")} 
+  alt="Hero"
+  loading="eager" 
+  width={800} 
+  height={600} 
+/>
+```
+
+### 3. State Management
+```typescript
+// stores/layout-store.ts
+import { atom } from 'nanostores';
+
+// Atomic updates prevent unnecessary re-renders
+export const layoutState = atom({
+  sidebarOpen: false,
+  rightPanelSize: 'quarter',
+  theme: 'light'
+});
+```
+
+### 4. CSS Strategy
+```css
+/* Critical CSS inlined in head */
+:root {
+  --layout-timing: 200ms ease-in-out;
+  --layout-z-index: {
+    base: 1,
+    sidebar: 10,
+    header: 20,
+    modal: 30
+  };
+}
+
+/* Component-specific CSS loaded on demand */
+@layer components {
+  .sidebar-transition {
+    transition: transform var(--layout-timing);
+  }
+}
+```
+
+## Component Architecture
+
+### Layout Grid System
+```astro
+<div class="layout-grid">
+  <aside class="left-sidebar" data-state={sidebarOpen ? 'open' : 'closed'}>
+    <slot name="sidebar" />
+  </aside>
+  
+  <main class="main-content">
+    <slot />
+  </main>
+  
+  <aside class="right-panel" data-size={rightPanelSize}>
+    <slot name="panel" />
+  </aside>
+</div>
+
+<style>
+  .layout-grid {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--layout-gap);
+    min-height: 100vh;
+  }
+</style>
+```
+
+### Error Boundaries
+```typescript
+import { ErrorBoundary } from 'react-error-boundary';
+
+function fallbackComponent({ error }) {
+  return (
+    <div role="alert">
+      <p>Something went wrong:</p>
+      <pre>{error.message}</pre>
+    </div>
+  );
+}
+
+<ErrorBoundary FallbackComponent={fallbackComponent}>
+  <DynamicComponent />
+</ErrorBoundary>
+```
+
+## Best Practices
+
+1. **Loading States**
+   - Always show loading indicators
+   - Maintain layout stability
+   - Prevent content jumps
+
+2. **Error States**
+   - Graceful fallbacks
+   - User-friendly error messages
+   - Recovery options
+
+3. **Performance Monitoring**
+   - Track Core Web Vitals
+   - Monitor hydration errors
+   - Implement error tracking
+
+4. **Accessibility**
+   - Proper ARIA attributes
+   - Keyboard navigation
+   - Screen reader support
+
+## Debugging Tips
+
+1. Check React DevTools for component hierarchy
+2. Monitor Network tab for loading issues
+3. Use Performance tab to track bottlenecks
+4. Implement error logging
+5. Test on multiple devices and connections
+
+## Common Issues
+
+1. **Hydration Mismatch**
+   - Ensure server and client markup match
+   - Use proper client directives
+   - Check for undefined window/document usage
+
+2. **Layout Shifts**
+   - Set explicit dimensions
+   - Use CSS containment
+   - Implement proper loading states
+
+3. **Performance Issues**
+   - Lazy load non-critical components
+   - Optimize images and assets
+   - Minimize JavaScript bundles

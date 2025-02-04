@@ -1,7 +1,6 @@
 import React from "react";
 import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/Sidebar";
-import Header from "@/components/Header";
 
 interface SidebarWrapperProps {
   children: React.ReactNode;
@@ -10,20 +9,40 @@ interface SidebarWrapperProps {
 export function SidebarWrapper({ children }: SidebarWrapperProps) {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  // Add click outside handler
+  // Use ResizeObserver to handle viewport changes
+  React.useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      const width = entries[0]?.contentRect.width;
+      if (width && width < 768) {
+        setIsOpen(false);
+      }
+    });
+
+    observer.observe(document.documentElement);
+    return () => observer.disconnect();
+  }, []);
+
+  // Enhanced click outside detection
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      const sidebar = document.querySelector('[data-sidebar="sidebar"]');
-      if (sidebar && !sidebar.contains(event.target as Node)) {
+      const sidebar = document.querySelector('[data-sidebar="true"]');
+      const trigger = document.querySelector('[data-sidebar-trigger="true"]');
+      
+      if (
+        sidebar && 
+        !sidebar.contains(event.target as Node) && 
+        trigger && 
+        !trigger.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isOpen]);
 
   return (
     <SidebarProvider 
@@ -32,13 +51,15 @@ export function SidebarWrapper({ children }: SidebarWrapperProps) {
       onOpenChange={setIsOpen}
     >
       <div className="flex min-h-screen">
-        <div onMouseEnter={() => setIsOpen(true)}>
+        <div 
+          data-sidebar="true"
+          className="transition-transform duration-200"
+        >
           <Sidebar variant="floating" collapsible="icon">
             <AppSidebar />
           </Sidebar>
         </div>
         <div className="flex-1">
-          <Header showLeft={true} showRight={false} />
           {children}
         </div>
       </div>
