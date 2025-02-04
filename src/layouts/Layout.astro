@@ -72,27 +72,14 @@ const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
       :root {
         --layout-timing: 200ms ease-in-out;
         --right-panel-width: 0px;
-        --main-width: 100%;
       }
 
       .layout-grid {
-        display: grid;
-        grid-template-columns: 1fr;
         min-height: 100vh;
-        position: relative;
       }
 
       .center-grid {
-        width: var(--main-width);
-        transition: width var(--layout-timing);
-        position: relative;
         min-height: 100vh;
-        margin-right: var(--right-panel-width); /* This pushes content left when panel opens */
-      }
-
-      /* When right panel is full, hide overflow on main content */
-      .center-grid[data-panel-size="full"] {
-        overflow: hidden;
       }
 
       .right-panel {
@@ -101,7 +88,7 @@ const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
         top: 0;
         height: 100%;
         width: var(--right-panel-width);
-        transition: width var(--layout-timing), transform var(--layout-timing);
+        transition: width var(--layout-timing);
         background: var(--background);
         border-left: 1px solid var(--border);
         z-index: 50;
@@ -112,27 +99,11 @@ const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
         .right-panel:not(.right-panel-icon) {
           width: 100vw;
         }
-        .center-grid {
-          width: 100% !important;
-          margin-right: 48px; /* Fixed margin for icon mode */
-        }
-        .center-grid:not([data-panel-size="icon"]) {
-          margin-right: 0;
-        }
       }
 
-      /* Desktop styles */
-      @media (min-width: 768px) {
-        .center-grid {
-          width: calc(100% - var(--right-panel-width)) !important;
-          margin-right: var(--right-panel-width);
-        }
-        /* Hide main content when panel is full */
-        .center-grid[data-panel-size="full"] {
-          opacity: 0;
-          pointer-events: none;
-          width: 0 !important;
-        }
+      /* Full panel mode */
+      .layout-grid[data-panel-size="full"] .center-grid {
+        display: none;
       }
 
       /* Scrollbar styles */
@@ -158,20 +129,17 @@ const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
   <body>
     <ErrorBoundaryWrapper client:load>
       <SidebarWrapper client:load>
-        <div class="layout-grid">
+        <div class="layout-grid" data-panel-size={initialRightSize}>
           <div 
             class:list={[
               "center-grid",
               { "icon-mode": initialRightSize === "icon" }
             ]}
-            data-panel-size={initialRightSize}
           >
             {header && <Header client:load showLeft={left} showRight={right} />}
-
             <main class="p-4 min-h-screen">
               <slot />
             </main>
-
             {footer && <Footer client:visible />}
           </div>
 

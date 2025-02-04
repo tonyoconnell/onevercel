@@ -27,27 +27,22 @@ const Right = ({ initialSize = 'quarter', chatConfig }: RightProps) => {
 
   useLayoutEffect(() => {
     const sizes = {
-      full: { right: '100%', main: '0%' },
-      half: { right: '50%', main: '50%' },
-      quarter: { right: '400px', main: 'calc(100% - 400px)' },
-      icon: { right: '48px', main: '100%' }
+      full: '100%',
+      half: '50%',
+      quarter: '400px',
+      icon: '48px'
     };
 
-    const size = sizes[state.rightPanelSize];
     const isMobile = window.innerWidth < 768;
+    const width = sizes[state.rightPanelSize];
     
     if (!state.rightVisible) {
       document.documentElement.style.setProperty('--right-panel-width', '0px');
-      document.documentElement.style.setProperty('--main-width', '100%');
     } else if (isMobile) {
-      // On mobile, main content is always full width
       document.documentElement.style.setProperty('--right-panel-width', 
         state.rightPanelSize === 'icon' ? '48px' : '100%');
-      document.documentElement.style.setProperty('--main-width', '100%');
     } else {
-      // On desktop, use the size mappings
-      document.documentElement.style.setProperty('--right-panel-width', size.right);
-      document.documentElement.style.setProperty('--main-width', size.main);
+      document.documentElement.style.setProperty('--right-panel-width', width);
     }
 
   }, [state.rightPanelSize, state.rightVisible]);
