@@ -1,8 +1,8 @@
 ---
-title: "The Story of Truth Terminal"
-description: "How an experimental AI art project revolutionized crypto markets"
-date: 2025-01-09
-picture: "/blog-placeholder-3.jpg"
+title: The Story of Truth Terminal
+description: How an experimental AI art project revolutionized crypto markets
+date: 2025-02-04
+picture: /blog-placeholder-3.jpg
 ---
 By Anthony O'Connell
 

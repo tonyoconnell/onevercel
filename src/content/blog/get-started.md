@@ -11,13 +11,13 @@ images:
     alt: ""
 ---
 
-Get started with our lightning-fast Astro + Shadcn/UI starter kit in minutes. This guide will walk you through setup, customization, and best practices.
+Get started with ONE in minutes. This guide will walk you through setup, customization, and best practices.
 
 ## Quick Start
 
 1. **Clone the Repository**
 ```bash
-git clone https://github.com/one-ie/astro-shadcn.git
+git clone https://github.com/one-ie/one.git
 cd astro-shadcn
 ```
 
@@ -95,4 +95,4 @@ import { Button } from "@/components/ui/button"
 - 💬 [Discord Community](https://astro.build/chat)
 - 🐛 [GitHub Issues](https://github.com/one-ie/astro-shadcn/issues)
 
-Get building amazing sites with Astro + Shadcn/UI! 🚀
+
