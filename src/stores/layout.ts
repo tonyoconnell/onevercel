@@ -1,96 +1,116 @@
 import { atom } from 'nanostores';
 
-/** Layout right panel size options */
-export const RightSize = {
-  Full: "Full",
-  Half: "Half",
-  Quarter: "Quarter",
-  Closed: "Closed"
+/** Panel display modes and their layout configurations */
+export const PanelMode = {
+  Icon: {
+    main: { width: '100%' },
+    right: {
+      width: '48px',
+      height: '48px',
+      position: 'fixed',
+      bottom: 'max(1rem, env(safe-area-inset-bottom))',
+      right: 'max(1rem, env(safe-area-inset-right))',
+      zIndex: 100
+    }
+  },
+  Floating: {
+    main: { width: '100%' },
+    right: {
+      width: '320px',
+      height: '480px',
+      position: 'fixed',
+      bottom: 'max(1rem, env(safe-area-inset-bottom))',
+      right: 'max(1rem, env(safe-area-inset-right))',
+      zIndex: 1000,
+      borderRadius: '12px 12px 0 0'
+    }
+  },
+  Quarter: {
+    main: { width: '75%' },
+    right: {
+      width: '25%',
+      minWidth: '320px',
+      background: 'var(--background)',
+      borderLeft: '1px solid var(--border)',
+      height: '100%',
+      zIndex: 2000
+    }
+  },
+  Half: {
+    main: { width: '50%' },
+    right: {
+      width: '50%',
+      background: 'var(--background)',
+      borderLeft: '1px solid var(--border)',
+      height: '100%',
+      zIndex: 2000
+    }
+  },
+  Full: {
+    main: { display: 'none' },
+    right: { 
+      width: '100%',
+      background: 'var(--background)',
+      height: '100%',
+      zIndex: 2000
+    }
+  }
 } as const;
 
-export type RightSizeType = typeof RightSize[keyof typeof RightSize];
+export type PanelModeType = keyof typeof PanelMode;
 
-/** Layout visibility state type */
-export interface LayoutState {
-  showLeft: boolean;
-  showTop: boolean;
-  showRight: boolean;
-  showBottom: boolean;
-  isMobile: boolean;
-  rightSize: RightSizeType;
+interface LayoutState {
+  mode: PanelModeType;
+  isVisible: boolean;
 }
 
-// Default layout state
 const defaultLayout: LayoutState = {
-  showLeft: true,
-  showTop: true,
-  showRight: false,
-  isMobile: false,
-  showBottom: true,
-  rightSize: RightSize.Closed
+  mode: 'Icon',
+  isVisible: true
 };
 
-// Create store with proper type
 const store = atom<LayoutState>(defaultLayout);
 
-// Layout-specific methods
 export const layoutActions = {
-  toggleLeft() {
+  setMode(mode: PanelModeType) {
     const current = store.get();
-    store.set({ ...current, showLeft: !current.showLeft });
+    store.set({ ...current, mode });
   },
 
-  toggleRight() {
+  toggleVisibility() {
     const current = store.get();
-    const isCurrentlyClosed = current.rightSize === RightSize.Closed;
-    store.set({
-      ...current,
-      showRight: !current.showRight,
-      rightSize: isCurrentlyClosed ? RightSize.Quarter : RightSize.Closed
-    });
+    store.set({ ...current, isVisible: !current.isVisible });
   },
-
-  setRightSize(size: RightSizeType) {
-    const current = store.get();
-    store.set({
-      ...current,
-      showRight: size !== RightSize.Closed,
-      rightSize: size
-    });
-  },
-
-  toggleTop() {
-    const current = store.get();
-    store.set({ ...current, showTop: !current.showTop });
-  },
-
-  toggleBottom() {
-    const current = store.get();
-    store.set({ ...current, showBottom: !current.showBottom });
-  },
-
-    setMobile(isMobile: boolean) {
-      const current = store.get();
-      store.set({ ...current, isMobile });
-    },
 
   initLayout() {
     const saved = localStorage.getItem('layoutPreference');
     if (saved) {
       try {
-        const savedState = JSON.parse(saved) as LayoutState;
-        store.set(savedState);
+        store.set(JSON.parse(saved) as LayoutState);
       } catch (e) {
         store.set(defaultLayout);
       }
     }
     
-    // Save layout changes to localStorage
-    store.subscribe(state => {
-      localStorage.setItem('layoutPreference', JSON.stringify(state));
-    });
+    const handleResize = () => {
+      const current = store.get();
+      const width = window.innerWidth;
+      
+      if (width < 768) {
+        if (current.mode !== 'Icon') {
+          store.set({ ...current, mode: 'Full' });
+        }
+      } else if (width < 1024) {
+        if (current.mode === 'Half' || current.mode === 'Full') {
+          store.set({ ...current, mode: 'Floating' });
+        }
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    store.subscribe(state => localStorage.setItem('layoutPreference', JSON.stringify(state)));
   }
 };
 
-// Export the store
 export const layoutStore = store;

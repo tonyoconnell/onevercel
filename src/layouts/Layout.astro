@@ -5,207 +5,69 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { SidebarWrapper } from "@/components/Left";
 import Right from "../components/Right";
-import { ErrorBoundaryWrapper } from "@/components/ErrorBoundaryWrapper";
 import { ChatConfigSchema } from "../schema/chat";
+import { PanelMode } from "@/stores/layout";
 
-interface LayoutProps {
+interface Props {
   title: string;
   description?: string;
   children: any;
   chatConfig?: any;
-  header?: boolean;
-  footer?: boolean;
-  left?: boolean;
+  showLeft?: boolean;
   leftSize?: "expanded" | "collapsed";
-  right?: boolean;
-  rightSize?: "full" | "half" | "quarter" | "icon";
+  initialPanelMode?: keyof typeof PanelMode;
 }
 
 const {
-  header = true,
-  footer = true,
-  left = true,
-  right = true,
-  rightSize: initialRightSize = "quarter",
+  title,
+  description = "ONE",
+  showLeft = true,
+  leftSize = "collapsed",
+  initialPanelMode = "Quarter",
+  chatConfig: providedConfig
 } = Astro.props;
 
-const { title, description = "ONE", chatConfig: providedConfig } = Astro.props;
-
-// Default chat config that can be overridden
-const defaultChatConfig = {
-  systemPrompt: [
-    {
-      type: "text" as const,
-      text: "Say XXX as every reply ",
-    },
-  ],
+const chatConfig = ChatConfigSchema.parse(providedConfig || {
+  systemPrompt: [{ type: "text", text: "Say XXX as every reply" }],
   welcome: {
     message: "I am Agent ONE. How can I help you today?",
     avatar: "/icon.svg",
     suggestions: [
-      {
-        label: "Tell me about ONE",
-        prompt: "What is ONE and how can it help me?",
-      },
-      {
-        label: "Get Started",
-        prompt: "How do I get started with ONE?",
-      },
+      { label: "Tell me about ONE", prompt: "What is ONE?" },
+      { label: "Get Started", prompt: "How do I get started?" },
     ],
   },
-};
-
-const chatConfig = ChatConfigSchema.parse(providedConfig || defaultChatConfig);
+});
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <title>{title}</title>
     <ThemeInit />
     
-    <!-- Critical CSS -->
-    <style is:inline>
-      :root {
-        --layout-timing: 200ms ease-in-out;
-        --right-panel-width: 0px;
-        --main-width: 100%;
-      }
-
-      .layout-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        min-height: 100vh;
-        position: relative;
-      }
-
-      .center-grid {
-        width: var(--main-width);
-        transition: width var(--layout-timing);
-        position: relative;
-        min-height: 100vh;
-        margin-right: var(--right-panel-width); /* This pushes content left when panel opens */
-      }
-
-      /* When right panel is full, hide overflow on main content */
-      .center-grid[data-panel-size="full"] {
-        overflow: hidden;
-      }
-
-      .right-panel {
-        position: fixed;
-        right: 0;
-        top: 0;
-        height: 100%;
-        width: var(--right-panel-width);
-        transition: width var(--layout-timing), transform var(--layout-timing);
-        background: var(--background);
-        border-left: 1px solid var(--border);
-        z-index: 50;
-      }
-
-      /* Mobile styles */
-      @media (max-width: 767px) {
-        .right-panel:not(.right-panel-icon) {
-          width: 100vw;
-        }
-        .center-grid {
-          width: 100% !important;
-          margin-right: 48px; /* Fixed margin for icon mode */
-        }
-        .center-grid:not([data-panel-size="icon"]) {
-          margin-right: 0;
-        }
-      }
-
-      /* Desktop styles */
-      @media (min-width: 768px) {
-        .center-grid {
-          width: calc(100% - var(--right-panel-width)) !important;
-          margin-right: var(--right-panel-width);
-        }
-        /* Hide main content when panel is full */
-        .center-grid[data-panel-size="full"] {
-          opacity: 0;
-          pointer-events: none;
-          width: 0 !important;
-        }
-      }
-
-      /* Scrollbar styles */
-      ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: #d1d5db;
-        border-radius: 4px;
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background: #9ca3af;
-      }
-    </style>
-
-    <!-- Preload critical assets -->
-    <link rel="preload" href="/logo.svg" as="image" />
   </head>
   
   <body>
-    <ErrorBoundaryWrapper client:load>
       <SidebarWrapper client:load>
-        <div class="layout-grid">
-          <div 
-            class:list={[
-              "center-grid",
-              { "icon-mode": initialRightSize === "icon" }
-            ]}
-            data-panel-size={initialRightSize}
-          >
-            {header && <Header client:load showLeft={left} showRight={right} />}
-
+        <div class="layout-grid" data-mode={initialPanelMode}>
+          <div class="main-content" style={PanelMode[initialPanelMode].main}>
+            <Header client:load showLeft={showLeft} showRight={true} />
             <main class="p-4 min-h-screen">
               <slot />
             </main>
-
-            {footer && <Footer client:visible />}
+            <Footer client:visible />
           </div>
 
-          {
-            right && (
-              <Right
-                client:only="react"
-                initialSize={initialRightSize}
-                chatConfig={chatConfig}
-              />
-            )
-          }
+          <Right
+            client:only="react"
+            initialMode={initialPanelMode}
+            chatConfig={chatConfig}
+          />
         </div>
       </SidebarWrapper>
-    </ErrorBoundaryWrapper>
-
-    <script>
-      // Hydration helpers
-      document.addEventListener("astro:page-load", () => {
-        // Initialize layout state
-        const centerGrid = document.querySelector(".center-grid");
-        if (centerGrid) {
-          const observer = new ResizeObserver(() => {
-            const rightWidth = getComputedStyle(document.documentElement)
-              .getPropertyValue("--right-panel-width")
-              .trim();
-            centerGrid.classList.toggle(
-              "icon-mode",
-              rightWidth === "48px" || rightWidth === "3rem"
-            );
-          });
-          observer.observe(document.documentElement);
-        }
-      });
-    </script>
   </body>
 </html>
