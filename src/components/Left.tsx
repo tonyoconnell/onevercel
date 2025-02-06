@@ -5,6 +5,11 @@ import { AppSidebar } from "@/components/Sidebar";
 export function SidebarWrapper({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = React.useState(false);
 
+  // Handle mouse enter - open sidebar
+  const handleMouseEnter = () => {
+    setIsOpen(true);
+  };
+
   // Single effect for all sidebar management
   React.useEffect(() => {
     // Handle resize
@@ -43,9 +48,11 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider defaultOpen={false} open={isOpen} onOpenChange={setIsOpen}>
       <div className="flex min-h-screen">
-        <Sidebar variant="floating" collapsible="icon">
-          <AppSidebar />
-        </Sidebar>
+        <div onMouseEnter={handleMouseEnter}>
+          <Sidebar variant="floating" collapsible="icon">
+            <AppSidebar />
+          </Sidebar>
+        </div>
         <div className="flex-1">
           {children}
         </div>
