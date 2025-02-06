@@ -4,7 +4,7 @@ title: "ONE License"
 description: "Maximum Freedom. Zero Restrictions"
 ---
 
-<div class="prose prose-slate max-w-3xl mx-auto px-4 py-8">
+<div class="prose">
 
 # ONE License (Version 1.0)
 ## Unlimited Commercial Freedom
@@ -74,17 +74,4 @@ Need additional rights or support? We offer:
 
 Contact [ai@one.ie](mailto:ai@one.ie) for enterprise inquiries.
 
----
-
-<div class="mt-8 text-center">
-<p class="text-xl font-semibold">Ready to innovate without limits?</p>
-<p class="mt-2">Start building with ONE today - maximum freedom, zero restrictions.</p>
-<p class="mt-4">
-<a href="https://one.ie/register" class="inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors">
-Get Started Free
-</a>
-</p>
-</div>
-
-</div>
 

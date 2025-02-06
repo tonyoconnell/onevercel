@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/Layout.astro
+layout: ../layouts/Text.astro
 title: "Terms of Service"
 description: "Fair, Simple, and Human"
 ---
