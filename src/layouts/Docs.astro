@@ -45,44 +45,42 @@ const pageData = {
 ---
 
 <Layout {...pageData}>
-  <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="lg:flex lg:gap-8 xl:gap-12">
-      <!-- Main Content -->
-      <main class="w-full lg:flex-1 min-w-0">
-        <article class="py-8 lg:py-12 max-w-3xl mx-auto">
-          <header class="mb-8 lg:mb-12">
-            <div class="space-y-2">
-              {entry.data.section && (
-                <p class="text-sm font-medium text-muted-foreground">
-                  {entry.data.section}
-                </p>
-              )}
-              <h1 class="text-3xl font-bold sm:text-4xl md:text-5xl">
-                {entry.data.title}
-              </h1>
-              {entry.data.description && (
-                <p class="text-lg sm:text-xl text-muted-foreground max-w-[750px]">
-                  {entry.data.description}
-                </p>
-              )}
-            </div>
-          </header>
-          
-          <div class="prose dark:prose-invert max-w-none">
-            <slot />
+  <div class="lg:flex lg:gap-8">
+    <!-- Main Content -->
+    <main class="w-full lg:flex-1 min-w-0">
+      <article class="py-8">
+        <header class="mb-8">
+          <div class="space-y-2">
+            {entry.data.section && (
+              <p class="text-sm font-medium text-muted-foreground">
+                {entry.data.section}
+              </p>
+            )}
+            <h1 class="text-3xl font-bold sm:text-4xl md:text-5xl">
+              {entry.data.title}
+            </h1>
+            {entry.data.description && (
+              <p class="text-lg sm:text-xl text-muted-foreground max-w-[750px]">
+                {entry.data.description}
+              </p>
+            )}
           </div>
-        </article>
-      </main>
+        </header>
+        
+        <div class="prose dark:prose-invert max-w-none">
+          <slot />
+        </div>
+      </article>
+    </main>
 
-      <!-- Right Sidebar -->
-      <div class="hidden lg:block w-64 xl:w-72 flex-none">
-        <div class="sticky top-16 -mt-10 pt-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
-          <div class="pl-8 pr-4">
-            <TableOfContents 
-              headings={headings} 
-              client:media="(min-width: 1024px)" 
-            />
-          </div>
+    <!-- Right Sidebar -->
+    <div class="hidden lg:block w-64 xl:w-72 flex-none">
+      <div class="sticky top-16 -mt-10 pt-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
+        <div class="pl-8 pr-4">
+          <TableOfContents 
+            headings={headings} 
+            client:media="(min-width: 1024px)" 
+          />
         </div>
       </div>
     </div>

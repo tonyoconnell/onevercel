@@ -1,10 +1,8 @@
 ---
-layout: ../layouts/Layout.astro
+layout: ../layouts/Text.astro
 title: "ONE License"
 description: "Maximum Freedom. Zero Restrictions"
 ---
-
-<div class="prose">
 
 # ONE License (Version 1.0)
 ## Unlimited Commercial Freedom

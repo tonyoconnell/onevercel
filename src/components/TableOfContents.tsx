@@ -100,10 +100,14 @@ export default function TableOfContents({ headings = [] }: Props): ReactElement 
 
   return (
     <nav className="space-y-2" aria-label="Table of Contents">
-      <div className="font-medium mb-4 text-sm px-4">On This Page</div>
-      <ul className="space-y-2">
-        {toc.map((heading) => renderTocItem(heading))}
-      </ul>
+      <div className="sticky top-16 -mt-10 pt-4 overflow-y-auto overflow-x-hidden max-h-[calc(100vh-4rem)] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-muted-foreground/20 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/30">
+        <div className="pl-8 pr-4">
+          <div className="font-medium mb-4 text-sm px-4">On This Page</div>
+          <ul className="space-y-2">
+            {toc.map((heading) => renderTocItem(heading))}
+          </ul>
+        </div>
+      </div>
     </nav>
   );
 }
