@@ -3,6 +3,7 @@ import "../styles/global.css";
 import ThemeInit from "@/components/Theme.astro";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { SidebarWrapper } from "@/components/Left";
 import Right from "../components/Right";
 
 import { ChatConfigSchema } from "../schema/chat";
@@ -148,21 +149,23 @@ const chatConfig = ChatConfigSchema.parse({
       }
     </style>
   </head><body>
-    <div class="main-grid" id="main-grid" data-panel-mode={initialPanelMode}>
-      <div class="center-grid" id="center-grid">
-        {header && <Header client:load />}
+    <SidebarWrapper client:load>
+      <div class="main-grid" id="main-grid" data-panel-mode={initialPanelMode}>
+        <div class="center-grid" id="center-grid">
+          {header && <Header client:load />}
 
-        <main class="p-4">
-          <slot />
-        </main>
+          <main class="p-4">
+            <slot />
+          </main>
 
-        {footer && <Footer client:load />}
+          {footer && <Footer client:load />}
+        </div>
       </div>
-    </div>
-    <Right
-      client:only="react"
-      initialMode={initialPanelMode}
-      chatConfig={chatConfig}
-    />
+      <Right
+        client:only="react"
+        initialMode={initialPanelMode}
+        chatConfig={chatConfig}
+      />
+    </SidebarWrapper>
   </body>
 </html>
