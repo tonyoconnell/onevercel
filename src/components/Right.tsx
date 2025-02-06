@@ -3,36 +3,17 @@ import { useLayoutEffect, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { layoutStore, layoutActions, PanelMode } from '../stores/layout';
 import { MyThread } from "@/components/Chat";
-import { Maximize2, PanelRightClose, X } from 'lucide-react';
+import { Maximize2, PanelRightClose, X, LayoutPanelLeft } from 'lucide-react';
 
-interface RightProps {
-  initialMode?: 'Full' | 'Half' | 'Quarter';
+interface RightProps {   
+  initialMode?: 'Full' | 'Half' | 'Quarter' | 'Floating' | 'Icon';
   chatConfig: any;
-  rightPanelMode?: 'full' | 'half' | 'quarter' | 'hidden';
+  rightPanelMode?: 'full' | 'half' | 'quarter' | 'floating' | 'hidden';
 }
 
 export default function Right({ initialMode, rightPanelMode, chatConfig }: RightProps) {
   const layout = useStore(layoutStore);
   const [isMobile, setIsMobile] = useState(false);
-
-  useLayoutEffect(() => {
-    if (initialMode) {
-      layoutActions.setMode(initialMode);
-    }
-  }, [initialMode]);
-
-  useLayoutEffect(() => {
-    if (rightPanelMode) {
-      const modeMap = {
-        'full': 'Full',
-        'half': 'Half',
-        'quarter': 'Quarter',
-        'hidden': 'Icon'
-      } as const;
-      
-      layoutActions.setMode(modeMap[rightPanelMode]);
-    }
-  }, [rightPanelMode]);
 
   useLayoutEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -49,6 +30,25 @@ export default function Right({ initialMode, rightPanelMode, chatConfig }: Right
     }
   }, [layout.mode]);
 
+  useLayoutEffect(() => {
+    if (rightPanelMode) {
+      const modeMap = {
+        'full': 'Full',
+        'half': 'Half',
+        'quarter': 'Quarter',
+        'floating': 'Floating',
+        'hidden': 'Icon'
+      } as const;
+      
+      // Check for mobile first
+      if (window.innerWidth < 768) {
+        layoutActions.setMode('Icon');
+      } else {
+        layoutActions.setMode(modeMap[rightPanelMode]);
+      }
+    }
+  }, [rightPanelMode]);
+
   const handleModeChange = (mode: keyof typeof PanelMode) => {
     if (isMobile && mode !== 'Icon') {
       layoutActions.setMode('Full');
@@ -64,7 +64,7 @@ export default function Right({ initialMode, rightPanelMode, chatConfig }: Right
   
   return (
     <aside 
-      className="right-panel"
+      className={`right-panel ${layout.mode === 'Floating' ? 'floating' : ''}`}
       data-mode={layout.mode}
       style={styles}
     >
@@ -97,6 +97,13 @@ export default function Right({ initialMode, rightPanelMode, chatConfig }: Right
                 <PanelRightClose className="h-4 w-4" />
               </button>
               <h2 className="font-semibold flex-1 text-center">Agent ONE</h2>
+              <button
+                onClick={() => handleModeChange("Floating")}
+                className="p-2 hover:bg-accent rounded-md"
+                aria-label="Float"
+              >
+                <LayoutPanelLeft className="h-4 w-4" />
+              </button>
               <button
                 onClick={() => handleModeChange("Icon")}
                 className="p-2 hover:bg-accent rounded-md"

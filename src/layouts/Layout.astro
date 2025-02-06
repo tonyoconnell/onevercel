@@ -13,15 +13,15 @@ interface Props {
   children: any;
   header?: boolean;
   footer?: boolean;
-  initialPanelMode?: "Quarter" | "Half" | "Full";
+  initialPanelMode?: "Quarter" | "Half" | "Full" | "Floating" | "Icon";
   chatConfig?: any;
-  rightPanelMode?: 'full' | 'half' | 'quarter' | 'hidden';
+  rightPanelMode?: 'full' | 'half' | 'quarter' | 'floating' | 'hidden' | 'icon';
 }
 
 const {
   title,
   description = "ONE",
-  initialPanelMode = "Full",
+  initialPanelMode,
   rightPanelMode = 'quarter',
   chatConfig: providedConfig,
 } = Astro.props;
@@ -84,6 +84,11 @@ const chatConfig = providedConfig || defaultChatConfig;
         grid-template-columns: 0fr 1fr;
       }
 
+      .main-grid[data-panel-mode="Floating"],
+      .main-grid[data-panel-mode="Icon"] {
+        grid-template-columns: 1fr;
+      }
+
       .center-grid {
         position: relative;
         z-index: 10;
@@ -100,10 +105,12 @@ const chatConfig = providedConfig || defaultChatConfig;
         right: 0;
         bottom: 0;
         z-index: 50;
-        background-color: var(--background);
+        background-color: hsl(var(--background));
         border-left: 1px solid var(--border);
         display: flex;
         flex-direction: column;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(12px);
       }
 
       :global(.right-panel[data-mode="Icon"]) {
@@ -115,23 +122,44 @@ const chatConfig = providedConfig || defaultChatConfig;
         border: none;
         border-radius: 9999px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease;
-      }
-
-      :global(.right-panel[data-mode="Icon"]:hover) {
-        transform: scale(1.05);
+        background-color: hsl(var(--primary));
       }
 
       :global(.right-panel[data-mode="Quarter"]) {
         width: 25%;
+        background-color: hsl(var(--background));
+        box-shadow: -4px 0 16px rgba(0, 0, 0, 0.1);
       }
 
       :global(.right-panel[data-mode="Half"]) {
         width: 50%;
+        background-color: hsl(var(--background));
+        box-shadow: -4px 0 16px rgba(0, 0, 0, 0.1);
       }
 
       :global(.right-panel[data-mode="Full"]) {
         width: 100%;
+        background-color: hsl(var(--background));
+      }
+
+      :global(.right-panel[data-mode="Floating"]) {
+        width: 400px;
+        height: 600px;
+        top: 50%;
+        right: 20px;
+        bottom: auto;
+        transform: translateY(-50%);
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        border: 1px solid var(--border);
+        background-color: hsl(var(--background));
+      }
+
+      @media (max-width: 768px) {
+        :global(.right-panel[data-mode="Floating"]) {
+          width: calc(100% - 40px);
+          height: calc(100% - 120px);
+        }
       }
 
       /* Add smooth scrolling to the whole page */
@@ -174,7 +202,6 @@ const chatConfig = providedConfig || defaultChatConfig;
       </div>
       <Right
         client:only="react"
-        initialMode={initialPanelMode}
         chatConfig={chatConfig}
         rightPanelMode={rightPanelMode}
       />

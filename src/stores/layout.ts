@@ -10,19 +10,29 @@ export const PanelMode = {
       position: 'fixed',
       bottom: 'max(1rem, env(safe-area-inset-bottom))',
       right: 'max(1rem, env(safe-area-inset-right))',
-      zIndex: 100
+      zIndex: 100,
+      borderRadius: '9999px',
+      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+      border: 'none'
     }
   },
   Floating: {
     main: { width: '100%' },
     right: {
-      width: '320px',
-      height: '480px',
+      width: '400px',
+      height: '600px',
       position: 'fixed',
-      bottom: 'max(1rem, env(safe-area-inset-bottom))',
-      right: 'max(1rem, env(safe-area-inset-right))',
+      top: '50%',
+      right: '20px',
+      transform: 'translateY(-50%)',
       zIndex: 1000,
-      borderRadius: '12px 12px 0 0'
+      borderRadius: '12px',
+      boxShadow: '0 8px 30px rgba(0, 0, 0, 0.15)',
+      border: '1px solid var(--border)',
+      '@media (max-width: 768px)': {
+        width: 'calc(100% - 40px)',
+        height: 'calc(100% - 120px)'
+      }
     }
   },
   Quarter: {
@@ -33,7 +43,11 @@ export const PanelMode = {
       background: 'var(--background)',
       borderLeft: '1px solid var(--border)',
       height: '100%',
-      zIndex: 2000
+      position: 'fixed',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: 50
     }
   },
   Half: {
@@ -43,16 +57,24 @@ export const PanelMode = {
       background: 'var(--background)',
       borderLeft: '1px solid var(--border)',
       height: '100%',
-      zIndex: 2000
+      position: 'fixed',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: 50
     }
   },
   Full: {
-    main: { display: 'none' },
+    main: { width: '0%' },
     right: { 
       width: '100%',
       background: 'var(--background)',
       height: '100%',
-      zIndex: 2000
+      position: 'fixed',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: 50
     }
   }
 } as const;
@@ -65,7 +87,7 @@ interface LayoutState {
 }
 
 const defaultLayout: LayoutState = {
-  mode: 'Icon',
+  mode: 'Quarter',  // Default fallback
   isVisible: true
 };
 
@@ -83,13 +105,27 @@ export const layoutActions = {
   },
 
   initLayout() {
+    // Set initial mode based on screen size
+    const initialMode = typeof window !== 'undefined' && window.innerWidth < 768 
+      ? 'Icon' 
+      : 'Quarter';
+    
+    // Check for saved preferences
     const saved = localStorage.getItem('layoutPreference');
     if (saved) {
       try {
-        store.set(JSON.parse(saved) as LayoutState);
+        const savedState = JSON.parse(saved) as LayoutState;
+        // Check if we should use Icon mode on mobile regardless of saved state
+        if (window.innerWidth < 768 && savedState.mode !== 'Icon' && savedState.mode !== 'Full') {
+          savedState.mode = 'Icon';
+        }
+        store.set(savedState);
       } catch (e) {
-        store.set(defaultLayout);
+        store.set({ ...defaultLayout, mode: initialMode });
       }
+    } else {
+      // No saved preference, use screen-size based default
+      store.set({ ...defaultLayout, mode: initialMode });
     }
     
     const handleResize = () => {
@@ -97,11 +133,13 @@ export const layoutActions = {
       const width = window.innerWidth;
       
       if (width < 768) {
-        if (current.mode !== 'Icon') {
-          store.set({ ...current, mode: 'Full' });
+        // On mobile, switch to Icon mode if not already in Icon or Full mode
+        if (current.mode !== 'Icon' && current.mode !== 'Full') {
+          store.set({ ...current, mode: 'Icon' });
         }
       } else if (width < 1024) {
-        if (current.mode === 'Half' || current.mode === 'Full') {
+        // On tablet, prefer Floating or Quarter modes
+        if (current.mode === 'Full') {
           store.set({ ...current, mode: 'Floating' });
         }
       }
