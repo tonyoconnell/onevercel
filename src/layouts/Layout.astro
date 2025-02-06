@@ -73,20 +73,24 @@ const chatConfig = providedConfig || defaultChatConfig;
       }
 
       .main-grid[data-panel-mode="Quarter"] {
-        grid-template-columns: 3fr 1fr;
+        grid-template-columns: minmax(0, 1fr);
+        padding-right: 25%;
       }
 
       .main-grid[data-panel-mode="Half"] {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: minmax(0, 1fr);
+        padding-right: 50%;
       }
 
       .main-grid[data-panel-mode="Full"] {
-        grid-template-columns: 0fr 1fr;
+        grid-template-columns: minmax(0, 1fr);
+        padding-right: 100%;
       }
 
       .main-grid[data-panel-mode="Floating"],
       .main-grid[data-panel-mode="Icon"] {
         grid-template-columns: 1fr;
+        padding-right: 0;
       }
 
       .center-grid {
