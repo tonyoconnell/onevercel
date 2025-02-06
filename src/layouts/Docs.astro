@@ -13,6 +13,9 @@ interface Props {
 const { entry } = Astro.props;
 const { headings } = await entry.render();
 
+// Get raw content from the slot
+const rawContent = await Astro.slots.render('default');
+
 // Create documentation-specific chat configuration
 const docsSpecificConfig = ChatConfigSchema.parse({
   systemPrompt: [{
@@ -40,7 +43,8 @@ const pageData = {
   description: entry.data.description,
   type: "documentation",
   chatConfig: docsSpecificConfig,
-  rightPanelMode: 'quarter' as const
+  rightPanelMode: 'quarter' as const,
+  content: rawContent
 };
 ---
 
