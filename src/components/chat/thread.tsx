@@ -117,7 +117,7 @@ interface MyThreadWelcomeProps {
 
 const MyThreadWelcome: FC<MyThreadWelcomeProps> = ({ welcome, onSuggestionClick }) => {
   return (
-    <ThreadPrimitive.Empty shouldShow>
+    <ThreadPrimitive.Empty>
       <div className="flex flex-grow flex-col items-center justify-center px-6 py-4">
         <Avatar>
           <AvatarFallback>

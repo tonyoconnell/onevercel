@@ -33,17 +33,12 @@ export function MyThread({
 
   // Handle suggestion clicks
   const handleSuggestionClick = useCallback((prompt: string) => {
+    // Set input and immediately submit
     chat.setInput(prompt);
-
-    // Create a synthetic form event
-    const syntheticEvent = {
+    chat.handleSubmit({
       preventDefault: () => {},
-      target: {
-        message: { value: prompt }
-      }
-    } as any;
-
-    chat.handleSubmit(syntheticEvent);
+      target: { message: { value: prompt } }
+    } as any);
   }, [chat]);
 
   return (
