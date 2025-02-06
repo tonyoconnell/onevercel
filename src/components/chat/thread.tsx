@@ -45,7 +45,16 @@ interface MyThreadProps {
 export const MyThread: FC<MyThreadProps> = ({ welcome, onSuggestionClick }) => {
   return (
     <ThreadPrimitive.Root className="flex flex-col h-full w-full">
-      <ScrollArea className="flex-1 w-full">
+      <ScrollArea className="flex-1 w-full relative">
+        <ThreadPrimitive.ScrollToBottom asChild>
+          <Button
+            variant="outline"
+            size="icon"
+            className="absolute bottom-4 right-4 z-10 rounded-full bg-background/80 shadow-md hover:bg-muted transition-opacity opacity-0 data-[visible=true]:opacity-100"
+          >
+            <ArrowDownIcon className="h-4 w-4" />
+          </Button>
+        </ThreadPrimitive.ScrollToBottom>
         <ThreadPrimitive.Viewport className="min-h-full w-full">
           <div className="pb-36">
             {/* Always show welcome section */}

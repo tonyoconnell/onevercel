@@ -1,9 +1,9 @@
-import { AssistantRuntimeProvider } from "@assistant-ui/react";
+import { AssistantRuntimeProvider, ThreadPrimitive } from "@assistant-ui/react";
 import { useVercelUseChatRuntime } from "@assistant-ui/react-ai-sdk";
 import { MyThread as CustomThread } from "@/components/chat/thread";
 import { type ChatConfig, createDefaultConfig } from "@/schema/chat";
 import { useChat } from "ai/react";
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import { nanoid } from 'nanoid';
   
 export function MyThread({
@@ -33,12 +33,32 @@ export function MyThread({
 
   // Handle suggestion clicks
   const handleSuggestionClick = useCallback((prompt: string) => {
-    // Set input and immediately submit
+    // Set the input value first
     chat.setInput(prompt);
-    chat.handleSubmit({
-      preventDefault: () => {},
+    
+    // Create minimal form event data
+    const submitEvent = {
+      preventDefault() {},
       target: { message: { value: prompt } }
-    } as any);
+    };
+    
+    // Submit the chat
+    chat.handleSubmit(submitEvent as any);
+
+    // Force scroll to bottom
+    const scrollContainer = document.querySelector('[data-radix-scroll-area-viewport]');
+    if (scrollContainer) {
+      // Initial scroll
+      scrollContainer.scrollTop = scrollContainer.scrollHeight;
+      
+      // Keep scrolling to follow messages
+      const scrollInterval = setInterval(() => {
+        scrollContainer.scrollTop = scrollContainer.scrollHeight;
+      }, 100);
+
+      // Stop following after 2 seconds
+      setTimeout(() => clearInterval(scrollInterval), 2000);
+    }
   }, [chat]);
 
   return (

@@ -26,7 +26,6 @@ chatConfig:
       - label: "🔄 Requirements"
         prompt: "What are the requirements for using the ONE License?"
 ---
-
 # ONE License (Version 1.0)
 ## Unlimited Commercial Freedom
 
