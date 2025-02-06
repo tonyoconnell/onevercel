@@ -21,6 +21,14 @@ export default function Right({ initialMode = "Icon", chatConfig }: RightProps) 
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  useLayoutEffect(() => {
+    // Update main grid layout when panel mode changes
+    const mainGrid = document.getElementById('main-grid');
+    if (mainGrid) {
+      mainGrid.setAttribute('data-panel-mode', layout.mode);
+    }
+  }, [layout.mode]);
+
   const handleModeChange = (mode: keyof typeof PanelMode) => {
     if (isMobile && mode !== 'Icon') {
       layoutActions.setMode('Full');

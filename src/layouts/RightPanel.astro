@@ -3,6 +3,8 @@ import "../styles/global.css";
 import ThemeInit from "@/components/Theme.astro";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Right from "../components/Right";
+import { PanelMode } from "@/stores/layout";
 
 import { ChatConfigSchema } from "../schema/chat";
 
@@ -12,10 +14,18 @@ interface Props {
   children: any;
   header?: boolean;
   footer?: boolean;
+  initialPanelMode?: "Quarter" | "Half" | "Full";
+  chatConfig?: any;
 }
 
+const {
+  title,
+  description = "ONE",
+  initialPanelMode = "Quarter",
+  chatConfig: providedConfig,
+} = Astro.props;
+
 const { header = true, footer = true } = Astro.props;
-const { title, description = "ONE" } = Astro.props;
 
 const chatConfig = ChatConfigSchema.parse({
   systemPrompt: [{ type: "text", text: "Say XXX as every reply" }],
@@ -49,6 +59,19 @@ const chatConfig = ChatConfigSchema.parse({
         min-height: 100vh;
         position: relative;
         z-index: 10;
+        transition: grid-template-columns 0.3s ease;
+      }
+
+      .main-grid[data-panel-mode="Quarter"] {
+        grid-template-columns: 3fr 1fr;
+      }
+
+      .main-grid[data-panel-mode="Half"] {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .main-grid[data-panel-mode="Full"] {
+        grid-template-columns: 0fr 1fr;
       }
 
       .center-grid {
@@ -56,6 +79,43 @@ const chatConfig = ChatConfigSchema.parse({
         z-index: 10;
         width: 100%;
         margin-right: 0;
+        transition: all 0.3s ease;
+        overflow: hidden;
+      }
+
+      /* Add styles for the right panel positioning */
+      :global(.right-panel) {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 50;
+        background-color: var(--background);
+        border-left: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+      }
+
+      :global(.right-panel[data-mode="Icon"]) {
+        width: 48px;
+        height: 48px;
+        bottom: auto;
+        top: 20px;
+        right: 20px;
+        border: none;
+        border-radius: 9999px;
+      }
+
+      :global(.right-panel[data-mode="Quarter"]) {
+        width: 25%;
+      }
+
+      :global(.right-panel[data-mode="Half"]) {
+        width: 50%;
+      }
+
+      :global(.right-panel[data-mode="Full"]) {
+        width: 100%;
       }
 
       /* Add smooth scrolling to the whole page */
@@ -83,7 +143,7 @@ const chatConfig = ChatConfigSchema.parse({
       }
     </style>
   </head><body>
-    <div class="main-grid">
+    <div class="main-grid" id="main-grid" data-panel-mode={initialPanelMode}>
       <div class="center-grid" id="center-grid">
         {header && <Header client:load />}
 
@@ -94,5 +154,10 @@ const chatConfig = ChatConfigSchema.parse({
         {footer && <Footer client:load />}
       </div>
     </div>
+    <Right
+      client:only="react"
+      initialMode={initialPanelMode}
+      chatConfig={chatConfig}
+    />
   </body>
 </html>

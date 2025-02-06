@@ -42,14 +42,12 @@ date: 2024-02-03
 - Main content reflows with panel changes
 
 ### Tablet (768px - 1024px)
-- Quarter becomes fixed 320px panel
-- Half and Full become overlays
+- Quarter has minimum width of 320px 
+- Half and Full not available
 - Icon and Floating remain unchanged
 
 ### Mobile (<768px)
-- All expanded modes become full overlays
-- Icon mode remains as fixed button
-- Floating becomes bottom sheet
+- Icon triggers full screen mode
 
 ## Additional Considerations
 

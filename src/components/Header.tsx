@@ -1,18 +1,12 @@
 // src/components/Header.tsx
-import React from 'react';
 import { Download } from 'lucide-react';
 
-interface HeaderProps {
-  showLeft: boolean;
-  showRight: boolean;
-}
-
-export default function Header({ showLeft, showRight }: HeaderProps) {
+export default function Header() {
   return (
     <header className="grid grid-cols-3 items-center h-[var(--header-height)] border-b bg-background/95 backdrop-blur">
       {/* Left column */}
       <div>
-        {showLeft && (
+        
           <button
             data-sidebar-trigger="true"
             className="p-2 focus:outline-none"
@@ -21,8 +15,7 @@ export default function Header({ showLeft, showRight }: HeaderProps) {
             {/* Sidebar Trigger Icon */}
             &#9776;
           </button>
-        )}
-      </div>
+       </div>
       
       {/* Center column with Logo */}
       <div className="flex justify-center">
@@ -39,12 +32,10 @@ export default function Header({ showLeft, showRight }: HeaderProps) {
       
       {/* Right column */}
       <div className="flex justify-end pr-4">
-        {showRight && (
-          <button className="flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 transition-colors">
+         <button className="flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 transition-colors">
             <Download className="h-5 w-5" />
-            <span>Download Free</span>
+            <span>Open Chat</span>
           </button>
-        )}
       </div>
     </header>
   );

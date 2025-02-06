@@ -55,7 +55,7 @@ const chatConfig = ChatConfigSchema.parse(providedConfig || {
       <SidebarWrapper client:load>
         <div class="layout-grid" data-mode={initialPanelMode}>
           <div class="main-content" style={PanelMode[initialPanelMode].main}>
-            <Header client:load showLeft={showLeft} showRight={true} />
+            <Header client:load />
             <main class="p-4 min-h-screen">
               <slot />
             </main>
