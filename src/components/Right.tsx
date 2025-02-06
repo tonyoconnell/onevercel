@@ -6,12 +6,11 @@ import { MyThread } from "@/components/Chat";
 import { Maximize2, PanelRightClose, Columns, LayoutPanelLeft, X } from 'lucide-react';
 
 interface RightProps {   
-  initialMode?: 'Full' | 'Half' | 'Quarter' | 'Floating' | 'Icon';
   chatConfig: any;
-  rightPanelMode?: 'full' | 'half' | 'quarter' | 'floating' | 'hidden';
+  rightPanelMode?: 'full' | 'half' | 'quarter' | 'floating' | 'hidden' | 'icon';
 }
 
-export default function Right({ initialMode, rightPanelMode, chatConfig }: RightProps) {
+export default function Right({ rightPanelMode, chatConfig }: RightProps) {
   const layout = useStore(layoutStore);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -37,7 +36,8 @@ export default function Right({ initialMode, rightPanelMode, chatConfig }: Right
         'half': 'Half',
         'quarter': 'Quarter',
         'floating': 'Floating',
-        'hidden': 'Icon'
+        'hidden': 'Icon',
+        'icon': 'Icon'
       } as const;
       
       // Check for mobile first
