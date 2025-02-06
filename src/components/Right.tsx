@@ -6,12 +6,11 @@ import { MyThread } from "@/components/Chat";
 import { Maximize2, PanelRightClose, X } from 'lucide-react';
 
 interface RightProps {
-  initialMode?: keyof typeof PanelMode;
   chatConfig: any;
   rightPanelMode?: 'full' | 'half' | 'quarter' | 'hidden';
 }
 
-export default function Right({ initialMode = "Icon", rightPanelMode, chatConfig }: RightProps) {
+export default function Right({ rightPanelMode, chatConfig }: RightProps) {
   const layout = useStore(layoutStore);
   const [isMobile, setIsMobile] = useState(false);
 
