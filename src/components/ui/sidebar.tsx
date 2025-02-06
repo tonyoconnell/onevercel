@@ -1,7 +1,6 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
-import type { VariantProps } from "class-variance-authority"
-import { cva } from "class-variance-authority"
+import { VariantProps, cva } from "class-variance-authority"
 import { PanelLeft } from "lucide-react"
 
 import { useIsMobile } from "@/hooks/use-mobile"
@@ -733,6 +732,7 @@ const SidebarMenuSubButton = React.forwardRef<
   )
 })
 SidebarMenuSubButton.displayName = "SidebarMenuSubButton"
+
 export {
   Sidebar,
   SidebarContent,
@@ -759,4 +759,3 @@ export {
   SidebarTrigger,
   useSidebar,
 }
-

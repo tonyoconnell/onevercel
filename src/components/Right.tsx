@@ -8,11 +8,25 @@ import { Maximize2, PanelRightClose, X } from 'lucide-react';
 interface RightProps {
   initialMode?: keyof typeof PanelMode;
   chatConfig?: any;
+  rightPanelMode?: 'full' | 'half' | 'quarter' | 'hidden';
 }
 
-export default function Right({ initialMode = "Icon", chatConfig }: RightProps) {
+export default function Right({ initialMode = "Icon", rightPanelMode, chatConfig }: RightProps) {
   const layout = useStore(layoutStore);
   const [isMobile, setIsMobile] = useState(false);
+
+  useLayoutEffect(() => {
+    if (rightPanelMode) {
+      const modeMap = {
+        'full': 'Full',
+        'half': 'Half',
+        'quarter': 'Quarter',
+        'hidden': 'Icon'
+      } as const;
+      
+      layoutActions.setMode(modeMap[rightPanelMode]);
+    }
+  }, [rightPanelMode]);
 
   useLayoutEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);

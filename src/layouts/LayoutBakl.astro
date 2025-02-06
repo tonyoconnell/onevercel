@@ -1,0 +1,73 @@
+---
+import "../styles/global.css";
+import ThemeInit from "@/components/Theme.astro";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { SidebarWrapper } from "@/components/Left";
+import Right from "../components/Right";
+import { ChatConfigSchema } from "../schema/chat";
+import { PanelMode } from "@/stores/layout";
+
+interface Props {
+  title: string;
+  description?: string;
+  children: any;
+  chatConfig?: any;
+  showLeft?: boolean;
+  leftSize?: "expanded" | "collapsed";
+  initialPanelMode?: keyof typeof PanelMode;
+}
+
+const {
+  title,
+  description = "ONE",
+  showLeft = true,
+  leftSize = "collapsed",
+  initialPanelMode = "Quarter",
+  chatConfig: providedConfig
+} = Astro.props;
+
+const chatConfig = ChatConfigSchema.parse(providedConfig || {
+  systemPrompt: [{ type: "text", text: "Say XXX as every reply" }],
+  welcome: {
+    message: "I am Agent ONE. How can I help you today?",
+    avatar: "/icon.svg",
+    suggestions: [
+      { label: "Tell me about ONE", prompt: "What is ONE?" },
+      { label: "Get Started", prompt: "How do I get started?" },
+    ],
+  },
+});
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <ThemeInit />
+    
+  </head>
+  
+  <body>
+      <SidebarWrapper client:load>
+        <div class="layout-grid" data-mode={initialPanelMode}>
+          <div class="main-content" style={PanelMode[initialPanelMode].main}>
+            <Header client:load />
+            <main class="p-4 min-h-screen">
+              <slot />
+            </main>
+            <Footer client:visible />
+          </div>
+
+          <Right
+            client:only="react"
+            initialMode={initialPanelMode}
+            chatConfig={chatConfig}
+          />
+        </div>
+      </SidebarWrapper>
+  </body>
+</html>

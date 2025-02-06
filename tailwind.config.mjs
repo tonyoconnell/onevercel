@@ -16,8 +16,8 @@ export default {
     		typography: theme => ({
     			DEFAULT: {
     				css: {
-    					'code::before': { content: '"\'"' },
-    					'code::after': { content: '"\'"' },
+    					'code::before': { content: '\\' },
+    					'code::after': { content: '\\' },
     					'h1,h2,h3,h4,h5,h6': {
     						scrollMarginTop: theme('spacing.20'),
     					}
