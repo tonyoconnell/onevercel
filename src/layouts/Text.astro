@@ -5,13 +5,18 @@ type Props = {
   frontmatter: {
     title: string;
     description: string;
+    chatConfig?: any;
   };
 };
 
 const { frontmatter } = Astro.props as Props;
 
 ---
-<Layout title={frontmatter.title} description={frontmatter.description}>
+<Layout 
+  title={frontmatter.title} 
+  description={frontmatter.description}
+  chatConfig={frontmatter.chatConfig}
+>
   <article class="prose dark:prose-invert prose-slate max-w-none py-8">
     <slot />
   </article>

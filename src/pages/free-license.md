@@ -2,6 +2,24 @@
 layout: ../layouts/Text.astro
 title: "ONE License"
 description: "Maximum Freedom. Zero Restrictions"
+chatConfig:
+  systemPrompt:
+    - type: text
+      text: "I am a licensing expert focused on helping visitors understand the ONE License terms and benefits."
+  welcome:
+    message: "👋 Hello! I can help explain the ONE License terms and how you can use them for your business."
+    avatar: "/icon.svg"
+    suggestions:
+      - label: "💡 Commercial Rights"
+        prompt: "What commercial rights do I get with the ONE License?"
+      - label: "🚀 Getting Started"
+        prompt: "What are the steps to start using the ONE License?"
+      - label: "💼 White Label Options"
+        prompt: "Tell me about white-label possibilities with ONE License"
+      - label: "⚖️ License Compatibility" 
+        prompt: "How does ONE License work with other open source licenses?"
+      - label: "🔄 Requirements"
+        prompt: "What are the requirements for using the ONE License?"
 ---
 
 # ONE License (Version 1.0)
