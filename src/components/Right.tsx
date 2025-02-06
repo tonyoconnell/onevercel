@@ -3,7 +3,7 @@ import { useLayoutEffect, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { layoutStore, layoutActions, PanelMode } from '../stores/layout';
 import { MyThread } from "@/components/Chat";
-import { Maximize2, PanelRightClose, X, LayoutPanelLeft } from 'lucide-react';
+import { Maximize2, PanelRightClose, Columns, LayoutPanelLeft, X } from 'lucide-react';
 
 interface RightProps {   
   initialMode?: 'Full' | 'Half' | 'Quarter' | 'Floating' | 'Icon';
@@ -83,36 +83,53 @@ export default function Right({ initialMode, rightPanelMode, chatConfig }: Right
           <header className="flex-none p-4 border-b">
             <div className="flex items-center gap-2">
               <div className="hidden md:flex items-center gap-2">
-                <button
-                  onClick={() => handleModeChange("Full")}
-                  className="p-2 hover:bg-accent rounded-md"
-                  aria-label="Expand"
-                >
-                  <Maximize2 className="h-4 w-4" />
-                </button>
-                <button
-                  onClick={() => handleModeChange("Half")}
-                  className="p-2 hover:bg-accent rounded-md"
-                  aria-label="Half"
-                >
-                  <PanelRightClose className="h-4 w-4" />
-                </button>
-                <button
-                  onClick={() => handleModeChange("Floating")}
-                  className="p-2 hover:bg-accent rounded-md"
-                  aria-label="Float"
-                >
-                  <LayoutPanelLeft className="h-4 w-4" />
-                </button>
+                {layout.mode !== 'Full' && (
+                  <button
+                    onClick={() => handleModeChange("Full")}
+                    className="p-2 hover:bg-accent rounded-md"
+                    aria-label="Full"
+                  >
+                    <Maximize2 className="h-4 w-4" />
+                  </button>
+                )}
+                {layout.mode !== 'Half' && (
+                  <button
+                    onClick={() => handleModeChange("Half")}
+                    className="p-2 hover:bg-accent rounded-md"
+                    aria-label="Half"
+                  >
+                    <PanelRightClose className="h-4 w-4" />
+                  </button>
+                )}
+                {layout.mode !== 'Quarter' && (
+                  <button
+                    onClick={() => handleModeChange("Quarter")}
+                    className="p-2 hover:bg-accent rounded-md"
+                    aria-label="Quarter"
+                  >
+                    <Columns className="h-4 w-4" />
+                  </button>
+                )}
               </div>
               <h2 className="font-semibold flex-1 text-center">Agent ONE</h2>
-              <button
-                onClick={() => handleModeChange("Icon")}
-                className="p-2 hover:bg-accent rounded-md"
-                aria-label="Close"
-              >
-                <X className="h-4 w-4" />
-              </button>
+              <div className="flex items-center gap-2">
+                {layout.mode !== 'Floating' && (
+                  <button
+                    onClick={() => handleModeChange("Floating")}
+                    className="p-2 hover:bg-accent rounded-md"
+                    aria-label="Float"
+                  >
+                    <LayoutPanelLeft className="h-4 w-4" />
+                  </button>
+                )}
+                <button
+                  onClick={() => handleModeChange("Icon")}
+                  className="p-2 hover:bg-accent rounded-md"
+                  aria-label="Close"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
             </div>
           </header>
           <main className="flex-1 overflow-auto">
