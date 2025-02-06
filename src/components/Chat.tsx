@@ -1,9 +1,9 @@
-import { AssistantRuntimeProvider, ThreadPrimitive } from "@assistant-ui/react";
+import { AssistantRuntimeProvider } from "@assistant-ui/react";
 import { useVercelUseChatRuntime } from "@assistant-ui/react-ai-sdk";
 import { MyThread as CustomThread } from "@/components/chat/thread";
 import { type ChatConfig, createDefaultConfig } from "@/schema/chat";
 import { useChat } from "ai/react";
-import { useCallback, useRef } from 'react';
+import { useCallback } from 'react';
 import { nanoid } from 'nanoid';
   
 export function MyThread({
