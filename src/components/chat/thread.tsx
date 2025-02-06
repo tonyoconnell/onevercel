@@ -153,44 +153,6 @@ export const MyThread: FC<MyThreadProps> = ({ welcome, onSuggestionClick }) => {
   );
 };
 
-interface MyThreadWelcomeProps {
-  welcome?: WelcomeConfig;
-  onSuggestionClick?: (prompt: string) => void;
-}
-
-const MyThreadWelcome: FC<MyThreadWelcomeProps> = ({ welcome, onSuggestionClick }) => {
-  return (
-    <ThreadPrimitive.Empty>
-      <div className="flex flex-grow flex-col items-center justify-center px-6 py-4">
-        <Avatar>
-          <AvatarFallback>
-            {welcome?.avatar ? (
-              <img src={welcome.avatar} alt="Assistant Avatar" className="w-full h-full object-cover" />
-            ) : (
-              'A'
-            )}
-          </AvatarFallback>
-        </Avatar>
-        <p className="mt-4 font-medium">{welcome?.message || "How can I help you today?"}</p>
-        {welcome?.suggestions && welcome.suggestions.length > 0 && (
-          <div className="mt-6 flex flex-wrap gap-2 justify-center">
-            {welcome.suggestions.map((suggestion, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                onClick={() => onSuggestionClick?.(suggestion.prompt)}
-                className="bg-muted hover:bg-blue-600/90 hover:text-white transition-colors"
-              >
-                {suggestion.label}
-              </Button>
-            ))}
-          </div>
-        )}
-      </div>
-    </ThreadPrimitive.Empty>
-  );
-};
-
 const MyComposer: FC = () => {
   return (
     <ComposerPrimitive.Root className="flex items-end rounded-[24px] border bg-muted shadow-lg transition-colors ease-in focus-within:border-ring/30 focus-within:shadow-md mx-auto max-w-[800px] w-full">
