@@ -8,7 +8,7 @@ import {
 } from "@assistant-ui/react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import type { FC } from "react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -43,18 +43,59 @@ interface MyThreadProps {
 }
 
 export const MyThread: FC<MyThreadProps> = ({ welcome, onSuggestionClick }) => {
+  const runtime = useThreadRuntime();
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const isAtBottom = useRef(true);
+
+  const scrollToBottom = useCallback(() => {
+    if (viewportRef.current) {
+      const viewport = viewportRef.current.querySelector('[data-radix-scroll-area-viewport]');
+      if (viewport) {
+        viewport.scrollTop = viewport.scrollHeight;
+      }
+    }
+  }, []);
+
+  // Handle scroll events to detect if we're at the bottom
+  useEffect(() => {
+    const viewport = viewportRef.current?.querySelector('[data-radix-scroll-area-viewport]');
+    if (!viewport) return;
+
+    const checkIsAtBottom = () => {
+      const { scrollTop, scrollHeight, clientHeight } = viewport;
+      isAtBottom.current = Math.abs(scrollHeight - clientHeight - scrollTop) < 10;
+    };
+
+    const handleScroll = () => {
+      checkIsAtBottom();
+    };
+
+    viewport.addEventListener('scroll', handleScroll);
+    return () => viewport.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Auto-scroll on mount and when runtime updates
+  useEffect(() => {
+    if (isAtBottom.current) {
+      // Small delay to ensure content is rendered
+      setTimeout(scrollToBottom, 100);
+    }
+  }, [runtime, scrollToBottom]);
+
   return (
     <ThreadPrimitive.Root className="flex flex-col h-full w-full">
-      <ScrollArea className="flex-1 w-full relative">
-        <ThreadPrimitive.ScrollToBottom asChild>
-          <Button
+      <ScrollArea ref={viewportRef} className="flex-1 w-full relative">
+        <div className="absolute bottom-24 right-6 z-10">
+          <TooltipIconButton
+            tooltip="Scroll to bottom"
             variant="outline"
-            size="icon"
-            className="absolute bottom-4 right-4 z-10 rounded-full bg-background/80 shadow-md hover:bg-muted transition-opacity opacity-0 data-[visible=true]:opacity-100"
+            onClick={scrollToBottom}
+            className="rounded-full bg-background/80 shadow-lg hover:bg-background/90 transition-opacity opacity-0 hover:shadow-xl"
+            style={{ opacity: isAtBottom.current ? 0 : 1 }}
           >
-            <ArrowDownIcon className="h-4 w-4" />
-          </Button>
-        </ThreadPrimitive.ScrollToBottom>
+            <ArrowDownIcon className="h-5 w-5" />
+          </TooltipIconButton>
+        </div>
         <ThreadPrimitive.Viewport className="min-h-full w-full">
           <div className="pb-36">
             {/* Always show welcome section */}
@@ -97,25 +138,10 @@ export const MyThread: FC<MyThreadProps> = ({ welcome, onSuggestionClick }) => {
 
       <div className="bg-gradient-to-t from-background from-50% to-transparent">
         <div className="px-6 pt-6 pb-4">
-          <MyThreadScrollToBottom />
           <MyComposer />
         </div>
       </div>
     </ThreadPrimitive.Root>
-  );
-};
-
-const MyThreadScrollToBottom: FC = () => {
-  return (
-    <ThreadPrimitive.ScrollToBottom asChild>
-      <TooltipIconButton
-        tooltip="Scroll to bottom"
-        variant="outline"
-        className="absolute -top-8 rounded-full disabled:invisible"
-      >
-        <ArrowDownIcon />
-      </TooltipIconButton>
-    </ThreadPrimitive.ScrollToBottom>
   );
 };
 
