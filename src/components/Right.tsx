@@ -132,7 +132,7 @@ export default function Right({ rightPanelMode, chatConfig }: RightProps) {
               </div>
             </div>
           </header>
-          <main className="flex-1 overflow-auto">
+          <main className="flex-1 overflow-auto mx-auto w-full max-w-[850px]">
             <MyThread config={chatConfig} />
           </main>
         </div>

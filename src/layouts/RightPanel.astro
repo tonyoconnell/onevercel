@@ -120,6 +120,13 @@ const chatConfig = ChatConfigSchema.parse({
 
       :global(.right-panel[data-mode="Full"]) {
         width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      :global(.right-panel[data-mode="Full"] > div) {
+        max-width: 850px;
+        width: 100%;
       }
 
       /* Add smooth scrolling to the whole page */
