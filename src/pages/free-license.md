@@ -1,11 +1,16 @@
 ---
 layout: ../layouts/Text.astro
-title: "ONE License"
+title: "ONE License"  
 description: "Maximum Freedom. Zero Restrictions"
 chatConfig:
+  provider: openai
+  model: "gpt-4o-mini"
+  apiEndpoint: "https://api.openai.com/v1"
+  temperature: 0.7
+  maxTokens: 4000
   systemPrompt:
     - type: text
-      text: "I am a licensing expert focused on helping visitors understand the ONE License terms and benefits."
+      text: "You are a licensing expert focused on helping visitors understand the ONE License terms and benefits. You provide clear, accurate information about licensing terms, commercial rights, and usage requirements."
   welcome:
     message: "👋 Hello! I can help explain the ONE License terms and how you can use them for your business."
     avatar: "/icon.svg"

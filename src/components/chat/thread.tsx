@@ -39,15 +39,16 @@ export interface WelcomeConfig {
 
 interface MyThreadProps {
   welcome?: WelcomeConfig;
+  onSuggestionClick?: (prompt: string) => void;
 }
 
-export const MyThread: FC<MyThreadProps> = ({ welcome }) => {
+export const MyThread: FC<MyThreadProps> = ({ welcome, onSuggestionClick }) => {
   return (
     <ThreadPrimitive.Root className="flex flex-col h-full w-full">
       <ScrollArea className="flex-1 w-full">
         <ThreadPrimitive.Viewport className="min-h-full w-full">
           <div className="pb-36">
-            <MyThreadWelcome welcome={welcome} />
+            <MyThreadWelcome welcome={welcome} onSuggestionClick={onSuggestionClick} />
             <ThreadPrimitive.Messages
               components={{
                 UserMessage: MyUserMessage,
@@ -85,9 +86,10 @@ const MyThreadScrollToBottom: FC = () => {
 
 interface MyThreadWelcomeProps {
   welcome?: WelcomeConfig;
+  onSuggestionClick?: (prompt: string) => void;
 }
 
-const MyThreadWelcome: FC<MyThreadWelcomeProps> = ({ welcome }) => {
+const MyThreadWelcome: FC<MyThreadWelcomeProps> = ({ welcome, onSuggestionClick }) => {
   const threadRuntime = useThreadRuntime();
 
   const handleSuggestionClick = useCallback((prompt: string) => {
@@ -103,7 +105,7 @@ const MyThreadWelcome: FC<MyThreadWelcomeProps> = ({ welcome }) => {
   }, [threadRuntime]);
 
   return (
-    <ThreadPrimitive.Empty>
+    <ThreadPrimitive.Empty shouldShow>
       <div className="flex flex-grow flex-col items-center justify-center px-6 py-4">
         <Avatar>
           <AvatarFallback>
@@ -121,7 +123,7 @@ const MyThreadWelcome: FC<MyThreadWelcomeProps> = ({ welcome }) => {
               <Button
                 key={index}
                 variant="outline"
-                onClick={() => handleSuggestionClick(suggestion.prompt)}
+                onClick={() => onSuggestionClick ? onSuggestionClick(suggestion.prompt) : handleSuggestionClick(suggestion.prompt)}
                 className="bg-muted hover:bg-blue-600/90 hover:text-white transition-colors"
               >
                 {suggestion.label}

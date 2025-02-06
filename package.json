@@ -9,6 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^1.1.6",
+    "@ai-sdk/mistral": "^1.1.6",
     "@ai-sdk/openai": "^1.1.9",
     "@assistant-ui/react": "^0.7.60",
     "@assistant-ui/react-ai-sdk": "^0.7.13",
