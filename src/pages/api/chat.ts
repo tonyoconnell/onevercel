@@ -51,13 +51,20 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Transform messages to the format expected by the AI provider
-    const messages = requestData.messages.map(msg => ({
-      ...msg,
-      content: [{
-        type: 'text' as const,
-        text: msg.content
-      }]
-    }));
+    const messages = requestData.messages.map(msg => {
+      // Handle content that's already in the correct format
+      if (Array.isArray(msg.content) && msg.content[0]?.type === 'text') {
+        return msg;
+      }
+      // Transform string content to expected format
+      return {
+        ...msg,
+        content: [{
+          type: 'text' as const,
+          text: typeof msg.content === 'string' ? msg.content : JSON.stringify(msg.content)
+        }]
+      };
+    });
 
     console.log('Sending messages:', JSON.stringify(messages, null, 2));
 

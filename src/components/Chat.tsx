@@ -7,20 +7,24 @@ import { useCallback } from 'react';
 import { nanoid } from 'nanoid';
   
 export function MyThread({
-  config = createDefaultConfig()
+  config = createDefaultConfig(),
+  content
 }: {
-  config?: ChatConfig
+  config?: ChatConfig,
+  content?: string
 }) {
   // Ensure we always have a valid config
   const safeConfig = config || createDefaultConfig();
 
   const chat = useChat({
     api: "/api/chat",
-    initialMessages: [{
-      id: nanoid(),
-      role: "system",
-      content: safeConfig.systemPrompt?.[0]?.text || "I am an AI assistant. How can I help you?"
-    }],
+    initialMessages: [
+      {
+        id: nanoid(),
+        role: "system" as const,
+        content: `${safeConfig.systemPrompt?.[0]?.text || "I am an AI assistant. How can I help you?"}\n\n${content ? `Context:\n${content}` : ''}`
+      }
+    ],
     body: {
       config: safeConfig
     },

@@ -16,6 +16,7 @@ interface Props {
   initialPanelMode?: "Quarter" | "Half" | "Full" | "Floating" | "Icon";
   chatConfig?: any;
   rightPanelMode?: 'hidden' | 'full' | 'half' | 'quarter' | 'floating' | 'icon';
+  content?: string;
 }
 
 const {
@@ -24,6 +25,7 @@ const {
   initialPanelMode,
   rightPanelMode = 'quarter',
   chatConfig: providedConfig,
+  content,
 } = Astro.props;
 
 const { header = true, footer = true } = Astro.props;
@@ -231,6 +233,7 @@ const chatConfig = providedConfig || defaultChatConfig;
         client:only="react"
         chatConfig={chatConfig}
         rightPanelMode={rightPanelMode}
+        content={content}
       />
     </SidebarWrapper>
   </body>

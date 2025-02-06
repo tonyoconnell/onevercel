@@ -5,12 +5,13 @@ import { layoutStore, layoutActions, PanelMode } from '../stores/layout';
 import { MyThread } from "@/components/Chat";
 import { Maximize2, PanelRightClose, Columns, LayoutPanelLeft, X } from 'lucide-react';
 
-interface RightProps {   
+interface RightProps {
   chatConfig: any;
   rightPanelMode?: 'full' | 'half' | 'quarter' | 'floating' | 'hidden' | 'icon';
+  content?: string;
 }
 
-export default function Right({ rightPanelMode, chatConfig }: RightProps) {
+export default function Right({ rightPanelMode, chatConfig, content }: RightProps) {
   const layout = useStore(layoutStore);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -133,7 +134,7 @@ export default function Right({ rightPanelMode, chatConfig }: RightProps) {
             </div>
           </header>
           <main className="flex-1 overflow-auto mx-auto w-full max-w-[850px]">
-            <MyThread config={chatConfig} />
+            <MyThread config={chatConfig} content={content} />
           </main>
         </div>
       )}
