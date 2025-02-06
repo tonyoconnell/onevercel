@@ -7,12 +7,16 @@ import { Chart } from "../components/Chart";
 const chatConfig = ChatConfigSchema.parse({
   systemPrompt: [{
     type: "text" as const,
-    text: "I am Agent ONE, an AI assistant focused on helping developers and businesses maximize value from free software. I provide clear, actionable guidance while maintaining a friendly and professional tone."
+    text: "I am a landing page assistant focused on helping visitors understand our product."
   }],
   welcome: {
-    message: "👋 I'm Agent ONE, your guide to maximizing business value with free software. What would you like to explore today?",
+    message: "👋 Welcome! How can I help you learn about our product?",
     avatar: "/icon.svg",
     suggestions: [
+      {
+        label: "Product Features",
+        prompt: "What are the main features of your product?"
+      },
       {
         label: "💡 How can I use ONE commercially?",
         prompt: "I'm interested in using ONE for my business. Can you explain the commercial rights and possibilities under the ONE License?"

@@ -4,8 +4,6 @@ import ThemeInit from "@/components/Theme.astro";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-import { ChatConfigSchema } from "../schema/chat";
-
 interface Props {
   title: string;
   description?: string;
@@ -17,17 +15,6 @@ interface Props {
 const { header = true, footer = true } = Astro.props;
 const { title, description = "ONE" } = Astro.props;
 
-const chatConfig = ChatConfigSchema.parse({
-  systemPrompt: [{ type: "text", text: "Say XXX as every reply" }],
-  welcome: {
-    message: "I am Agent ONE. How can I help you today?",
-    avatar: "/icon.svg",
-    suggestions: [
-      { label: "Tell me about ONE", prompt: "What is ONE?" },
-      { label: "Get Started", prompt: "How do I get started?" },
-    ],
-  },
-});
 ---
 
 <!doctype html>

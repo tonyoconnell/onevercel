@@ -7,7 +7,7 @@ import { Maximize2, PanelRightClose, X } from 'lucide-react';
 
 interface RightProps {
   initialMode?: keyof typeof PanelMode;
-  chatConfig?: any;
+  chatConfig: any;
   rightPanelMode?: 'full' | 'half' | 'quarter' | 'hidden';
 }
 

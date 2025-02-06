@@ -3,6 +3,7 @@ import Layout from './Layout.astro';
 import TableOfContents from '../components/TableOfContents';
 import type { CollectionEntry } from 'astro:content';
 import type { MarkdownHeading } from 'astro';
+import { ChatConfigSchema } from '../schema/chat';
 
 interface Props {
   entry: CollectionEntry<'docs'>;
@@ -12,10 +13,34 @@ interface Props {
 const { entry } = Astro.props;
 const { headings } = await entry.render();
 
+// Create documentation-specific chat configuration
+const docsSpecificConfig = ChatConfigSchema.parse({
+  systemPrompt: [{
+    type: "text" as const,
+    text: "I am a documentation assistant. I help users understand the documentation and answer questions about it. I'll reference the current page content in my responses."
+  }],
+  welcome: {
+    message: "👋 Need help with the documentation? I'm here to assist!",
+    avatar: "/icon.svg",
+    suggestions: [
+      {
+        label: "📚 Explain this page",
+        prompt: "Can you explain what this documentation page is about?"
+      },
+      {
+        label: "🔍 Key concepts",
+        prompt: "What are the key concepts covered in this section?"
+      }
+    ]
+  }
+});
+
 const pageData = {
   title: entry.data.title,
   description: entry.data.description,
   type: "documentation",
+  chatConfig: docsSpecificConfig,
+  rightPanelMode: 'quarter' as const
 };
 ---
 
