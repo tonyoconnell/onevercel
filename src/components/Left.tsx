@@ -4,6 +4,7 @@ import { AppSidebar } from "@/components/Sidebar";
 
 export function SidebarWrapper({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = React.useState(false);
+  const sidebarRef = React.useRef<HTMLDivElement>(null);
 
   // Handle mouse enter - open sidebar
   const handleMouseEnter = () => {
@@ -23,32 +24,23 @@ export function SidebarWrapper({ children }: { children: React.ReactNode }) {
 
     // Handle click outside
     const handleClickOutside = (e: MouseEvent) => {
-      const sidebar = document.querySelector('[data-sidebar="true"]');
-      const trigger = document.querySelector('[data-sidebar-trigger="true"]');
-      
-      if (
-        isOpen && 
-        sidebar && 
-        !sidebar.contains(e.target as Node) && 
-        trigger && 
-        !trigger.contains(e.target as Node)
-      ) {
+      if (!sidebarRef.current?.contains(e.target as Node) && isOpen) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('click', handleClickOutside);
 
     return () => {
       observer.disconnect();
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('click', handleClickOutside);
     };
   }, [isOpen]);
 
   return (
     <SidebarProvider defaultOpen={false} open={isOpen} onOpenChange={setIsOpen}>
       <div className="flex min-h-screen">
-        <div onMouseEnter={handleMouseEnter}>
+        <div ref={sidebarRef} onMouseEnter={handleMouseEnter}>
           <Sidebar variant="floating" collapsible="icon">
             <AppSidebar />
           </Sidebar>
