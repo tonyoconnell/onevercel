@@ -51,7 +51,10 @@ export const MyThread: FC<MyThreadProps> = ({ welcome, onSuggestionClick }) => {
     if (viewportRef.current) {
       const viewport = viewportRef.current.querySelector('[data-radix-scroll-area-viewport]');
       if (viewport) {
-        viewport.scrollTop = viewport.scrollHeight;
+        viewport.scrollTo({
+          top: viewport.scrollHeight,
+          behavior: 'smooth'
+        });
       }
     }
   }, []);
@@ -63,7 +66,8 @@ export const MyThread: FC<MyThreadProps> = ({ welcome, onSuggestionClick }) => {
 
     const checkIsAtBottom = () => {
       const { scrollTop, scrollHeight, clientHeight } = viewport;
-      isAtBottom.current = Math.abs(scrollHeight - clientHeight - scrollTop) < 10;
+      // Show scroll button as soon as any content is not visible
+      isAtBottom.current = (scrollHeight - clientHeight - scrollTop) <= 1;
     };
 
     const handleScroll = () => {
@@ -90,8 +94,12 @@ export const MyThread: FC<MyThreadProps> = ({ welcome, onSuggestionClick }) => {
             tooltip="Scroll to bottom"
             variant="outline"
             onClick={scrollToBottom}
-            className="rounded-full bg-background/80 shadow-lg hover:bg-background/90 transition-opacity opacity-0 hover:shadow-xl"
-            style={{ opacity: isAtBottom.current ? 0 : 1 }}
+            className="rounded-full bg-background shadow-lg hover:bg-background/90 transition-all duration-200 scale-90 hover:scale-100"
+            style={{
+              opacity: isAtBottom.current ? 0 : 0.9,
+              transform: `scale(${isAtBottom.current ? 0.9 : 1})`,
+              pointerEvents: isAtBottom.current ? 'none' : 'auto'
+            }}
           >
             <ArrowDownIcon className="h-5 w-5" />
           </TooltipIconButton>
