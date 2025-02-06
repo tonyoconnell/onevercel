@@ -3,6 +3,7 @@ import { useVercelUseChatRuntime } from "@assistant-ui/react-ai-sdk";
 import { MyThread as CustomThread } from "@/components/chat/thread";
 import { type ChatConfig, createDefaultConfig } from "@/schema/chat";
 import { useChat } from "ai/react";
+import { useCallback } from 'react';
 import { nanoid } from 'nanoid';
   
 export function MyThread({
@@ -15,7 +16,11 @@ export function MyThread({
 
   const chat = useChat({
     api: "/api/chat",
-    initialMessages: [],
+    initialMessages: [{
+      id: nanoid(),
+      role: "system",
+      content: safeConfig.systemPrompt?.[0]?.text || "I am an AI assistant. How can I help you?"
+    }],
     body: {
       config: safeConfig
     },
@@ -27,21 +32,19 @@ export function MyThread({
   const runtime = useVercelUseChatRuntime(chat);
 
   // Handle suggestion clicks
-  const handleSuggestionClick = (prompt: string) => {
-    if (chat.messages.length === 0) {
-      // If this is the first message, add system prompt first
-      chat.append({
-        id: nanoid(),
-        role: "system",
-        content: safeConfig.systemPrompt?.[0]?.text || "I am an AI assistant. How can I help you?"
-      });
-    }
-    chat.append({
-      id: nanoid(),
-      role: "user",
-      content: prompt
-    });
-  };
+  const handleSuggestionClick = useCallback((prompt: string) => {
+    chat.setInput(prompt);
+
+    // Create a synthetic form event
+    const syntheticEvent = {
+      preventDefault: () => {},
+      target: {
+        message: { value: prompt }
+      }
+    } as any;
+
+    chat.handleSubmit(syntheticEvent);
+  }, [chat]);
 
   return (
     <div className="h-full">

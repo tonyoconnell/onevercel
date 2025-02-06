@@ -48,7 +48,33 @@ export const MyThread: FC<MyThreadProps> = ({ welcome, onSuggestionClick }) => {
       <ScrollArea className="flex-1 w-full">
         <ThreadPrimitive.Viewport className="min-h-full w-full">
           <div className="pb-36">
-            <MyThreadWelcome welcome={welcome} onSuggestionClick={onSuggestionClick} />
+            {/* Always show welcome section */}
+            <div className="flex flex-grow flex-col items-center justify-center px-6 py-4">
+              <Avatar>
+                <AvatarFallback>
+                  {welcome?.avatar ? (
+                    <img src={welcome.avatar} alt="Assistant Avatar" className="w-full h-full object-cover" />
+                  ) : (
+                    'A'
+                  )}
+                </AvatarFallback>
+              </Avatar>
+              <p className="mt-4 font-medium">{welcome?.message || "How can I help you today?"}</p>
+              {welcome?.suggestions && welcome.suggestions.length > 0 && (
+                <div className="mt-6 flex flex-wrap gap-2 justify-center">
+                  {welcome.suggestions.map((suggestion, index) => (
+                    <Button
+                      key={index}
+                      variant="outline"
+                      onClick={() => onSuggestionClick?.(suggestion.prompt)}
+                      className="bg-muted hover:bg-blue-600/90 hover:text-white transition-colors"
+                    >
+                      {suggestion.label}
+                    </Button>
+                  ))}
+                </div>
+              )}
+            </div>
             <ThreadPrimitive.Messages
               components={{
                 UserMessage: MyUserMessage,
@@ -90,20 +116,6 @@ interface MyThreadWelcomeProps {
 }
 
 const MyThreadWelcome: FC<MyThreadWelcomeProps> = ({ welcome, onSuggestionClick }) => {
-  const threadRuntime = useThreadRuntime();
-
-  const handleSuggestionClick = useCallback((prompt: string) => {
-    if (threadRuntime) {
-      threadRuntime.append({
-        role: 'user',
-        content: [{
-          type: 'text',
-          text: prompt
-        }]
-      });
-    }
-  }, [threadRuntime]);
-
   return (
     <ThreadPrimitive.Empty shouldShow>
       <div className="flex flex-grow flex-col items-center justify-center px-6 py-4">
@@ -123,7 +135,7 @@ const MyThreadWelcome: FC<MyThreadWelcomeProps> = ({ welcome, onSuggestionClick 
               <Button
                 key={index}
                 variant="outline"
-                onClick={() => onSuggestionClick ? onSuggestionClick(suggestion.prompt) : handleSuggestionClick(suggestion.prompt)}
+                onClick={() => onSuggestionClick?.(suggestion.prompt)}
                 className="bg-muted hover:bg-blue-600/90 hover:text-white transition-colors"
               >
                 {suggestion.label}
