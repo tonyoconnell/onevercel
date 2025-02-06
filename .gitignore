@@ -37,6 +37,7 @@ pnpm-debug.log*
 # Sensitive data
 .env.*
 !.env.example
+.obsidian/plugins/smart-composer/data.json
 
 # First ignore all .obsidian folders completely
 **/.obsidian/
