@@ -82,28 +82,30 @@ export default function Right({ initialMode, rightPanelMode, chatConfig }: Right
         <div className="h-full flex flex-col">
           <header className="flex-none p-4 border-b">
             <div className="flex items-center gap-2">
-              <button
-                onClick={() => handleModeChange("Full")}
-                className="p-2 hover:bg-accent rounded-md"
-                aria-label="Expand"
-              >
-                <Maximize2 className="h-4 w-4" />
-              </button>
-              <button
-                onClick={() => handleModeChange("Half")}
-                className="p-2 hover:bg-accent rounded-md"
-                aria-label="Half"
-              >
-                <PanelRightClose className="h-4 w-4" />
-              </button>
+              <div className="hidden md:flex items-center gap-2">
+                <button
+                  onClick={() => handleModeChange("Full")}
+                  className="p-2 hover:bg-accent rounded-md"
+                  aria-label="Expand"
+                >
+                  <Maximize2 className="h-4 w-4" />
+                </button>
+                <button
+                  onClick={() => handleModeChange("Half")}
+                  className="p-2 hover:bg-accent rounded-md"
+                  aria-label="Half"
+                >
+                  <PanelRightClose className="h-4 w-4" />
+                </button>
+                <button
+                  onClick={() => handleModeChange("Floating")}
+                  className="p-2 hover:bg-accent rounded-md"
+                  aria-label="Float"
+                >
+                  <LayoutPanelLeft className="h-4 w-4" />
+                </button>
+              </div>
               <h2 className="font-semibold flex-1 text-center">Agent ONE</h2>
-              <button
-                onClick={() => handleModeChange("Floating")}
-                className="p-2 hover:bg-accent rounded-md"
-                aria-label="Float"
-              >
-                <LayoutPanelLeft className="h-4 w-4" />
-              </button>
               <button
                 onClick={() => handleModeChange("Icon")}
                 className="p-2 hover:bg-accent rounded-md"
