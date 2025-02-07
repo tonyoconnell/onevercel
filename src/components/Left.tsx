@@ -103,7 +103,7 @@ export function Left({ navigation, type }: SidebarProps) {
         aria-label="Main navigation"
         className={cn(
           "fixed left-0 top-0 h-screen z-50",
-          "bg-[#111111] border-r border-[#111111]",
+          "bg-[#222222] border-r border-[#111111]",
           "transition-all duration-300 ease-in-out will-change-transform",
           "transform",
           {
@@ -122,7 +122,7 @@ export function Left({ navigation, type }: SidebarProps) {
           )}
         >
           {/* Logo Section */}
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center border-b">
             <Button
               variant="ghost"
               aria-label={`Switch to ${theme === 'dark' ? 'light' : theme === 'earth' ? 'dark' : 'earth'} theme`}
@@ -136,17 +136,17 @@ export function Left({ navigation, type }: SidebarProps) {
               asChild
             >
               <a href="/" className="flex items-center gap-4">
-                <div className="absolute inset-0 flex items-center justify-center w-16 h-16 border-b">
+                <div className="absolute inset-0 flex items-center justify-center w-16 h-16">
                   <div className="w-8 h-8 flex items-center justify-center">
                     <img
-                      src="icon.svg"
+                      src="/icon.svg"
                       alt="ONE Logo"
                       className="w-full h-full"
                     />
                   </div>
                 </div>
                 <span className={cn(
-                  "transition-all duration-200 text-white font-medium  border-b",
+                  "transition-all duration-200 text-white font-medium",
                   sidebarState === 'expanded' ? "opacity-100 pl-4" : "opacity-0 w-0",
                   "truncate"
                 )}>
@@ -212,7 +212,10 @@ export function Left({ navigation, type }: SidebarProps) {
           </div>
 
           {/* Theme Toggle */}
-          <div className="flex items-center justify-center">
+          <div className={cn(
+            "flex items-center justify-center",
+            sidebarState === 'expanded' ? "border-b border-white/10" : ""
+          )}>
             <Button
               variant="ghost"
               aria-label={`Switch to ${theme === 'dark' ? 'light' : theme === 'earth' ? 'dark' : 'earth'} theme`}
