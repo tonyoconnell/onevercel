@@ -24,8 +24,8 @@ export default function Header() {
             src="/logo.svg" 
             alt="Logo"
             className="h-8 w-auto"
-            width={32}
-            height={32}
+            width={40}
+            height={40}
           />
         </a>
       </div>

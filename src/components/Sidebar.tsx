@@ -116,7 +116,7 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <a href="/">
-                <img src="/icon.svg" alt="ONE" className="h-6 w-6" />
+                <img src="/icon.svg" alt="ONE" className="h-10 w-10" />
                 <span>ONE</span>
               </a>
             </SidebarMenuButton>
@@ -136,7 +136,7 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
-                      <item.icon className="h-6 w-6" />
+                      <item.icon className="h-10 w10" />
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
@@ -156,7 +156,7 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
-                      <item.icon className="h-6 w-6" />
+                      <item.icon className="h-10 w-10" />
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
@@ -176,7 +176,7 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
-                      <item.icon className="h-6 w-6" />
+                      <item.icon className="h-10 w-10" />
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
