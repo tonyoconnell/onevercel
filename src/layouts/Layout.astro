@@ -67,26 +67,15 @@ const chatConfig = providedConfig || defaultChatConfig;
 
       .main-grid {
         display: grid;
-        grid-template-columns: 240px minmax(0, 1fr);
         min-height: 100vh;
         position: relative;
         z-index: 10;
         width: 100%;
         max-width: 100%;
         overflow-x: hidden;
-        transition: grid-template-columns 0.3s ease;
       }
 
-      .main-grid[data-sidebar-open="true"] {
-        grid-template-columns: 240px minmax(0, 1fr);
-      }
-
-      @media (min-width: 640px) {
-        .main-grid {
-          grid-template-columns: 240px minmax(0, 1fr);
-        }
-      }
-
+      /* Initial states without transitions */
       .main-grid[data-panel-mode="Quarter"] {
         grid-template-columns: minmax(0, 75%);
       }
@@ -105,13 +94,17 @@ const chatConfig = providedConfig || defaultChatConfig;
         padding-right: 0;
       }
 
+      /* Add transitions after initial render */
+      .main-grid.transitions-enabled {
+        transition: grid-template-columns 0.3s ease;
+      }
+
       .center-grid {
         position: relative;
         z-index: 10;
         width: 100%;
         max-width: 100%;
         margin-right: 0;
-        transition: all 0.3s ease;
         overflow: hidden;
       }
 
@@ -120,13 +113,6 @@ const chatConfig = providedConfig || defaultChatConfig;
         .main-grid:not([data-panel-mode="Full"]) .center-grid {
           padding-left: 60px;
         }
-      }
-
-      /* Ensure content doesn't overlap with right panel */
-      .main-grid[data-panel-mode="Half"] .center-grid,
-      .main-grid[data-panel-mode="Quarter"] .center-grid {
-        margin-right: 0;
-        width: 100%;
       }
 
       /* Add styles for the right panel positioning */
@@ -140,8 +126,12 @@ const chatConfig = providedConfig || defaultChatConfig;
         border-left: 1px solid hsl(var(--border));
         display: flex;
         flex-direction: column;
-        transition: all 0.3s ease;
         overflow-y: auto;
+      }
+
+      /* Enable transitions after initial render */
+      :global(.transitions-enabled .right-panel) {
+        transition: all 0.3s ease;
       }
 
       /* Adjust header padding to align with main header */
@@ -239,9 +229,15 @@ const chatConfig = providedConfig || defaultChatConfig;
         background: #9ca3af;
       }
     </style>
+    <script>
+      // Enable transitions after initial render
+      window.addEventListener('load', () => {
+        document.querySelector('.main-grid')?.classList.add('transitions-enabled');
+      });
+    </script>
   </head>
   <body>
-    <div class="main-grid" id="main-grid" data-panel-mode={initialPanelMode}>
+    <div class="main-grid" id="main-grid" data-panel-mode={initialPanelMode || 'Quarter'}>
       <Left client:idle />
       <div class="center-grid" id="center-grid">
         {header && <Header client:load />}
