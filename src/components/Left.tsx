@@ -136,7 +136,7 @@ export function Left({ navigation, type }: SidebarProps) {
               asChild
             >
               <a href="/" className="flex items-center gap-4">
-                <div className="absolute inset-0 flex items-center justify-center w-16 h-16">
+                <div className="absolute inset-0 flex items-center justify-center w-16 h-16 border-b">
                   <div className="w-8 h-8 flex items-center justify-center">
                     <img
                       src="icon.svg"
@@ -146,7 +146,7 @@ export function Left({ navigation, type }: SidebarProps) {
                   </div>
                 </div>
                 <span className={cn(
-                  "transition-all duration-200 text-white font-medium",
+                  "transition-all duration-200 text-white font-medium  border-b",
                   sidebarState === 'expanded' ? "opacity-100 pl-4" : "opacity-0 w-0",
                   "truncate"
                 )}>

@@ -3,7 +3,7 @@ import { Download } from 'lucide-react';
 
 export default function Header() {
   return (
-    <header className="grid grid-cols-3 items-center h-[var(--header-height)] border-b bg-background/95 backdrop-blur">
+    <header className="grid grid-cols-3 items-center h-16 border-b bg-background/95 backdrop-blur">
       {/* Left column */}
       <div>
         
@@ -23,9 +23,8 @@ export default function Header() {
           <img 
             src="/logo.svg" 
             alt="Logo"
-            className="h-8 w-auto"
-            width={40}
-            height={40}
+            className="h-10 w-auto"
+      
           />
         </a>
       </div>

@@ -81,7 +81,7 @@ export default function Right({ rightPanelMode, chatConfig, content }: RightProp
         </button>
       ) : (
         <div className="h-full flex flex-col">
-          <header className="flex-none p-4 border-b">
+          <header className="flex-none p-4 h-16 border-b border-l">
             <div className="flex items-center gap-2">
               <div className="hidden md:flex items-center gap-2">
                 {layout.mode !== 'Full' && (
