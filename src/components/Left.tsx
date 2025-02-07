@@ -2,8 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { cn } from '../lib/utils';
 import { Button } from './ui/button';
 import {
-  Eye, Ear, MessageSquare, Mic, Sun, Moon, Leaf, Key, Palette,
-  Code2, GraduationCap, PlayCircle, Headphones, MessageCircle,
+  Eye, Ear, MessageSquare, Mic, Sun, Moon, Leaf, Palette,
   type LucideIcon
 } from 'lucide-react';
 
@@ -26,9 +25,11 @@ interface NavigationItem {
 interface SidebarProps {
   navigation?: NavigationItem[];
   type?: string;
+  isOpen?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
 }
 
-export function Left({ navigation, type }: SidebarProps) {
+export function Left({ navigation, isOpen, onOpenChange }: SidebarProps) {
   const [mounted, setMounted] = useState(false);
   const [currentPath, setCurrentPath] = useState('/');
   const [sidebarState, setSidebarState] = useState<'closed' | 'open' | 'expanded'>('open');
@@ -49,12 +50,20 @@ export function Left({ navigation, type }: SidebarProps) {
       const isMobile = isMobileDevice();
       if (isMobile && sidebarState !== 'closed') {
         setSidebarState('closed');
+        onOpenChange?.(false);
       }
     };
 
     window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [onOpenChange]);
+
+  // Sync with external isOpen prop
+  useEffect(() => {
+    if (isMobileDevice()) {
+      setSidebarState(isOpen ? 'open' : 'closed');
+    }
+  }, [isOpen]);
 
   // Handle hover behavior on desktop
   const handleMouseEnter = useCallback(() => {
@@ -90,7 +99,10 @@ export function Left({ navigation, type }: SidebarProps) {
       {isMobileDevice() && sidebarState !== 'closed' && (
         <div
           className="fixed inset-0 bg-[#111111]/80 backdrop-blur-sm z-40 transition-opacity duration-300"
-          onClick={() => setSidebarState('closed')}
+          onClick={() => {
+            setSidebarState('closed');
+            onOpenChange?.(false);
+          }}
           aria-hidden="true"
         />
       )}
@@ -245,7 +257,7 @@ export function Left({ navigation, type }: SidebarProps) {
                 sidebarState === 'expanded' ? "opacity-100 pl-4" : "opacity-0 w-0",
                 "truncate"
               )}>
-
+                {theme === 'dark' ? 'Light Mode' : theme === 'earth' ? 'Dark Mode' : 'Earth Mode'}
               </span>
             </Button>
           </div>
