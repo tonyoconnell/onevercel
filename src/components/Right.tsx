@@ -3,7 +3,7 @@ import { useLayoutEffect, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { layoutStore, layoutActions, PanelMode } from '../stores/layout';
 import { MyThread } from "@/components/Chat";
-import { Maximize2, PanelRightClose, Columns, LayoutPanelLeft, X } from 'lucide-react';
+import { Maximize2, PanelRightClose, Columns, Minus, X } from 'lucide-react';
 
 interface RightProps {
   chatConfig: any;
@@ -120,7 +120,7 @@ export default function Right({ rightPanelMode, chatConfig, content }: RightProp
                     className="p-2 hover:bg-accent rounded-md"
                     aria-label="Float"
                   >
-                    <LayoutPanelLeft className="h-4 w-4" />
+                    <Minus className="h-4 w-4" />
                   </button>
                 )}
                 <button

@@ -60,9 +60,43 @@ export default function Header() {
       <div className="flex justify-end pr-4">
         <button className="flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 transition-colors">
           <Download className="h-5 w-5" />
-          <span>Download</span>
+          <span className="hidden sm:inline">Download</span>
         </button>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobile && (
+        <div
+          className={`fixed inset-0 bg-background/95 backdrop-blur-sm z-50 transition-all duration-300 ${isSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        >
+          <div className={`flex flex-col items-center justify-center h-full space-y-8 transition-all duration-300 transform ${isSidebarOpen ? 'translate-y-0' : '-translate-y-8'}`}>
+            <a href="/" className="text-2xl font-medium hover:text-primary transition-colors">Home</a>
+            <a href="/docs" className="text-2xl font-medium hover:text-primary transition-colors">Docs</a>
+            <a href="/blog" className="text-2xl font-medium hover:text-primary transition-colors">Blog</a>
+            <a href="/chat" className="text-2xl font-medium hover:text-primary transition-colors">Chat</a>
+            <button
+              onClick={toggleSidebar}
+              className="mt-8 p-2 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors"
+              aria-label="Close Menu"
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

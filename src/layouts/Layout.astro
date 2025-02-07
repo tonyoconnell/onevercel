@@ -71,24 +71,32 @@ const chatConfig = providedConfig || defaultChatConfig;
         min-height: 100vh;
         position: relative;
         z-index: 10;
-        transition: grid-template-columns 0.3s ease;
         width: 100%;
         max-width: 100%;
+        overflow-x: hidden;
+        transition: grid-template-columns 0.3s ease;
+      }
+
+      .main-grid[data-sidebar-open="true"] {
+        grid-template-columns: 240px minmax(0, 1fr);
+      }
+
+      @media (min-width: 640px) {
+        .main-grid {
+          grid-template-columns: 240px minmax(0, 1fr);
+        }
       }
 
       .main-grid[data-panel-mode="Quarter"] {
-        grid-template-columns: minmax(0, 100%);
-        padding-right: 25%;
+        grid-template-columns: minmax(0, 75%);
       }
 
       .main-grid[data-panel-mode="Half"] {
-        grid-template-columns: minmax(0, 100%);
-        padding-right: 50%;
+        grid-template-columns: minmax(0, 50%);
       }
 
       .main-grid[data-panel-mode="Full"] {
-        grid-template-columns: minmax(0, 100%);
-        padding-right: 100%;
+        grid-template-columns: minmax(0, 0%);
       }
 
       .main-grid[data-panel-mode="Floating"],
@@ -105,7 +113,6 @@ const chatConfig = providedConfig || defaultChatConfig;
         margin-right: 0;
         transition: all 0.3s ease;
         overflow: hidden;
-        padding-right: 0;  /* Default padding */
       }
 
       /* Add left padding only on desktop */
@@ -115,10 +122,11 @@ const chatConfig = providedConfig || defaultChatConfig;
         }
       }
 
-      /* Add extra padding for Half and Quarter modes */
+      /* Ensure content doesn't overlap with right panel */
       .main-grid[data-panel-mode="Half"] .center-grid,
       .main-grid[data-panel-mode="Quarter"] .center-grid {
-        padding-right: 0px;
+        margin-right: 0;
+        width: 100%;
       }
 
       /* Add styles for the right panel positioning */
@@ -130,11 +138,11 @@ const chatConfig = providedConfig || defaultChatConfig;
         z-index: 50;
         background-color: hsl(var(--background));
         border-left: 1px solid hsl(var(--border) / 0.9);
-        border-right: 1px solid hsl(var(--border) / 0.9);
         display: flex;
         flex-direction: column;
         transition: all 0.3s ease;
         backdrop-filter: blur(12px);
+        overflow-y: auto;
       }
 
       /* Adjust header padding to align with main header */
