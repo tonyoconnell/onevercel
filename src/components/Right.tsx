@@ -68,10 +68,13 @@ export default function Right({ rightPanelMode, chatConfig, content }: RightProp
   const styles = PanelMode[layout.mode].right;
   
   return (
-    <aside 
-      className={`right-panel ${layout.mode === 'Floating' ? 'floating' : ''}`}
+    <aside
+      className={`right-panel layout-transition ${layout.mode === 'Floating' ? 'floating' : ''}`}
       data-mode={layout.mode}
-      style={styles}
+      style={{
+        ...styles,
+        overflow: 'hidden',
+      }}
     >
       {isIcon ? (
         <button 
@@ -85,60 +88,62 @@ export default function Right({ rightPanelMode, chatConfig, content }: RightProp
         </button>
       ) : (
         <div className="h-full flex flex-col">
-          <header className="flex-none p-4 h-16 border-b border-l">
-            <div className="flex items-center gap-2">
-              <div className="hidden md:flex items-center gap-2">
-                {layout.mode !== 'Full' && (
-                  <button
-                    onClick={() => handleModeChange("Full")}
-                    className="p-2 hover:bg-accent rounded-md"
-                    aria-label="Full"
-                  >
-                    <Maximize2 className="h-4 w-4" />
-                  </button>
-                )}
-                {layout.mode !== 'Half' && (
-                  <button
-                    onClick={() => handleModeChange("Half")}
-                    className="p-2 hover:bg-accent rounded-md"
-                    aria-label="Half"
-                  >
-                    <PanelRightClose className="h-4 w-4" />
-                  </button>
-                )}
-                {layout.mode !== 'Quarter' && (
-                  <button
-                    onClick={() => handleModeChange("Quarter")}
-                    className="p-2 hover:bg-accent rounded-md"
-                    aria-label="Quarter"
-                  >
-                    <Columns className="h-4 w-4" />
-                  </button>
-                )}
-              </div>
-              <h2 className="font-semibold flex-1 text-center">Agent ONE</h2>
-              <div className="flex items-center gap-2">
-                {layout.mode !== 'Floating' && (
-                  <button
-                    onClick={() => handleModeChange("Floating")}
-                    className="p-2 hover:bg-accent rounded-md"
-                    aria-label="Float"
-                  >
-                    <Minus className="h-4 w-4" />
-                  </button>
-                )}
-                <button
-                  onClick={() => handleModeChange("Icon")}
-                  className="p-2 hover:bg-accent rounded-md"
-                  aria-label="Close"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
+          <header className="flex-none p-2 h-14 border-b">
+                <div className="flex items-center gap-2">
+                  <div className="hidden md:flex items-center gap-1">
+                    {layout.mode !== 'Full' && (
+                      <button
+                        onClick={() => handleModeChange("Full")}
+                        className="p-1.5 hover:bg-accent/80 rounded-md transition-colors"
+                        aria-label="Full"
+                      >
+                        <Maximize2 className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />
+                      </button>
+                    )}
+                    {layout.mode !== 'Half' && layout.mode !== 'Floating' && (
+                      <button
+                        onClick={() => handleModeChange("Half")}
+                        className="p-1.5 hover:bg-accent/80 rounded-md transition-colors"
+                        aria-label="Half"
+                      >
+                        <PanelRightClose className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />
+                      </button>
+                    )}
+                    {layout.mode !== 'Quarter' && (
+                      <button
+                        onClick={() => handleModeChange("Quarter")}
+                        className="p-1.5 hover:bg-accent/80 rounded-md transition-colors"
+                        aria-label="Quarter"
+                      >
+                        <Columns className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />
+                      </button>
+                    )}
+                  </div>
+                  <h2 className="font-semibold flex-1 text-center text-sm tracking-wide">Agent ONE</h2>
+                  <div className="flex items-center gap-1">
+                    {layout.mode !== 'Floating' && (
+                      <button
+                        onClick={() => handleModeChange("Floating")}
+                        className="p-1.5 hover:bg-accent/80 rounded-md transition-colors"
+                        aria-label="Float"
+                      >
+                        <Minus className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />
+                      </button>
+                    )}
+                    <button
+                      onClick={() => handleModeChange("Icon")}
+                      className="p-1.5 hover:bg-accent/80 rounded-md transition-colors"
+                      aria-label="Close"
+                    >
+                      <X className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />
+                    </button>
+                  </div>
+                </div>
+              </header>
+          <main className="flex-1 overflow-y-auto overflow-x-hidden mx-auto w-full max-w-[850px]">
+            <div className="h-full py-4">
+              <MyThread config={chatConfig} content={content} />
             </div>
-          </header>
-          <main className="flex-1 overflow-auto mx-auto w-full max-w-[850px]">
-            <MyThread config={chatConfig} content={content} />
           </main>
         </div>
       )}
