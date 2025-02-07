@@ -96,7 +96,7 @@ const chatConfig = providedConfig || defaultChatConfig;
       }
 
       .main-grid[data-panel-mode="Full"] {
-        grid-template-columns: minmax(0, 0%);
+        grid-template-columns: 0;
       }
 
       .main-grid[data-panel-mode="Floating"],
@@ -115,9 +115,9 @@ const chatConfig = providedConfig || defaultChatConfig;
         overflow: hidden;
       }
 
-      /* Add left padding only on desktop */
+      /* Add left padding only on desktop and when not in full mode */
       @media (min-width: 640px) {
-        .center-grid {
+        .main-grid:not([data-panel-mode="Full"]) .center-grid {
           padding-left: 60px;
         }
       }
@@ -135,13 +135,12 @@ const chatConfig = providedConfig || defaultChatConfig;
         top: 0;
         right: 0;
         bottom: 0;
-        z-index: 50;
+        z-index: 9999;
         background-color: hsl(var(--background));
-        border-left: 1px solid hsl(var(--border) / 0.9);
+        border-left: 1px solid hsl(var(--border));
         display: flex;
         flex-direction: column;
         transition: all 0.3s ease;
-        backdrop-filter: blur(12px);
         overflow-y: auto;
       }
 
@@ -171,19 +170,30 @@ const chatConfig = providedConfig || defaultChatConfig;
 
       :global(.right-panel[data-mode="Quarter"]) {
         width: 25%;
+        min-width: 320px;
         background-color: hsl(var(--background));
-        box-shadow: -4px 0 16px rgba(0, 0, 0, 0.1);
       }
 
       :global(.right-panel[data-mode="Half"]) {
         width: 50%;
         background-color: hsl(var(--background));
-        box-shadow: -4px 0 16px rgba(0, 0, 0, 0.1);
       }
 
       :global(.right-panel[data-mode="Full"]) {
-        width: 100%;
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        position: fixed;
+        inset: 0;
         background-color: hsl(var(--background));
+        border: none;
+        z-index: 9999;
+        overflow-y: auto;
+      }
+
+      :global(.right-panel[data-mode="Full"] main) {
+        border-left: none;
       }
 
       :global(.right-panel[data-mode="Floating"]) {
@@ -194,7 +204,6 @@ const chatConfig = providedConfig || defaultChatConfig;
         bottom: auto;
         transform: translateY(-50%);
         border-radius: 12px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
         border: 1px solid var(--border);
         background-color: hsl(var(--background));
       }
@@ -233,7 +242,7 @@ const chatConfig = providedConfig || defaultChatConfig;
   </head>
   <body>
     <div class="main-grid" id="main-grid" data-panel-mode={initialPanelMode}>
-      <Left client:load />
+      <Left client:idle />
       <div class="center-grid" id="center-grid">
         {header && <Header client:load />}
 
@@ -241,10 +250,10 @@ const chatConfig = providedConfig || defaultChatConfig;
           <slot />
         </main>
 
-        {footer && <Footer client:load />}
+        {footer && <Footer client:idle />}
       </div>
       <Right
-        client:only="react"
+        client:idle
         chatConfig={chatConfig}
         rightPanelMode={rightPanelMode}
         content={content}

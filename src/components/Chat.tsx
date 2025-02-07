@@ -1,9 +1,10 @@
+// src/components/Chat.tsx
 import { AssistantRuntimeProvider } from "@assistant-ui/react";
 import { useVercelUseChatRuntime } from "@assistant-ui/react-ai-sdk";
 import { MyThread as CustomThread } from "@/components/chat/thread";
 import { type ChatConfig, createDefaultConfig } from "@/schema/chat";
 import { useChat } from "ai/react";
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
   
 export function MyThread({
@@ -13,6 +14,13 @@ export function MyThread({
   config?: ChatConfig,
   content?: string
 }) {
+  // Client-side only rendering
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Ensure we always have a valid config
   const safeConfig = config || createDefaultConfig();
 
@@ -64,6 +72,10 @@ export function MyThread({
       setTimeout(() => clearInterval(scrollInterval), 2000);
     }
   }, [chat]);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div className="h-full">

@@ -1,5 +1,5 @@
 // src/components/Right.tsx
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { layoutStore, layoutActions, PanelMode } from '../stores/layout';
 import { MyThread } from "@/components/Chat";
@@ -14,24 +14,28 @@ interface RightProps {
 export default function Right({ rightPanelMode, chatConfig, content }: RightProps) {
   const layout = useStore(layoutStore);
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    setMounted(true);
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // Update main grid layout when panel mode changes
-    const mainGrid = document.getElementById('main-grid');
-    if (mainGrid) {
-      mainGrid.setAttribute('data-panel-mode', layout.mode);
+    if (mounted) {
+      const mainGrid = document.getElementById('main-grid');
+      if (mainGrid) {
+        mainGrid.setAttribute('data-panel-mode', layout.mode);
+      }
     }
-  }, [layout.mode]);
+  }, [layout.mode, mounted]);
 
-  useLayoutEffect(() => {
-    if (rightPanelMode) {
+  useEffect(() => {
+    if (mounted && rightPanelMode) {
       const modeMap = {
         'full': 'Full',
         'half': 'Half',
@@ -48,7 +52,7 @@ export default function Right({ rightPanelMode, chatConfig, content }: RightProp
         layoutActions.setMode(modeMap[rightPanelMode]);
       }
     }
-  }, [rightPanelMode]);
+  }, [rightPanelMode, mounted]);
 
   const handleModeChange = (mode: keyof typeof PanelMode) => {
     if (isMobile && mode !== 'Icon') {
@@ -58,7 +62,7 @@ export default function Right({ rightPanelMode, chatConfig, content }: RightProp
     }
   };
 
-  if (!layout.isVisible) return null;
+  if (!layout.isVisible || !mounted) return null;
 
   const isIcon = layout.mode === "Icon";
   const styles = PanelMode[layout.mode].right;

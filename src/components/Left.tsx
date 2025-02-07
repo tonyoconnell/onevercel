@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { cn } from '../lib/utils';
 import { Button } from './ui/button';
+import { useStore } from '@nanostores/react';
+import { layoutStore } from '../stores/layout';
 import {
   Eye, Ear, MessageSquare, Mic, Sun, Moon, Leaf, Palette,
   type LucideIcon
@@ -34,6 +36,7 @@ export function Left({ navigation, isOpen, onOpenChange }: SidebarProps) {
   const [currentPath, setCurrentPath] = useState('/');
   const [sidebarState, setSidebarState] = useState<'closed' | 'open' | 'expanded'>('open');
   const [theme, setTheme] = useState<'dark' | 'light' | 'earth'>('dark');
+  const layout = useStore(layoutStore);
 
   // Use the navigation prop or fall back to default navigation
   const mainNavItems = navigation || defaultNavigation;
@@ -93,6 +96,9 @@ export function Left({ navigation, isOpen, onOpenChange }: SidebarProps) {
 
   if (!mounted) return null;
 
+  // Hide the sidebar when right panel is in full mode
+  if (layout.mode === 'Full') return null;
+
   return (
     <>
       {/* Mobile backdrop with blur */}
@@ -114,7 +120,7 @@ export function Left({ navigation, isOpen, onOpenChange }: SidebarProps) {
         role="complementary"
         aria-label="Main navigation"
         className={cn(
-          "fixed left-0 top-0 h-screen z-50",
+          "fixed left-0 top-0 h-screen z-40",
           "bg-[#222222] border-r border-[#111111]",
           "transition-all duration-300 ease-in-out will-change-transform",
           "transform",
