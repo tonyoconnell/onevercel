@@ -20,6 +20,7 @@
     "@astrojs/node": "^9.0.2",
     "@astrojs/react": "^4.2.0",
     "@astrojs/tailwind": "^6.0.0",
+    "@astrojs/vercel": "^8.0.6",
     "@hookform/resolvers": "^3.10.0",
     "@nanostores/react": "^0.8.4",
     "@radix-ui/react-accordion": "^1.2.2",
@@ -93,7 +94,6 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@astrojs/netlify": "^6.1.0",
     "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^22.13.1",
     "terser": "^5.37.0",

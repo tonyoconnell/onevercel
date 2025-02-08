@@ -2,8 +2,7 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
-import node from '@astrojs/node';
-import netlify from '@astrojs/netlify';
+import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
   integrations: [
@@ -25,7 +24,10 @@ export default defineConfig({
     }
   },
   output: 'server',
-  adapter: netlify({
-    edgeMiddleware: true // Enable edge middleware capabilities
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    },
+    imageService: true,
   })
 });
