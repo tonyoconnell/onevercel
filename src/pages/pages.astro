@@ -67,7 +67,7 @@ interface PageModule {
 }
 
 // Get all files from pages directory using import.meta.glob
-const pageGlob = await import.meta.glob<PageModule>('./**/*.(astro|md|mdx|svx)');
+const pageGlob = import.meta.glob<PageModule>('./**/*.(astro|md|mdx|svx)');
 
 // Convert glob result to array of file data
 const pages = await Promise.all(
@@ -112,14 +112,6 @@ const sortedFileTypes = Object.entries(filesByType).sort(([typeA], [typeB]) => {
   return typeA.localeCompare(typeB);
 });
 
-// Chat configuration
-const chatConfig = {
-  mode: 'split' as const,
-  title: "Agent ONE",
-  description: "Let me help you find content",
-  placeholder: "Ask me anything...",
-  attachments: true
-};
 ---
 
 <Layout 
