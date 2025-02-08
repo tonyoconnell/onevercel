@@ -48,10 +48,30 @@ const pageData = {
 };
 ---
 
+<script>
+  interface Window {
+    handleTocVisibility: (isVisible: boolean) => void;
+  }
+  
+  let tocVisible = true;
+  
+  document.addEventListener('astro:page-load', () => {
+    const main = document.querySelector('main');
+    
+    (window as any).handleTocVisibility = (isVisible: boolean) => {
+      tocVisible = isVisible;
+      if (main) {
+        main.style.transition = 'padding-right 0.2s ease-in-out';
+        main.style.paddingRight = isVisible ? '' : '0';
+      }
+    };
+  });
+</script>
+
 <Layout {...pageData}>
-  <div class="lg:flex lg:gap-8">
+  <div class="lg:flex lg:justify-between">
     <!-- Main Content -->
-    <main class="w-full lg:flex-1 min-w-0">
+    <main class="w-full min-w-0 transition-all duration-200" transition:animate="none">
       <article class="py-8">
         <header class="mb-8">
           <div class="space-y-2">
@@ -78,9 +98,9 @@ const pageData = {
     </main>
 
     <!-- Right Sidebar -->
-    <div class="hidden lg:block w-64 xl:w-72 flex-none">
-      <div class="sticky top-16 -mt-10 pt-4 overflow-y-auto max-h-[calc(100vh-4rem)]">
-        <div class="pl-8 pr-4">
+    <div class="hidden lg:block flex-none transition-all duration-200">
+      <div class="pt-4">
+        <div class="pl-8 pr-4 w-64 xl:w-72">
           <TableOfContents 
             headings={headings} 
             client:media="(min-width: 1024px)" 

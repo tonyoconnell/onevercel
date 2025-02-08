@@ -15,15 +15,32 @@ import {
 import License from '../../LICENSE?raw';
 import FaqAccordion from "../components/FaqAccordion";
 
-const GITHUB_REPO = "one-ie/one";
+const GITHUB_REPO = "one-ie/astro-shadcn";
 const GITHUB_URL = `https://github.com/${GITHUB_REPO}`;
-const DOWNLOAD_URL = "https://github.com/one-ie/one/archive/refs/heads/main.zip";
+const DOWNLOAD_URL = 'https://github.com/${GITHUB_REPO}/archive/refs/heads/main.zi';
 
 const URLS = {
   clone: `git clone https://github.com/${GITHUB_REPO}.git`,
   codespace: `https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=${GITHUB_REPO}`,
   fork: `https://github.com/${GITHUB_REPO}/fork`,
 };
+
+// Fetch GitHub stars count
+const getGitHubStats = async () => {
+  try {
+    const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}`);
+    const data = await response.json();
+    return {
+      stars: data.stargazers_count,
+      forks: data.forks_count
+    };
+  } catch (error) {
+    console.error('Error fetching GitHub stats:', error);
+    return { stars: '14.2k', forks: '3.1k' }; // Fallback values
+  }
+};
+
+const stats = await getGitHubStats();
 
 const SYSTEM_REQUIREMENTS = [
   "Node.js 18.x or higher",
@@ -116,12 +133,15 @@ const faqs = [
           <Button 
             variant="outline" 
             size="lg" 
-            className="w-full group bg-background border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300"
-            onClick={() => navigator.clipboard.writeText(URLS.clone)}
+            className="w-full group bg-background border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300 text-foreground hover:text-foreground"
+            id="copyCloneCommand"
           >
             <CodeIcon className="w-5 h-5 mr-2 text-primary" />
             <code class="font-mono text-sm">git clone {GITHUB_REPO}</code>
           </Button>
+          <p id="copyMessage" class="mt-2 text-sm text-primary opacity-0 transition-opacity duration-200">
+            Copied to clipboard!
+          </p>
         </Card>
       </div>
 
@@ -131,7 +151,7 @@ const faqs = [
           <Button 
             variant="outline" 
             size="lg" 
-            className="group bg-[#0D1117] hover:bg-[#161B22] border-2 border-[#30363D] hover:border-primary text-white transition-all duration-300"
+            className="group bg-[#0D1117] hover:bg-[#161B22] border-2 border-[#30363D] hover:border-primary text-white hover:text-white transition-all duration-300"
           >
             <GitHubLogoIcon className="w-5 h-5 mr-2" />
             <span>Open in Codespaces</span>
@@ -139,11 +159,31 @@ const faqs = [
         </a>
         
         <a href={GITHUB_URL} class="inline-block">
-          <Button variant="outline" size="lg" className="group">
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="group text-foreground hover:text-foreground"
+          >
             <GitHubLogoIcon className="w-5 h-5 mr-2" />
             <span>View Source</span>
             <div class="ml-2 px-2 py-0.5 bg-muted rounded-full text-xs font-medium">
-              14.2k ⭐
+              {stats.stars} ⭐
+            </div>
+          </Button>
+        </a>
+
+        <a href={URLS.fork} class="inline-block">
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="group text-foreground hover:text-foreground"
+          >
+            <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 5C7 3.89543 7.89543 3 9 3C10.1046 3 11 3.89543 11 5C11 5.74028 10.5978 6.38663 10 6.73244V14.0396H14.7761C15.1132 13.4132 15.7859 13 16.5 13C17.6046 13 18.5 13.8954 18.5 15C18.5 16.1046 17.6046 17 16.5 17C15.7859 17 15.1132 16.5868 14.7761 15.9604H10V17.2676C10.5978 17.6134 11 18.2597 11 19C11 20.1046 10.1046 21 9 21C7.89543 21 7 20.1046 7 19C7 18.2597 7.40221 17.6134 8 17.2676V6.73244C7.40221 6.38663 7 5.74028 7 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Fork Project</span>
+            <div class="ml-2 px-2 py-0.5 bg-muted rounded-full text-xs font-medium">
+              {stats.forks}
             </div>
           </Button>
         </a>
@@ -199,7 +239,7 @@ const faqs = [
         <AlertDescription className="text-lg">
           Join thousands of developers building the future with ONE.
           <a href={GITHUB_URL} class="inline-block">
-            <Button variant="link" className="ml-3 text-lg">
+            <Button variant="link" className="ml-3 text-lg text-foreground hover:text-foreground">
               Star on GitHub <GitHubLogoIcon className="ml-2 w-5 h-5" />
             </Button>
           </a>
@@ -231,3 +271,19 @@ const faqs = [
     }
   }
 </style>
+
+<script>
+  // Handle copy functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const copyButton = document.getElementById('copyCloneCommand');
+    const copyMessage = document.getElementById('copyMessage');
+    
+    if (copyButton && copyMessage) {
+      copyButton.addEventListener('click', () => {
+        navigator.clipboard.writeText('git clone one-ie/one');
+        copyMessage.classList.remove('opacity-0');
+        setTimeout(() => copyMessage.classList.add('opacity-0'), 2000);
+      });
+    }
+  });
+</script>
