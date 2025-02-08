@@ -41,9 +41,6 @@ importers:
       '@astrojs/tailwind':
         specifier: ^6.0.0
         version: 6.0.0(astro@5.2.3(@types/node@22.13.1)(jiti@1.21.7)(rollup@4.34.0)(terser@5.37.0)(typescript@5.7.3)(yaml@2.7.0))(tailwindcss@3.4.17)
-      '@astrojs/vercel':
-        specifier: ^8.0.6
-        version: 8.0.6(astro@5.2.3(@types/node@22.13.1)(jiti@1.21.7)(rollup@4.34.0)(terser@5.37.0)(typescript@5.7.3)(yaml@2.7.0))(react@18.3.1)(rollup@4.34.0)
       '@hookform/resolvers':
         specifier: ^3.10.0
         version: 3.10.0(react-hook-form@7.54.2(react@18.3.1))
@@ -258,6 +255,9 @@ importers:
         specifier: ^3.24.1
         version: 3.24.1
     devDependencies:
+      '@astrojs/vercel':
+        specifier: ^8.0.6
+        version: 8.0.6(astro@5.2.3(@types/node@22.13.1)(jiti@1.21.7)(rollup@4.34.0)(terser@5.37.0)(typescript@5.7.3)(yaml@2.7.0))(react@18.3.1)(rollup@4.34.0)
       '@tailwindcss/typography':
         specifier: ^0.5.16
         version: 0.5.16(tailwindcss@3.4.17)
