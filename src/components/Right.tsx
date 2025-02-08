@@ -88,9 +88,9 @@ export default function Right({ rightPanelMode, chatConfig, content }: RightProp
         </button>
       ) : (
         <div className="h-full flex flex-col">
-          <header className="flex-none p-2 h-14 border-b">
-                <div className="flex items-center gap-2">
-                  <div className="hidden md:flex items-center gap-1">
+          <header className="flex-none px-2 h-[65px] border-b border-l flex items-center relative">
+                <div className="flex items-center w-full">
+                  <div className="flex items-center gap-1">
                     {layout.mode !== 'Full' && (
                       <button
                         onClick={() => handleModeChange("Full")}
@@ -119,8 +119,8 @@ export default function Right({ rightPanelMode, chatConfig, content }: RightProp
                       </button>
                     )}
                   </div>
-                  <h2 className="font-semibold flex-1 text-center text-sm tracking-wide">Agent ONE</h2>
-                  <div className="flex items-center gap-1">
+                  <h2 className="font-semibold absolute left-1/2 -translate-x-1/2 text-sm tracking-wide">Agent ONE</h2>
+                  <div className="flex items-center gap-1 ml-auto">
                     {layout.mode !== 'Floating' && (
                       <button
                         onClick={() => handleModeChange("Floating")}
