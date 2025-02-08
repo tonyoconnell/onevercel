@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/Layout.astro
+layout: ../layouts/Text.astro
 title: "Careers at ONE"
 description: "Join us in building the future of AI-powered development"
 ---

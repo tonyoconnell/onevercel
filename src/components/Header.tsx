@@ -18,7 +18,7 @@ export default function Header() {
   };
 
   return (
-    <header className="grid grid-cols-3 items-center h-16 border-b bg-background/95 backdrop-blur">
+    <header className="grid grid-cols-3 items-center h-[65px] border-b bg-background/95 backdrop-blur">
       {/* Left column */}
       <div>
         {isMobile && (

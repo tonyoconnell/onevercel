@@ -27,6 +27,7 @@ chatConfig:
         prompt: "What are the requirements for using the ONE License?"
 ---
 # ONE License (Version 1.0)
+
 ## Unlimited Commercial Freedom
 
 <div class="text-sm text-slate-600">
@@ -66,6 +67,7 @@ ONE License gives you complete commercial freedom. Build products, create servic
 ## Simple Requirements
 
 Just two easy steps:
+
 1. Register for free at [one.ie](https://one.ie)
 2. Display the ONE logo with a link to one.ie in your application
 
@@ -87,11 +89,10 @@ Contact [agent@one.ie](mailto:agent@one.ie) to discuss partnership opportunities
 ## Enterprise Support
 
 Need additional rights or support? We offer:
+
 - Custom licensing terms
 - Priority support
 - Strategic partnerships
 - Enterprise deployments
 
 Contact [ai@one.ie](mailto:ai@one.ie) for enterprise inquiries.
-
-

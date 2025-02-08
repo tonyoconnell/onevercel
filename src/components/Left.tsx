@@ -4,17 +4,17 @@ import { Button } from './ui/button';
 import { useStore } from '@nanostores/react';
 import { layoutStore } from '../stores/layout';
 import {
-  Eye, Ear, MessageSquare, Mic, Sun, Moon, Leaf, Palette,
+  Newspaper, Headphones, Download, FileText, Shield, Sun, Moon, Leaf, 
   type LucideIcon
 } from 'lucide-react';
 
 // Default navigation items
 const defaultNavigation = [
-  { title: 'Watch', path: '/watch', icon: Eye },
-  { title: 'Listen', path: '/listen', icon: Ear },
-  { title: 'Chat', path: '/chat', icon: MessageSquare },
-  { title: 'Speak', path: '/speak', icon: Mic },
-  { title: 'Design', path: '/design', icon: Palette }
+  { title: 'Blog', path: '/blog', icon: Newspaper },
+  { title: 'Podcast', path: '/podcast', icon: Headphones },
+  { title: 'Download', path: '/download', icon: Download },
+  { title: 'Docs', path: '/docs', icon: FileText },
+  { title: 'License', path: '/free-license', icon: Shield }
 ];
 
 interface NavigationItem {

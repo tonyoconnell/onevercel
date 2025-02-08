@@ -22,13 +22,14 @@ export const PanelMode = {
       width: '400px',
       height: '600px',
       position: 'fixed',
-      top: '50%',
+      top: 'calc(50% + 100px)',
       right: '20px',
       transform: 'translateY(-50%)',
       zIndex: 1000,
-      borderRadius: '12px',
-      boxShadow: '0 8px 30px rgba(0, 0, 0, 0.15)',
+      borderRadius: '16px',
+      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
       border: '1px solid var(--border)',
+      background: 'var(--background)',
       '@media (max-width: 768px)': {
         width: 'calc(100% - 40px)',
         height: 'calc(100% - 120px)'
