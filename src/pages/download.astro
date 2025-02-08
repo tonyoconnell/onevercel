@@ -1,0 +1,288 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Card } from "@/components/ui/card";
+import { 
+  GitHubLogoIcon,
+  CodeIcon,
+  DownloadIcon,
+  CheckIcon,
+} from '@radix-ui/react-icons';
+
+// Import license content
+import License from '../../LICENSE?raw';
+import FaqAccordion from "../components/FaqAccordion";
+
+const GITHUB_REPO = "one-ie/one";
+const GITHUB_URL = `https://github.com/${GITHUB_REPO}`;
+const DOWNLOAD_URL = `https://github.com/${GITHUB_REPO}/archive/refs/heads/main.zip`;
+
+const URLS = {
+  clone: `git clone https://github.com/${GITHUB_REPO}.git`,
+  codespace: `https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=${GITHUB_REPO}`,
+  fork: `https://github.com/${GITHUB_REPO}/fork`,
+};
+
+// Fetch GitHub stars count
+const getGitHubStats = async () => {
+  try {
+    const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}`);
+    const data = await response.json();
+    return {
+      stars: data.stargazers_count,
+      forks: data.forks_count
+    };
+  } catch (error) {
+    console.error('Error fetching GitHub stats:', error);
+    return { stars: '14.2k', forks: '3.1k' }; // Fallback values
+  }
+};
+
+const stats = await getGitHubStats();
+
+const SYSTEM_REQUIREMENTS = [
+  "Node.js 18.x or higher",
+  "pnpm package manager",
+  "Modern web browser (Chrome, Firefox, Safari, Edge)",
+  "4GB RAM minimum (8GB recommended)",
+  "Any modern operating system (Windows, macOS, Linux)",
+];
+
+const INSTALLATION_STEPS = [
+  {
+    title: "Download the Source",
+    description: "Download the ZIP file or clone the repository using Git",
+  },
+  {
+    title: "Install Dependencies",
+    description: "Run 'pnpm install' to install required packages",
+  },
+  {
+    title: "Configuration",
+    description: "Set up your environment variables following the .env.example",
+  },
+  {
+    title: "Start Development",
+    description: "Run 'pnpm dev' to start the development server",
+  },
+];
+
+const faqs = [
+  {
+    question: "What makes the ONE Free License unique?",
+    answer: "The ONE Free License offers maximum commercial freedom with a simple requirement: maintain our brand visibility. You get unlimited usage rights, complete commercial freedom, and the ability to monetize without any royalty fees - just keep our logo visible in your application."
+  },
+  {
+    question: "What are the brand requirements?",
+    answer: "The only requirement is to display the ONE logo visibly in your application, maintain its original design, and include a link to https://one.ie. All brand assets are available at https://one.ie/brand."
+  },
+  {
+    question: "Can I use ONE in commercial products?",
+    answer: "Absolutely! The license grants unrestricted commercial rights. You can use, modify, license, sublicense, distribute, and monetize ONE in any way - including integration into commercial products, SaaS offerings, and AI applications."
+  },
+  {
+    question: "Who owns the modifications I make to ONE?",
+    answer: "You own any modifications you make to ONE. While we retain ownership of the original software, your innovations and modifications belong to you. You can even patent innovations based on the software."
+  },
+  {
+    question: "Is the ONE Free License compatible with open-source licenses?",
+    answer: "Yes! The ONE Free License is compatible with all major open-source licenses including MIT, Apache 2.0, GPL, BSD, and Mozilla Public License. You can freely combine ONE with other open-source projects."
+  },
+  {
+    question: "What if I need to remove the ONE branding?",
+    answer: "For complete white-labeling rights and removal of brand requirements, we offer an Enterprise License. Visit https://one.ie/enterprise for more information about our Enterprise offering."
+  }
+];
+---
+
+<Layout 
+  title="Download ONE Framework"
+  description="Download the enterprise-grade AI framework that's completely free and open source. Get started in minutes with direct download or Git integration."
+>
+  <main class="container mx-auto px-6 w-full">
+    <section class="min-h-[80vh] flex flex-col justify-center items-center text-center py-12">
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60 max-w-[900px]">
+        Build AI Apps Faster
+      </h1>
+      
+      <p class="text-lg md:text-xl text-muted-foreground max-w-2xl mb-12">
+        The enterprise-grade AI framework that's completely free and open source.
+        Production-ready in minutes, not months.
+      </p>
+
+      <!-- Download Options Grid -->
+      <div class="grid md:grid-cols-2 gap-8 w-full max-w-4xl mb-12">
+        <!-- Direct Download Card -->
+        <Card className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow">
+          <h3 class="text-2xl font-bold mb-4">Quick Download</h3>
+          <p class="text-muted-foreground mb-6">Download the latest stable release directly</p>
+          <a href={DOWNLOAD_URL} class="w-full">
+            <Button size="lg" className="w-full">
+              <DownloadIcon className="mr-2 h-5 w-5" />
+              Download ZIP
+            </Button>
+          </a>
+        </Card>
+
+        <!-- Git Clone Card -->
+        <Card className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow">
+          <h3 class="text-2xl font-bold mb-4">Git Integration</h3>
+          <p class="text-muted-foreground mb-6">Clone the repository using Git</p>
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="w-full group bg-background border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300 text-foreground hover:text-foreground"
+            id="copyCloneCommand"
+          >
+            <CodeIcon className="w-5 h-5 mr-2 text-primary" />
+            <code class="font-mono text-sm">git clone {GITHUB_REPO}</code>
+          </Button>
+          <p id="copyMessage" class="mt-2 text-sm text-primary opacity-0 transition-opacity duration-200">
+            Copied to clipboard!
+          </p>
+        </Card>
+      </div>
+
+      <!-- Secondary Options -->
+      <div class="flex flex-wrap gap-4 justify-center mb-12">
+        <a href={URLS.codespace} class="inline-block">
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="group bg-[#0D1117] hover:bg-[#161B22] border-2 border-[#30363D] hover:border-primary text-white hover:text-white transition-all duration-300"
+          >
+            <GitHubLogoIcon className="w-5 h-5 mr-2" />
+            <span>Open in Codespaces</span>
+          </Button>
+        </a>
+        
+        <a href={GITHUB_URL} class="inline-block">
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="group text-foreground hover:text-foreground"
+          >
+            <GitHubLogoIcon className="w-5 h-5 mr-2" />
+            <span>View Source</span>
+            <div class="ml-2 px-2 py-0.5 bg-muted rounded-full text-xs font-medium">
+              {stats.stars} ⭐
+            </div>
+          </Button>
+        </a>
+
+        <a href={URLS.fork} class="inline-block">
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="group text-foreground hover:text-foreground"
+          >
+            <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 5C7 3.89543 7.89543 3 9 3C10.1046 3 11 3.89543 11 5C11 5.74028 10.5978 6.38663 10 6.73244V14.0396H14.7761C15.1132 13.4132 15.7859 13 16.5 13C17.6046 13 18.5 13.8954 18.5 15C18.5 16.1046 17.6046 17 16.5 17C15.7859 17 15.1132 16.5868 14.7761 15.9604H10V17.2676C10.5978 17.6134 11 18.2597 11 19C11 20.1046 10.1046 21 9 21C7.89543 21 7 20.1046 7 19C7 18.2597 7.40221 17.6134 8 17.2676V6.73244C7.40221 6.38663 7 5.74028 7 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Fork Project</span>
+            <div class="ml-2 px-2 py-0.5 bg-muted rounded-full text-xs font-medium">
+              {stats.forks}
+            </div>
+          </Button>
+        </a>
+      </div>
+    </section>
+
+    <!-- System Requirements & Installation -->
+    <section class="w-full max-w-[1400px] mb-20 grid md:grid-cols-2 gap-8">
+      <Card className="p-8">
+        <h2 class="text-2xl font-bold mb-6">System Requirements</h2>
+        <ul class="space-y-4">
+          {SYSTEM_REQUIREMENTS.map(req => (
+            <li class="flex items-start">
+              <CheckIcon className="w-5 h-5 mr-2 text-green-500 flex-shrink-0 mt-1" />
+              <span>{req}</span>
+            </li>
+          ))}
+        </ul>
+      </Card>
+
+      <Card className="p-8">
+        <h2 class="text-2xl font-bold mb-6">Installation Guide</h2>
+        <div class="space-y-6">
+          {INSTALLATION_STEPS.map((step, index) => (
+            <div class="flex items-start">
+              <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
+                <span class="font-bold text-primary">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="font-semibold mb-1">{step.title}</h3>
+                <p class="text-muted-foreground text-sm">{step.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </section>
+
+    <section class="w-full max-w-[1400px] mb-20">
+      <h2 class="text-4xl font-bold mb-10 text-center">ONE Free License</h2>
+      <Card className="prose prose-lg max-w-none dark:prose-invert p-8">
+        <pre class="whitespace-pre-wrap text-sm leading-relaxed opacity-90">{License}</pre>
+      </Card>
+    </section>
+
+    <section class="w-full max-w-[1400px] mb-20">
+      <h2 class="text-4xl font-bold mb-10 text-center">Frequently Asked Questions</h2>
+      <FaqAccordion client:idle faqs={faqs} />
+    </section>
+
+    <section class="text-center mb-16 w-full max-w-[1400px]">
+      <Alert className="py-6">
+        <AlertDescription className="text-lg">
+          Join thousands of developers building the future with ONE.
+          <a href={GITHUB_URL} class="inline-block">
+            <Button variant="link" className="ml-3 text-lg text-foreground hover:text-foreground">
+              Star on GitHub <GitHubLogoIcon className="ml-2 w-5 h-5" />
+            </Button>
+          </a>
+        </AlertDescription>
+      </Alert>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .prose {
+    @apply mx-auto;
+  }
+  
+  .prose pre {
+    @apply bg-muted;
+  }
+
+  .container {
+    width: 95%;
+    margin: 0 auto;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      width: 100%;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  // Handle copy functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const copyButton = document.getElementById('copyCloneCommand');
+    const copyMessage = document.getElementById('copyMessage');
+    
+    if (copyButton && copyMessage) {
+      copyButton.addEventListener('click', () => {
+        navigator.clipboard.writeText('git clone one-ie/one');
+        copyMessage.classList.remove('opacity-0');
+        setTimeout(() => copyMessage.classList.add('opacity-0'), 2000);
+      });
+    }
+  });
+</script>
