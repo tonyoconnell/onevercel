@@ -49,29 +49,40 @@ const pageData = {
 ---
 
 <script>
-  interface Window {
-    handleTocVisibility: (isVisible: boolean) => void;
+  declare global {
+    interface Window {
+      handleTocVisibility: (isVisible: boolean) => void;
+    }
   }
-  
-  let tocVisible = true;
   
   document.addEventListener('astro:page-load', () => {
     const main = document.querySelector('main');
+    const tocContainer = document.getElementById('toc-container');
     
-    (window as any).handleTocVisibility = (isVisible: boolean) => {
-      tocVisible = isVisible;
+    // Set initial TOC width
+    document.documentElement.style.setProperty('--toc-width', '16rem');
+    
+    window.handleTocVisibility = (isVisible: boolean) => {
+      // Update TOC container
+      if (tocContainer) {
+        tocContainer.style.width = isVisible ? 'var(--toc-width)' : '0';
+        tocContainer.style.opacity = isVisible ? '1' : '0';
+      }
+      
+      // Update main content
       if (main) {
-        main.style.transition = 'padding-right 0.2s ease-in-out';
-        main.style.paddingRight = isVisible ? '' : '0';
+        // Ensure main content expands properly
+        main.style.width = isVisible ? 'calc(100% - var(--toc-width))' : '100%';
+        main.style.maxWidth = isVisible ? 'calc(100% - var(--toc-width))' : '100%';
       }
     };
   });
 </script>
 
 <Layout {...pageData}>
-  <div class="lg:flex lg:justify-between">
+  <div class="lg:flex relative">
     <!-- Main Content -->
-    <main class="w-full min-w-0 transition-all duration-200" transition:animate="none">
+    <main class="flex-1 min-w-0 transition-all duration-300 ease-in-out w-full" transition:animate="none">
       <article class="py-8">
         <header class="mb-8">
           <div class="space-y-2">
@@ -98,9 +109,13 @@ const pageData = {
     </main>
 
     <!-- Right Sidebar -->
-    <div class="hidden lg:block flex-none transition-all duration-200">
+    <div
+      class="hidden lg:block flex-shrink-0 transition-all duration-300 ease-in-out overflow-hidden max-w-[240px]"
+      id="toc-container"
+      style="width: var(--toc-width)"
+    >
       <div class="pt-4">
-        <div class="pl-8 pr-4 w-64 xl:w-72">
+        <div class="pl-8 pr-4">
           <TableOfContents 
             headings={headings} 
             client:media="(min-width: 1024px)" 
