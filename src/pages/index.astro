@@ -6,164 +6,234 @@ import { ChatConfigSchema } from '../schema/chat';
 const chatConfig = ChatConfigSchema.parse({
   systemPrompt: [{
     type: "text" as const,
-    text: "I am a landing page assistant focused on helping visitors understand our product."
+    text: `You are the ONE framework's primary AI advocate and assistant, designed to engage visitors in meaningful conversations about our powerful, free AI development platform. Your role goes beyond navigation - you're here to showcase our features, demonstrate our value, and help users understand why ONE is the best choice for their AI development needs.
+
+Core Benefits:
+- 100% Free & Open Source
+  • Complete commercial freedom
+  • No hidden costs or royalties
+  • Enterprise-grade capabilities
+  • White-label ready
+
+- Advanced AI Integration
+  • Built on Vercel AI SDK
+  • Real-time streaming responses
+  • Multiple AI model support
+  • Edge-optimized performance
+
+- Developer Experience
+  • Astro-based architecture
+  • React component library
+  • shadcn/ui integration
+  • TypeScript support
+
+Key Features:
+1. AI Capabilities
+   • Streaming chat interface
+   • Voice synthesis
+   • Code highlighting
+   • Markdown support
+   • Branch navigation
+   • Context awareness
+
+2. UI Components
+   • Multiple panel modes
+   • Responsive design
+   • Dark/light themes
+   • Custom theming
+   • Accessibility support
+
+3. Performance
+   • Edge runtime
+   • Optimal caching
+   • Fast page loads
+   • SEO optimized
+
+Technical Stack:
+- Astro - Core framework
+- React - Component library
+- shadcn/ui - UI components
+- Vercel AI SDK - AI integration
+- Edge Runtime - Performance optimization
+
+Response Style:
+- Be enthusiastic but professional
+- Show excitement about features
+- Maintain technical accuracy
+- Use emojis sparingly
+- Provide code examples when relevant
+- Guide users toward implementation
+- Keep conversations flowing naturally
+- Focus on solutions and possibilities
+
+Remember to:
+- Showcase features naturally through conversation
+- Emphasize the free, open-source nature
+- Demonstrate value through examples
+- Guide users toward implementation
+- Build excitement about possibilities
+- Address concerns proactively
+- Keep conversations flowing naturally
+
+Your goal is to excite users about ONE's possibilities and guide them toward successful implementation while making them feel confident that ONE is the right choice for their AI development needs.`
   }],
   welcome: {
-    message: "👋 Welcome! How can I help you learn about our product?",
+    message: "👋 Welcome! I'm excited to show you how ONE can transform your development process. What would you like to know about our free, enterprise-grade AI framework?",
     avatar: "/icon.svg",
     suggestions: [
       {
-        label: "Product Features",
-        prompt: "What are the main features of your product?"
+        label: "💡 What makes ONE special?",
+        prompt: "What makes ONE different from other AI frameworks?"
       },
       {
-        label: "💡 How can I use ONE commercially?",
-        prompt: "I'm interested in using ONE for my business. Can you explain the commercial rights and possibilities under the ONE License?"
+        label: "🚀 Quick Start",
+        prompt: "How can I get started with ONE in the next 5 minutes?"
       },
       {
-        label: "🚀 Quick Start Guide",
-        prompt: "What are the first 3 steps to get started with ONE for my project?"
+        label: "💼 Commercial Usage",
+        prompt: "Can I use ONE for commercial projects? What are the terms?"
       },
       {
-        label: "💼 White-Label Options",
-        prompt: "Tell me about the white-label possibilities with ONE. How can I brand it as my own solution?"
+        label: "⚡ Technical Features",
+        prompt: "What are the main technical features and capabilities of ONE?"
       },
       {
-        label: "⚖️ License Compatibility",
-        prompt: "How does the ONE License work with other open source licenses? What are the key benefits?"
+        label: "🎨 UI Components",
+        prompt: "Tell me about ONE's UI components and customization options."
       },
       {
-        label: "🔄 Integration Help",
-        prompt: "I want to integrate ONE into my existing system. What's the best approach?"
+        label: "🔄 Integration",
+        prompt: "How can I integrate ONE into my existing project?"
       }
     ]
   }
-});
+});  
 
 // Set the desired right panel mode
-const rightPanelMode = 'quarter'; // You can change this to 'full', 'half', 'quarter', or 'hidden'
+const rightPanelMode = 'quarter'; // You can change this to 'full', 'half', 'floating', or 'icon'
 ---
+
 <Layout 
-  title="Astro + shadcn/ui" 
+  title="ONE - Free AI Framework" 
   chatConfig={chatConfig}
   rightPanelMode={rightPanelMode}
 >
 <section class="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
-	<div class="max-w-[64rem] flex flex-col items-center gap-4 text-center mx-auto">
-		<h1 class="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
-			Transform Your Website with <span class="text-blue-600">Intelligent AI Agents</span>
-		</h1>
-		<p class="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-			ONE makes it simple to add powerful AI assistants to every page on your website. Built on Vercel AI SDK and Assistant UI, it's the fastest way to give your visitors 24/7 intelligent support.
-		</p>
-		<div class="space-x-4">
-			<a href="#demo"
-				class="inline-flex items-center justify-center rounded-md border-2 border-blue-600 text-blue-600 px-6 py-3 text-sm font-medium transition-colors hover:bg-blue-600 hover:text-white">
-				Try Live Demo
-			</a>
-			<a href="#features"
-				class="inline-flex items-center justify-center rounded-md border border-input px-6 py-3 text-sm font-medium transition-colors hover:border-blue-600 hover:text-blue-600">
-				Explore Features
-			</a>
-		</div>
-	</div>
+<div class="max-w-[64rem] flex flex-col items-center gap-4 text-center mx-auto">
+<h1 class="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
+Transform Your Website with <span class="text-blue-600">Intelligent AI Agents</span>
+</h1>
+<p class="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
+ONE makes it simple to add powerful AI assistants to every page on your website. Built on Vercel AI SDK and Assistant UI, it's the fastest way to give your visitors 24/7 intelligent support.
+</p>
+<div class="space-x-4">
+<a href="chat"
+class="inline-flex items-center justify-center rounded-md border-2 border-blue-600 text-blue-600 px-6 py-3 text-sm font-medium transition-colors hover:bg-blue-600 hover:text-white">
+Try Live Demo
+</a>
+<a href="#features"
+class="inline-flex items-center justify-center rounded-md border border-input px-6 py-3 text-sm font-medium transition-colors hover:border-blue-600 hover:text-blue-600">
+Explore Features
+</a>
+</div>
+</div>
 </section>
 
 <section id="features" class="py-20">
-	<div class="container mx-auto px-4">
-		<h2 class="text-3xl font-bold text-center mb-12">Everything You Need for AI-Powered Support</h2>
-		<div class="grid md:grid-cols-3 gap-8">
-			<div class="p-6 rounded-lg border shadow-sm hover:shadow-md transition-shadow">
-				<div class="w-12 h-12 border rounded-lg flex items-center justify-center mb-4">
-					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-					</svg>
-				</div>
-				<h3 class="text-xl font-semibold mb-2">Lightning Fast Integration</h3>
-				<p class="text-muted-foreground">Add AI agents to any page with just a few lines of code. Built on Vercel AI SDK for optimal performance.</p>
-			</div>
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center mb-12">Everything You Need for AI-Powered Support</h2>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="p-6 rounded-lg border shadow-sm hover:shadow-md transition-shadow">
+<div class="w-12 h-12 border rounded-lg flex items-center justify-center mb-4">
+<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+</svg>
+</div>
+<h3 class="text-xl font-semibold mb-2">Lightning Fast Integration</h3>
+<p class="text-muted-foreground">Add AI agents to any page with just a few lines of code. Built on Vercel AI SDK for optimal performance.</p>
+</div>
 
-			<div class="p-6 rounded-lg border shadow-sm hover:shadow-md transition-shadow">
-				<div class="w-12 h-12 border rounded-lg flex items-center justify-center mb-4">
-					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-					</svg>
-				</div>
-				<h3 class="text-xl font-semibold mb-2">Advanced Conversation Features</h3>
-				<p class="text-muted-foreground">Real-time streaming, message branches, voice synthesis, and markdown support built-in.</p>
-			</div>
+<div class="p-6 rounded-lg border shadow-sm hover:shadow-md transition-shadow">
+<div class="w-12 h-12 border rounded-lg flex items-center justify-center mb-4">
+<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+</svg>
+</div>
+<h3 class="text-xl font-semibold mb-2">Advanced Conversation Features</h3>
+<p class="text-muted-foreground">Real-time streaming, message branches, voice synthesis, and markdown support built-in.</p>
+</div>
 
-			<div class="p-6 rounded-lg border shadow-sm hover:shadow-md transition-shadow">
-				<div class="w-12 h-12 border rounded-lg flex items-center justify-center mb-4">
-					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-					</svg>
-				</div>
-				<h3 class="text-xl font-semibold mb-2">Fully Customizable</h3>
-				<p class="text-muted-foreground">Customize the look, behavior and AI capabilities to match your brand and use case perfectly.</p>
-			</div>
-		</div>
-	</div>
+<div class="p-6 rounded-lg border shadow-sm hover:shadow-md transition-shadow">
+<div class="w-12 h-12 border rounded-lg flex items-center justify-center mb-4">
+<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+</svg>
+</div>
+<h3 class="text-xl font-semibold mb-2">Fully Customizable</h3>
+<p class="text-muted-foreground">Customize the look, behavior and AI capabilities to match your brand and use case perfectly.</p>
+</div>
+</div>
+</div>
 </section>
 
 <section class="py-20">
-	<div class="container mx-auto px-4">
-		<div class="flex flex-col md:flex-row items-center gap-12">
-			<div class="flex-1">
-				<h2 class="text-3xl font-bold mb-6">Powerful Features That Convert</h2>
-				<ul class="space-y-4">
-					<li class="flex items-start gap-3">
-						<svg class="w-6 h-6 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-						</svg>
-						<div>
-							<h3 class="font-semibold">Smart Suggestions</h3>
-							<p class="text-muted-foreground">Guide users with contextual suggestions that boost engagement</p>
-						</div>
-					</li>
-					<li class="flex items-start gap-3">
-						<svg class="w-6 h-6 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-						</svg>
-						<div>
-							<h3 class="font-semibold">Message History & Branches</h3>
-							<p class="text-muted-foreground">Never lose context with full conversation history and branching</p>
-						</div>
-					</li>
-					<li class="flex items-start gap-3">
-						<svg class="w-6 h-6 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-						</svg>
-						<div>
-							<h3 class="font-semibold">Voice Synthesis</h3>
-							<p class="text-muted-foreground">Natural text-to-speech makes interactions more engaging</p>
-						</div>
-					</li>
-				</ul>
-			</div>
-			<div class="flex-1">
-				<div class="rounded-lg border shadow-lg overflow-hidden">
-					<img src="/chat-demo.png" alt="ONE Chat Interface" class="w-full" />
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="container mx-auto px-4">
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="flex-1">
+<h2 class="text-3xl font-bold mb-6">Powerful Features That Convert</h2>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<svg class="w-6 h-6 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+</svg>
+<div>
+<h3 class="font-semibold">Smart Suggestions</h3>
+<p class="text-muted-foreground">Guide users with contextual suggestions that boost engagement</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<svg class="w-6 h-6 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+</svg>
+<div>
+<h3 class="font-semibold">Message History & Branches</h3>
+<p class="text-muted-foreground">Never lose context with full conversation history and branching</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<svg class="w-6 h-6 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+</svg>
+<div>
+<h3 class="font-semibold">Voice Synthesis</h3>
+<p class="text-muted-foreground">Natural text-to-speech makes interactions more engaging</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="flex-1">
+<div class="rounded-lg border shadow-lg overflow-hidden">
+<img src="/screenshots/chat.png" alt="ONE Chat Interface" class="w-full" />
+</div>
+</div>
+</div>
+</div>
 </section>
 
 <section class="py-20 border-t">
-	<div class="container mx-auto px-4 text-center">
-		<h2 class="text-3xl font-bold mb-6">Ready to Transform Your Website?</h2>
-		<p class="text-xl mb-8 text-muted-foreground">Start adding intelligent AI agents to your pages in minutes</p>
-		<div class="flex justify-center gap-4">
-			<a href="/docs/quickstart"
-				class="inline-flex items-center justify-center rounded-md border-2 border-blue-600 text-blue-600 px-6 py-3 text-sm font-medium transition-colors hover:bg-blue-600 hover:text-white">
-				Get Started
-			</a>
-			<a href="/pricing"
-				class="inline-flex items-center justify-center rounded-md border px-6 py-3 text-sm font-medium transition-colors hover:border-blue-600 hover:text-blue-600">
-				View Pricing
-			</a>
-		</div>
-	</div>
+<div class="container mx-auto px-4 text-center">
+<h2 class="text-3xl font-bold mb-6">Ready to Transform Your Website?</h2>
+<p class="text-xl mb-8 text-muted-foreground">Start adding intelligent AI agents to your pages in minutes</p>
+<div class="flex justify-center gap-4">
+<a href="/docs/quickstart"
+class="inline-flex items-center justify-center rounded-md border-2 border-blue-600 text-blue-600 px-6 py-3 text-sm font-medium transition-colors hover:bg-blue-600 hover:text-white">
+Get Started
+</a>
+<a href="/download"
+class="inline-flex items-center justify-center rounded-md border px-6 py-3 text-sm font-medium transition-colors hover:border-blue-600 hover:text-blue-600">
+Download Free
+</a>
+</div>
+</div>
 </section>
 </Layout>

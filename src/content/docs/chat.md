@@ -1,131 +1,168 @@
 ---
-title: Chat
-description: Detailed Overview of Chat Features
+title: Chat System
+description: Comprehensive guide to ONE's AI-powered chat system
 date: 2024-02-02
-section: Introduction
-order: 0
+section: Core Features
+order: 1
 ---
+
 # Chat System Overview
 
-The chat system is built using Astro, React, and the Assistant UI framework, providing a modern, interactive chat interface with AI capabilities.
+ONE's chat system combines Astro, React, and the Assistant UI framework to deliver a powerful, flexible, and user-friendly chat interface with advanced AI capabilities.
 
 ## Architecture
 
-The chat system consists of several key components:
+The chat system is built on a modular architecture with several key components:
 
 ### 1. Frontend Components
 
-#### Chat Page (`src/pages/chat.astro`)
-- Serves as the main entry point for the chat interface
-- Configures the chat system with customizable settings like:
-  - System prompt
-  - Welcome message
+#### Layout System
+- **Panel Modes**:
+  - `quarter`: 25% width side panel (default)
+  - `half`: 50% width side panel
+  - `full`: Full screen chat interface
+  - `floating`: Detached floating window
+  - `icon`: Minimized chat button
+  - `hidden`: No chat interface
+
+- **Responsive Behavior**:
+  ```typescript
+  interface LayoutProps {
+    title: string;
+    description?: string;
+    header?: boolean;
+    footer?: boolean;
+    rightPanelMode?: 'hidden' | 'full' | 'half' | 'quarter' | 'floating' | 'icon';
+    chatConfig?: ChatConfig;
+    content?: string;
+  }
+  ```
+
+#### Chat Components
+
+##### Main Chat Page (`src/pages/chat.astro`)
+- Entry point for the chat interface
+- Configurable settings:
+  - System prompts
+  - Welcome messages
   - Quick suggestions
-- Uses a layout that keeps the right panel closed for better chat experience
+  - Layout modes
+- Integration with page content
+- AI context management
 
-#### Thread Component (`src/components/assistant-ui/thread.tsx`)
-- Core UI component handling the chat interface
-- Features:
+##### Thread Component (`src/components/chat/thread.tsx`)
+- Core chat interface features:
   - Scrollable message area
-  - Message composition
-  - Welcome screen with customizable avatar and suggestions
-  - User and assistant message components with different styling
-  - Action buttons for messages (edit, copy, refresh)
-  - Branch navigation for conversation history
-  - Text-to-speech capability for assistant messages
+  - Dynamic composition interface
+  - Customizable welcome screen
+  - Message styling and actions
+  - Branch navigation
+  - Voice synthesis
 
-### 2. Backend API
+### 2. Backend Architecture
 
 #### Chat API (`src/pages/api/chat.ts`)
-- Handles chat requests using the OpenAI API
-- Processes messages with configurable parameters:
-  - Model selection
-  - Temperature control
-  - Maximum tokens
-  - System prompts
-- Includes error handling and response formatting
-- Uses the Vercel AI SDK for edge runtime compatibility
-
-## Key Features
-
-### Message Handling
-- Supports both user and assistant messages
-- Real-time message streaming
-- Markdown rendering for assistant responses
-- Message editing capabilities
-- Copy to clipboard functionality
-- Message branching for alternate responses
-
-### User Interface
-- Clean, modern design with responsive layout
-- Floating composition bar with send/cancel controls
-- Avatar support for assistant messages
-- Loading states and animations
-- Hover actions for message management
-- Scroll-to-bottom functionality
-
-### Configuration
-- Customizable system prompts
-- Welcome message configuration
-- Suggestion buttons for quick starts
-- Configurable model parameters
+- OpenAI API integration
+- Configurable parameters:
+  ```typescript
+  interface ChatAPIConfig {
+    provider: "openai";
+    model: string;
+    apiEndpoint: string;
+    temperature: number;
+    maxTokens: number;
+    systemPrompt: string | SystemPrompt[];
+    contextData?: string;
+    functions?: ChatFunction[];
+  }
+  ```
+- Edge runtime optimization
 - Error handling and recovery
+- Response streaming
 
-## Implementation Details
+## Advanced Features
 
-### Message Components
+### 1. Message Management
+- Real-time streaming responses
+- Markdown and code rendering
+- Message editing and history
+- Branch navigation
+- Copy functionality
+- Voice synthesis
+- Code syntax highlighting
 
-1. **User Messages**
-   - Right-aligned design
-   - Edit capability
-   - Branch navigation
+### 2. User Interface Modes
 
-2. **Assistant Messages**
-   - Left-aligned with avatar
-   - Markdown rendering
-   - Text-to-speech option
-   - Copy/refresh actions
-   - Branch selection
+#### Quarter Mode (Default)
+```typescript
+<Layout rightPanelMode="quarter">
+  <YourContent />
+</Layout>
+```
+- 25% width side panel
+- Ideal for documentation and content-heavy pages
+- Maintains content visibility
 
-### Composition Interface
-- Auto-expanding text area
-- Send/Cancel toggle based on state
-- Character limit handling
-- Focus management
+#### Floating Mode
+```typescript
+<Layout rightPanelMode="floating">
+  <YourContent />
+</Layout>
+```
+- Detached window
+- Draggable interface
+- Minimal content interference
 
-### State Management
-- Uses Assistant UI runtime for state handling
-- Manages message history and branches
-- Handles loading and error states
-- Controls message streaming
+#### Icon Mode
+```typescript
+<Layout rightPanelMode="icon">
+  <YourContent />
+</Layout>
+```
+- Minimized chat button
+- Expands on click
+- Maximum content space
 
-## Usage
+### 3. Configuration System
 
-The chat interface can be customized through the configuration object in `chat.astro`:
-
+#### Basic Configuration
 ```typescript
 const chatConfig = ChatConfigSchema.parse({
   systemPrompt: [{
     type: "text",
-    text: "Your system prompt here"
+    text: "You are a helpful assistant."
   }],
   welcome: {
-    message: "Custom welcome message",
-    avatar: "/path/to/avatar.svg",
+    message: "👋 How can I help you today?",
+    avatar: "/icon.svg",
     suggestions: [
       {
-        label: "Suggestion Label",
-        prompt: "Actual prompt text"
+        label: "Get Started",
+        prompt: "How do I get started?"
       }
     ]
   }
 });
 ```
 
-## Development Considerations
-
-- Uses edge runtime for optimal performance
-- Implements proper error handling
-- Provides fallback states for loading and errors
-- Maintains responsive design across devices
-- Follows accessibility best practices
+#### Advanced Configuration
+```typescript
+const advancedConfig = {
+  provider: "openai",
+  model: "gpt-4o-mini",
+  temperature: 0.7,
+  maxTokens: 2000,
+  features: {
+    textToSpeech: true,
+    codeHighlight: true,
+    markdown: true,
+    suggestions: true,
+    branchNavigation: true
+  },
+  styles: {
+    theme: "light" | "dark" | "system",
+    accentColor: "#0066FF",
+    messageSpacing: "comfortable" | "compact"
+  }
+};
+```
