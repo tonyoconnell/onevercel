@@ -26,9 +26,16 @@ const chatConfig = ChatConfigSchema.parse({
     ]
   }
 });
+
+const rightPanelMode = 'full'; // You can change this to 'full', 'half', 'floating', or 'icon'
+
 ---
 
-<Layout title="ONE - AI Agents for Every Page" chatConfig={chatConfig}>
+<Layout 
+  title="Astro + shadcn/ui" 
+  chatConfig={chatConfig}
+  rightPanelMode={rightPanelMode}
+>
 	<section class="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
 		<div class="max-w-[64rem] flex flex-col items-center gap-4 text-center mx-auto">
 			<h1 class="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">

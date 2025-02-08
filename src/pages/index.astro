@@ -38,10 +38,10 @@ const chatConfig = ChatConfigSchema.parse({
       }
     ]
   }
-});
+});  
 
 // Set the desired right panel mode
-const rightPanelMode = 'quarter'; // You can change this to 'full', 'half', 'quarter', or 'hidden'
+const rightPanelMode = 'quarter'; // You can change this to 'full', 'half', 'floating', or 'icon'
 ---
 <Layout 
   title="Astro + shadcn/ui" 
@@ -57,7 +57,7 @@ const rightPanelMode = 'quarter'; // You can change this to 'full', 'half', 'qua
 			ONE makes it simple to add powerful AI assistants to every page on your website. Built on Vercel AI SDK and Assistant UI, it's the fastest way to give your visitors 24/7 intelligent support.
 		</p>
 		<div class="space-x-4">
-			<a href="#demo"
+			<a href="chat"
 				class="inline-flex items-center justify-center rounded-md border-2 border-blue-600 text-blue-600 px-6 py-3 text-sm font-medium transition-colors hover:bg-blue-600 hover:text-white">
 				Try Live Demo
 			</a>
@@ -143,7 +143,7 @@ const rightPanelMode = 'quarter'; // You can change this to 'full', 'half', 'qua
 			</div>
 			<div class="flex-1">
 				<div class="rounded-lg border shadow-lg overflow-hidden">
-					<img src="/chat-demo.png" alt="ONE Chat Interface" class="w-full" />
+					<img src="/screenshots/chat.png" alt="ONE Chat Interface" class="w-full" />
 				</div>
 			</div>
 		</div>
@@ -159,9 +159,9 @@ const rightPanelMode = 'quarter'; // You can change this to 'full', 'half', 'qua
 				class="inline-flex items-center justify-center rounded-md border-2 border-blue-600 text-blue-600 px-6 py-3 text-sm font-medium transition-colors hover:bg-blue-600 hover:text-white">
 				Get Started
 			</a>
-			<a href="/pricing"
+			<a href="/download"
 				class="inline-flex items-center justify-center rounded-md border px-6 py-3 text-sm font-medium transition-colors hover:border-blue-600 hover:text-blue-600">
-				View Pricing
+				Download Free
 			</a>
 		</div>
 	</div>
