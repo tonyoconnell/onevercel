@@ -5,7 +5,6 @@ import {
   Download,
   FileText,
   Shield,
-  type LucideIcon
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
