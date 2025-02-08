@@ -1,0 +1,233 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Card } from "@/components/ui/card";
+import { 
+  GitHubLogoIcon,
+  CodeIcon,
+  DownloadIcon,
+  CheckIcon,
+  ArrowRightIcon,
+} from '@radix-ui/react-icons';
+
+// Import license content
+import License from '../../LICENSE?raw';
+import FaqAccordion from "../components/FaqAccordion";
+
+const GITHUB_REPO = "one-ie/one";
+const GITHUB_URL = `https://github.com/${GITHUB_REPO}`;
+const DOWNLOAD_URL = "https://github.com/one-ie/one/archive/refs/heads/main.zip";
+
+const URLS = {
+  clone: `git clone https://github.com/${GITHUB_REPO}.git`,
+  codespace: `https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=${GITHUB_REPO}`,
+  fork: `https://github.com/${GITHUB_REPO}/fork`,
+};
+
+const SYSTEM_REQUIREMENTS = [
+  "Node.js 18.x or higher",
+  "pnpm package manager",
+  "Modern web browser (Chrome, Firefox, Safari, Edge)",
+  "4GB RAM minimum (8GB recommended)",
+  "Any modern operating system (Windows, macOS, Linux)",
+];
+
+const INSTALLATION_STEPS = [
+  {
+    title: "Download the Source",
+    description: "Download the ZIP file or clone the repository using Git",
+  },
+  {
+    title: "Install Dependencies",
+    description: "Run 'pnpm install' to install required packages",
+  },
+  {
+    title: "Configuration",
+    description: "Set up your environment variables following the .env.example",
+  },
+  {
+    title: "Start Development",
+    description: "Run 'pnpm dev' to start the development server",
+  },
+];
+
+const faqs = [
+  {
+    question: "What makes the ONE Free License unique?",
+    answer: "The ONE Free License offers maximum commercial freedom with a simple requirement: maintain our brand visibility. You get unlimited usage rights, complete commercial freedom, and the ability to monetize without any royalty fees - just keep our logo visible in your application."
+  },
+  {
+    question: "What are the brand requirements?",
+    answer: "The only requirement is to display the ONE logo visibly in your application, maintain its original design, and include a link to https://one.ie. All brand assets are available at https://one.ie/brand."
+  },
+  {
+    question: "Can I use ONE in commercial products?",
+    answer: "Absolutely! The license grants unrestricted commercial rights. You can use, modify, license, sublicense, distribute, and monetize ONE in any way - including integration into commercial products, SaaS offerings, and AI applications."
+  },
+  {
+    question: "Who owns the modifications I make to ONE?",
+    answer: "You own any modifications you make to ONE. While we retain ownership of the original software, your innovations and modifications belong to you. You can even patent innovations based on the software."
+  },
+  {
+    question: "Is the ONE Free License compatible with open-source licenses?",
+    answer: "Yes! The ONE Free License is compatible with all major open-source licenses including MIT, Apache 2.0, GPL, BSD, and Mozilla Public License. You can freely combine ONE with other open-source projects."
+  },
+  {
+    question: "What if I need to remove the ONE branding?",
+    answer: "For complete white-labeling rights and removal of brand requirements, we offer an Enterprise License. Visit https://one.ie/enterprise for more information about our Enterprise offering."
+  }
+];
+---
+
+<Layout 
+  title="Download ONE Framework"
+  description="Download the enterprise-grade AI framework that's completely free and open source. Get started in minutes with direct download or Git integration."
+>
+  <main class="container mx-auto px-6 w-full">
+    <section class="min-h-[80vh] flex flex-col justify-center items-center text-center py-12">
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60 max-w-[900px]">
+        Build AI Apps Faster
+      </h1>
+      
+      <p class="text-lg md:text-xl text-muted-foreground max-w-2xl mb-12">
+        The enterprise-grade AI framework that's completely free and open source.
+        Production-ready in minutes, not months.
+      </p>
+
+      <!-- Download Options Grid -->
+      <div class="grid md:grid-cols-2 gap-8 w-full max-w-4xl mb-12">
+        <!-- Direct Download Card -->
+        <Card className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow">
+          <h3 class="text-2xl font-bold mb-4">Quick Download</h3>
+          <p class="text-muted-foreground mb-6">Download the latest stable release directly</p>
+          <a href={DOWNLOAD_URL} class="w-full">
+            <Button size="lg" className="w-full">
+              <DownloadIcon className="mr-2 h-5 w-5" />
+              Download ZIP
+            </Button>
+          </a>
+        </Card>
+
+        <!-- Git Clone Card -->
+        <Card className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow">
+          <h3 class="text-2xl font-bold mb-4">Git Integration</h3>
+          <p class="text-muted-foreground mb-6">Clone the repository using Git</p>
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="w-full group bg-background border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300"
+            onClick={() => navigator.clipboard.writeText(URLS.clone)}
+          >
+            <CodeIcon className="w-5 h-5 mr-2 text-primary" />
+            <code class="font-mono text-sm">git clone {GITHUB_REPO}</code>
+          </Button>
+        </Card>
+      </div>
+
+      <!-- Secondary Options -->
+      <div class="flex flex-wrap gap-4 justify-center mb-12">
+        <a href={URLS.codespace} class="inline-block">
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="group bg-[#0D1117] hover:bg-[#161B22] border-2 border-[#30363D] hover:border-primary text-white transition-all duration-300"
+          >
+            <GitHubLogoIcon className="w-5 h-5 mr-2" />
+            <span>Open in Codespaces</span>
+          </Button>
+        </a>
+        
+        <a href={GITHUB_URL} class="inline-block">
+          <Button variant="outline" size="lg" className="group">
+            <GitHubLogoIcon className="w-5 h-5 mr-2" />
+            <span>View Source</span>
+            <div class="ml-2 px-2 py-0.5 bg-muted rounded-full text-xs font-medium">
+              14.2k ⭐
+            </div>
+          </Button>
+        </a>
+      </div>
+    </section>
+
+    <!-- System Requirements & Installation -->
+    <section class="w-full max-w-[1400px] mb-20 grid md:grid-cols-2 gap-8">
+      <Card className="p-8">
+        <h2 class="text-2xl font-bold mb-6">System Requirements</h2>
+        <ul class="space-y-4">
+          {SYSTEM_REQUIREMENTS.map(req => (
+            <li class="flex items-start">
+              <CheckIcon className="w-5 h-5 mr-2 text-green-500 flex-shrink-0 mt-1" />
+              <span>{req}</span>
+            </li>
+          ))}
+        </ul>
+      </Card>
+
+      <Card className="p-8">
+        <h2 class="text-2xl font-bold mb-6">Installation Guide</h2>
+        <div class="space-y-6">
+          {INSTALLATION_STEPS.map((step, index) => (
+            <div class="flex items-start">
+              <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
+                <span class="font-bold text-primary">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="font-semibold mb-1">{step.title}</h3>
+                <p class="text-muted-foreground text-sm">{step.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </section>
+
+    <section class="w-full max-w-[1400px] mb-20">
+      <h2 class="text-4xl font-bold mb-10 text-center">ONE Free License</h2>
+      <Card className="prose prose-lg max-w-none dark:prose-invert p-8">
+        <pre class="whitespace-pre-wrap text-sm leading-relaxed opacity-90">{License}</pre>
+      </Card>
+    </section>
+
+    <section class="w-full max-w-[1400px] mb-20">
+      <h2 class="text-4xl font-bold mb-10 text-center">Frequently Asked Questions</h2>
+      <FaqAccordion client:idle faqs={faqs} />
+    </section>
+
+    <section class="text-center mb-16 w-full max-w-[1400px]">
+      <Alert className="py-6">
+        <AlertDescription className="text-lg">
+          Join thousands of developers building the future with ONE.
+          <a href={GITHUB_URL} class="inline-block">
+            <Button variant="link" className="ml-3 text-lg">
+              Star on GitHub <GitHubLogoIcon className="ml-2 w-5 h-5" />
+            </Button>
+          </a>
+        </AlertDescription>
+      </Alert>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .prose {
+    @apply mx-auto;
+  }
+  
+  .prose pre {
+    @apply bg-muted;
+  }
+
+  .container {
+    width: 95%;
+    margin: 0 auto;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      width: 100%;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+</style>
