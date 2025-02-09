@@ -17,7 +17,7 @@ export default defineConfig({
   output: 'server',
   adapter: vercel({
     webAnalytics: {
-      enabled: true,
+      enabled: false,
     },
     imageService: true,
     maxDuration: 60,
@@ -33,7 +33,7 @@ export default defineConfig({
     },
     build: {
       cssCodeSplit: false,
-      cssMinify: true,
+      cssMinify: false,
       rollupOptions: {
         output: {
           assetFileNames: '[ext]/[hash][extname]',
