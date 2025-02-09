@@ -27,7 +27,7 @@ export default defineConfig({
       noExternal: ['@radix-ui/*', '@assistant-ui/*', 'lucide-react']
     },
     build: {
-      cssCodeSplit: true,
+      cssCodeSplit: false,
       cssMinify: true,
       rollupOptions: {
         output: {
