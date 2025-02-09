@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   integrations: [
@@ -13,15 +13,6 @@ export default defineConfig({
   ],
   markdown: {
     // markdown config
-  },
-  vite: {
-    assetsInclude: ['**/*.md'],
-    build: {
-      chunkSizeWarningLimit: 1800,     
-    },
-    ssr: {
-      noExternal: ['@assistant-ui/react']
-    }
   },
   output: 'server',
   adapter: vercel({
