@@ -23,10 +23,24 @@ export default defineConfig({
   }),
   vite: {
     ssr: {
-      noExternal: ['@radix-ui/*', 'lucide-react']
+      noExternal: ['@radix-ui/*', 'lucide-react', '@assistant-ui/*'],
     },
     optimizeDeps: {
-      include: ['@radix-ui/react-slot', 'lucide-react']
+      include: ['@radix-ui/react-slot', 'lucide-react', 'nanoid/non-secure/index.js']
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'lucide-icons': ['lucide-react']
+          }
+        }
+      }
+    },
+    resolve: {
+      alias: {
+        'nanoid/non-secure': 'nanoid/non-secure/index.js'
+      }
     }
   }
 });
