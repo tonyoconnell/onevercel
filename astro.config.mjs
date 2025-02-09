@@ -20,7 +20,12 @@ export default defineConfig({
       enabled: true,
     },
     imageService: true,
-    maxDuration: 60
+    maxDuration: 60,
+    imagesConfig: {
+      sizes: [640, 750, 828, 1080, 1200],
+      domains: ['localhost'],
+      minimumCacheTTL: 60
+    }
   }),
   vite: {
     ssr: {
@@ -31,9 +36,9 @@ export default defineConfig({
       cssMinify: true,
       rollupOptions: {
         output: {
-          assetFileNames: 'assets/[hash][extname]',
-          chunkFileNames: 'chunks/[hash].js',
-          entryFileNames: 'entries/[hash].js',
+          assetFileNames: '[ext]/[hash][extname]',
+          chunkFileNames: 'js/[hash].js',
+          entryFileNames: 'js/[hash].js',
           manualChunks(id) {
             if (id.includes('lucide-react')) {
               return 'icons';
