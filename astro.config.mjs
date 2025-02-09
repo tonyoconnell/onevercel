@@ -20,26 +20,32 @@ export default defineConfig({
       enabled: true,
     },
     imageService: true,
+    maxDuration: 60
   }),
   vite: {
     ssr: {
-      noExternal: ['@radix-ui/*', 'lucide-react', '@assistant-ui/*'],
-    },
-    optimizeDeps: {
-      include: ['@radix-ui/react-slot', 'lucide-react', 'nanoid/non-secure/index.js']
+      noExternal: ['@radix-ui/*', '@assistant-ui/*', 'lucide-react']
     },
     build: {
+      chunkSizeWarningLimit: 1000,
+      target: 'node18',
       rollupOptions: {
+        maxParallelFileOps: 5,
         output: {
-          manualChunks: {
-            'lucide-icons': ['lucide-react']
+          entryFileNames: 'entry.[hash].mjs',
+          chunkFileNames: 'chunks/[name].[hash].mjs',
+          assetFileNames: 'assets/[name].[hash][extname]',
+          manualChunks(id) {
+            if (id.includes('lucide-react')) {
+              return 'icons';
+            }
+            if (id.includes('node_modules')) {
+              if (id.includes('@radix-ui')) return 'radix';
+              if (id.includes('@assistant-ui')) return 'assistant';
+              return 'vendor';
+            }
           }
         }
-      }
-    },
-    resolve: {
-      alias: {
-        'nanoid/non-secure': 'nanoid/non-secure/index.js'
       }
     }
   }
