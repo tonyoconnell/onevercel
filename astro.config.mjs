@@ -27,14 +27,13 @@ export default defineConfig({
       noExternal: ['@radix-ui/*', '@assistant-ui/*', 'lucide-react']
     },
     build: {
-      chunkSizeWarningLimit: 1000,
-      target: 'node18',
+      cssCodeSplit: true,
+      cssMinify: true,
       rollupOptions: {
-        maxParallelFileOps: 5,
         output: {
-          entryFileNames: 'entry.[hash].mjs',
-          chunkFileNames: 'chunks/[name].[hash].mjs',
-          assetFileNames: 'assets/[name].[hash][extname]',
+          assetFileNames: 'assets/[hash][extname]',
+          chunkFileNames: 'chunks/[hash].js',
+          entryFileNames: 'entries/[hash].js',
           manualChunks(id) {
             if (id.includes('lucide-react')) {
               return 'icons';
@@ -46,6 +45,11 @@ export default defineConfig({
             }
           }
         }
+      }
+    },
+    css: {
+      modules: {
+        generateScopedName: '[hash:base64:8]'
       }
     }
   }
