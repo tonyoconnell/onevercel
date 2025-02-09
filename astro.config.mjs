@@ -20,5 +20,13 @@ export default defineConfig({
       enabled: true,
     },
     imageService: true,
-  })
+  }),
+  vite: {
+    ssr: {
+      noExternal: ['@radix-ui/*', 'lucide-react']
+    },
+    optimizeDeps: {
+      include: ['@radix-ui/react-slot', 'lucide-react']
+    }
+  }
 });
