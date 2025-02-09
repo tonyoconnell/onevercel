@@ -11,50 +11,25 @@ export default defineConfig({
       applyBaseStyles: false
     }),
   ],
-  markdown: {
-    // markdown config
-  },
   output: 'server',
   adapter: vercel({
     webAnalytics: {
-      enabled: false,
+      enabled: true,
     },
     imageService: true,
-    maxDuration: 60,
-    imagesConfig: {
-      sizes: [640, 750, 828, 1080, 1200],
-      domains: ['localhost'],
-      minimumCacheTTL: 60
-    }
+    maxDuration: 60
   }),
   vite: {
     ssr: {
       noExternal: ['@radix-ui/*', '@assistant-ui/*', 'lucide-react']
     },
     build: {
-      cssCodeSplit: false,
-      cssMinify: false,
       rollupOptions: {
         output: {
-          assetFileNames: '[ext]/[hash][extname]',
-          chunkFileNames: 'js/[hash].js',
-          entryFileNames: 'js/[hash].js',
-          manualChunks(id) {
-            if (id.includes('lucide-react')) {
-              return 'icons';
-            }
-            if (id.includes('node_modules')) {
-              if (id.includes('@radix-ui')) return 'radix';
-              if (id.includes('@assistant-ui')) return 'assistant';
-              return 'vendor';
-            }
-          }
+          assetFileNames: 'assets/[name]-[hash][extname]',
+          chunkFileNames: 'assets/[name]-[hash].js',
+          entryFileNames: 'assets/[name]-[hash].js'
         }
-      }
-    },
-    css: {
-      modules: {
-        generateScopedName: '[hash:base64:8]'
       }
     }
   }
