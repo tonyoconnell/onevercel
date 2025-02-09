@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
-import vercel from '@astrojs/vercel';
+import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
   integrations: [
@@ -14,23 +14,17 @@ export default defineConfig({
   output: 'server',
   adapter: vercel({
     webAnalytics: {
-      enabled: true,
+      enabled: false
     },
-    imageService: true,
-    maxDuration: 60
+    imageService: true
   }),
   vite: {
     ssr: {
       noExternal: ['@radix-ui/*', '@assistant-ui/*', 'lucide-react']
     },
     build: {
-      rollupOptions: {
-        output: {
-          assetFileNames: 'assets/[name]-[hash][extname]',
-          chunkFileNames: 'assets/[name]-[hash].js',
-          entryFileNames: 'assets/[name]-[hash].js'
-        }
-      }
+      assetsInlineLimit: 0,
+      cssCodeSplit: false
     }
   }
 });
