@@ -6,7 +6,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import type { SelectProps } from "@radix-ui/react-select";
-import type { ElementType, SVGProps } from "react";
+import type { SVGProps } from "react";
 
 export const MODELS = [
 	"deepseek-chat",
@@ -113,7 +113,7 @@ const DeepSeek = (props: SVGProps<SVGSVGElement>) => (
 	</svg>
 );
 
-const ModelIcons: Record<Model, ElementType> = {
+const ModelIcons: Record<Model, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
 	"deepseek-chat": DeepSeek,
 	"llama-3.3-70b-versatile": Groq,
 	"llama-3.1-8b-instant": Groq,

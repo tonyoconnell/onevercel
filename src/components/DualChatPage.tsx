@@ -7,7 +7,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import {
   Sidebar,
-  SidebarInset,
   SidebarProvider,
   SidebarTrigger,
   useSidebar,
@@ -48,10 +47,14 @@ const RightSidebar = () => {
           <span className="sr-only">Toggle Chat</span>
         </SidebarTrigger>
       </div>
-      <Sidebar 
-        side="right"  
+      <Sidebar
+        side="right"
         collapsible="offcanvas"
-        className="fixed right-0 top-0 h-screen w-[400px] border-l bg-background shadow-lg"
+        className={`
+          fixed top-0 h-screen w-[400px] border-l bg-background shadow-lg
+          transition-[right] duration-300 ease-in-out
+          ${state === 'expanded' ? 'right-0' : '-right-[400px]'}
+        `}
       >
         <div className="pt-14">
           <ChatSimple />
