@@ -63,7 +63,6 @@ interface CryptoPrices {
 }
 
 export default function CryptoPayment({ 
-  orderId, 
   amount, 
   currency = "USD",
   onSuccess 
@@ -180,7 +179,6 @@ export default function CryptoPayment({
             <QRCode
               value={`${CRYPTO_CONFIG[selectedCrypto].qrPrefix}${CRYPTO_CONFIG[selectedCrypto].address}?amount=${cryptoAmount}`}
               size={200}
-              includeMargin={true}
             />
           </div>
         ) : (
