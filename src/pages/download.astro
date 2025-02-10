@@ -25,21 +25,48 @@ const SYSTEM_REQUIREMENTS = [
 
 const INSTALLATION_STEPS = [
   {
-    title: "Download the Source",
-    description: "Download the ZIP file or clone the repository using Git",
+    title: "Setup Framework",
+    description: "Download and install using Git or ZIP, then run 'pnpm install'",
   },
   {
-    title: "Install Dependencies",
-    description: "Run 'pnpm install' to install required packages",
+    title: "Configure AI Models",
+    description: "Set up AI providers and customize agent behaviors",
   },
   {
-    title: "Configuration",
-    description: "Set up your environment variables following the .env.example",
+    title: "Payment Integration",
+    description: "Configure crypto wallets and payment processors",
   },
   {
-    title: "Start Development",
-    description: "Run 'pnpm dev' to start the development server",
+    title: "Token Setup",
+    description: "Connect wallet and verify token holdings for features",
   },
+  {
+    title: "Deploy Agents",
+    description: "Launch your first AI agent and test transactions",
+  }
+];
+
+const TOKEN_TIERS = [
+  {
+    tokens: "100 ONE",
+    features: "Single project white-label rights",
+    includes: ["Remove branding", "Custom domain", "Basic support"]
+  },
+  {
+    tokens: "1,000 ONE",
+    features: "Multi-domain deployment",
+    includes: ["Multiple projects", "Premium support", "Custom agents"]
+  },
+  {
+    tokens: "10,000 ONE",
+    features: "Unlimited commercial use",
+    includes: ["Unlimited projects", "Priority support", "Advanced features"]
+  },
+  {
+    tokens: "50,000+ ONE",
+    features: "Enterprise package",
+    includes: ["Strategy consulting", "Custom training", "Dedicated support"]
+  }
 ];
 
 const GITHUB_REPO = "one-ie/one";
@@ -56,40 +83,58 @@ const URLS = {
 const chatConfig = ChatConfigSchema.parse({
   systemPrompt: [{
     type: "text" as const,
-    text: `You are ONE's download assistant, focused on helping users download, install, and get started with the framework. Your role includes:
-
-- Guiding users through the download process
-- Helping with installation steps and troubleshooting
-- Explaining system requirements
-- Assisting with initial setup and configuration
-- Answering license-related questions
-
-One is free and open-source see https://one.ie/free-license
-
-Reference the following information to assist users:
-${JSON.stringify({ SYSTEM_REQUIREMENTS, INSTALLATION_STEPS, URLS }, null, 2)}
-
-Keep responses focused on download, installation, and getting started. For other topics, direct users to appropriate documentation sections.`
+    text: `You are ONE's setup specialist, helping users build AI-powered businesses. Your role includes:
+    
+    - Guiding users through framework installation
+    - Setting up AI agents for sales and support
+    - Configuring crypto and traditional payments
+    - Explaining the token-based features
+    - Implementing content automation
+    - Troubleshooting technical issues
+    
+    Key Features to Highlight:
+    1. AI Agent Capabilities
+       • 24/7 automated sales and support
+       • Content generation and optimization
+       • Multi-language support
+       • Custom training options
+    
+    2. Payment Integration
+       • Crypto: BTC, ETH, SOL
+       • Traditional: Cards, transfers
+       • Digital: Apple Pay, Google Pay
+       • Global: Alipay, Klarna
+    
+    3. Token System Benefits
+       • 100 ONE - Single project
+       • 1,000 ONE - Multiple domains
+       • 10,000 ONE - Unlimited projects
+       • 50,000+ ONE - Enterprise features
+    
+    Reference Information:
+    ${JSON.stringify({ SYSTEM_REQUIREMENTS, INSTALLATION_STEPS, URLS }, null, 2)}
+    
+    Focus on helping users deploy their first AI agent and set up payment processing. Guide them through token system benefits.`
   }],
   welcome: {
-    message: "👋 Need help downloading or installing ONE? I can guide you through the process and answer any questions about getting started.",
+    message: "👋 Ready to build your AI-powered business? I'll help you get started with AI agents, payments, and token features.",
     avatar: "/icon.svg",
     suggestions: [
       {
-        label: "💻 System Requirements",
-        prompt: "What are the system requirements for running ONE?"
+        label: "🤖 AI Agent Setup",
+        prompt: "How do I create my first AI sales agent?"
       },
       {
-        label: "📥 Installation Help",
-        prompt: "Walk me through the installation process"
+        label: "💳 Payment Integration",
+        prompt: "Guide me through setting up crypto and traditional payments"
       },
       {
-        label: "🔑 License Questions",
-        prompt: "Can you explain the ONE Free License terms?"
+        label: "🪙 Token Features",
+        prompt: "Explain how the token system works for unlocking features"
       },
       {
-        label: "⚙️ Configuration",
-        prompt: "How do I configure ONE after installation?"
+        label: "📥 Quick Install",
+        prompt: "What's the fastest way to get started with ONE?"
       }
     ]
   }
@@ -114,28 +159,28 @@ const stats = await getGitHubStats();
 
 const faqs = [
   {
-    question: "What makes the ONE Free License unique?",
-    answer: "The ONE Free License offers maximum commercial freedom with a simple requirement: maintain our brand visibility. You get unlimited usage rights, complete commercial freedom, and the ability to monetize without any royalty fees - just keep our logo visible in your application."
+    question: "How do I access white-label features?",
+    answer: "White-label features are accessed through our token system:\n• 100 ONE - Full white-label for single project\n• 1,000 ONE - Multiple domains\n• 10,000 ONE - Unlimited projects\n• 50,000+ ONE - Enterprise with training\n\nJust hold the required tokens in your wallet to unlock features."
   },
   {
-    question: "What are the brand requirements?",
-    answer: "The only requirement is to display the ONE logo visibly in your application, maintain its original design, and include a link to https://one.ie. All brand assets are available at https://one.ie/brand."
+    question: "What payment methods can I integrate?",
+    answer: "ONE supports comprehensive payment options:\n• Cryptocurrencies: BTC, ETH, SOL\n• Traditional: Credit cards, bank transfers\n• Digital wallets: Apple Pay, Google Pay\n• Global options: Alipay, Klarna\n\nAll payment methods include real-time verification and automated processing."
   },
   {
-    question: "Can I use ONE in commercial products?",
-    answer: "Absolutely! The license grants unrestricted commercial rights. You can use, modify, license, sublicense, distribute, and monetize ONE in any way - including integration into commercial products, SaaS offerings, and AI applications."
+    question: "How do I create AI agents?",
+    answer: "Creating AI agents is simple:\n1. Choose agent type (sales, support, content)\n2. Configure AI model and behaviors\n3. Train on your data and content\n4. Set up payment processing if needed\n5. Deploy to your website\n\nFull documentation available at https://one.ie/docs/ai-agents"
   },
   {
-    question: "Who owns the modifications I make to ONE?",
-    answer: "You own any modifications you make to ONE. While we retain ownership of the original software, your innovations and modifications belong to you. You can even patent innovations based on the software."
+    question: "What can AI agents do?",
+    answer: "ONE's AI agents can:\n• Handle complete sales processes\n• Generate and optimize content\n• Process payments and orders\n• Provide 24/7 customer support\n• Create marketing materials\n• Manage social media\n• Operate in multiple languages"
   },
   {
-    question: "Is the ONE Free License compatible with open-source licenses?",
-    answer: "Yes! The ONE Free License is compatible with all major open-source licenses including MIT, Apache 2.0, GPL, BSD, and Mozilla Public License. You can freely combine ONE with other open-source projects."
+    question: "Can I modify the source code?",
+    answer: "Yes! You own any modifications you make. You can customize:\n• AI agent behaviors\n• Payment flows\n• UI/UX design\n• Business logic\n• Integration points\n• Training data\n\nAll while maintaining compatibility with our token system."
   },
   {
-    question: "What if I need to remove the ONE branding?",
-    answer: "For complete white-labeling rights and removal of brand requirements, we offer an Enterprise License. Visit https://one.ie/enterprise for more information about our Enterprise offering."
+    question: "What about enterprise needs?",
+    answer: "For enterprise users holding 50,000+ ONE tokens, we provide:\n• Priority support\n• Custom AI training\n• Advanced features\n• Strategy consulting\n• Team training\n• Custom integrations\n• Dedicated account manager"
   }
 ];
 ---
@@ -288,8 +333,43 @@ const faqs = [
       </Card>
     </section>
 
+    <!-- Token Tiers -->
     <section class="w-full max-w-[1400px] mb-20">
-      <h2 class="text-4xl font-bold mb-10 text-center">ONE Free License</h2>
+      <h2 class="text-4xl font-bold mb-10 text-center">Token-Based Features</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {TOKEN_TIERS.map(tier => (
+          <Card className="p-6 hover:shadow-lg transition-shadow">
+            <div class="flex flex-col h-full">
+              <div class="mb-4">
+                <h3 class="text-2xl font-bold text-primary mb-2">{tier.tokens}</h3>
+                <p class="text-lg font-medium mb-4">{tier.features}</p>
+              </div>
+              <ul class="space-y-3 flex-grow">
+                {tier.includes.map(feature => (
+                  <li class="flex items-start gap-2">
+                    <CheckIcon className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span class="text-muted-foreground">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              <div class="mt-6 pt-4 border-t">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full hover:bg-primary/5"
+                >
+                  Get Tokens
+                </Button>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </section>
+
+    <!-- License Section -->
+    <section class="w-full max-w-[1400px] mb-20">
+      <h2 class="text-4xl font-bold mb-10 text-center">Base License</h2>
       <Card className="prose prose-lg max-w-none dark:prose-invert p-8">
         <pre class="whitespace-pre-wrap text-sm leading-relaxed opacity-90">{License}</pre>
       </Card>
