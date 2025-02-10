@@ -18,13 +18,13 @@ export function ChatSimple({ className, ...props }: ComponentPropsWithoutRef<"di
             api: "/api/chatsimple",
             initialMessages: [
                 {
-                    id: "1",
+                    id: "initial-assistant",
                     content:
                         "Hi! I need help organizing my project management workflow. Can you guide me through some best practices?",
                     role: "assistant",
                 },
                 {
-                    id: "1",
+                    id: "initial-user",
                     content:
                         "Hi! I need help organizing my project management workflow. Can you guide me through some best practices?",
                     role: "user",
