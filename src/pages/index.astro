@@ -1,109 +1,199 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Card } from "@/components/ui/card";
 import { ChatConfigSchema } from '../schema/chat';
+import {
+  GitHubLogoIcon,
+  CodeIcon,
+  DownloadIcon,
+  CheckIcon,
+} from '@radix-ui/react-icons';
+import FaqAccordion from "../components/FaqAccordion";
+
+// Import license content
+import License from '../../LICENSE?raw';
+
+const SYSTEM_REQUIREMENTS = [
+  "Node.js 18.x or higher",
+  "pnpm package manager",
+  "Modern web browser (Chrome, Firefox, Safari, Edge)",
+  "Any modern operating system (Windows, macOS, Linux)",
+  "Deploy on Vercel, Netlify, AWS or any Node.js server",
+];
+
+const INSTALLATION_STEPS = [
+  {
+    title: "Download the Source",
+    description: "Download the ZIP file or clone the repository using Git",
+  },
+  {
+    title: "Install Dependencies",
+    description: "Run 'pnpm install' to install required packages",
+  },
+  {
+    title: "Configuration",
+    description: "Set up your environment variables following the .env.example",
+  },
+  {
+    title: "Start Development",
+    description: "Run 'pnpm dev' to start the development server",
+  },
+];
+
+const faqs = [
+  // Core Features
+  {
+    question: "What can I build with ONE?",
+    answer: "ONE enables you to build complete AI-powered businesses. Key features include: 1) AI Sales Agents that engage customers and close deals 24/7 2) Multi-channel Content Generation for blogs, social media, and marketing 3) Full E-commerce with crypto and traditional payments 4) Custom AI training for your specific business needs."
+  },
+  // Token System
+  {
+    question: "How does the token system work?",
+    answer: "ONE uses a token-based system for accessing premium features: \n• 100 ONE - Full white-label for single project\n• 1,000 ONE - Unlimited white-label for multiple domains\n• 10,000 ONE - Unlimited rights across projects\n• 50,000+ ONE - Enterprise features with strategy and training\n\nTokens can be purchased on supported exchanges and used immediately for unlocking features."
+  },
+  // Payments
+  {
+    question: "What payment methods are supported?",
+    answer: "ONE offers comprehensive payment support:\n• Cryptocurrencies: BTC, ETH, SOL with QR codes\n• Credit Cards & Bank Transfers\n• Digital Wallets: Apple Pay, Google Pay\n• Global Options: Alipay, Klarna, SEPA\n• Real-time payment verification\n• Automatic currency conversion"
+  },
+  // AI Agents
+  {
+    question: "How powerful are the AI agents?",
+    answer: "ONE's AI agents are enterprise-grade and can:\n• Handle complete sales cycles\n• Generate and optimize content\n• Process transactions autonomously\n• Learn from customer interactions\n• Operate in multiple languages\n• Integrate with external systems\n• Maintain context across sessions"
+  },
+  // Content Generation
+  {
+    question: "What type of content can be automated?",
+    answer: "The content automation system handles:\n• Blog posts & articles\n• Social media content\n• Product descriptions\n• Marketing materials\n• Documentation & guides\n• Email campaigns\n• Video scripts & podcasts\n\nAll content is SEO-optimized and maintains your brand voice."
+  },
+  // Technical
+  {
+    question: "What's the technical architecture?",
+    answer: "ONE is built on modern technology:\n• Astro & React for frontend\n• Edge-optimized runtime\n• Vercel AI SDK integration\n• WebSocket for real-time features\n• TypeScript support\n• Shadcn/UI components\n• API-first architecture"
+  },
+  // Getting Started
+  {
+    question: "How do I get started?",
+    answer: "Getting started is straightforward:\n1. Download and install using pnpm\n2. Connect your AI provider (OpenAI, Anthropic, etc.)\n3. Set up payment processing\n4. Configure your first AI agent\n5. Deploy to your preferred platform\n\nVisit https://one.ie/docs/quickstart for step-by-step guidance."
+  },
+  // Customization
+  {
+    question: "Can I customize everything?",
+    answer: "Yes, ONE is fully customizable:\n• Create custom AI agents\n• Design unique workflows\n• Build custom UI components\n• Set up custom payment flows\n• Define business rules\n• Create specialized content templates\n• Implement custom authentication"
+  }
+];
 
 // You can override any default values here
 const chatConfig = ChatConfigSchema.parse({
   systemPrompt: [{
     type: "text" as const,
-    text: `You are the ONE framework's primary AI advocate and assistant, designed to engage visitors in meaningful conversations about our powerful, free AI development platform. Your role goes beyond navigation - you're here to showcase our features, demonstrate our value, and help users understand why ONE is the best choice for their AI development needs.
+    text: `You are ONE's lead AI advocate, helping users understand how to build AI-powered businesses with our framework. Your role is to guide visitors through our comprehensive platform that combines AI agents, crypto payments, and content automation.
 
-Core Benefits:
-- 100% Free & Open Source
-  • Complete commercial freedom
-  • No hidden costs or royalties
-  • Enterprise-grade capabilities
-  • White-label ready
+Core Capabilities:
+1. AI Agents & Automation
+   • Autonomous sales agents 24/7
+   • Content generation & optimization
+   • Social media management
+   • Customer interaction handling
+   • Multi-language support
+   • Context-aware responses
+   • Custom training options
 
-- Advanced AI Integration
-  • Built on Vercel AI SDK
-  • Real-time streaming responses
-  • Multiple AI model support
-  • Edge-optimized performance
+2. Payment Integration
+   • Cryptocurrency (BTC, ETH, SOL)
+   • Traditional payments (Credit Cards)
+   • Digital wallets (Apple Pay, Google Pay)
+   • Global options (Alipay, Klarna)
+   • Real-time verification
+   • QR code support
+   • Automatic conversion
 
-- Developer Experience
-  • Astro-based architecture
-  • React component library
-  • shadcn/ui integration
-  • TypeScript support
+3. Token System
+   • 100 ONE - Single project white-label
+   • 1,000 ONE - Multiple domains
+   • 10,000 ONE - Unlimited rights
+   • 50,000+ ONE - Enterprise features
+   • Instant feature unlocking
+   • Token staking benefits
+   • Trading flexibility
 
-Key Features:
-1. AI Capabilities
-   • Streaming chat interface
-   • Voice synthesis
-   • Code highlighting
-   • Markdown support
-   • Branch navigation
-   • Context awareness
+4. Content Automation
+   • Blog post generation
+   • Social media content
+   • Product descriptions
+   • Marketing materials
+   • Documentation
+   • Email campaigns
+   • SEO optimization
 
-2. UI Components
-   • Multiple panel modes
-   • Responsive design
-   • Dark/light themes
-   • Custom theming
-   • Accessibility support
+Technical Foundation:
+• Modern Stack
+  - Astro & React
+  - Edge Runtime
+  - TypeScript
+  - Vercel AI SDK
+  - WebSocket
+  - Shadcn/UI
+  - API-first
 
-3. Performance
-   • Edge runtime
-   • Optimal caching
-   • Fast page loads
-   • SEO optimized
+• Enterprise Features
+  - Custom AI training
+  - Business logic integration
+  - Workflow automation
+  - Multi-channel deployment
+  - Analytics & tracking
+  - Security measures
+  - Scalability options
 
-Technical Stack:
-- Astro - Core framework
-- React - Component library
-- shadcn/ui - UI components
-- Vercel AI SDK - AI integration
-- Edge Runtime - Performance optimization
+Communication Style:
+• Be solution-focused
+• Highlight practical applications
+• Explain token benefits clearly
+• Share specific examples
+• Provide implementation steps
+• Address technical & business needs
+• Maintain professional enthusiasm
 
-Response Style:
-- Be enthusiastic but professional
-- Show excitement about features
-- Maintain technical accuracy
-- Use emojis sparingly
-- Provide code examples when relevant
-- Guide users toward implementation
-- Keep conversations flowing naturally
-- Focus on solutions and possibilities
+Key Points to Emphasize:
+• Complete business solution
+• Token-based white-labeling
+• Comprehensive payment options
+• AI agent capabilities
+• Content automation power
+• Easy implementation
+• Scalable architecture
 
-Remember to:
-- Showcase features naturally through conversation
-- Emphasize the free, open-source nature
-- Demonstrate value through examples
-- Guide users toward implementation
-- Build excitement about possibilities
-- Address concerns proactively
-- Keep conversations flowing naturally
-
-Your goal is to excite users about ONE's possibilities and guide them toward successful implementation while making them feel confident that ONE is the right choice for their AI development needs.`
+Your goal is to help users understand how ONE can transform their business with AI agents, automated content, and integrated payments while explaining our token-based system for accessing premium features.`
   }],
   welcome: {
-    message: "👋 Welcome! I'm excited to show you how ONE can transform your development process. What would you like to know about our free, enterprise-grade AI framework?",
+    message: "👋 Welcome! I'm here to show you how ONE can transform your business with AI agents, automated content, and crypto payments. What would you like to learn about?",
     avatar: "/icon.svg",
     suggestions: [
       {
-        label: "💡 What makes ONE special?",
-        prompt: "What makes ONE different from other AI frameworks?"
+        label: "🤖 AI Agents",
+        prompt: "Tell me about ONE's AI agent capabilities for sales and automation"
+      },
+      {
+        label: "💳 Payment Options",
+        prompt: "What payment methods does ONE support, including crypto?"
+      },
+      {
+        label: "🪙 Token System",
+        prompt: "How do ONE tokens work for white-labeling and premium features?"
+      },
+      {
+        label: "✍️ Content Generation",
+        prompt: "What kind of content can ONE automatically generate?"
       },
       {
         label: "🚀 Quick Start",
-        prompt: "How can I get started with ONE in the next 5 minutes?"
+        prompt: "How can I deploy my first AI agent with ONE?"
       },
       {
-        label: "💼 Commercial Usage",
-        prompt: "Can I use ONE for commercial projects? What are the terms?"
-      },
-      {
-        label: "⚡ Technical Features",
-        prompt: "What are the main technical features and capabilities of ONE?"
-      },
-      {
-        label: "🎨 UI Components",
-        prompt: "Tell me about ONE's UI components and customization options."
-      },
-      {
-        label: "🔄 Integration",
-        prompt: "How can I integrate ONE into my existing project?"
+        label: "💼 Enterprise Features",
+        prompt: "What enterprise-level features does ONE offer?"
       }
     ]
   }
@@ -259,4 +349,178 @@ Crypto Integration
 </div>
 </div>
 </section>
+
+<!-- Download Options Grid -->
+<section class="container mx-auto px-6 py-20 border-t">
+  <h2 class="text-3xl font-bold text-center mb-12">Download & Get Started</h2>
+  <div class="grid md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto mb-12">
+    <!-- Direct Download Card -->
+    <Card className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow">
+      <h3 class="text-2xl font-bold mb-4">Quick Download</h3>
+      <p class="text-muted-foreground mb-6">Download the latest stable release directly</p>
+      <a href={`https://github.com/one-ie/one/archive/refs/heads/main.zip`} class="w-full">
+        <Button size="lg" className="w-full">
+          <DownloadIcon className="mr-2 h-5 w-5" />
+          Download ZIP
+        </Button>
+      </a>
+    </Card>
+
+    <!-- Git Clone Card -->
+    <Card className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow">
+      <h3 class="text-2xl font-bold mb-4">Git Integration</h3>
+      <p class="text-muted-foreground mb-6">Clone the repository using Git</p>
+      <Button
+        variant="outline"
+        size="lg"
+        className="w-full group bg-background border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300 text-foreground hover:text-foreground"
+        id="copyCloneCommand"
+      >
+        <CodeIcon className="w-5 h-5 mr-2 text-primary" />
+        <code class="font-mono text-sm">git clone one-ie/one</code>
+      </Button>
+      <p id="copyMessage" class="mt-2 text-sm text-primary opacity-0 transition-opacity duration-200">
+        Copied to clipboard!
+      </p>
+    </Card>
+  </div>
+
+  <!-- Secondary Options -->
+  <div class="flex flex-wrap gap-4 justify-center mb-12">
+    <a href="https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=one-ie/one" class="inline-block">
+      <Button
+        variant="outline"
+        size="lg"
+        className="group bg-[#0D1117] hover:bg-[#161B22] border-2 border-[#30363D] hover:border-primary text-white hover:text-white transition-all duration-300"
+      >
+        <GitHubLogoIcon className="w-5 h-5 mr-2" />
+        <span>Open in Codespaces</span>
+      </Button>
+    </a>
+    
+    <a href="https://github.com/one-ie/one" class="inline-block">
+      <Button
+        variant="outline"
+        size="lg"
+        className="group text-foreground hover:text-foreground"
+      >
+        <GitHubLogoIcon className="w-5 h-5 mr-2" />
+        <span>View Source</span>
+        <div class="ml-2 px-2 py-0.5 bg-muted rounded-full text-xs font-medium">
+          14.2k ⭐
+        </div>
+      </Button>
+    </a>
+
+    <a href="https://github.com/one-ie/one/fork" class="inline-block">
+      <Button
+        variant="outline"
+        size="lg"
+        className="group text-foreground hover:text-foreground"
+      >
+        <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 5C7 3.89543 7.89543 3 9 3C10.1046 3 11 3.89543 11 5C11 5.74028 10.5978 6.38663 10 6.73244V14.0396H14.7761C15.1132 13.4132 15.7859 13 16.5 13C17.6046 13 18.5 13.8954 18.5 15C18.5 16.1046 17.6046 17 16.5 17C15.7859 17 15.1132 16.5868 14.7761 15.9604H10V17.2676C10.5978 17.6134 11 18.2597 11 19C11 20.1046 10.1046 21 9 21C7.89543 21 7 20.1046 7 19C7 18.2597 7.40221 17.6134 8 17.2676V6.73244C7.40221 6.38663 7 5.74028 7 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Fork Project</span>
+        <div class="ml-2 px-2 py-0.5 bg-muted rounded-full text-xs font-medium">
+          3.1k
+        </div>
+      </Button>
+    </a>
+  </div>
+</section>
+
+<!-- System Requirements & Installation -->
+<section class="container mx-auto px-6 py-20 border-t">
+  <div class="w-full max-w-[1400px] mx-auto grid md:grid-cols-2 gap-8">
+    <Card className="p-8">
+      <h2 class="text-2xl font-bold mb-6">System Requirements</h2>
+      <ul class="space-y-4">
+        {SYSTEM_REQUIREMENTS.map(req => (
+          <li class="flex items-start">
+            <CheckIcon className="w-5 h-5 mr-2 text-green-500 flex-shrink-0 mt-1" />
+            <span>{req}</span>
+          </li>
+        ))}
+      </ul>
+    </Card>
+
+    <Card className="p-8">
+      <h2 class="text-2xl font-bold mb-6">Installation Guide</h2>
+      <div class="space-y-6">
+        {INSTALLATION_STEPS.map((step, index) => (
+          <div class="flex items-start">
+            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
+              <span class="font-bold text-primary">{index + 1}</span>
+            </div>
+            <div>
+              <h3 class="font-semibold mb-1">{step.title}</h3>
+              <p class="text-muted-foreground text-sm">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Card>
+  </div>
+</section>
+
+<!-- License Section -->
+<section class="container mx-auto px-6 py-20 border-t">
+  <div class="w-full max-w-[1400px] mx-auto">
+    <h2 class="text-4xl font-bold mb-10 text-center">ONE Free License</h2>
+    <Card className="prose prose-lg max-w-none dark:prose-invert p-8">
+      <pre class="whitespace-pre-wrap text-sm leading-relaxed opacity-90">{License}</pre>
+    </Card>
+  </div>
+</section>
+
+<!-- FAQs -->
+<section class="container mx-auto px-6 py-20 border-t">
+  <div class="w-full max-w-[1400px] mx-auto">
+    <h2 class="text-4xl font-bold mb-10 text-center">Frequently Asked Questions</h2>
+    <FaqAccordion client:idle faqs={faqs} />
+  </div>
+</section>
+
+<!-- GitHub Call-to-Action -->
+<section class="container mx-auto px-6 pb-20">
+  <div class="text-center w-full max-w-[1400px] mx-auto">
+    <Alert className="py-6">
+      <AlertDescription className="text-lg">
+        Join thousands of developers building the future with ONE.
+        <a href="https://github.com/one-ie/one" class="inline-block">
+          <Button variant="link" className="ml-3 text-lg text-foreground hover:text-foreground">
+            Star on GitHub <GitHubLogoIcon className="ml-2 w-5 h-5" />
+          </Button>
+        </a>
+      </AlertDescription>
+    </Alert>
+  </div>
+</section>
 </Layout>
+
+<style>
+  .prose {
+    @apply mx-auto;
+  }
+  
+  .prose pre {
+    @apply bg-muted;
+  }
+</style>
+
+<script>
+  // Handle copy functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const copyButton = document.getElementById('copyCloneCommand');
+    const copyMessage = document.getElementById('copyMessage');
+    
+    if (copyButton && copyMessage) {
+      copyButton.addEventListener('click', () => {
+        navigator.clipboard.writeText('git clone one-ie/one');
+        copyMessage.classList.remove('opacity-0');
+        setTimeout(() => copyMessage.classList.add('opacity-0'), 2000);
+      });
+    }
+  });
+</script>

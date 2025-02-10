@@ -10,21 +10,23 @@ chatConfig:
   maxTokens: 4000
   systemPrompt:
     - type: text
-      text: "You are a licensing expert focused on helping visitors understand the ONE License terms and benefits. You provide clear, accurate information about licensing terms, commercial rights, and usage requirements."
+      text: "You are ONE's licensing and token expert, helping visitors understand our unique token-based licensing system and framework capabilities. You explain how ONE tokens enable white-labeling and premium features, guide users through AI agent development, and clarify our payment integration options including both crypto and traditional methods. You provide clear, accurate information about token tiers, commercial rights, and technical capabilities."
   welcome:
     message: "👋 Hello! I can help explain the ONE License terms and how you can use them for your business."
     avatar: "/icon.svg"
     suggestions:
-      - label: "💡 Commercial Rights"
-        prompt: "What commercial rights do I get with the ONE License?"
-      - label: "🚀 Getting Started"
-        prompt: "What are the steps to start using the ONE License?"
-      - label: "💼 White Label Options"
-        prompt: "Tell me about white-label possibilities with ONE License"
-      - label: "⚖️ License Compatibility" 
-        prompt: "How does ONE License work with other open source licenses?"
-      - label: "🔄 Requirements"
-        prompt: "What are the requirements for using the ONE License?"
+      - label: "🪙 Token Benefits"
+        prompt: "How do ONE tokens work for white-labeling?"
+      - label: "🤖 AI Capabilities"
+        prompt: "What AI features are included with ONE?"
+      - label: "💳 Payment Options"
+        prompt: "What payment methods does ONE support?"
+      - label: "🚀 Quick Start"
+        prompt: "How do I get started with ONE?"
+      - label: "💼 Business Use"
+        prompt: "How can I use ONE for my business?"
+      - label: "🌟 Premium Features"
+        prompt: "What features come with token holding?"
 ---
 # ONE License (Version 1.0)
 
@@ -71,10 +73,38 @@ Just two easy steps:
 1. Register for free at [one.ie](https://one.ie)
 2. Display the ONE logo with a link to one.ie in your application
 
-## White-Label Options
+## White-Label with ONE Token
 
-Want to remove our branding? We offer white-label rights for qualified partners.
-Contact [agent@one.ie](mailto:agent@one.ie) to discuss partnership opportunities.
+Remove our branding instantly by holding ONE tokens:
+
+- **100 ONE** - Full white-label rights for a single project
+- **1.000 ONE** - Unlimited white-label for multiple domains
+- **10,000 ONE** - Unlimited white-label rights across all projects
+- **50,000+ ONE** - Enterprise white-label with strategy and training
+
+Benefits include:
+- Complete branding removal
+- Full commercial rights
+- Acess to private Github Repo
+
+### Token-Based Licensing
+
+1. **Automatic Verification**
+   - Hold required ONE tokens in your wallet
+   - Connect wallet to your project
+   - Instantly unlock white-label features
+
+2. **Flexible Options**
+   - Purchase tokens on supported exchanges
+   - Stake tokens for additional benefits
+   - Trade or transfer rights as needed
+
+3. **Enterprise Features**
+   - Custom token allocations available
+   - Multi-project licensing
+   - Priority support and updates
+
+Contact [token@one.ie](mailto:token@one.ie) to discuss token-based licensing or visit our [token dashboard](https://one.ie/token).
 
 ## Legal Protection
 
