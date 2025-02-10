@@ -25,22 +25,41 @@ Before you begin, ensure you have:
 
 ## Quick Start
 
-### 1. Get the Project
+### 1. Get the Project 🚀
 
-You have three options to get started with ONE:
+Choose your preferred way to get started with ONE:
 
-#### Option 1: Clone the repository
+<details>
+<summary>📦 Option 1: Clone the Repository</summary>
+
+```bash
 git clone https://github.com/one-ie/one.git
-
-#### Option 2: Download the ZIP file
-Visit: https://github.com/one-ie/one/archive/refs/heads/main.zip
-
-#### Option 3: Fork the repository
-Visit: https://github.com/one-ie/one/fork
+cd one
 ```
+</details>
 
-You can also create a new project directly in GitHub Codespaces:
-[Open in Codespaces](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=one-ie/one)
+<details>
+<summary>💾 Option 2: Download ZIP</summary>
+
+1. Download the ZIP file:
+   [Download ONE](https://github.com/one-ie/one/archive/refs/heads/main.zip)
+2. Extract the contents
+3. Navigate to the project directory
+</details>
+
+<details>
+<summary>🔄 Option 3: Fork the Repository</summary>
+
+1. Visit the [Fork page](https://github.com/one-ie/one/fork)
+2. Create your fork
+3. Clone your forked repository
+</details>
+
+#### ☁️ Quick Start with GitHub Codespaces
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=one-ie/one)
+
+Click the button above to instantly start developing in a cloud environment.
 
 ### 2. Install Dependencies
 
