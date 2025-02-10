@@ -1,19 +1,15 @@
 # 🚀 ONE - Build AI-Powered Businesses
 
-Combining Astro's performance with Shadcn's beautiful components, featuring AI agents, crypto payments, and content automation.
+ONE is a powerful, modern web development framework that combines the blazing-fast performance of Astro with the elegant components of Shadcn/UI. This enterprise-ready starter kit empowers developers to build AI-powered applications with:
 
-## ✨ Key Features
+- ⚡ **High Performance**: Astro's partial hydration ensures minimal JavaScript
+- 🎨 **Beautiful UI**: Pre-configured Shadcn components with full TypeScript support
+- 🤖 **AI Integration**: Built-in tools for AI-powered features and automation
+- 📱 **Responsive Design**: Mobile-first approach with Tailwind CSS
+- 🔒 **Type Safety**: Full TypeScript support throughout the codebase
+- 🛠️ **Developer Experience**: Hot reloading, intuitive project structure, and comprehensive documentation
 
-- 🤖 **AI Agents**: Built-in support for intelligent AI assistants
-- 💰 **Crypto Payments**: Integrated cryptocurrency payment system
-- 📝 **Content Automation**: Automated content generation and management
-- 🎯 **Token System**: Flexible token-based authentication and authorization
-- ⚡ **High Performance**: Lightning-fast page loads and optimal SEO
-- 🎨 **Beautiful UI**: Pre-configured Shadcn components
-
-### 🎨 Screenshots
-![Dark Mode](https://astro-shadcn.one.ie/screenshots/screenshot-dark.png)
-![Light Mode](https://astro-shadcn.one.ie/screenshots/screenshot-light.png)
+Perfect for building modern web applications, from simple landing pages to complex AI-powered platforms.
 
 ## ⚡ Quick Start
 
