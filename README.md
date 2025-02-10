@@ -58,8 +58,7 @@ Visit `http://localhost:4321` - You're ready to go! 🎉
 
 ## Step 1: Create Your Markdown File
 
-Create a new markdown file in your pages directory (e.g., `src/pages/your-page.md`):
----
+Create a new markdown file in your pages directory (e.g., src/pages/your-page.md)
 layout: ../layouts/Text.astro
 title: "ONE License"  
 description: "Maximum Freedom. Zero Restrictions"
