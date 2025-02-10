@@ -25,24 +25,24 @@ const SYSTEM_REQUIREMENTS = [
 
 const INSTALLATION_STEPS = [
   {
-    title: "Setup Framework",
-    description: "Download and install using Git or ZIP, then run 'pnpm install'",
+    title: "Get the Code",
+    description: "Download ZIP or clone with Git - takes just seconds",
   },
   {
-    title: "Configure AI Models",
-    description: "Set up AI providers and customize agent behaviors",
+    title: "Quick Setup",
+    description: "Run 'pnpm install' to install dependencies",
   },
   {
-    title: "Payment Integration",
-    description: "Configure crypto wallets and payment processors",
+    title: "Configure",
+    description: "Set up your environment variables and AI providers",
   },
   {
-    title: "Token Setup",
-    description: "Connect wallet and verify token holdings for features",
+    title: "Deploy Anywhere",
+    description: "Push to Vercel, AWS, or your own server",
   },
   {
-    title: "Deploy Agents",
-    description: "Launch your first AI agent and test transactions",
+    title: "Start Building",
+    description: "Create your first AI agent and go live",
   }
 ];
 
@@ -85,11 +85,10 @@ const chatConfig = ChatConfigSchema.parse({
     type: "text" as const,
     text: `You are ONE's setup specialist, helping users build AI-powered businesses. Your role includes:
     
-    - Guiding users through framework installation
+    - Fast framework installation and deployment
     - Setting up AI agents for sales and support
-    - Configuring crypto and traditional payments
-    - Explaining the token-based features
-    - Implementing content automation
+    - Configuring payment systems and automation
+    - Implementing content generation
     - Troubleshooting technical issues
     
     Key Features to Highlight:
@@ -159,8 +158,12 @@ const stats = await getGitHubStats();
 
 const faqs = [
   {
-    question: "How do I access white-label features?",
-    answer: "White-label features are accessed through our token system:\n• 100 ONE - Full white-label for single project\n• 1,000 ONE - Multiple domains\n• 10,000 ONE - Unlimited projects\n• 50,000+ ONE - Enterprise with training\n\nJust hold the required tokens in your wallet to unlock features."
+    question: "Is ONE really free?",
+    answer: "Yes! ONE is 100% free and open source forever. The core framework, including AI agents, payment processing, and all features are completely free to use. There are no hidden costs or proprietary lock-in."
+  },
+  {
+    question: "How quickly can I deploy?",
+    answer: "Deployment is super fast and flexible! You can:\n• Deploy to Vercel in under 5 minutes\n• Use your own server infrastructure\n• Host on AWS, Google Cloud, or Azure\n• Use any Node.js compatible platform\n\nThe framework is platform-agnostic and runs anywhere."
   },
   {
     question: "What payment methods can I integrate?",
@@ -192,9 +195,18 @@ const faqs = [
   rightPanelMode="quarter"
 >
   <main class="container mx-auto px-6 w-full">
-    
+    <section class="py-12 text-center max-w-4xl mx-auto mb-12">
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
+        Build & Deploy in Minutes
+        <span class="block mt-2">100% Free Forever</span>
+      </h1>
+      <p class="text-xl text-muted-foreground mb-8">
+        ONE is completely free and open source. Get started in minutes with zero setup complexity.
+        Deploy anywhere - from Vercel to your own infrastructure.
+      </p>
+    </section>
 
-      <!-- Download Options Grid -->
+    <!-- Download Options Grid -->
       <div class="grid md:grid-cols-2 gap-8 w-full max-w-4xl mb-12">
         <!-- Direct Download Card -->
         <Card className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow">
@@ -270,77 +282,10 @@ const faqs = [
           </Button>
         </a>
       </div>
-    </section>
-
-    <!-- System Requirements & Installation -->
-    <section class="w-full max-w-[1400px] mb-20 grid md:grid-cols-2 gap-8">
-      <Card className="p-8">
-        <h2 class="text-2xl font-bold mb-6">System Requirements</h2>
-        <ul class="space-y-4">
-          {SYSTEM_REQUIREMENTS.map(req => (
-            <li class="flex items-start">
-              <CheckIcon className="w-5 h-5 mr-2 text-green-500 flex-shrink-0 mt-1" />
-              <span>{req}</span>
-            </li>
-          ))}
-        </ul>
-      </Card>
-
-      <Card className="p-8">
-        <h2 class="text-2xl font-bold mb-6">Installation Guide</h2>
-        <div class="space-y-6">
-          {INSTALLATION_STEPS.map((step, index) => (
-            <div class="flex items-start">
-              <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
-                <span class="font-bold text-primary">{index + 1}</span>
-              </div>
-              <div>
-                <h3 class="font-semibold mb-1">{step.title}</h3>
-                <p class="text-muted-foreground text-sm">{step.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </Card>
-    </section>
-
-    <!-- Token Tiers -->
-    <section class="w-full max-w-[1400px] mb-20">
-      <h2 class="text-4xl font-bold mb-10 text-center">Token-Based Features</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {TOKEN_TIERS.map(tier => (
-          <Card className="p-6 hover:shadow-lg transition-shadow">
-            <div class="flex flex-col h-full">
-              <div class="mb-4">
-                <h3 class="text-2xl font-bold text-primary mb-2">{tier.tokens}</h3>
-                <p class="text-lg font-medium mb-4">{tier.features}</p>
-              </div>
-              <ul class="space-y-3 flex-grow">
-                {tier.includes.map(feature => (
-                  <li class="flex items-start gap-2">
-                    <CheckIcon className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <span class="text-muted-foreground">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <div class="mt-6 pt-4 border-t">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-full hover:bg-primary/5"
-                >
-                  Get Tokens
-                </Button>
-              </div>
-            </div>
-          </Card>
-        ))}
-      </div>
-    </section>
 
     <!-- License Section -->
     <section class="w-full max-w-[1400px] mb-20">
-      <h2 class="text-4xl font-bold mb-10 text-center">Base License</h2>
+      <h2 class="text-4xl font-bold mb-10 text-center">License</h2>
       <Card className="prose prose-lg max-w-none dark:prose-invert p-8">
         <pre class="whitespace-pre-wrap text-sm leading-relaxed opacity-90">{License}</pre>
       </Card>
@@ -354,7 +299,7 @@ const faqs = [
     <section class="text-center mb-16 w-full max-w-[1400px]">
       <Alert className="py-6">
         <AlertDescription className="text-lg">
-          Join thousands of developers building the future with ONE.
+          Join developers at the frontier of AI building the future with ONE.
           <a href={GITHUB_URL} class="inline-block">
             <Button variant="link" className="ml-3 text-lg text-foreground hover:text-foreground">
               Star on GitHub <GitHubLogoIcon className="ml-2 w-5 h-5" />
