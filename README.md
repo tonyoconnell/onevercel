@@ -56,63 +56,255 @@ Visit `http://localhost:4321` - You're ready to go! 🎉
 
 ## 📝 Creating Your First Page
 
-### Adding a Markdown Page
+## Step 1: Create Your Markdown File
 
-1. **Create a New File**
-Create `src/pages/my-first-page.md`:
-
-```markdown
+Create a new markdown file in your pages directory (e.g., `src/pages/your-page.md`):
 ---
-title: My First Page
-layout: ../layouts/Layout.astro
+layout: ../layouts/Text.astro
+title: "ONE License"  
+description: "Maximum Freedom. Zero Restrictions"
+chatConfig:
+  provider: openai
+  model: "gpt-4o-mini"
+  apiEndpoint: "https://api.openai.com/v1"
+  temperature: 0.7
+  maxTokens: 4000
+  systemPrompt:
+    - type: text
+      text: "You are ONE's licensing and token expert, helping visitors understand our unique token-based licensing system and framework capabilities. You explain how ONE tokens enable white-labeling and premium features, guide users through AI agent development, and clarify our payment integration options including both crypto and traditional methods. You provide clear, accurate information about token tiers, commercial rights, and technical capabilities."
+  welcome:
+    message: "👋 Hello! I can help explain the ONE License terms and how you can use them for your business."
+    avatar: "/icon.svg"
+    suggestions:
+      - label: "🪙 Token Benefits"
+        prompt: "How do ONE tokens work for white-labeling?"
+      - label: "🤖 AI Capabilities"
+        prompt: "What AI features are included with ONE?"
+      - label: "💳 Payment Options"
+        prompt: "What payment methods does ONE support?"
+      - label: "🚀 Quick Start"
+        prompt: "How do I get started with ONE?"
+      - label: "💼 Business Use"
+        prompt: "How can I use ONE for my business?"
+      - label: "🌟 Premium Features"
+        prompt: "What features come with token holding?"
 ---
+# ONE License (Version 1.0)
 
-# Welcome to My First Page
+## Unlimited Commercial Freedom
 
-This is a markdown page with full support for:
-- ✨ Markdown syntax
-- 🎨 Tailwind CSS classes
-- 🧩 Shadcn/UI components
+ONE License gives you complete commercial freedom. Build products, create services, and generate revenue without restrictions. No usage limits. No royalty fees. Just pure business potential.
+
+## Key Benefits
+
+- **✨ 100% Commercial Rights** - Sell products and services at any price point
+- **🚀 Full Modification Rights** - Customize and adapt the software freely
+- **💼 White-Label Ready** - Brand as your own solution
+- **🔄 Perpetual Usage** - Rights never expire
+- **🤝 Enterprise-Friendly** - Compatible with all major licenses
+
+# Getting Started with ONE
+
+This guide will help you set up and start building AI-powered applications using the ONE framework. ONE combines Astro, React, and modern AI capabilities to create intelligent web applications.
+
+## Prerequisites
+
+Before you begin, ensure you have:
+- Node.js 18 or higher installed
+- pnpm package manager (`npm install -g pnpm`)
+- An OpenAI API key (for AI capabilities)
+- Basic knowledge of Astro and React
+
+## Quick Start
+
+### 1. Get the Project
+
+You have three options to get started with ONE:
+
+```bash
+# Option 1: Clone the repository
+git clone https://github.com/one-ie/one.git
+
+# Option 2: Download the ZIP file
+# Visit: https://github.com/one-ie/one/archive/refs/heads/main.zip
+
+# Option 3: Fork the repository
+# Visit: https://github.com/one-ie/one/fork
 ```
 
-2. **Using Components in Markdown**
-```markdown
----
-title: Interactive Page
-layout: ../layouts/Layout.astro
----
+You can also create a new project directly in GitHub Codespaces:
+[Open in Codespaces](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=one-ie/one)
 
-import { Button } from "@/components/ui/button"
+### 2. Install Dependencies
 
-# Interactive Markdown
+```bash
+# Navigate to project directory
+cd one
 
-<Button client:load>Click Me!</Button>
+# Install dependencies
+pnpm install
 ```
 
-### Creating an Astro Page
+### 3. Configure Environment Variables
 
-1. **Create a New File**
-Create `src/pages/my-component-page.astro`:
+Create a `.env` file in your project root:
+
+```env
+OPENAI_API_KEY=your_api_key_here
+```
+
+### 4. Start Development Server
+
+```bash
+pnpm dev
+```
+
+Visit `http://localhost:3000` to see your application running.
+
+## Project Structure
+
+```
+one/
+├── src/
+│   ├── components/     # UI components
+│   ├── layouts/       # Page layouts
+│   ├── pages/         # Routes and pages
+│   ├── content/       # Markdown content
+│   └── styles/        # Global styles
+└── public/           # Static assets
+```
+
+## Adding AI Chat to a Page
+
+1. Create a new page (e.g., `src/pages/chat.astro`):
 
 ```astro
 ---
-import Layout from '../layouts/Layout.astro';
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import Layout from "../layouts/Layout.astro";
+import { ChatConfigSchema } from '../schema/chat';
+
+const chatConfig = ChatConfigSchema.parse({
+  systemPrompt: [{
+    type: "text",
+    text: "You are a helpful assistant."
+  }],
+  welcome: {
+    message: "👋 How can I help you today?",
+    avatar: "/icon.svg",
+    suggestions: [
+      {
+        label: "Get Started",
+        prompt: "How do I get started with ONE?"
+      }
+    ]
+  }
+});
 ---
 
-<Layout title="Component Page">
-  <main class="container mx-auto p-4">
-    <Card>
-      <CardHeader>
-        <CardTitle>Welcome!</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <Button client:load>Interactive Button</Button>
-      </CardContent>
-    </Card>
+<Layout 
+  title="Chat Page"
+  chatConfig={chatConfig}
+  rightPanelMode="quarter"
+>
+  <main>
+    <h1>Welcome to the Chat</h1>
+    <!-- Your page content here -->
   </main>
 </Layout>
+```
+
+## Customizing the Chat Interface
+
+### Chat Configuration Options
+
+```typescript
+const chatConfig = {
+  provider: "openai",          // AI provider
+  model: "gpt-4o-mini",       // Model to use
+  apiEndpoint: "https://api.openai.com/v1",
+  temperature: 0.7,           // Response creativity (0-1)
+  maxTokens: 2000,           // Maximum response length
+  systemPrompt: "...",       // AI behavior definition
+  welcome: {
+    message: "...",          // Welcome message
+    avatar: "/path/to/icon.svg",
+    suggestions: [...]       // Quick start prompts
+  }
+};
+```
+
+### Panel Modes
+
+The chat interface can be displayed in different modes:
+- `quarter`: 25% width side panel
+- `half`: 50% width side panel
+- `full`: Full screen chat
+- `floating`: Floating chat window
+- `icon`: Minimized chat button
+
+## Adding Page-Specific Knowledge
+
+Make your AI assistant knowledgeable about specific pages:
+
+```astro
+---
+const pageContent = "Your page content here";
+
+const chatConfig = ChatConfigSchema.parse({
+  systemPrompt: [{
+    type: "text",
+    text: `You are an expert on ${pageContent}. Help users understand this content.`
+  }],
+  // ... other config options
+});
+---
+```
+
+## Basic Customization
+
+### 1. Styling
+
+Customize the appearance using Tailwind CSS classes:
+
+```css
+/* src/styles/global.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Your custom styles here */
+```
+
+### 2. Layout
+
+Adjust the layout using the Layout component props:
+
+```astro
+<Layout
+  title="Your Page"
+  description="Page description"
+  header={true}        // Show/hide header
+  footer={true}        // Show/hide footer
+  rightPanelMode="quarter"
+>
+  <!-- Your content -->
+</Layout>
+```
+
+### 3. Chat Features
+
+Enable or disable specific chat features:
+
+```typescript
+const chatConfig = ChatConfigSchema.parse({
+  // ... other options
+  features: {
+    textToSpeech: true,    // Enable voice synthesis
+    codeHighlight: true,   // Enable code syntax highlighting
+    markdown: true,        // Enable markdown rendering
+    suggestions: true      // Enable quick suggestions
+  }
+});
 ```
 
 ## 🎨 Pre-installed Components
@@ -142,16 +334,49 @@ import { Card } from "@/components/ui/card"
 ## 🛠️ Project Structure
 
 ```text
-your-project/
-├── src/
-│   ├── components/
-│   │   └── ui/          # All Shadcn components
-│   ├── layouts/
-│   │   └── Layout.astro # Base layout
-│   └── pages/
-│       └── index.astro  # Homepage
-├── astro.config.mjs     # Astro configuration
-└── tailwind.config.cjs  # Tailwind configuration
+src/
+├── components/                # UI Components
+│   ├── ui/                   # Shadcn/UI components
+│   ├── chat/                 # Chat-related components
+│   └── magicui/              # Enhanced UI components
+│
+├── content/                  # Content Collections
+│   ├── blog/                 # Blog posts
+│   ├── docs/                 # Documentation
+│   └── prompts/              # AI prompts
+│
+├── hooks/                    # React hooks
+│   ├── use-mobile.tsx
+│   ├── use-theme.ts
+│   └── use-toast.ts
+│
+├── layouts/                  # Page layouts
+│   ├── Blog.astro
+│   ├── Docs.astro
+│   ├── Layout.astro
+│   └── LeftRight.astro
+│
+├── lib/                      # Utility functions
+│   ├── utils.ts
+│   └── icons.ts
+│
+├── pages/                    # Routes and pages
+│   ├── api/                  # API endpoints
+│   ├── blog/                 # Blog routes
+│   ├── docs/                 # Documentation routes
+│   └── index.astro          # Homepage
+│
+├── schema/                   # Data schemas
+│   └── chat.ts              # Chat-related schemas
+│
+├── stores/                   # State management
+│   └── layout.ts            # Layout state
+│
+├── styles/                   # Global styles
+│   └── global.css           # Global CSS
+│
+└── types/                    # TypeScript types
+    └── env.d.ts             # Environment types
 ```
 
 ## 🚀 Development Workflow
@@ -219,18 +444,6 @@ your-project/
    </Layout>
    ```
 
-## 📊 Performance & Screenshots
-
-### ⚡ Lighthouse Scores
-![Desktop Performance](https://astro-shadcn.one.ie/screenshots/lighthouse-desktop.png)
-![Mobile Performance](https://astro-shadcn.one.ie/screenshots/lighthouse-mobile.png)
-
-Perfect scores across all metrics:
-- 🚀 Performance: 100
-- ♿ Accessibility: 100
-- 🔧 Best Practices: 100
-- 🔍 SEO: 100
-
 ## 📚 Quick Links
 
 - [Astro Documentation](https://docs.astro.build)
@@ -245,4 +458,4 @@ Perfect scores across all metrics:
 
 ---
 
-Built with 🚀 Astro, 🎨 Shadcn/UI and Vercel AI SDL by [ONE](https://one.ie)
+Built with 🚀 Astro, 🎨 Shadcn/UI and Vercel AI SDK by [ONE](https://one.ie)
