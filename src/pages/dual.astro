@@ -1,9 +1,9 @@
 ---
-import Layout from "../layouts/Landing.astro";
 import DualPage from "../components/DualChatPage";
+import BaseLayout from "../layouts/Landing.astro";
 
 ---
 
-<Layout title="ONE - Dual Chat" description="A dual chat page">
-    <DualPage client:load />
-</Layout>
+<BaseLayout title="ONE - Dual Chat" description="A dual chat page">
+  <DualPage client:load />
+</BaseLayout>

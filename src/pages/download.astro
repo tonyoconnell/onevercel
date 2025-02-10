@@ -3,7 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card } from "@/components/ui/card";
-import { 
+import { ChatConfigSchema } from '../schema/chat';
+import {
   GitHubLogoIcon,
   CodeIcon,
   DownloadIcon,
@@ -14,39 +15,12 @@ import {
 import License from '../../LICENSE?raw';
 import FaqAccordion from "../components/FaqAccordion";
 
-const GITHUB_REPO = "one-ie/one";
-const GITHUB_URL = `https://github.com/${GITHUB_REPO}`;
-const DOWNLOAD_URL = `https://github.com/${GITHUB_REPO}/archive/refs/heads/main.zip`;
-
-const URLS = {
-  clone: `git clone https://github.com/${GITHUB_REPO}.git`,
-  codespace: `https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=${GITHUB_REPO}`,
-  fork: `https://github.com/${GITHUB_REPO}/fork`,
-};
-
-// Fetch GitHub stars count
-const getGitHubStats = async () => {
-  try {
-    const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}`);
-    const data = await response.json();
-    return {
-      stars: data.stargazers_count,
-      forks: data.forks_count
-    };
-  } catch (error) {
-    console.error('Error fetching GitHub stats:', error);
-    return { stars: '14.2k', forks: '3.1k' }; // Fallback values
-  }
-};
-
-const stats = await getGitHubStats();
-
 const SYSTEM_REQUIREMENTS = [
   "Node.js 18.x or higher",
   "pnpm package manager",
   "Modern web browser (Chrome, Firefox, Safari, Edge)",
-  "4GB RAM minimum (8GB recommended)",
   "Any modern operating system (Windows, macOS, Linux)",
+  "Deploy on Vercel, Netlify, AWS or any Node.js server",
 ];
 
 const INSTALLATION_STEPS = [
@@ -67,6 +41,74 @@ const INSTALLATION_STEPS = [
     description: "Run 'pnpm dev' to start the development server",
   },
 ];
+
+const GITHUB_REPO = "one-ie/one";
+const GITHUB_URL = `https://github.com/${GITHUB_REPO}`;
+const DOWNLOAD_URL = `https://github.com/${GITHUB_REPO}/archive/refs/heads/main.zip`;
+
+const URLS = {
+  clone: `git clone https://github.com/${GITHUB_REPO}.git`,
+  codespace: `https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=${GITHUB_REPO}`,
+  fork: `https://github.com/${GITHUB_REPO}/fork`,
+};
+
+// Configure chat
+const chatConfig = ChatConfigSchema.parse({
+  systemPrompt: [{
+    type: "text" as const,
+    text: `You are ONE's download assistant, focused on helping users download, install, and get started with the framework. Your role includes:
+
+- Guiding users through the download process
+- Helping with installation steps and troubleshooting
+- Explaining system requirements
+- Assisting with initial setup and configuration
+- Answering license-related questions
+
+Reference the following information to assist users:
+${JSON.stringify({ SYSTEM_REQUIREMENTS, INSTALLATION_STEPS, URLS }, null, 2)}
+
+Keep responses focused on download, installation, and getting started. For other topics, direct users to appropriate documentation sections.`
+  }],
+  welcome: {
+    message: "👋 Need help downloading or installing ONE? I can guide you through the process and answer any questions about getting started.",
+    avatar: "/icon.svg",
+    suggestions: [
+      {
+        label: "💻 System Requirements",
+        prompt: "What are the system requirements for running ONE?"
+      },
+      {
+        label: "📥 Installation Help",
+        prompt: "Walk me through the installation process"
+      },
+      {
+        label: "🔑 License Questions",
+        prompt: "Can you explain the ONE Free License terms?"
+      },
+      {
+        label: "⚙️ Configuration",
+        prompt: "How do I configure ONE after installation?"
+      }
+    ]
+  }
+});
+
+// Fetch GitHub stars count
+const getGitHubStats = async () => {
+  try {
+    const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}`);
+    const data = await response.json();
+    return {
+      stars: data.stargazers_count,
+      forks: data.forks_count
+    };
+  } catch (error) {
+    console.error('Error fetching GitHub stats:', error);
+    return { stars: '14.2k', forks: '3.1k' }; // Fallback values
+  }
+};
+
+const stats = await getGitHubStats();
 
 const faqs = [
   {
@@ -96,9 +138,11 @@ const faqs = [
 ];
 ---
 
-<Layout 
+<Layout
   title="Download ONE Framework"
   description="Download the enterprise-grade AI framework that's completely free and open source. Get started in minutes with direct download or Git integration."
+  chatConfig={chatConfig}
+  rightPanelMode="quarter"
 >
   <main class="container mx-auto px-6 w-full">
     <section class="min-h-[80vh] flex flex-col justify-center items-center text-center py-12">

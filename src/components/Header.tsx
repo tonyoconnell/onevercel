@@ -73,10 +73,13 @@ export default function Header() {
       
       {/* Right column */}
       <div className="flex justify-end pr-4">
-        <button className="flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 transition-colors">
-          <Download className="h-5 w-5" />
+        <a
+          href="/download"
+          className="group flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium bg-primary/10 text-primary hover:bg-primary/20 transition-all duration-300 ease-in-out"
+        >
+          <Download className="h-4 w-4 transition-transform group-hover:-translate-y-0.5" />
           <span className="hidden sm:inline">Download</span>
-        </button>
+        </a>
       </div>
 
       {/* Mobile Menu */}

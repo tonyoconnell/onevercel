@@ -32,6 +32,7 @@ const { title, description = "ONE" } = Astro.props;
 
       .main-grid {
         display: grid;
+        grid-template-columns: 1fr;
         min-height: 100vh;
         position: relative;
         z-index: 10;
@@ -41,15 +42,7 @@ const { title, description = "ONE" } = Astro.props;
         position: relative;
         z-index: 10;
         width: 100%;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .content-area {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        min-height: 0; /* Important for nested scrolling */
+        margin-right: 0;
       }
 
       /* Add smooth scrolling to the whole page */
@@ -75,22 +68,16 @@ const { title, description = "ONE" } = Astro.props;
       ::-webkit-scrollbar-thumb:hover {
         background: #9ca3af;
       }
-
-      /* Mobile-first approach */
-      @media (min-width: 768px) {
-        .main-grid {
-          grid-template-columns: minmax(0, 1fr);
-        }
-      }
     </style>
-  </head>
-  <body>
-    <div class="main-grid bg-background">
-      <div class="center-grid">
+  </head><body>
+    <div class="main-grid">
+      <div class="center-grid" id="center-grid">
         {header && <Header client:load />}
-        <div class="content-area">
+
+        <main class="p-4">
           <slot />
-        </div>
+        </main>
+
         {footer && <Footer client:load />}
       </div>
     </div>
