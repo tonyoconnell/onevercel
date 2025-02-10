@@ -13,98 +13,7 @@ Perfect for building modern web applications, from simple landing pages to compl
 
 ## ⚡ Quick Start
 
-### Prerequisites
-- Node.js 18 or higher
-- npm or pnpm or yarn
-- Git (optional)
-
-### Installation
-
-1. **Clone the Repository**
-```bash
-# Clone the repository
-git clone https://github.com/one-ie/one.git
-
-# Navigate to project
-cd one
-```
-
-2. **Install Dependencies**
-```bash
-# Using npm
-npm install
-
-# OR using pnpm
-pnpm install
-
-# OR using yarn
-yarn install
-```
-
-3. **Set Up Environment Variables**
-```bash
-# Copy the example environment file
-cp .env.example .env
-```
-
-4. **Start Development Server**
-```bash
-npm run dev
-```
-
-Visit `http://localhost:4321` - You're ready to go! 🎉
-
-## 📝 Creating Your First Page
-
-## Step 1: Create Your Markdown File
-
-Create a new markdown file in your pages directory (e.g., src/pages/your-page.md)
-layout: ../layouts/Text.astro
-title: "ONE License"  
-description: "Maximum Freedom. Zero Restrictions"
-chatConfig:
-  provider: openai
-  model: "gpt-4o-mini"
-  apiEndpoint: "https://api.openai.com/v1"
-  temperature: 0.7
-  maxTokens: 4000
-  systemPrompt:
-    - type: text
-      text: "You are ONE's licensing and token expert, helping visitors understand our unique token-based licensing system and framework capabilities. You explain how ONE tokens enable white-labeling and premium features, guide users through AI agent development, and clarify our payment integration options including both crypto and traditional methods. You provide clear, accurate information about token tiers, commercial rights, and technical capabilities."
-  welcome:
-    message: "👋 Hello! I can help explain the ONE License terms and how you can use them for your business."
-    avatar: "/icon.svg"
-    suggestions:
-      - label: "🪙 Token Benefits"
-        prompt: "How do ONE tokens work for white-labeling?"
-      - label: "🤖 AI Capabilities"
-        prompt: "What AI features are included with ONE?"
-      - label: "💳 Payment Options"
-        prompt: "What payment methods does ONE support?"
-      - label: "🚀 Quick Start"
-        prompt: "How do I get started with ONE?"
-      - label: "💼 Business Use"
-        prompt: "How can I use ONE for my business?"
-      - label: "🌟 Premium Features"
-        prompt: "What features come with token holding?"
----
-# ONE License (Version 1.0)
-
-## Unlimited Commercial Freedom
-
-ONE License gives you complete commercial freedom. Build products, create services, and generate revenue without restrictions. No usage limits. No royalty fees. Just pure business potential.
-
-## Key Benefits
-
-- **✨ 100% Commercial Rights** - Sell products and services at any price point
-- **🚀 Full Modification Rights** - Customize and adapt the software freely
-- **💼 White-Label Ready** - Brand as your own solution
-- **🔄 Perpetual Usage** - Rights never expire
-- **🤝 Enterprise-Friendly** - Compatible with all major licenses
-
-# Getting Started with ONE
-
-This guide will help you set up and start building AI-powered applications using the ONE framework. ONE combines Astro, React, and modern AI capabilities to create intelligent web applications.
+This guide will help you set up and start building AI-powered applications with ONE. ONE combines Astro, React, and modern AI capabilities to create intelligent web applications.
 
 ## Prerequisites
 
@@ -120,15 +29,14 @@ Before you begin, ensure you have:
 
 You have three options to get started with ONE:
 
-```bash
-# Option 1: Clone the repository
+#### Option 1: Clone the repository
 git clone https://github.com/one-ie/one.git
 
-# Option 2: Download the ZIP file
-# Visit: https://github.com/one-ie/one/archive/refs/heads/main.zip
+#### Option 2: Download the ZIP file
+Visit: https://github.com/one-ie/one/archive/refs/heads/main.zip
 
-# Option 3: Fork the repository
-# Visit: https://github.com/one-ie/one/fork
+#### Option 3: Fork the repository
+Visit: https://github.com/one-ie/one/fork
 ```
 
 You can also create a new project directly in GitHub Codespaces:
