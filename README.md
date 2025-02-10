@@ -1,29 +1,123 @@
-# 🚀 Astro 5 + Shadcn/UI Starter Kit
+# 🚀 ONE - Build AI-Powered Businesses
 
-A lightning-fast starter template combining Astro's performance with Shadcn's beautiful components.
+Combining Astro's performance with Shadcn's beautiful components, featuring AI agents, crypto payments, and content automation.
 
-### 🎨  Screenshots
+## ✨ Key Features
+
+- 🤖 **AI Agents**: Built-in support for intelligent AI assistants
+- 💰 **Crypto Payments**: Integrated cryptocurrency payment system
+- 📝 **Content Automation**: Automated content generation and management
+- 🎯 **Token System**: Flexible token-based authentication and authorization
+- ⚡ **High Performance**: Lightning-fast page loads and optimal SEO
+- 🎨 **Beautiful UI**: Pre-configured Shadcn components
+
+### 🎨 Screenshots
 ![Dark Mode](https://astro-shadcn.one.ie/screenshots/screenshot-dark.png)
 ![Light Mode](https://astro-shadcn.one.ie/screenshots/screenshot-light.png)
 
-
 ## ⚡ Quick Start
 
+### Prerequisites
+- Node.js 18 or higher
+- npm or pnpm or yarn
+- Git (optional)
+
+### Installation
+
+1. **Clone the Repository**
 ```bash
 # Clone the repository
-git clone https://github.com/one-ie/astro-shadcn.git
+git clone https://github.com/one-ie/one.git
 
 # Navigate to project
-cd astro-shadcn
+cd one
+```
 
-# Install dependencies
+2. **Install Dependencies**
+```bash
+# Using npm
 npm install
 
-# Start development server
+# OR using pnpm
+pnpm install
+
+# OR using yarn
+yarn install
+```
+
+3. **Set Up Environment Variables**
+```bash
+# Copy the example environment file
+cp .env.example .env
+```
+
+4. **Start Development Server**
+```bash
 npm run dev
 ```
 
 Visit `http://localhost:4321` - You're ready to go! 🎉
+
+## 📝 Creating Your First Page
+
+### Adding a Markdown Page
+
+1. **Create a New File**
+Create `src/pages/my-first-page.md`:
+
+```markdown
+---
+title: My First Page
+layout: ../layouts/Layout.astro
+---
+
+# Welcome to My First Page
+
+This is a markdown page with full support for:
+- ✨ Markdown syntax
+- 🎨 Tailwind CSS classes
+- 🧩 Shadcn/UI components
+```
+
+2. **Using Components in Markdown**
+```markdown
+---
+title: Interactive Page
+layout: ../layouts/Layout.astro
+---
+
+import { Button } from "@/components/ui/button"
+
+# Interactive Markdown
+
+<Button client:load>Click Me!</Button>
+```
+
+### Creating an Astro Page
+
+1. **Create a New File**
+Create `src/pages/my-component-page.astro`:
+
+```astro
+---
+import Layout from '../layouts/Layout.astro';
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+---
+
+<Layout title="Component Page">
+  <main class="container mx-auto p-4">
+    <Card>
+      <CardHeader>
+        <CardTitle>Welcome!</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Button client:load>Interactive Button</Button>
+      </CardContent>
+    </Card>
+  </main>
+</Layout>
+```
 
 ## 🎨 Pre-installed Components
 
@@ -64,25 +158,6 @@ your-project/
 └── tailwind.config.cjs  # Tailwind configuration
 ```
 
-
-
-### Using Components
-
-```astro
----
-// src/pages/index.astro
-import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
----
-
-<Card>
-  <CardHeader>
-    <CardTitle>Welcome to Astro + Shadcn!</CardTitle>
-  </CardHeader>
-  <Button client:load>Interactive Button</Button>
-</Card>
-```
-
 ## 🚀 Development Workflow
 
 1. **Start Development**
@@ -116,7 +191,6 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 ✅ **Build Warnings**: Suppressed in configuration
 ✅ **Path Aliases**: Pre-configured for easy imports
 ✅ **React Integration**: Properly set up for Shadcn
-
 
 ## 💡 Pro Tips
 
@@ -161,8 +235,6 @@ Perfect scores across all metrics:
 - 🔧 Best Practices: 100
 - 🔍 SEO: 100
 
-
-
 ## 📚 Quick Links
 
 - [Astro Documentation](https://docs.astro.build)
@@ -173,8 +245,8 @@ Perfect scores across all metrics:
 
 - Join [Astro Discord](https://astro.build/chat)
 - Check [Astro Documentation](https://docs.astro.build)
-- File an [Issue on GitHub](https://github.com/one-ie/astro-shadcn/issues)
+- File an [Issue on GitHub](https://github.com/one-ie/one/issues)
 
 ---
 
-Built with 🚀 Astro and 🎨 Shadcn/UI by [ONE](https://one.ie)
+Built with 🚀 Astro, 🎨 Shadcn/UI and Vercel AI SDL by [ONE](https://one.ie)
