@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import 'dotenv/config';
 import { openai } from "@ai-sdk/openai";
 import { anthropic } from "@ai-sdk/anthropic";
 import { mistral } from "@ai-sdk/mistral";
@@ -13,6 +14,13 @@ interface ChatRequest {
 }
 
 const getProvider = (config: ChatConfig) => {
+  // Log all environment variables for debugging
+  console.log('Environment Variables Status:', {
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY ? 'Present' : 'Missing',
+    ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY ? 'Present' : 'Missing',
+    MISTRAL_API_KEY: process.env.MISTRAL_API_KEY ? 'Present' : 'Missing'
+  });
+
   switch (config.provider) {
     case 'anthropic':
       if (!process.env.ANTHROPIC_API_KEY) {
@@ -21,7 +29,13 @@ const getProvider = (config: ChatConfig) => {
       return anthropic(config.model);
       
     case 'mistral':
-      if (!process.env.MISTRAL_API_KEY) {
+      const mistralKey = process.env.MISTRAL_API_KEY;
+      console.log('Mistral API Key:', {
+        key: mistralKey,
+        length: mistralKey?.length,
+        isDefined: typeof mistralKey !== 'undefined'
+      });
+      if (!mistralKey) {
         throw new Error('MISTRAL_API_KEY not configured');
       }
       return mistral(config.model);
@@ -38,15 +52,24 @@ const getProvider = (config: ChatConfig) => {
 export const POST: APIRoute = async ({ request }) => {
   try {
     const requestData = await request.json() as ChatRequest;
-    const config = requestData.config;
-
-    if (!config?.provider || !config?.model) {
-      throw new Error(`Invalid config: provider=${config?.provider}, model=${config?.model}`);
-    }
+    const config = {
+      ...requestData.config,
+      provider: requestData.config?.provider || 'openai',
+      model: requestData.config?.model || 'gpt-4o-mini'
+    };
 
     // Check environment variables early
     const envKey = `${config.provider.toUpperCase()}_API_KEY`;
-    if (!process.env[envKey]) {
+    const apiKey = process.env[envKey];
+    console.log(`Checking ${envKey}:`, {
+      key: apiKey,
+      length: apiKey?.length,
+      isDefined: typeof apiKey !== 'undefined',
+      provider: config.provider,
+      model: config.model
+    });
+    if (!apiKey) {
+      console.error(`Environment variable ${envKey} is not loaded properly`);
       throw new Error(`Missing ${envKey} in environment variables`);
     }
 
