@@ -14,13 +14,7 @@ interface ChatRequest {
 }
 
 const getProvider = (config: ChatConfig) => {
-  // Log all environment variables for debugging
-  console.log('Environment Variables Status:', {
-    OPENAI_API_KEY: process.env.OPENAI_API_KEY ? 'Present' : 'Missing',
-    ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY ? 'Present' : 'Missing',
-    MISTRAL_API_KEY: process.env.MISTRAL_API_KEY ? 'Present' : 'Missing'
-  });
-
+ 
   switch (config.provider) {
     case 'anthropic':
       if (!process.env.ANTHROPIC_API_KEY) {
