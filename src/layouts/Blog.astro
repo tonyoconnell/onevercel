@@ -1,38 +1,42 @@
 ---
-import Layout from './Layout.astro';
-import type { CollectionEntry } from 'astro:content';
-import { ChatConfigSchema } from '../schema/chat';
+import Layout from "./Layout.astro";
+import type { CollectionEntry } from "astro:content";
+import { ChatConfigSchema } from "../schema/chat";
 
 interface Props {
-  entry: CollectionEntry<'blog'>;
+  entry: CollectionEntry<"blog">;
   children: any;
 }
 
 const { entry } = Astro.props;
 
 // Get raw content from the slot
-const rawContent = await Astro.slots.render('default');
+const rawContent = await Astro.slots.render("default");
 
 // Create blog-specific chat configuration
 const blogSpecificConfig = ChatConfigSchema.parse({
-  systemPrompt: [{
-    type: "text" as const,
-    text: "I am a blog content assistant. I help users understand the blog post and answer questions about it. I'll reference the current post content in my responses."
-  }],
+  provider: "mistral",
+  model: "mistral-large-latest",
+  systemPrompt: [
+    {
+      type: "text" as const,
+      text: "I am a blog content assistant. I help users understand the blog post and answer questions about it. I'll reference the current post content in my responses.",
+    },
+  ],
   welcome: {
     message: "👋 Have questions about this blog post? I'm here to help!",
     avatar: "/icon.svg",
     suggestions: [
       {
         label: "📝 Summarize",
-        prompt: "Can you give me a summary of this blog post?"
+        prompt: "Can you give me a summary of this blog post?",
       },
       {
         label: "🔍 Key Points",
-        prompt: "What are the main points discussed in this article?"
-      }
-    ]
-  }
+        prompt: "What are the main points discussed in this article?",
+      },
+    ],
+  },
 });
 
 const pageData = {
@@ -41,8 +45,8 @@ const pageData = {
   image: entry.data.picture,
   type: "article",
   chatConfig: blogSpecificConfig,
-  rightPanelMode: 'quarter' as const,
-  content: rawContent
+  rightPanelMode: "quarter" as const,
+  content: rawContent,
 };
 ---
 
@@ -52,21 +56,25 @@ const pageData = {
       <h1 class="text-4xl font-bold mb-4">
         {entry.data.title}
       </h1>
-      {entry.data.description && (
-        <p class="text-xl text-muted-foreground mb-4">
-          {entry.data.description}
-        </p>
-      )}
-      {entry.data.picture && entry.data.picture.trim() !== "" && (
-        <img
-          src={entry.data.picture}
-          alt={entry.data.title}
-          class="w-full object-cover rounded-lg"
-          onerror="this.style.display='none'"
-        />
-      )}
+      {
+        entry.data.description && (
+          <p class="text-xl text-muted-foreground mb-4">
+            {entry.data.description}
+          </p>
+        )
+      }
+      {
+        entry.data.picture && entry.data.picture.trim() !== "" && (
+          <img
+            src={entry.data.picture}
+            alt={entry.data.title}
+            class="w-full object-cover rounded-lg"
+            onerror="this.style.display='none'"
+          />
+        )
+      }
     </header>
-    
+
     <div class="prose dark:prose-invert max-w-none">
       <slot />
     </div>

@@ -6,11 +6,11 @@ const ContentPart = z.object({
 });
 
 // Define supported providers
-const ProviderSchema = z.enum(['openai', 'anthropic', 'mistral', 'ollama']).default('openai');
+const ProviderSchema = z.enum(['openai', 'anthropic', 'mistral', 'ollama']).default('mistral');
 
 export const ChatConfigSchema = z.object({
   provider: ProviderSchema,
-  model: z.string().default('gpt-4-turbo'),
+  model: z.string().default('mistral-large-latest'),
   apiKey: z.string().optional(),
   apiEndpoint: z.string().url().optional(),
   runtime: z.enum(['edge', 'node']).default('edge'),

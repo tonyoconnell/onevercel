@@ -3,8 +3,8 @@ layout: ../layouts/Text.astro
 title: "ONE License"  
 description: "Maximum Freedom. Zero Restrictions"
 chatConfig:
-  provider: openai
-  model: "gpt-4o-mini"
+  provider: mistral
+  model: "mistral-large-latest"
   apiEndpoint: "https://api.openai.com/v1"
   temperature: 0.7
   maxTokens: 4000

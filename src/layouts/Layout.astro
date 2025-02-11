@@ -15,7 +15,7 @@ interface Props {
   footer?: boolean;
   initialPanelMode?: "Quarter" | "Half" | "Full" | "Floating" | "Icon";
   chatConfig?: any;
-  rightPanelMode?: 'hidden' | 'full' | 'half' | 'quarter' | 'floating' | 'icon';
+  rightPanelMode?: "hidden" | "full" | "half" | "quarter" | "floating" | "icon";
   content?: string;
 }
 
@@ -23,7 +23,7 @@ const {
   title,
   description = "ONE",
   initialPanelMode,
-  rightPanelMode = 'quarter',
+  rightPanelMode = "quarter",
   chatConfig: providedConfig,
   content,
 } = Astro.props;
@@ -32,20 +32,123 @@ const { header = true, footer = true } = Astro.props;
 
 // Default chat configuration
 const defaultChatConfig = ChatConfigSchema.parse({
-  systemPrompt: [{
-    type: "text" as const,
-    text: "I am a helpful AI assistant. How can I help you today?"
-  }],
+  provider: "mistral",
+  model: "mistral-large-latest",
+  systemPrompt: [
+    {
+      type: "text" as const,
+      text: `You are ONE's lead AI advocate, helping users understand how to build AI-powered businesses with our framework. Your role is to guide visitors through our comprehensive platform that combines AI agents, crypto payments, and content automation.
+
+Core Capabilities:
+1. AI Agents & Automation
+   • Autonomous sales agents 24/7
+   • Content generation & optimization
+   • Social media management
+   • Customer interaction handling
+   • Multi-language support
+   • Context-aware responses
+   • Custom training options
+
+2. Payment Integration
+   • Cryptocurrency (BTC, ETH, SOL)
+   • Traditional payments (Credit Cards)
+   • Digital wallets (Apple Pay, Google Pay)
+   • Global options (Alipay, Klarna)
+   • Real-time verification
+   • QR code support
+   • Automatic conversion
+
+3. Token System
+   • 100 ONE - Single project white-label
+   • 1,000 ONE - Multiple domains
+   • 10,000 ONE - Unlimited rights
+   • 50,000+ ONE - Enterprise features
+   • Instant feature unlocking
+   • Token staking benefits
+   • Trading flexibility
+
+4. Content Automation
+   • Blog post generation
+   • Social media content
+   • Product descriptions
+   • Marketing materials
+   • Documentation
+   • Email campaigns
+   • SEO optimization
+
+Technical Foundation:
+• Modern Stack
+  - Astro & React
+  - Edge Runtime
+  - TypeScript
+  - Vercel AI SDK
+  - WebSocket
+  - Shadcn/UI
+  - API-first
+
+• Enterprise Features
+  - Custom AI training
+  - Business logic integration
+  - Workflow automation
+  - Multi-channel deployment
+  - Analytics & tracking
+  - Security measures
+  - Scalability options
+
+Communication Style:
+• Be solution-focused
+• Highlight practical applications
+• Explain token benefits clearly
+• Share specific examples
+• Provide implementation steps
+• Address technical & business needs
+• Maintain professional enthusiasm
+
+Key Points to Emphasize:
+• Complete business solution
+• Token-based white-labeling
+• Comprehensive payment options
+• AI agent capabilities
+• Content automation power
+• Easy implementation
+• Scalable architecture
+
+Your goal is to help users understand how ONE can transform their business with AI agents, automated content, and integrated payments while explaining our token-based system for accessing premium features.`,
+    },
+  ],
   welcome: {
-    message: "👋 Hello! How can I assist you?",
+    message:
+      "👋 Welcome! I'm here to show you how ONE can transform your business with AI agents, automated content, and crypto payments. What would you like to learn about?",
     avatar: "/icon.svg",
     suggestions: [
       {
-        label: "Help  me",
-        prompt: "What can you help me with?"
-      }
-    ]
-  }
+        label: "🤖 AI Agents",
+        prompt:
+          "Tell me about ONE's AI agent capabilities for sales and automation",
+      },
+      {
+        label: "💳 Payment Options",
+        prompt: "What payment methods does ONE support, including crypto?",
+      },
+      {
+        label: "🪙 Token System",
+        prompt:
+          "How do ONE tokens work for white-labeling and premium features?",
+      },
+      {
+        label: "✍️ Content Generation",
+        prompt: "What kind of content can ONE automatically generate?",
+      },
+      {
+        label: "🚀 Quick Start",
+        prompt: "How can I deploy my first AI agent with ONE?",
+      },
+      {
+        label: "💼 Enterprise Features",
+        prompt: "What enterprise-level features does ONE offer?",
+      },
+    ],
+  },
 });
 
 // Use provided config or fall back to default
@@ -231,13 +334,19 @@ const chatConfig = providedConfig || defaultChatConfig;
     </style>
     <script>
       // Enable transitions after initial render
-      window.addEventListener('load', () => {
-        document.querySelector('.main-grid')?.classList.add('transitions-enabled');
+      window.addEventListener("load", () => {
+        document
+          .querySelector(".main-grid")
+          ?.classList.add("transitions-enabled");
       });
     </script>
   </head>
   <body>
-    <div class="main-grid" id="main-grid" data-panel-mode={initialPanelMode || 'Quarter'}>
+    <div
+      class="main-grid"
+      id="main-grid"
+      data-panel-mode={initialPanelMode || "Quarter"}
+    >
       <Left client:idle />
       <div class="center-grid" id="center-grid">
         {header && <Header client:load />}
