@@ -1,5 +1,7 @@
 # 🚀 ONE - Build AI-Powered Businesses
 
+For Astro Shadcn starter kit switch to the astro-shadcn branch. 
+
 ONE is a powerful, modern web development framework that combines the blazing-fast performance of Astro with the elegant components of Shadcn/UI. This enterprise-ready starter kit empowers developers to build AI-powered applications with:
 
 - ⚡ **High Performance**: Astro's partial hydration ensures minimal JavaScript
