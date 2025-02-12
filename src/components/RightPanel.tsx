@@ -56,8 +56,8 @@ export function RightPanel({
                         : "w-0 overflow-hidden"
                 }`}
             >
-                <div className="p-4">
-                    <div className="flex gap-2 mb-4">
+                <div className="h-full flex flex-col">
+                    <div className="flex gap-2 p-4">
                         <Button
                             size="sm"
                             onClick={() => setPanelWidth("quarter")}
@@ -73,8 +73,8 @@ export function RightPanel({
                             1/2
                         </Button>
                     </div>
-                    <div>
-                    <ChatSimple />
+                    <div className="flex-1 overflow-hidden">
+                        <ChatSimple />
                     </div>
                 </div>
             </div>

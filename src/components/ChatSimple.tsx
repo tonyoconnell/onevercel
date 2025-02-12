@@ -8,7 +8,7 @@ import {
     ChatMessageAvatar,
     ChatMessageContent,
 } from "@/components/chat/chat-message";
-import { ChatMessageArea } from "@/components/chat/chat-message-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { useChat } from "ai/react";
 import type { ComponentPropsWithoutRef } from "react";
 import { useEffect, useRef, useState } from "react";
@@ -54,69 +54,51 @@ export function ChatSimple({ className, ...props }: ComponentPropsWithoutRef<"di
     useEffect(() => {
         const scrollToBottom = () => {
             if (messagesEndRef.current) {
-                const behavior = isLoading ? "auto" : "smooth";
-                messagesEndRef.current.scrollIntoView({ behavior });
+                messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
             }
         };
-        
         scrollToBottom();
-        
-        // Additional scroll after content updates
         const timeoutId = setTimeout(scrollToBottom, 100);
         return () => clearTimeout(timeoutId);
     }, [messages, isLoading, isFocused]);
 
     return (
-        <div className={cn(
-            "flex flex-col min-h-0 h-full",
-            className
-        )} {...props}>
-            {/* Scrollable messages area */}
-            <div className="flex-1 min-h-0 overflow-hidden">
-                <div className="h-full overflow-y-auto">
-                    <ChatMessageArea scrollButtonAlignment="center">
-                        <div className="w-full p-2 space-y-2.5">
-                            {messages.map((message) => {
-                                if (message.role !== "user") {
-                                    return (
-                                        <ChatMessage key={message.id} id={message.id} className="px-1">
-                                            <ChatMessageAvatar />
-                                            <ChatMessageContent content={message.content} />
-                                        </ChatMessage>
-                                    );
-                                }
-                                return (
-                                    <ChatMessage
-                                        key={message.id}
-                                        id={message.id}
-                                        variant="bubble"
-                                        type="outgoing"
-                                        className="px-1"
-                                    >
-                                        <ChatMessageContent content={message.content} />
-                                    </ChatMessage>
-                                );
-                            })}
-                            
-                            {isLoading && (
-                                <div className="flex items-center gap-2 text-muted-foreground animate-in fade-in duration-200 px-3">
-                                    <Loader2 className="h-3 w-3 animate-spin" />
-                                    <span className="text-xs">AI is typing...</span>
-                                </div>
-                            )}
-                            
-                            <div ref={messagesEndRef} className="h-px" />
+        <div className={cn("flex flex-col h-full relative", className)} {...props}>
+                    <ScrollArea className="flex-1 h-0">
+                        <div className="flex flex-col space-y-4 p-4 pb-6">
+                    {messages.map((message) => {
+                        if (message.role !== "user") {
+                            return (
+                                <ChatMessage key={message.id} id={message.id}>
+                                    <ChatMessageAvatar />
+                                    <ChatMessageContent content={message.content} />
+                                </ChatMessage>
+                            );
+                        }
+                        return (
+                            <ChatMessage
+                                key={message.id}
+                                id={message.id}
+                                variant="bubble"
+                                type="outgoing"
+                            >
+                                <ChatMessageContent content={message.content} />
+                            </ChatMessage>
+                        );
+                    })}
+                    
+                    {isLoading && (
+                        <div className="flex items-center gap-2 text-muted-foreground animate-in fade-in duration-200">
+                            <Loader2 className="h-3 w-3 animate-spin" />
+                            <span className="text-xs">AI is typing...</span>
                         </div>
-                    </ChatMessageArea>
+                    )}
+                    
+                    <div ref={messagesEndRef} className="h-px" />
                 </div>
-            </div>
+            </ScrollArea>
 
-            {/* Input container */}
-            <div className={cn(
-                "flex-none border-t bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60",
-                "transition-all duration-200",
-                isFocused ? "shadow-md" : "shadow-sm"
-            )}>
+            <div className="flex-none border-t bg-background">
                 <div className="p-2">
                     <ChatInput
                         value={input}
@@ -128,7 +110,7 @@ export function ChatSimple({ className, ...props }: ComponentPropsWithoutRef<"di
                     >
                         <ChatInputTextArea 
                             placeholder="Type a message..." 
-                            className="min-h-[42px] max-h-[160px] focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg resize-none scrollbar-thin scrollbar-thumb-primary/10 hover:scrollbar-thumb-primary/20"
+                            className="min-h-[42px] max-h-[160px] focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg resize-none"
                             onFocus={() => setIsFocused(true)}
                             onBlur={() => setIsFocused(false)}
                         />

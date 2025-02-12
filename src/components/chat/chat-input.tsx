@@ -52,10 +52,11 @@ function ChatInput({
 		<ChatInputContext.Provider value={contextValue}>
 			<div
 				className={cn(
-					variant === "default" &&
-						"flex flex-col items-end w-full p-2 rounded-2xl border border-input bg-transparent focus-within:ring-1 focus-within:ring-ring focus-within:outline-none",
-					variant === "unstyled" && "flex items-start gap-2 w-full",
-					className,
+				"absolute bottom-0 left-0 right-0 w-full bg-white dark:bg-gray-900 border-t",
+				variant === "default" &&
+				"flex flex-col items-end gap-2 p-3",
+				variant === "unstyled" && "flex items-start gap-2 p-3",
+				className
 				)}
 			>
 				{children}
