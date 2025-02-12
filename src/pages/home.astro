@@ -1,24 +1,23 @@
 ---
 import NewLayout from "../layouts/New.astro";
+import { HeroGeometric } from "../components/ui/shape-landing-hero";
 ---
 
 <NewLayout 
     defaultWidth="half"
     defaultOpen={true}
 >
-    <main class="max-w-6xl mx-auto px-4 py-8">
+    <main>
         <!-- Hero Section -->
-        <section class="text-center py-20">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
-                Transform Your Website with <span class="text-blue-600">AI</span>
-            </h1>
-            <p class="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Add intelligent chat, content generation, and automation in minutes. No coding required.
-            </p>
-        </section>
+        <HeroGeometric
+            client:load
+            badge="AI-Powered Development"
+            title1="Build AI-Powered"
+            title2="Websites & Apps"
+        />
 
         <!-- Features Grid -->
-        <section class="py-16">
+        <section class="py-16 max-w-6xl mx-auto px-4">
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="p-6 rounded-lg border bg-card">
                     <div class="w-12 h-12 rounded-full bg-blue-600/10 flex items-center justify-center mb-4">
