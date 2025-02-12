@@ -37,7 +37,7 @@ export function RightPanel({
                         size="sm"
                         className="mb-4"
                     >
-                        {isPanelOpen ? "Hide Panel" : "Show Panel"}
+                        {isPanelOpen ? "Hide Agent" : "Add Agent"}
                     </Button>
                     <div className="mt-4">
                         {children}
