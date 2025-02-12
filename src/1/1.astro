@@ -1,0 +1,70 @@
+---
+// Core Astro layout
+import { ONE } from '../components/ONE'
+import './1.css'
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = 'ONE - AI Development Partner',
+  description = 'Building AI agents with perfect synchronicity'
+} = Astro.props;
+
+// Runtime configuration
+const config = {
+  name: 'ONE',
+  version: '1.0.0',
+  mode: 'dark',
+  theme: {
+    primary: '#000000',
+    secondary: '#ffffff',
+    accent: '#0066ff'
+  }
+}
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/1.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <ONE 
+      client:load
+      name={config.name}
+      version={config.version}
+      mode={config.mode}
+      theme={config.theme}
+    />
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  /* Import core styles */
+  @import '../1.css';
+
+  /* Layout-specific styles */
+  body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    display: grid;
+    min-height: 100vh;
+  }
+
+  main {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+</style>

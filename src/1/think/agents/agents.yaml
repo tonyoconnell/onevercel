@@ -1,0 +1,27 @@
+# Agent configuration with smart contracts
+version: '1.0.0'
+
+swarm:
+  size: 7
+  consensus:
+    algorithm: weighted_vote
+    threshold: 0.7
+
+contracts:
+  enabled: true
+  autoMatch: true
+  valueThreshold: 100
+  rewardDistribution: weighted
+
+agents:
+  architect:
+    focus: system_design
+    contracts:
+      capabilities: [design, architect, plan]
+      valueMultiplier: 1.5
+
+  builder:
+    focus: implementation
+    contracts:
+      capabilities: [build, code, test]
+      valueMultiplier: 1.2 

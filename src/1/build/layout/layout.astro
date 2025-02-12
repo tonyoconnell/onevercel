@@ -1,0 +1,291 @@
+---
+// Core Layout Component for ONE
+import type { InferGetStaticPropsType } from "astro";
+import { ViewTransitions } from "astro:transitions";
+import "../../../1/1.css";
+import { ONE } from "../../../1/1";
+import type { TransitionDirectionalAnimations } from "astro";
+
+interface LayoutProps {
+  title?: string;
+  description?: string;
+  type?: string;
+  showHeader?: boolean;
+  showFooter?: boolean;
+  showSidebar?: boolean;
+  showChat?: boolean;
+  chat?: ChatConfig | false;
+  theme?: "light" | "dark" | "system";
+}
+
+// Define layout configuration types
+interface ChatConfig {
+  mode: "icon" | "floating" | "fullscreen" | "split" | "embedded";
+  modeConfig?: {
+    icon?: {
+      position: "bottom-right" | "bottom-left" | "top-right" | "top-left";
+      badge?: number;
+      pulse?: boolean;
+      launchMode?: "split" | "floating" | "fullscreen";
+    };
+    floating?: {
+      minWidth?: number;
+      maxWidth?: number;
+      defaultPosition?: { x: number; y: number };
+      draggable?: boolean;
+      resizable?: boolean;
+    };
+    fullscreen?: {
+      showHeader?: boolean;
+      showNavigation?: boolean;
+      transitionDuration?: number;
+    };
+    split?: {
+      showHeader?: boolean;
+      showNavigation?: boolean;
+      position?: "left" | "right";
+      width?: string;
+    };
+    embedded?: {
+      width?: string;
+      height?: string;
+      inheritTheme?: boolean;
+    };
+  };
+  provider?: string;
+  model?: string;
+  apiEndpoint?: string;
+}
+
+// Props with defaults
+const {
+  title = "ONE - AI Development Partner",
+  description = "Building with perfect synchronicity",
+  type = "default",
+  showHeader = true,
+  showFooter = true,
+  showSidebar = true,
+  showChat = true,
+  chat = {
+    mode: "icon",
+    modeConfig: {
+      icon: {
+        position: "bottom-right",
+        badge: 1,
+        pulse: true,
+        launchMode: "split",
+      },
+    },
+  },
+  theme = "system",
+} = Astro.props as LayoutProps;
+
+// Initialize ONE system
+const config = {
+  name: "ONE",
+  version: "1.0.0",
+  theme: {
+    primary: "var(--one-primary)",
+    secondary: "var(--one-secondary)",
+    accent: "var(--one-accent)",
+  },
+};
+
+// Transition animation configuration
+const transitionAnimation = {
+  forwards: {
+    old: [{ name: "fadeOut", duration: "0.3s", fillMode: "forwards" }],
+    new: [{ name: "fadeIn", duration: "0.3s", fillMode: "backwards" }],
+  },
+  backwards: {
+    old: [{ name: "fadeOut", duration: "0.3s", fillMode: "forwards" }],
+    new: [{ name: "fadeIn", duration: "0.3s", fillMode: "backwards" }],
+  },
+};
+---
+
+<!doctype html>
+<html
+  lang="en"
+  class:list={[
+    "scroll-smooth antialiased",
+    theme === "system" ? "theme-system" : theme,
+  ]}
+  data-theme={theme}
+  transition:animate={transitionAnimation}
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <ViewTransitions />
+
+    <script is:inline>
+      // Initialize theme
+      const theme = localStorage.getItem("theme") || "system";
+      document.documentElement.classList.add(theme);
+      if (theme === "system") {
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+          .matches
+          ? "dark"
+          : "light";
+        document.documentElement.classList.add(systemTheme);
+      }
+    </script>
+  </head>
+
+  <body class="one-container">
+    <div class="one-layout">
+      {
+        showSidebar && (
+          <aside class="one-sidebar" transition:name="sidebar">
+            <slot name="sidebar" />
+          </aside>
+        )
+      }
+
+      <div class="one-main">
+        {
+          showHeader && (
+            <header class="one-header" transition:name="header">
+              <slot name="header">
+                <div class="one-header-content">
+                  <a href="/" class="one-logo">
+                    <img
+                      src="/logo.svg"
+                      alt={config.name}
+                      width="120"
+                      height="40"
+                    />
+                  </a>
+                  <nav class="one-nav">
+                    <slot name="nav" />
+                  </nav>
+                </div>
+              </slot>
+            </header>
+          )
+        }
+
+        <main
+          class:list={[
+            "one-content",
+            chat && `one-content-with-chat-${chat.mode}`,
+          ]}
+        >
+          <slot />
+        </main>
+
+        {
+          showChat && chat && (
+            <div class:list={["one-chat", `one-chat-${chat.mode}`]}>
+              <slot name="chat" />
+            </div>
+          )
+        }
+
+        {
+          showFooter && (
+            <footer class="one-footer">
+              <slot name="footer">
+                <div class="one-footer-content">
+                  <p>
+                    &copy; {new Date().getFullYear()} {config.name} v
+                    {config.version}
+                  </p>
+                </div>
+              </slot>
+            </footer>
+          )
+        }
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  /* Layout-specific styles */
+  .one-layout {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    min-height: 100vh;
+  }
+
+  .one-sidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid hsl(var(--one-secondary));
+    background: hsl(var(--one-background));
+  }
+
+  .one-main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .one-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: hsl(var(--one-background));
+    border-bottom: 1px solid hsl(var(--one-secondary));
+    backdrop-filter: blur(8px);
+  }
+
+  .one-content {
+    flex: 1;
+    padding: calc(var(--one-spacing-unit) * 4);
+  }
+
+  .one-chat {
+    position: fixed;
+    z-index: 50;
+    transition: all 0.3s ease;
+  }
+
+  .one-chat-icon {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .one-chat-floating {
+    bottom: 1rem;
+    right: 1rem;
+    width: min(400px, calc(100vw - 2rem));
+  }
+
+  .one-chat-split {
+    top: 0;
+    right: 0;
+    width: min(400px, 40vw);
+    height: 100vh;
+    border-left: 1px solid hsl(var(--one-secondary));
+  }
+
+  .one-chat-fullscreen {
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .one-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .one-sidebar {
+      display: none;
+    }
+
+    .one-content {
+      padding: calc(var(--one-spacing-unit) * 2);
+    }
+  }
+</style>

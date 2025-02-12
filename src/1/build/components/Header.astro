@@ -1,0 +1,27 @@
+---
+import { ModeToggle } from "./ui/mode-toggle";
+import { Button } from "./ui/button";
+---
+
+<header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+  <div class="container flex h-14 items-center">
+    <div class="mr-4 flex">
+      <a href="/" class="mr-6 flex items-center space-x-2">
+        <span class="font-bold">1</span>
+      </a>
+      <nav class="flex items-center space-x-6 text-sm font-medium">
+        <a href="/docs" class="transition-colors hover:text-foreground/80">Docs</a>
+        <a href="/market" class="transition-colors hover:text-foreground/80">Market</a>
+        <a href="/network" class="transition-colors hover:text-foreground/80">Network</a>
+      </nav>
+    </div>
+    <div class="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+      <div class="w-full flex-1 md:w-auto md:flex-none">
+      </div>
+      <nav class="flex items-center space-x-2">
+        <ModeToggle client:load />
+        <Button variant="outline" client:load>Connect</Button>
+      </nav>
+    </div>
+  </div>
+</header> 
