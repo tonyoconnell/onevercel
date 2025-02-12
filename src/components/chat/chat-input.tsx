@@ -112,9 +112,9 @@ function ChatInputTextArea({
 			onChange={onChange}
 			onKeyDown={handleKeyDown}
 			className={cn(
-				"max-h-[400px] min-h-0 resize-none overflow-x-hidden",
-				variant === "unstyled" &&
-					"border-none focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none",
+				"min-h-[44px] max-h-[200px] resize-none overflow-x-hidden",
+				"bg-transparent border-none focus-visible:ring-0 focus-visible:ring-offset-0",
+				variant === "unstyled" && "shadow-none",
 				className,
 			)}
 			rows={rows}
@@ -147,7 +147,7 @@ function ChatInputSubmit({
 			<Button
 				onClick={onStop}
 				className={cn(
-					"shrink-0 rounded-full p-1.5 h-fit border dark:border-zinc-600",
+					"shrink-0 rounded-full p-2 h-fit bg-primary hover:bg-primary/90 text-primary-foreground border-none",
 					className,
 				)}
 				{...props}
@@ -177,7 +177,7 @@ function ChatInputSubmit({
 	return (
 		<Button
 			className={cn(
-				"shrink-0 rounded-full p-1.5 h-fit border dark:border-zinc-600",
+				"shrink-0 rounded-full p-2 h-fit bg-primary hover:bg-primary/90 text-primary-foreground border-none",
 				className,
 			)}
 			disabled={isDisabled}
