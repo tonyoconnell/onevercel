@@ -140,7 +140,7 @@ export const aiSchema = z.object({
       prompt: z.string()
     })).optional().default([])
   }).optional().default({
-    message: "How can I help you today?",
+    message: "I am Agent ONE. How can I help you build AI agents?",
     center: true,
     suggestions: []
   })

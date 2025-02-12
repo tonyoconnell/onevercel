@@ -147,8 +147,8 @@ theme:
 
 # AI 
 ai:
-  provider: anthropic
-  model: claude-3-5-sonnet
+  provider: deepseek
+  model: deepseek-latest
   temperature: 0.1
   features:
     - content-generation
