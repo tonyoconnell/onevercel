@@ -68,44 +68,47 @@ export function ChatSimple({ className, ...props }: ComponentPropsWithoutRef<"di
 
     return (
         <div className={cn(
-            "w-full h-full flex flex-col",
+            "flex flex-col min-h-0 h-full",
             className
         )} {...props}>
             {/* Scrollable messages area */}
-            <div className="flex-1 overflow-y-auto">
-                <ChatMessageArea scrollButtonAlignment="center">
-                    <div className="w-full p-3 space-y-3">
-                        {messages.map((message) => {
-                            if (message.role !== "user") {
+            <div className="flex-1 min-h-0 overflow-hidden">
+                <div className="h-full overflow-y-auto">
+                    <ChatMessageArea scrollButtonAlignment="center">
+                        <div className="w-full p-2 space-y-2.5">
+                            {messages.map((message) => {
+                                if (message.role !== "user") {
+                                    return (
+                                        <ChatMessage key={message.id} id={message.id} className="px-1">
+                                            <ChatMessageAvatar />
+                                            <ChatMessageContent content={message.content} />
+                                        </ChatMessage>
+                                    );
+                                }
                                 return (
-                                    <ChatMessage key={message.id} id={message.id}>
-                                        <ChatMessageAvatar />
+                                    <ChatMessage
+                                        key={message.id}
+                                        id={message.id}
+                                        variant="bubble"
+                                        type="outgoing"
+                                        className="px-1"
+                                    >
                                         <ChatMessageContent content={message.content} />
                                     </ChatMessage>
                                 );
-                            }
-                            return (
-                                <ChatMessage
-                                    key={message.id}
-                                    id={message.id}
-                                    variant="bubble"
-                                    type="outgoing"
-                                >
-                                    <ChatMessageContent content={message.content} />
-                                </ChatMessage>
-                            );
-                        })}
-                        
-                        {isLoading && (
-                            <div className="flex items-center gap-2 text-muted-foreground animate-in fade-in duration-200">
-                                <Loader2 className="h-4 w-4 animate-spin" />
-                                <span className="text-sm">AI is typing...</span>
-                            </div>
-                        )}
-                        
-                        <div ref={messagesEndRef} className="h-px" />
-                    </div>
-                </ChatMessageArea>
+                            })}
+                            
+                            {isLoading && (
+                                <div className="flex items-center gap-2 text-muted-foreground animate-in fade-in duration-200 px-3">
+                                    <Loader2 className="h-3 w-3 animate-spin" />
+                                    <span className="text-xs">AI is typing...</span>
+                                </div>
+                            )}
+                            
+                            <div ref={messagesEndRef} className="h-px" />
+                        </div>
+                    </ChatMessageArea>
+                </div>
             </div>
 
             {/* Input container */}
@@ -114,7 +117,7 @@ export function ChatSimple({ className, ...props }: ComponentPropsWithoutRef<"di
                 "transition-all duration-200",
                 isFocused ? "shadow-md" : "shadow-sm"
             )}>
-                <div className="p-3">
+                <div className="p-2">
                     <ChatInput
                         value={input}
                         onChange={handleInputChange}
@@ -125,7 +128,7 @@ export function ChatSimple({ className, ...props }: ComponentPropsWithoutRef<"di
                     >
                         <ChatInputTextArea 
                             placeholder="Type a message..." 
-                            className="min-h-[44px] max-h-[160px] focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg resize-none scrollbar-thin scrollbar-thumb-primary/10 hover:scrollbar-thumb-primary/20"
+                            className="min-h-[42px] max-h-[160px] focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg resize-none scrollbar-thin scrollbar-thumb-primary/10 hover:scrollbar-thumb-primary/20"
                             onFocus={() => setIsFocused(true)}
                             onBlur={() => setIsFocused(false)}
                         />
