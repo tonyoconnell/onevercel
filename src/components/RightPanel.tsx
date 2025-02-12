@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { ChatSimple } from "@/components/ChatSimple";
+
 
 interface RightPanelProps {
     children?: React.ReactNode;
@@ -72,7 +74,7 @@ export function RightPanel({
                         </Button>
                     </div>
                     <div>
-                        {panelContent || <div className="text-muted-foreground">Panel Content</div>}
+                    <ChatSimple />
                     </div>
                 </div>
             </div>

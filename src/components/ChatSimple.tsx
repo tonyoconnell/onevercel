@@ -16,6 +16,12 @@ export function ChatSimple({ className, ...props }: ComponentPropsWithoutRef<"di
     const { messages, input, handleInputChange, handleSubmit, isLoading, stop } =
         useChat({
             api: "/api/chatsimple",
+            body: {
+                config: {
+                    provider: "mistral",
+                    model: "mistral-large-latest",
+                }
+            },
             initialMessages: [
                 {
                     id: "initial-assistant",
