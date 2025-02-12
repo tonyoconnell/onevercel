@@ -1,4 +1,6 @@
 ---
+import { ShapeLandingHero } from "@/components/ui/shape-landing-hero";
+import { Squares } from "@/components/ui/squares-background";
 import Layout from "../layouts/Layout.astro";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -30,7 +32,7 @@ const getGitHubStats = async () => {
     };
   } catch (error) {
     console.error("Error fetching GitHub stats:", error);
-    return { stars: "14.2k", forks: "3.1k" }; // Fallback values
+    return { stars: "1", forks: "1" }; // Fallback values
   }
 };
 
@@ -243,10 +245,11 @@ const rightPanelMode = "quarter"; // You can change this to 'full', 'half', 'flo
   chatConfig={chatConfig}
   rightPanelMode={rightPanelMode}
 >
-  <section class="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
-    <div
-      class="max-w-[64rem] flex flex-col items-center gap-6 text-center mx-auto"
-    >
+  <section class="relative space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32 bg-[#060606] overflow-hidden">
+    <div class="absolute inset-0">
+      <Squares client:load direction="diagonal" speed={0.5} squareSize={40} borderColor="#333" hoverFillColor="#222" />
+    </div>
+    <div class="relative max-w-[64rem] flex flex-col items-center gap-6 text-center mx-auto">
       <h1 class="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
         Build <span class="text-blue-600">AI-Powered Businesses</span> For Free
       </h1>
