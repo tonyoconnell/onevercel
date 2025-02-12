@@ -1,0 +1,33 @@
+---
+import NewLayout from "../layouts/New.astro";
+---
+
+<NewLayout 
+    defaultWidth="quarter"
+    defaultOpen={true}
+>
+    <main class="space-y-4">
+        <h1 class="text-4xl font-bold">Right Panel Test</h1>
+        <p class="text-lg text-muted-foreground">
+            This page demonstrates the responsive right panel layout.
+        </p>
+        
+        <div class="grid gap-4 mt-8">
+            <div class="p-6 rounded-lg border bg-card text-card-foreground shadow-sm">
+                <h2 class="text-xl font-semibold mb-2">Main Content Area</h2>
+                <p class="text-muted-foreground">
+                    Content adjusts based on panel width
+                </p>
+            </div>
+            
+            <div class="p-6 rounded-lg border bg-muted text-card-foreground shadow-sm">
+                <h2 class="text-xl font-semibold mb-2">Features</h2>
+                <ul class="space-y-2 text-sm text-muted-foreground">
+                    <li>✨ Panel toggle</li>
+                    <li>🎚️ Width control (1/4 or 1/2)</li>
+                    <li>🔄 Smooth transitions</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</NewLayout>
