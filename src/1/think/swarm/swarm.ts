@@ -85,15 +85,63 @@ export class ONE {
 
     // System initialization
     static async init(config?: Partial<SystemConfig>): Promise<ONE> {
-        const defaultConfig = {
+        const defaultConfig: SystemConfig = {
             version: '1.0.0',
             provider: 'anthropic',
             model: 'claude-3-sonnet',
             theme: 'ONE',
-            // ... default config values
+            swarm: {
+                size: 7,
+                roles: ['architect', 'builder', 'tester', 'optimizer', 'monitor', 'learner', 'coordinator'],
+                consensus: {
+                    algorithm: 'weighted_vote',
+                    threshold: 0.7,
+                    timeout: '30s'
+                },
+                communication: {
+                    protocol: 'mesh',
+                    sync: 'eventual',
+                    channels: ['direct', 'broadcast', 'pubsub']
+                }
+            },
+            collective: {
+                memory: {
+                    shared: {
+                        limit: 1000,
+                        pruneThreshold: 0.8
+                    },
+                    distributed: {
+                        shards: 3,
+                        replication: 2
+                    }
+                },
+                personality: {
+                    openness: 0.8,
+                    conscientiousness: 0.9,
+                    adaptability: 0.7,
+                    collaboration: 0.9
+                }
+            },
+            capabilities: {
+                chat: true,
+                generate: true,
+                transform: true,
+                image: false,
+                audio: false,
+                video: false,
+                swarm: {
+                    coordinate: true,
+                    distribute: true,
+                    consensus: true,
+                    heal: true
+                }
+            },
+            tools: [],
+            connections: [],
+            evaluators: []
         }
 
-        const mergedConfig = { ...defaultConfig, ...config }
+        const mergedConfig = { ...defaultConfig, ...config } as SystemConfig
         return new ONE(mergedConfig)
     }
 
@@ -194,6 +242,25 @@ export class ONE {
                 await this.reinitializeAgent(id)
             }
         }
+    }
+
+    private async reinitializeAgent(id: string): Promise<void> {
+        // Remove the unhealthy agent
+        this.swarm.delete(id)
+        // Create and initialize a new agent (implementation details needed)
+        // this.swarm.set(id, newAgent)
+    }
+
+    private weightedVoteConsensus(results: Result[], threshold: number): Result {
+        // Count successful results
+        const successCount = results.filter(r => r.success).length
+        const ratio = successCount / results.length
+        
+        // Return consensus based on threshold
+        if (ratio >= threshold) {
+            return { success: true, data: results[0].data }
+        }
+        return { success: false, error: new Error('Failed to reach consensus') }
     }
 }
 
