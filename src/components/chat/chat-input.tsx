@@ -50,18 +50,16 @@ function ChatInput({
 
 	return (
 		<ChatInputContext.Provider value={contextValue}>
-			<div
-				className={cn(
-				"absolute bottom-0 left-0 right-0 w-full bg-background/95 backdrop-blur border-t shadow-sm",
-				variant === "default" &&
-				"flex flex-col items-end gap-2 px-4 py-3",
-				variant === "unstyled" && "flex items-start gap-2 p-3",
-				className
-				)}
-			>
-				{children}
+			<div className={cn("absolute bottom-0 left-0 right-0 w-full p-4", className)}>
+			  <div className={cn(
+			    "w-full bg-muted/50 backdrop-blur rounded-2xl px-4 py-3",
+			    variant === "default" && "flex flex-col items-end gap-2",
+			    variant === "unstyled" && "flex items-start gap-2 bg-transparent"
+			  )}>
+			    {children}
+			  </div>
 			</div>
-		</ChatInputContext.Provider>
+			</ChatInputContext.Provider>
 	);
 }
 
