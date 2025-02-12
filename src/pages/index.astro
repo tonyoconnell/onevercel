@@ -1,5 +1,4 @@
 ---
-import { ShapeLandingHero } from "@/components/ui/shape-landing-hero";
 import { Squares } from "@/components/ui/squares-background";
 import Layout from "../layouts/Layout.astro";
 import { Button } from "@/components/ui/button";
@@ -70,25 +69,20 @@ const faqs = [
   {
     question: "What can I build with ONE?",
     answer:
-      "ONE enables you to build complete AI-powered businesses. Key features include: 1) AI Sales Agents that engage customers and close deals 24/7 2) Multi-channel Content Generation for blogs, social media, and marketing 3) Full E-commerce with crypto and traditional payments 4) Custom AI training for your specific business needs.",
+      "ONE enables you to build complete AI-powered businesses. It's perfect for building 1) AI Sales Agents that engage customers and close deals 24/7 2) Multi-channel Content Generation for blogs, social media, and marketing 3) Full E-commerce with crypto and traditional payments 4) Courses and digital products.",
   },
-  // Token System
-  {
-    question: "How does the token system work?",
-    answer:
-      "For complete white-labeling rights and removal of brand requirements, so you can sell ONE as your own product: \n• Single Project - $100: Brand ONE as your own product\n• Unlimited Projects - $1,000: Sell unlimited white-labeled versions\n• Enterprise - Custom solutions\n\nInstantly deploy ONE under your own brand.",
-  },
+
   // Payments
   {
     question: "What payment methods are supported?",
     answer:
-      "ONE supports all major payment methods through Stripe:\n• Credit/Debit Cards (Visa, Mastercard, American Express)\n• Digital Wallets (Apple Pay, Google Pay, Microsoft Pay)\n• Bank Transfers (ACH, SEPA, BACS)\n• Buy Now Pay Later (Klarna, Afterpay, Clearpay)\n• Local Methods (iDEAL, Bancontact, giropay)\n• International Cards (JCB, UnionPay)\n\nCrypto payments (BTC, ETH, SOL) are under active development - see progress at /crypto",
+      "ONE makes it easy for you to accept all major payment methods through Stripe:\n• Credit/Debit Cards (Visa, Mastercard, American Express)\n• Digital Wallets (Apple Pay, Google Pay, Microsoft Pay)\n• Bank Transfers (ACH, SEPA, BACS)\n• Buy Now Pay Later (Klarna, Afterpay, Clearpay)\n• Local Methods (iDEAL, Bancontact, giropay)\n• International Cards (JCB, UnionPay)\n\nCrypto payments (BTC, ETH, SOL) are under active development - see progress at /crypto",
   },
   // AI Agents
   {
     question: "How powerful are the AI agents?",
     answer:
-      "ONE's AI agents are enterprise-grade and can:\n• Handle complete sales cycles\n• Generate and optimize content\n• Process transactions autonomously\n• Learn from customer interactions\n• Operate in multiple languages\n• Integrate with external systems\n• Maintain context across sessions",
+      "You can build enterprise-grade agents that can:\n• Handle complete sales cycles\n• Generate and optimize content\n• Process transactions autonomously\n• Learn from customer interactions\n• Operate in multiple languages\n• Integrate with external systems\n• Maintain context across sessions",
   },
   // Content Generation
   {
@@ -245,592 +239,28 @@ const rightPanelMode = "quarter"; // You can change this to 'full', 'half', 'flo
   chatConfig={chatConfig}
   rightPanelMode={rightPanelMode}
 >
-  <section class="relative space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32 bg-[#060606] overflow-hidden">
+  <section class="relative pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32 bg-neutral-900 overflow-hidden border-b border-neutral-800">
     <div class="absolute inset-0">
-      <Squares client:load direction="diagonal" speed={0.5} squareSize={40} borderColor="#333" hoverFillColor="#222" />
+      <Squares client:load direction="diagonal" speed={0.5} squareSize={40} borderColor="#404040" hoverFillColor="#333" />
     </div>
-    <div class="relative max-w-[64rem] flex flex-col items-center gap-6 text-center mx-auto">
-      <h1 class="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
-        Build <span class="text-blue-600">AI-Powered Businesses</span> For Free
+    <div class="relative z-10 max-w-[64rem] flex flex-col items-center gap-8 text-center mx-auto px-4">
+      <h1 class="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight text-neutral-100">
+        Build{" "}
+        <span class="text-blue-500">AI-Powered</span>{" "}
+        <span class="text-neutral-100">Businesses</span>
       </h1>
-      <div class="flex flex-col items-center gap-4 max-w-[800px]">
-        <p class="text-lg md:text-xl text-muted-foreground">
-          Create intelligent businesses with AI agents, automated content, and
-          crypto payments. Free forever, open-source, and enterprise-ready.
+      <div class="flex flex-col items-center gap-6 max-w-[800px]">
+        <p class="text-lg sm:text-xl md:text-2xl text-neutral-400 leading-relaxed tracking-wide max-w-2xl">
+          Create intelligent businesses with AI agents, automated content, websites, and
+  accept payments. Free forever, open-source, and enterprise-ready.
         </p>
 
-        <div class="flex flex-wrap justify-center gap-3 text-sm md:text-base">
-          <span
-            class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 text-primary"
-          >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            24/7 AI Agents
-          </span>
-          <span
-            class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 text-primary"
-          >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
-            All Payments
-          </span>
-          <span
-            class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 text-primary"
-          >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-              ></path>
-            </svg>
-            Auto Content
-          </span>
-          <span
-            class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 text-primary"
-          >
-            <svg
-              class="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7"></path>
-            </svg>
-            100% Free
-          </span>
-        </div>
-
-        <div class="text-sm text-muted-foreground mt-4">
-          Complete white-label rights available starting at $100
-        </div>
-      </div>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a
-          href="/download"
-          class="inline-flex items-center justify-center rounded-md bg-blue-600 text-white px-6 py-3 text-sm font-medium transition-colors hover:bg-blue-700"
-        >
-          <svg
-            class="w-5 h-5 mr-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-            ></path>
-          </svg>
-          Get Started Free
-        </a>
-
-        <a
-          href="chat"
-          class="inline-flex items-center justify-center rounded-md border px-6 py-3 text-sm font-medium transition-colors hover:border-blue-600 hover:text-blue-600"
-        >
-          Try Live Demo
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Core Benefits -->
-  <section class="py-16 bg-gradient-to-b from-primary/5 to-transparent">
-    <div class="container mx-auto px-4">
-      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        <div class="text-center p-6">
-          <div
-            class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4"
-          >
-            <svg
-              class="w-6 h-6 text-primary"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7"></path>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold mb-2">100% Free Core</h3>
-          <p class="text-sm text-muted-foreground">
-            All essential features free forever. Build complete AI businesses
-            without restrictions.
-          </p>
-        </div>
-
-        <div class="text-center p-6">
-          <div
-            class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4"
-          >
-            <svg
-              class="w-6 h-6 text-primary"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold mb-2">Production Ready</h3>
-          <p class="text-sm text-muted-foreground">
-            Enterprise-grade AI agents, payments, and content automation out of
-            the box.
-          </p>
-        </div>
-
-        <div class="text-center p-6">
-          <div
-            class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4"
-          >
-            <svg
-              class="w-6 h-6 text-primary"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold mb-2">Optional Premium</h3>
-          <p class="text-sm text-muted-foreground">
-            Enhance with token-based features like white-labeling when you need
-            them.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="features" class="py-20">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-4">
-        Free Enterprise-Grade Features
-      </h2>
-      <p class="text-center text-muted-foreground max-w-2xl mx-auto mb-12">
-        All core features are completely free and open source. Build
-        production-ready AI businesses without any costs.
-      </p>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div
-          class="p-6 rounded-lg border shadow-sm hover:shadow-md transition-shadow"
-        >
-          <div
-            class="w-12 h-12 border rounded-lg flex items-center justify-center mb-4"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-blue-600"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">AI Agents</h3>
-          <div class="space-y-3">
-            <p class="text-muted-foreground">Free Features:</p>
-            <ul class="text-sm text-muted-foreground space-y-1">
-              <li class="flex items-center gap-2">
-                <svg
-                  class="w-4 h-4 text-green-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
-                </svg>
-                Sales & Support automation
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  class="w-4 h-4 text-green-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
-                </svg>
-                Content generation
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  class="w-4 h-4 text-green-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
-                </svg>
-                Basic customization
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div
-          class="p-6 rounded-lg border shadow-sm hover:shadow-md transition-shadow"
-        >
-          <div
-            class="w-12 h-12 border rounded-lg flex items-center justify-center mb-4"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-blue-600"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">All Payments</h3>
-          <div class="space-y-3">
-            <p class="text-muted-foreground">Free Features:</p>
-            <ul class="text-sm text-muted-foreground space-y-1">
-              <li class="flex items-center gap-2">
-                <svg
-                  class="w-4 h-4 text-green-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
-                </svg>
-                Crypto (BTC/ETH/SOL)
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  class="w-4 h-4 text-green-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
-                </svg>
-                Credit cards & transfers
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  class="w-4 h-4 text-green-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
-                </svg>
-                Digital wallets
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div
-          class="p-6 rounded-lg border shadow-sm hover:shadow-md transition-shadow"
-        >
-          <div
-            class="w-12 h-12 border rounded-lg flex items-center justify-center mb-4"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-blue-600"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-              ></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Content Creation</h3>
-          <div class="space-y-3">
-            <p class="text-muted-foreground">Free Features:</p>
-            <ul class="text-sm text-muted-foreground space-y-1">
-              <li class="flex items-center gap-2">
-                <svg
-                  class="w-4 h-4 text-green-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
-                </svg>
-                Blog & social posts
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  class="w-4 h-4 text-green-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
-                </svg>
-                Documentation
-              </li>
-              <li class="flex items-center gap-2">
-                <svg
-                  class="w-4 h-4 text-green-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
-                </svg>
-                SEO optimization
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Premium Features Note -->
-      <div class="mt-16 text-center">
-        <div
-          class="inline-block px-6 py-3 rounded-lg bg-primary/5 border border-primary/20"
-        >
-          <h3 class="text-lg font-semibold mb-2">Optional Premium Features</h3>
-          <p class="text-sm text-muted-foreground mb-4">
-            Want to sell ONE as your own product? Complete white-label rights
-            starting at $100.
-          </p>
-          <div class="flex flex-wrap justify-center gap-3">
-            <span
-              class="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary"
-              >White Label</span
-            >
-            <span
-              class="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary"
-              >Custom Training</span
-            >
-            <span
-              class="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary"
-              >Priority Support</span
-            >
-            <span
-              class="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary"
-              >Enterprise Tools</span
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-20">
-    <div class="container mx-auto px-4">
-      <div class="flex flex-col md:flex-row items-center gap-12">
-        <div class="flex-1">
-          <h2 class="text-3xl font-bold mb-6">
-            Advanced AI & Crypto Capabilities
-          </h2>
-          <ul class="space-y-4">
-            <li class="flex items-start gap-3">
-              <svg
-                class="w-6 h-6 text-green-500 flex-shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <div>
-                <h3 class="font-semibold">AI Sales Agents</h3>
-                <p class="text-muted-foreground">
-                  Deploy autonomous AI agents that can showcase and sell
-                  products 24/7
-                </p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg
-                class="w-6 h-6 text-green-500 flex-shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <div>
-                <h3 class="font-semibold">Crypto Integration</h3>
-                <p class="text-muted-foreground">
-                  Accept BTC, ETH, and SOL payments with real-time verification
-                  and QR codes
-                </p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg
-                class="w-6 h-6 text-green-500 flex-shrink-0"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <div>
-                <h3 class="font-semibold">Content Generation</h3>
-                <p class="text-muted-foreground">
-                  Automate content creation and social media posting with
-                  AI-powered tools
-                </p>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="flex-1">
-          <div class="rounded-lg border shadow-lg overflow-hidden">
-            <img
-              src="/screenshots/chat.png"
-              alt="ONE Chat Interface"
-              class="w-full"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-20 border-t">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-6">Build the Future of AI Commerce</h2>
-      <p class="text-xl mb-8 text-muted-foreground">
-        Create AI-powered businesses with automated content, sales, and crypto
-        payments
-      </p>
-      <div class="flex flex-col items-center">
-        <div class="flex justify-center gap-4 mb-6">
-          <a
-            href="/docs/get-started"
-            class="inline-flex items-center justify-center rounded-md border-2 border-blue-600 text-blue-600 px-6 py-3 text-sm font-medium transition-colors hover:bg-blue-600 hover:text-white"
-          >
-            Get Started Free
-          </a>
-          <a
-            href="/docs/crypto-integration"
-            class="inline-flex items-center justify-center rounded-md border px-6 py-3 text-sm font-medium transition-colors hover:border-blue-600 hover:text-blue-600"
-          >
-            Crypto Integration
-          </a>
-        </div>
-        <p class="text-sm text-muted-foreground">
-          Looking to partner? <a
-            href="/contact"
-            class="text-blue-600 hover:underline"
-            >Let's build something amazing together →</a>
-        </p>
-      </div>
-    </div>
+       </div>
+    </div>  
   </section>
 
   <!-- Download Options Grid -->
-  <section class="container mx-auto px-6 py-20 border-t">
+  <section class="container mx-auto px-6 py-20 ">
     <h2 class="text-3xl font-bold text-center mb-12">Download & Get Started</h2>
     <div class="grid md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto mb-12">
       <!-- Direct Download Card -->
@@ -856,7 +286,7 @@ const rightPanelMode = "quarter"; // You can change this to 'full', 'half', 'flo
       <Card
         className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow"
       >
-        <h3 class="text-2xl font-bold mb-4">Git Integration</h3>
+        <h3 class="text-2xl font-bold mb-4">Git Clone</h3>
         <p class="text-muted-foreground mb-6">Clone the repository using Git</p>
         <Button
           variant="outline"
@@ -865,7 +295,7 @@ const rightPanelMode = "quarter"; // You can change this to 'full', 'half', 'flo
           id="copyCloneCommand"
         >
           <CodeIcon className="w-5 h-5 mr-2 text-primary" />
-          <code class="font-mono text-sm">git clone one-ie/one</code>
+          <code class="font-mono text-sm">git clone https://github.com/one-ie/one</code>
         </Button>
         <p
           id="copyMessage"

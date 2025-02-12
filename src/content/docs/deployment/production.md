@@ -46,6 +46,8 @@ EDGE_CONFIG=your_edge_config
 
 ### 2. Cloudflare Pages
 
+Note: This is under active development 
+
 ```bash
 # Install Wrangler
 pnpm add -g wrangler
@@ -66,68 +68,6 @@ zone_id = "your_zone_id"
 
 [env.production]
 vars = { ENVIRONMENT = "production" }
-```
-
-### 3. Custom Server
-
-```typescript
-// server.js
-import { handler } from './dist/server/entry.mjs';
-import express from 'express';
-import compression from 'compression';
-
-const app = express();
-app.use(compression());
-app.use(express.static('dist/client'));
-app.use(handler);
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
-```
-
-## Performance Optimization
-
-### 1. Edge Runtime
-
-Enable edge functions for optimal performance:
-
-```typescript
-// src/pages/api/chat.ts
-export const config = {
-  runtime: 'edge',
-  regions: ['all'],
-};
-
-export default async function handler(req: Request) {
-  // Your chat API logic
-}
-```
-
-### 2. Caching Strategy
-
-```typescript
-// src/lib/cache.ts
-import { LRUCache } from 'lru-cache';
-
-export const responseCache = new LRUCache({
-  max: 500,  // Maximum items
-  maxAge: 1000 * 60 * 60,  // 1 hour
-  updateAgeOnGet: true,
-  updateAgeOnHas: true,
-});
-
-// Usage
-const getCachedResponse = async (key: string) => {
-  if (responseCache.has(key)) {
-    return responseCache.get(key);
-  }
-  
-  const response = await generateResponse(key);
-  responseCache.set(key, response);
-  return response;
-};
 ```
 
 ### 3. Asset Optimization
@@ -163,32 +103,6 @@ const envSchema = z.object({
 });
 
 export const env = envSchema.parse(process.env);
-```
-
-### 2. API Rate Limiting
-
-```typescript
-// src/middleware/rateLimiter.ts
-import { Ratelimit } from '@upstash/ratelimit';
-import { Redis } from '@upstash/redis';
-
-const ratelimit = new Ratelimit({
-  redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(10, '10 s'),
-});
-
-export async function rateLimiter(request: Request) {
-  const ip = request.headers.get('x-forwarded-for');
-  const { success, limit, remaining, reset } = await ratelimit.limit(
-    `ratelimit_${ip}`
-  );
-
-  return { success, headers: {
-    'X-RateLimit-Limit': limit.toString(),
-    'X-RateLimit-Remaining': remaining.toString(),
-    'X-RateLimit-Reset': reset.toString(),
-  }};
-}
 ```
 
 ### 3. Content Security Policy
@@ -336,11 +250,3 @@ export async function GET() {
 - [ ] Backup strategy in place
 - [ ] SSL certificates installed
 - [ ] DNS records updated
-
-## Next Steps
-
-- [Monitoring Setup](/docs/deployment/monitoring)
-- [Scaling Guide](/docs/deployment/scaling)
-- [Security Best Practices](/docs/deployment/security)
-
-Need help? Check our [FAQ](/docs/faq) or contact [support](mailto:support@one.ie).
