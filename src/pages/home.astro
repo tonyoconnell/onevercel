@@ -1,12 +1,10 @@
 ---
-import NewLayout from "../layouts/New.astro";
 import { HeroGeometric } from "../components/ui/shape-landing-hero";
+import { AIChatButton } from "../components/AIChatButton";
+import { HeroLayout } from "../layouts/HeroLayout";
 ---
 
-<NewLayout 
-    defaultWidth="half"
-    defaultOpen={true}
->
+<HeroLayout client:load defaultWidth="half" defaultOpen={false}>
     <main>
         <!-- Hero Section -->
         <HeroGeometric
@@ -14,7 +12,15 @@ import { HeroGeometric } from "../components/ui/shape-landing-hero";
             badge="AI-Powered Development"
             title1="Build AI-Powered"
             title2="Websites & Apps"
-        />
+        >
+            <AIChatButton
+                client:load
+                onOpenPanel={() => window.dispatchEvent(new CustomEvent('openAIPanel'))}
+                className="px-8 py-6 text-lg font-medium tracking-wide"
+            >
+                Try AI Chat
+            </AIChatButton>
+        </HeroGeometric>
 
         <!-- Features Grid -->
         <section class="py-16 max-w-6xl mx-auto px-4">
@@ -51,9 +57,27 @@ import { HeroGeometric } from "../components/ui/shape-landing-hero";
             </div>
         </section>
     </main>
-</NewLayout>
+</HeroLayout>
 
 <style>
+    @keyframes shimmer {
+        0% {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+    
+    .animate-shimmer {
+        animation: shimmer 2.5s infinite;
+    }
+
     .text-gradient {
         background-clip: text;
         -webkit-background-clip: text;

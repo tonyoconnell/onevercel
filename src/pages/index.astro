@@ -74,13 +74,13 @@ const faqs = [
   {
     question: "How does the token system work?",
     answer:
-      "ONE uses a token-based system for accessing premium features: \n• 100 ONE - Full white-label for single project\n• 1,000 ONE - Unlimited white-label for multiple domains\n• 10,000 ONE - Unlimited rights across projects\n• 50,000+ ONE - Enterprise features with strategy and training\n\nTokens can be purchased on supported exchanges and used immediately for unlocking features.",
+      "For complete white-labeling rights and removal of brand requirements, so you can sell ONE as your own product: \n• Single Project - $100: Brand ONE as your own product\n• Unlimited Projects - $1,000: Sell unlimited white-labeled versions\n• Enterprise - Custom solutions\n\nInstantly deploy ONE under your own brand.",
   },
   // Payments
   {
     question: "What payment methods are supported?",
     answer:
-      "ONE offers comprehensive payment support:\n• Cryptocurrencies: BTC, ETH, SOL with QR codes\n• Credit Cards & Bank Transfers\n• Digital Wallets: Apple Pay, Google Pay\n• Global Options: Alipay, Klarna, SEPA\n• Real-time payment verification\n• Automatic currency conversion",
+      "ONE supports all major payment methods through Stripe:\n• Credit/Debit Cards (Visa, Mastercard, American Express)\n• Digital Wallets (Apple Pay, Google Pay, Microsoft Pay)\n• Bank Transfers (ACH, SEPA, BACS)\n• Buy Now Pay Later (Klarna, Afterpay, Clearpay)\n• Local Methods (iDEAL, Bancontact, giropay)\n• International Cards (JCB, UnionPay)\n\nCrypto payments (BTC, ETH, SOL) are under active development - see progress at /crypto",
   },
   // AI Agents
   {
@@ -133,23 +133,23 @@ Core Capabilities:
    • Context-aware responses
    • Custom training options
 
-2. Payment Integration
-   • Cryptocurrency (BTC, ETH, SOL)
-   • Traditional payments (Credit Cards)
-   • Digital wallets (Apple Pay, Google Pay)
-   • Global options (Alipay, Klarna)
-   • Real-time verification
-   • QR code support
-   • Automatic conversion
+2. Payment Integration (via Stripe)
+   • Credit/Debit Cards - All major networks
+   • Digital Wallets - Apple/Google/Microsoft Pay
+   • Bank Transfers - ACH/SEPA/BACS
+   • Buy Now Pay Later - Multiple providers
+   • Local Payment Methods - Regional options
+   • International Cards - Global coverage
+   • Real-time verification & processing
+   • Note: Crypto payments in development (/crypto)
 
-3. Token System
-   • 100 ONE - Single project white-label
-   • 1,000 ONE - Multiple domains
-   • 10,000 ONE - Unlimited rights
-   • 50,000+ ONE - Enterprise features
-   • Instant feature unlocking
-   • Token staking benefits
-   • Trading flexibility
+3. White-Label Options
+   • $100 - Brand ONE as your own product
+   • $1,000 - Sell unlimited white-labeled versions
+   • Enterprise - Custom solutions available
+   • Complete branding rights
+   • Sell as your own product
+   • No brand requirements
 
 4. Content Automation
    • Blog post generation
@@ -202,34 +202,33 @@ Your goal is to help users understand how ONE can transform their business with 
   ],
   welcome: {
     message:
-      "👋 Welcome! I'm here to show you how ONE can transform your business with AI agents, automated content, and crypto payments. What would you like to learn about?",
+      "👋 Welcome! ONE is free software that lets you build intelligent AI agents and businesses without restrictions. Whether you're a CEO, engineer, educator or creator, you can create agents that build more agents. What would you like to explore?",
     avatar: "/icon.svg",
     suggestions: [
       {
-        label: "🤖 AI Agents",
+        label: "🤖 Build AI Agents",
         prompt:
-          "Tell me about ONE's AI agent capabilities for sales and automation",
+          "Tell me how I can create AI agents that build more agents",
       },
       {
-        label: "💳 Payment Options",
-        prompt: "What payment methods does ONE support, including crypto?",
+        label: "💡 Free Forever",
+        prompt: "What can I build with ONE? It's free forever!",
       },
       {
-        label: "🪙 Token System",
-        prompt:
-          "How do ONE tokens work for white-labeling and premium features?",
+        label: "🔧 Implementation",
+        prompt: "How do I implement ONE in my project or business?",
       },
       {
-        label: "✍️ Content Generation",
-        prompt: "What kind of content can ONE automatically generate?",
+        label: "🎓 Learning & Education",
+        prompt: "How can educators and students use ONE?",
       },
       {
         label: "🚀 Quick Start",
-        prompt: "How can I deploy my first AI agent with ONE?",
+        prompt: "Show me how to deploy my first AI agent",
       },
       {
-        label: "💼 Enterprise Features",
-        prompt: "What enterprise-level features does ONE offer?",
+        label: "🌐 Community",
+        prompt: "How can I connect with other ONE builders?",
       },
     ],
   },
@@ -331,7 +330,7 @@ const rightPanelMode = "quarter"; // You can change this to 'full', 'half', 'flo
         </div>
 
         <div class="text-sm text-muted-foreground mt-4">
-          Optional token-based features available for enterprise users
+          Complete white-label rights available starting at $100
         </div>
       </div>
       <div class="flex flex-wrap justify-center gap-4">
@@ -683,8 +682,8 @@ const rightPanelMode = "quarter"; // You can change this to 'full', 'half', 'flo
         >
           <h3 class="text-lg font-semibold mb-2">Optional Premium Features</h3>
           <p class="text-sm text-muted-foreground mb-4">
-            Want to remove branding or need enterprise features? Unlock
-            additional capabilities with ONE tokens.
+            Want to sell ONE as your own product? Complete white-label rights
+            starting at $100.
           </p>
           <div class="flex flex-wrap justify-center gap-3">
             <span

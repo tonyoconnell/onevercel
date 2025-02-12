@@ -74,10 +74,12 @@ function HeroGeometric({
     badge = "Design Collective",
     title1 = "Elevate Your Digital Vision",
     title2 = "Crafting Exceptional Websites",
+    children,
 }: {
     badge?: string;
     title1?: string;
     title2?: string;
+    children?: React.ReactNode;
 }) {
     const fadeUpVariants = {
         hidden: { opacity: 0, y: 30 },
@@ -184,11 +186,16 @@ function HeroGeometric({
                         variants={fadeUpVariants}
                         initial="hidden"
                         animate="visible"
+                        className="space-y-8"
                     >
-                        <p className="text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4">
+                        <p className="text-base sm:text-lg md:text-xl text-white/40 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4">
                             Crafting exceptional digital experiences through
                             innovative design and cutting-edge technology.
                         </p>
+
+                        <div className="flex justify-center">
+                            {children}
+                        </div>
                     </motion.div>
                 </div>
             </div>

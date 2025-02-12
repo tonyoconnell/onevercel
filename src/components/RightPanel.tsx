@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChatSimple } from "@/components/ChatSimple";
-
 
 interface RightPanelProps {
     children?: React.ReactNode;
@@ -18,6 +17,10 @@ export function RightPanel({
     const [isPanelOpen, setIsPanelOpen] = useState(defaultOpen);
     const [panelWidth, setPanelWidth] = useState<"quarter" | "half">(defaultWidth);
 
+    useEffect(() => {
+        setIsPanelOpen(defaultOpen);
+    }, [defaultOpen]);
+
     return (
         <div className="flex h-screen w-full">
             {/* Main Content */}
@@ -30,24 +33,14 @@ export function RightPanel({
                         : "w-full"
                 }`}
             >
-                <div className="p-4">
-                    <Button 
-                        onClick={() => setIsPanelOpen(!isPanelOpen)}
-                        variant="outline"
-                        size="sm"
-                        className="mb-4"
-                    >
-                        {isPanelOpen ? "Hide Agent" : "Add Agent"}
-                    </Button>
-                    <div className="mt-4">
-                        {children}
-                    </div>
+                <div className="h-full overflow-auto">
+                    {children}
                 </div>
             </div>
 
             {/* Right Panel */}
             <div
-                className={`h-full bg-background border-l transition-all duration-300 ${
+                className={`fixed right-0 top-0 h-full bg-background border-l shadow-2xl transition-all duration-300 ${
                     isPanelOpen
                         ? panelWidth === "quarter"
                             ? "w-1/4"
@@ -56,20 +49,29 @@ export function RightPanel({
                 }`}
             >
                 <div className="h-full flex flex-col">
-                    <div className="flex gap-2 p-4">
+                    <div className="flex justify-between items-center p-4 border-b">
+                        <div className="flex gap-2">
+                            <Button
+                                size="sm"
+                                onClick={() => setPanelWidth("quarter")}
+                                variant={panelWidth === "quarter" ? "default" : "outline"}
+                            >
+                                1/4
+                            </Button>
+                            <Button
+                                size="sm"
+                                onClick={() => setPanelWidth("half")}
+                                variant={panelWidth === "half" ? "default" : "outline"}
+                            >
+                                1/2
+                            </Button>
+                        </div>
                         <Button
                             size="sm"
-                            onClick={() => setPanelWidth("quarter")}
-                            variant={panelWidth === "quarter" ? "default" : "outline"}
+                            variant="ghost"
+                            onClick={() => setIsPanelOpen(false)}
                         >
-                            1/4
-                        </Button>
-                        <Button
-                            size="sm"
-                            onClick={() => setPanelWidth("half")}
-                            variant={panelWidth === "half" ? "default" : "outline"}
-                        >
-                            1/2
+                            ✕
                         </Button>
                     </div>
                     <div className="flex-1 overflow-hidden">

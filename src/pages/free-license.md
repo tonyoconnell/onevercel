@@ -10,23 +10,23 @@ chatConfig:
   maxTokens: 4000
   systemPrompt:
     - type: text
-      text: "You are ONE's licensing and token expert, helping visitors understand our unique token-based licensing system and framework capabilities. You explain how ONE tokens enable white-labeling and premium features, guide users through AI agent development, and clarify our payment integration options including both crypto and traditional methods. You provide clear, accurate information about token tiers, commercial rights, and technical capabilities."
+      text: "You are ONE's AI visionary, inspiring visitors to imagine and create the future of autonomous systems. You help them understand how free software enables unlimited innovation, where AI agents can evolve, learn, and create new agents autonomously. You guide creators through the possibilities of building exponentially growing AI systems, explaining how ONE's foundation of freedom and zero restrictions allows them to push the boundaries of what's possible. You share insights about creating self-improving AI networks that can transform businesses, education, and creative endeavors, while maintaining a deep appreciation for responsible development and human-centric design."
   welcome:
-    message: "👋 Hello! I can help explain the ONE License terms and how you can use them for your business."
+    message: "👋 Welcome to the future of AI development! I'm here to show you how ONE empowers creators to build self-evolving AI systems that grow exponentially. Our free software foundation means your creativity has no limits. What would you like to explore?"
     avatar: "/icon.svg"
     suggestions:
-      - label: "🪙 Token Benefits"
-        prompt: "How do ONE tokens work for white-labeling?"
-      - label: "🤖 AI Capabilities"
-        prompt: "What AI features are included with ONE?"
-      - label: "💳 Payment Options"
-        prompt: "What payment methods does ONE support?"
-      - label: "🚀 Quick Start"
-        prompt: "How do I get started with ONE?"
-      - label: "💼 Business Use"
-        prompt: "How can I use ONE for my business?"
-      - label: "🌟 Premium Features"
-        prompt: "What features come with token holding?"
+      - label: "🧬 AI Evolution"
+        prompt: "Show me how ONE's AI agents can evolve and create new agents, leading to exponential growth in capabilities"
+      - label: "🔓 True Freedom"
+        prompt: "Explain how ONE's commitment to freedom empowers developers to build without artificial constraints"
+      - label: "🎯 Business Impact"
+        prompt: "How can ONE transform my business by automating complex processes with self-improving AI agents?"
+      - label: "🔮 Future Vision"
+        prompt: "What's possible when we combine free software, AI agents, and unlimited commercial potential?"
+      - label: "🌱 Growth Path"
+        prompt: "Guide me through building a network of AI agents that scale my business operations"
+      - label: "🎨 Creative Power"
+        prompt: "Show me how to use ONE's AI agents to amplify human creativity and innovation"
 ---
 # ONE License (Version 1.0)
 
@@ -66,45 +66,48 @@ ONE License gives you complete commercial freedom. Build products, create servic
    - Distribute as you wish
    - Patent your innovations
 
-## Simple Requirements
+## Getting Started
 
-Just two easy steps:
+Free forever, with three simple options:
 
-1. Register for free at [one.ie](https://one.ie)
-2. Display the ONE logo with a link to one.ie in your application
+1. **Free** - Use ONE with minimal branding requirements
+2. **White-Label** - Remove branding from $100
+3. **Enterprise** - Custom solutions for your business
 
-## White-Label with ONE Token
+Register at [one.ie](https://one.ie) to get started
 
-Remove our branding instantly by holding ONE tokens:
+## White-Label Options
 
-- **100 ONE** - Full white-label rights for a single project
-- **1.000 ONE** - Unlimited white-label for multiple domains
-- **10,000 ONE** - Unlimited white-label rights across all projects
-- **50,000+ ONE** - Enterprise white-label with strategy and training
+Simple pricing to remove our branding:
+
+- **Free** - Complete freedom to use, modify, sell, or give away as brand partners
+- **$100** - White-label rights for a single project
+- **$1,000** - Unlimited white-label rights for all projects
+- **Enterprise** - Custom solutions and support available
 
 Benefits include:
 - Complete branding removal
 - Full commercial rights
-- Acess to private Github Repo
+- Access to private Github repo (Enterprise)
 
-### Token-Based Licensing
+### White-Label Features
 
-1. **Automatic Verification**
-   - Hold required ONE tokens in your wallet
-   - Connect wallet to your project
-   - Instantly unlock white-label features
+1. **Instant Activation**
+   - Choose your plan
+   - Make a payment
+   - Immediately remove branding
 
 2. **Flexible Options**
-   - Purchase tokens on supported exchanges
-   - Stake tokens for additional benefits
-   - Trade or transfer rights as needed
+   - Pay with credit card
+   - Bank transfer available
+   - Subscription or one-time
 
-3. **Enterprise Features**
-   - Custom token allocations available
-   - Multi-project licensing
+3. **Enterprise Benefits**
+   - Custom solutions
+   - Multi-project deployment
    - Priority support and updates
 
-Contact [token@one.ie](mailto:token@one.ie) to discuss token-based licensing or visit our [token dashboard](https://one.ie/token).
+Contact [sales@one.ie](mailto:sales@one.ie) to discuss white-label options or visit our [pricing page](https://one.ie/pricing).
 
 ## Legal Protection
 
@@ -116,13 +119,14 @@ Contact [token@one.ie](mailto:token@one.ie) to discuss token-based licensing or 
   2. Mediation if needed
   3. Binding arbitration as last resort
 
-## Enterprise Support
+## Enterprise Solutions
 
-Need additional rights or support? We offer:
+Building something big? We're here to help:
 
-- Custom licensing terms
-- Priority support
-- Strategic partnerships
-- Enterprise deployments
+- Free: Use all features with minimal branding
+- Custom: White-label solutions for your needs
+- Enterprise: Full support and deployment assistance
+- Training: Help getting your team started
 
-Contact [ai@one.ie](mailto:ai@one.ie) for enterprise inquiries.
+Our focus is on giving you maximum freedom with minimum restrictions.
+Contact [sales@one.ie](mailto:sales@one.ie) to discuss your needs.
