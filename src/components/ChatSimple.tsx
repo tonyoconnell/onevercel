@@ -64,7 +64,7 @@ export function ChatSimple({ className, ...props }: ComponentPropsWithoutRef<"di
 
     return (
         <div className={cn("flex flex-col h-full relative", className)} {...props}>
-                    <ScrollArea className="flex-1 h-0">
+                    <ScrollArea className="flex-1">
                         <div className="flex flex-col space-y-4 p-4 pb-6">
                     {messages.map((message) => {
                         if (message.role !== "user") {
