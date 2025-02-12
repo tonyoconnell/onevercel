@@ -68,11 +68,11 @@ export function ChatSimple({ className, ...props }: ComponentPropsWithoutRef<"di
 
     return (
         <div className={cn(
-            "flex flex-col h-full overflow-hidden bg-background/50",
+            "w-full h-full flex flex-col",
             className
         )} {...props}>
-            {/* Messages container */}
-            <div className="flex-1 min-h-0 overflow-y-auto pb-[68px]">
+            {/* Scrollable messages area */}
+            <div className="flex-1 overflow-y-auto">
                 <ChatMessageArea scrollButtonAlignment="center">
                     <div className="w-full p-3 space-y-3">
                         {messages.map((message) => {
@@ -108,10 +108,9 @@ export function ChatSimple({ className, ...props }: ComponentPropsWithoutRef<"di
                 </ChatMessageArea>
             </div>
 
-            {/* Fixed input at bottom */}
+            {/* Input container */}
             <div className={cn(
-                "fixed bottom-0 inset-x-0 z-10", 
-                "border-t bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60",
+                "flex-none border-t bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60",
                 "transition-all duration-200",
                 isFocused ? "shadow-md" : "shadow-sm"
             )}>
