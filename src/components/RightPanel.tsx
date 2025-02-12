@@ -12,7 +12,6 @@ interface RightPanelProps {
 
 export function RightPanel({ 
     children, 
-    panelContent, 
     defaultWidth = "quarter",
     defaultOpen = true 
 }: RightPanelProps) {

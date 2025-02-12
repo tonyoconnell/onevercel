@@ -4,12 +4,11 @@ import "../styles/global.css";
 import { RightPanel } from "@/components/RightPanel";
 
 interface Props {
-    panelContent?: React.ReactNode;
     defaultWidth?: "quarter" | "half";
     defaultOpen?: boolean;
 }
 
-const { panelContent, defaultWidth, defaultOpen } = Astro.props;
+const { defaultWidth, defaultOpen } = Astro.props;
 ---
 
 <!doctype html>
