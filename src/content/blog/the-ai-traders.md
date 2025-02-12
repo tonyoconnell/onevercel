@@ -2,7 +2,7 @@
 title: "The AI Traders: Inside Wall Street's Algorithmic Revolution"
 description: "Special Report: How Artificial Intelligence is Reshaping Finance"
 date: 2025-01-09
-picture: "/blog-placeholder-3.jpg"
+picture: "src/assets/traders.webp"
 ---
 
 By Anthony O'Connell

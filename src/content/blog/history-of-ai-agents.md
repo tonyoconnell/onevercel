@@ -2,7 +2,7 @@
 title: "The Ghost in the Machine: How AI Agents Evolved from Science Fiction to Your Smartphone"
 description: "How AI Agents Evolved from Science Fiction to Your Smartphone"
 date: 2025-01-09
-picture: "/blog-placeholder-3.jpg"
+picture: "/src/assets/office.webp"
 ---
 
 In a sleek office building in Silicon Valley, an AI agent is negotiating a meeting schedule between executives across three continents. Meanwhile, in a London home, another digital agent is orchestrating a family's dinner delivery, adjusting the heating, and curating tomorrow's entertainment. These invisible assistants, once the stuff of science fiction, have quietly become part of our daily reality. But their journey from theoretical concept to ubiquitous helper has been anything but straightforward.
