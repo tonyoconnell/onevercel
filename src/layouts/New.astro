@@ -1,0 +1,30 @@
+---
+import "../styles/global.css";
+
+import { RightPanel } from "@/components/RightPanel";
+
+interface Props {
+    defaultWidth?: "quarter" | "half";
+    defaultOpen?: boolean;
+}
+
+const { defaultWidth, defaultOpen } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Astro Panel Layout</title>
+    </head>
+    <body>
+        <RightPanel 
+            client:load 
+            defaultWidth={defaultWidth}
+            defaultOpen={defaultOpen}
+        >
+            <slot />
+        </RightPanel>
+    </body>
+</html>

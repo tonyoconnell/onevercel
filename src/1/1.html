@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="{{image}}">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:description" content="{{description}}">
+  <meta name="twitter:image" content="{{image}}">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family={{fonts.heading}}:wght@400;500;600;700&family={{fonts.body}}:wght@400;500&family={{fonts.code}}&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <style>
+    :root {
+      /* Colors */
+      --background: {{theme.colors.light.background}};
+      --foreground: {{theme.colors.light.foreground}};
+      --primary: {{theme.colors.light.primary}};
+      --secondary: {{theme.colors.light.secondary}};
+      --accent: {{theme.colors.light.accent}};
+      
+      /* Typography */
+      --font-heading: '{{fonts.heading}}', sans-serif;
+      --font-body: '{{fonts.body}}', sans-serif;
+      --font-code: '{{fonts.code}}', monospace;
+      --font-size-base: {{typography.sizes.base}}px;
+      --font-scale: {{typography.sizes.scale}};
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: {{theme.colors.dark.background}};
+        --foreground: {{theme.colors.dark.foreground}};
+        --primary: {{theme.colors.dark.primary}};
+        --secondary: {{theme.colors.dark.secondary}};
+        --accent: {{theme.colors.dark.accent}};
+      }
+    }
+    
+    html {
+      font-family: var(--font-body);
+      font-size: var(--font-size-base);
+      background: var(--background);
+      color: var(--foreground);
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+    }
+    
+    code {
+      font-family: var(--font-code);
+    }
+  </style>
+  
+  <!-- Generated Styles -->
+  {{styles}}
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    {{> header}}
+  </header>
+  
+  <!-- Main Content -->
+  <main class="main">
+    {{> content}}
+  </main>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    {{> footer}}
+  </footer>
+  
+  <!-- Generated Scripts -->
+  {{scripts}}
+  
+  <!-- AI Chat Widget -->
+  {{#if ai.features.includes('chat-interface')}}
+  <div id="chat-widget" class="chat-widget">
+    {{> chat}}
+  </div>
+  {{/if}}
+</body>
+</html> 

@@ -1,24 +1,17 @@
 import { z } from "zod";
 
-// Navigation item schema
-const navigationItemSchema = z.object({
-  title: z.string(),
-  path: z.string(),
-  icon: z.string().optional()
-});
-
-// Contact schema
+// Person schema
 export const contactSchema = z.object({
-  email: z.string(),
+  email: z.string().optional(),
   phone: z.string().optional(),
   website: z.string().optional(),
   whatsapp: z.string().optional(),
   telegram: z.string().optional(),
   address: z.object({
-    street: z.string(),
+    street: z.string().optional(),
     area: z.string().optional(),
-    city: z.string(),
-    country: z.string(),
+    city: z.string().optional(),
+    country: z.string().optional(),
     zip: z.string().optional(),
   }).optional(),
   social: z.object({
@@ -90,7 +83,14 @@ export const seoSchema = z.object({
   })
 });
 
-// Navigation schema
+
+// Navigation
+const navigationItemSchema = z.object({
+  title: z.string(),
+  path: z.string(),
+  icon: z.string().optional()
+});
+
 export const navigationSchema = z.object({
   top: z.object({
     logo: z.string().optional(),
@@ -124,11 +124,12 @@ export const layoutSchema = z.object({
 export const aiSchema = z.object({
   provider: z.string(),
   model: z.string(),
-  apiEndpoint: z.string(),
-  runtime: z.string(),
-  temperature: z.number().optional().default(0.7),
-  maxTokens: z.number().optional().default(2000),
+  apiEndpoint: z.string().optional(),
+  runtime: z.string().optional(),
+  temperature: z.number().optional().default(0.6),
+  maxTokens: z.number().optional().default(100000),
   systemPrompt: z.string().optional(),
+  assistantPrompt: z.string().optional(),
   userPrompt: z.string().optional(),
   welcome: z.object({
     message: z.string(),
@@ -139,7 +140,7 @@ export const aiSchema = z.object({
       prompt: z.string()
     })).optional().default([])
   }).optional().default({
-    message: "How can I help you today?",
+    message: "I am Agent ONE. How can I help you build AI agents?",
     center: true,
     suggestions: []
   })
@@ -159,5 +160,3 @@ export const ConfigSchema = z.object({
   }),
   ai: aiSchema
 });
-
-export type Config = z.infer<typeof ConfigSchema>;

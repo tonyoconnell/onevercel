@@ -1,0 +1,127 @@
+openapi: 3.1.0
+info:
+  title: ONE API
+  version: 1.0.0
+  description: The unified API for ONE system
+  contact:
+    name: ONE Support
+    url: https://one.ie
+
+servers:
+  - url: https://one.ie/api/1
+    description: Production server
+  - url: http://localhost:1111/api/1
+    description: Development server
+
+paths:
+  /{capability}:
+    parameters:
+      - name: capability
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The capability to execute
+    get:
+      summary: Execute capability (GET)
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Execute capability (POST)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Response:
+      type: object
+      required:
+        - status
+        - message
+        - data
+        - _one
+      properties:
+        status:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Success
+        data:
+          type: object
+        _one:
+          type: object
+          required:
+            - version
+            - timestamp
+            - path
+          properties:
+            version:
+              type: string
+              example: 1.0.0
+            timestamp:
+              type: string
+              format: date-time
+            path:
+              type: string
+              example: chat
+
+    Error:
+      type: object
+      required:
+        - status
+        - message
+        - _one
+      properties:
+        status:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: Invalid request
+        data:
+          type: null
+        _one:
+          type: object
+          required:
+            - version
+            - timestamp
+            - path
+          properties:
+            version:
+              type: string
+              example: 1.0.0
+            timestamp:
+              type: string
+              format: date-time
+            path:
+              type: string
+              example: error 

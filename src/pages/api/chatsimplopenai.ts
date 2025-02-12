@@ -1,5 +1,4 @@
 import type { APIRoute } from 'astro';
-import 'dotenv/config';
 import { openai } from "@ai-sdk/openai";
 import { anthropic } from "@ai-sdk/anthropic";
 import { mistral } from "@ai-sdk/mistral";
@@ -41,8 +40,8 @@ export const POST: APIRoute = async ({ request }) => {
     const requestData = await request.json() as ChatRequest;
     const config = {
       ...requestData.config,
-      provider: requestData.config?.provider || 'mistral',
-      model: requestData.config?.model || 'mistral-large-latest'
+      provider: requestData.config?.provider || 'openai',
+      model: requestData.config?.model || 'gpt-4o-mini'
     };
 
     // Check environment variables early

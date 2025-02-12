@@ -1,0 +1,198 @@
+# ONE - Your AI Agent Generator
+# =====================
+# Version: 1.0.0
+# Purpose: Single source of truth for generating the entire site structure
+
+# Generator Configuration
+generator:
+  version: 1.0.0
+  engine: astro
+  mode: SSR
+  integrations:
+    - react
+    - tailwind
+    - mdx
+    - shadcn
+
+# Business Configuration
+business:
+  name: ONE
+  description: Build AI Agents to Amplify Marketing, Sales, Customer Service and Education
+  website: https://one.ie
+  legalName: ONE
+  type: Education Company
+  founded: 1999
+  founders: [Anthony O Connell]
+  vatID: 
+  companyNumber: 
+  hours: 24/7 - AI Powered
+  industries:
+    - Crypto & Web3
+    - Digital Agencies
+    - Content Creators
+    - Ecommerce
+  solutions:
+    - Marketing Automation
+    - Sales Enhancement
+    - Customer Service
+    - Educational Content
+  payments:
+    - Stripe
+    - Credit Card
+    - Debit Card
+    - Bitcoin
+    - Ethereum
+    - Solana
+  currencies: [EUR, USD, GBP]
+
+# Site Structure
+structure:
+  layouts:
+    - name: one
+      components:
+        - header
+        - sidebar
+        - main
+        - chat
+    - name: landing
+      components:
+        - hero
+        - features
+        - testimonials
+        - cta
+    - name: docs
+      components:
+        - sidebar
+        - content
+        - toc
+        - chat
+
+# Content Collections
+collections:
+  - name: pages
+    type: content
+    schema:
+      fields:
+        - title: string
+        - description: string
+        - layout: string
+        - components: array
+  - name: docs
+    type: content
+    schema:
+      fields:
+        - title: string
+        - description: string
+        - category: string
+        - order: number
+  - name: blog
+    type: content
+    schema:
+      fields:
+        - title: string
+        - description: string
+        - date: date
+        - author: string
+        - tags: array
+
+# Components
+components:
+  - name: Header
+    type: react
+    props:
+      - navigation
+      - theme
+      - user
+  - name: Sidebar
+    type: react
+    props:
+      - navigation
+      - activeItem
+  - name: Chat
+    type: react
+    props:
+      - config
+      - mode
+      - position
+
+# Theme Configuration
+theme:
+  colors:
+      one:
+        background: "#FAFAF9"
+        foreground: "#1C1917"
+        primary: "#78716C"
+        secondary: "#E7E5E4"
+        accent: "#44403C"
+      light:
+        background: "#FFFFFF"
+        foreground: "#111111"
+        primary: "#0D76FF"
+        secondary: "#F5F5F5"
+        accent: "#FF3366"
+      dark:
+        background: "#000000"
+        foreground: "#FFFFFF"
+        primary: "#0D76FF"
+        secondary: "#2F2F2F"
+        accent: "#FF3366"
+      typography:
+        fonts:
+          heading: "Inter"
+          body: "Inter"
+          code: "JetBrains Mono"
+        sizes:
+          base: 16
+          scale: 1.25
+
+# AI 
+ai:
+  provider: deepseek
+  model: deepseek-latest
+  temperature: 0.1
+  features:
+    - content-generation
+    - code-assistance
+    - chat-interface
+    - image-generation
+  prompts:
+    welcome: "Welcome! I'm Agent ONE, your AI assistant for development."
+    system:
+      - Building
+      - Integrating open source solutions
+      - Optimizing development workflows
+      - Providing technical guidance
+
+# Build Configuration
+build:
+  target: Cloudflare
+  env: production
+  optimization:
+    images: true
+    fonts: true
+    css: true
+    js: true
+  output:
+    dir: dist
+    clean: true
+
+# Development Configuration
+development:
+  server:
+    port: 1111
+    host: localhost
+  watch:
+    - src
+    - public
+    - blocks
+  hot: true
+  devtools: true
+
+version: '1.0.0'
+features:
+  - core
+  - monitor
+  - registry
+settings:
+  theme: light
+  mode: chat  

@@ -2,8 +2,9 @@
   "business": {
     "name": "ONE",
     "description": "AI-Powered Solutions",
+    "number": "1",
     "contact": {
-      "email": "hello@one.ie",
+      "email": "agent@one.ie",
       "phone": "+353 1 234 5678",
       "whatsapp": "+353 87 123 4567",
       "website": "https://one.ie",
@@ -158,14 +159,15 @@
     }
   },
   "ai": {
-    "provider": "openai",
-    "model": "gpt-4o-mini",
+    "provider": "anthropic",
+    "model": "claude-3-5-sonnet-20241022",
     "apiEndpoint": "https://api.openai.com/v1",
     "runtime": "edge",
     "temperature": 0.7,
     "maxTokens": 2000,
-    "systemPrompt": "You are a helpful AI assistant.",
-    "userPrompt": "src/1/1.md",
+    "systemPrompt": "I am Agent ONE. My goal is to help you build AI agents, websites and apps",
+    "assistantPrompt": "src/1/1.md ",
+    "userPrompt": "src/1/1.user.md",
     "welcome": {
       "message": "How can I assist you today?",
       "center": true,
