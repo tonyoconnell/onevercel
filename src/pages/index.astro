@@ -231,7 +231,7 @@ Your goal is to help users understand how ONE can transform their business with 
 });  
 
 // Set the desired right panel mode
-const rightPanelMode = "quarter"; // You can change this to 'full', 'half', 'floating', or 'icon'
+const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floating', or 'icon'
 ---
 
 <Layout
@@ -295,7 +295,7 @@ const rightPanelMode = "quarter"; // You can change this to 'full', 'half', 'flo
           id="copyCloneCommand"
         >
           <CodeIcon className="w-5 h-5 mr-2 text-primary" />
-          <code class="font-mono text-sm">git clone https://github.com/one-ie/one</code>
+          <code class="font-mono text-sm">one-ie/one</code>
         </Button>
         <p
           id="copyMessage"
@@ -455,7 +455,7 @@ const rightPanelMode = "quarter"; // You can change this to 'full', 'half', 'flo
 
     if (copyButton && copyMessage) {
       copyButton.addEventListener("click", () => {
-        navigator.clipboard.writeText("git clone one-ie/one");
+        navigator.clipboard.writeText("git clone https://github.com/one-ie/one.git");
         copyMessage.classList.remove("opacity-0");
         setTimeout(() => copyMessage.classList.add("opacity-0"), 2000);
       });
