@@ -97,6 +97,7 @@
     "typescript": "^5.7.3",
     "vaul": "^1.1.2",
     "vitest": "^3.0.5",
+     "path-to-regexp": ">=8.2.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
