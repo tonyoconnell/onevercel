@@ -201,7 +201,7 @@ importers:
         specifier: ^0.4.4
         version: 0.4.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       path-to-regexp:
-        specifier: 8.2.0
+        specifier: ^8.2.0
         version: 8.2.0
       qrcode.react:
         specifier: ^4.2.0
@@ -286,7 +286,7 @@ importers:
         specifier: ^22.13.1
         version: 22.13.1
       vite:
-        specifier: 6.1.0
+        specifier: ^6.1.0
         version: 6.1.0(@types/node@22.13.1)(jiti@1.21.7)(terser@5.37.0)(yaml@2.7.0)
 
 packages:
@@ -7013,7 +7013,7 @@ snapshots:
       vfile: 6.0.3
       vite: 6.1.0(@types/node@22.13.1)(jiti@1.21.7)(terser@5.37.0)(yaml@2.7.0)
       vitefu: 1.0.5(vite@6.1.0(@types/node@22.13.1)(jiti@1.21.7)(terser@5.37.0)(yaml@2.7.0))
-      which-pm: 3.0.1
+      which-pm: 3.0.0
       xxhash-wasm: 1.1.0
       yargs-parser: 21.1.1
       yocto-spinner: 0.2.0
