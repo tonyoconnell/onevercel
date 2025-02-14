@@ -1,41 +1,14 @@
 ---
 import { Squares } from "@/components/ui/squares-background";
 import Layout from "../layouts/Layout.astro";
-import { Button } from "@/components/ui/button";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card } from "@/components/ui/card";
 import { ChatConfigSchema } from "../schema/chat";
-import {
-  GitHubLogoIcon,
-  CodeIcon,
-  DownloadIcon,
-  CheckIcon,
-} from "@radix-ui/react-icons";
+import { CheckIcon } from "@radix-ui/react-icons";
+import { GitSection } from "@/components/GitSection";
 import FaqAccordion from "../components/FaqAccordion";
 
 // Import license content
 import License from "../../LICENSE?raw";
-
-// GitHub repository details and stats
-const GITHUB_REPO = "one-ie/one";
-const GITHUB_URL = `https://github.com/${GITHUB_REPO}`;
-
-// Fetch GitHub stats
-const getGitHubStats = async () => {
-  try {
-    const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}`);
-    const data = await response.json();
-    return {
-      stars: data.stargazers_count,
-      forks: data.forks_count,
-    };
-  } catch (error) {
-    console.error("Error fetching GitHub stats:", error);
-    return { stars: "1", forks: "1" }; // Fallback values
-  }
-};
-
-const stats = await getGitHubStats();
 
 const SYSTEM_REQUIREMENTS = [
   "Node.js 18.x or higher",
@@ -203,8 +176,7 @@ Your goal is to help users understand how ONE can transform their business with 
     suggestions: [
       {
         label: "🤖 Build AI Agents",
-        prompt:
-          "Tell me how I can create AI agents that build more agents",
+        prompt: "Tell me how I can create AI agents that build more agents",
       },
       {
         label: "💡 Free Forever",
@@ -228,7 +200,7 @@ Your goal is to help users understand how ONE can transform their business with 
       },
     ],
   },
-});  
+});
 
 // Set the desired right panel mode
 const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floating', or 'icon'
@@ -239,122 +211,41 @@ const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floati
   chatConfig={chatConfig}
   rightPanelMode={rightPanelMode}
 >
-  <section class="relative pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32 bg-neutral-900 overflow-hidden border-b border-neutral-800">
+  <section
+    class="relative pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32 bg-neutral-900 overflow-hidden border-b border-neutral-800"
+  >
     <div class="absolute inset-0">
-      <Squares client:load direction="diagonal" speed={0.5} squareSize={40} borderColor="#404040" hoverFillColor="#333" />
+      <Squares
+        client:load
+        direction="diagonal"
+        speed={0.5}
+        squareSize={40}
+        borderColor="#404040"
+        hoverFillColor="#333"
+      />
     </div>
-    <div class="relative z-10 max-w-[64rem] flex flex-col items-center gap-8 text-center mx-auto px-4">
-      <h1 class="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight text-neutral-100">
+    <div
+      class="relative z-10 max-w-[64rem] flex flex-col items-center gap-8 text-center mx-auto px-4"
+    >
+      <h1
+        class="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight text-neutral-100"
+      >
         Build{" "}
         <span class="text-blue-500">AI-Powered</span>{" "}
         <span class="text-neutral-100">Businesses</span>
       </h1>
       <div class="flex flex-col items-center gap-6 max-w-[800px]">
-        <p class="text-lg sm:text-xl md:text-2xl text-neutral-400 leading-relaxed tracking-wide max-w-2xl">
-          Create intelligent businesses with AI agents, automated content, websites, and
-  accept payments. Free forever, open-source, and enterprise-ready.
-        </p>
-
-       </div>
-    </div>  
-  </section>
-
-  <!-- Download Options Grid -->
-  <section class="container mx-auto px-6 py-20 ">
-    <h2 class="text-3xl font-bold text-center mb-12">Download & Get Started</h2>
-    <div class="grid md:grid-cols-2 gap-8 w-full max-w-4xl mx-auto mb-12">
-      <!-- Direct Download Card -->
-      <Card
-        className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow"
-      >
-        <h3 class="text-2xl font-bold mb-4">Quick Download</h3>
-        <p class="text-muted-foreground mb-6">
-          Download the latest stable release directly
-        </p>
-        <a
-          href={`https://github.com/one-ie/one/archive/refs/heads/main.zip`}
-          class="w-full"
-        >
-          <Button size="lg" className="w-full">
-            <DownloadIcon className="mr-2 h-5 w-5" />
-            Download ZIP
-          </Button>
-        </a>
-      </Card>
-
-      <!-- Git Clone Card -->
-      <Card
-        className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow"
-      >
-        <h3 class="text-2xl font-bold mb-4">Git Clone</h3>
-        <p class="text-muted-foreground mb-6">Clone the repository using Git</p>
-        <Button
-          variant="outline"
-          size="lg"
-          className="w-full group bg-background border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300 text-foreground hover:text-foreground"
-          id="copyCloneCommand"
-        >
-          <CodeIcon className="w-5 h-5 mr-2 text-primary" />
-          <code class="font-mono text-sm">one-ie/one</code>
-        </Button>
         <p
-          id="copyMessage"
-          class="mt-2 text-sm text-primary opacity-0 transition-opacity duration-200"
+          class="text-lg sm:text-xl md:text-2xl text-neutral-400 leading-relaxed tracking-wide max-w-2xl"
         >
-          Copied to clipboard!
+          Create intelligent businesses with AI agents, automated content,
+          websites, and accept payments. Free forever, open-source, and
+          enterprise-ready.
         </p>
-      </Card>
-    </div>
-
-    <!-- Secondary Options -->
-    <div class="flex flex-wrap gap-4 justify-center mb-12">
-      <a
-        href={`https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=${GITHUB_REPO}`}
-        class="inline-block"
-      >
-        <Button
-          variant="outline"
-          size="lg"
-          className="group bg-[#0D1117] hover:bg-[#161B22] border-2 border-[#30363D] hover:border-primary text-white hover:text-white transition-all duration-300"
-        >
-          <GitHubLogoIcon className="w-5 h-5 mr-2" />
-          <span>Open in Codespaces</span>
-        </Button>
-      </a>
-
-      <a href={GITHUB_URL} class="inline-block">
-        <Button
-          variant="outline"
-          size="lg"
-          className="group bg-primary/5 hover:bg-primary/10 text-foreground hover:text-foreground"
-        >
-          <GitHubLogoIcon className="w-5 h-5 mr-2" />
-          <span>View Source</span>
-          <div
-            class="ml-2 px-2 py-0.5 rounded-full bg-primary/10 text-xs font-medium"
-          >
-            {stats.stars} ⭐
-          </div>
-        </Button>
-      </a>
-
-      <a href={`${GITHUB_URL}/fork`} class="inline-block">
-        <Button
-          variant="outline"
-          size="lg"
-          className="group text-foreground hover:text-foreground"
-        >
-          <GitHubLogoIcon className="w-5 h-5 mr-2" />
-          <span>Fork Project</span>
-          <div
-            class="ml-2 px-2 py-0.5 rounded-full bg-primary/10 text-xs font-medium"
-          >
-            {stats.forks}
-          </div>
-        </Button>
-      </a>
+      </div>
     </div>
   </section>
+  <GitSection client:load />
 
   <!-- System Requirements & Installation -->
   <section class="container mx-auto px-6 py-20 border-t">
@@ -418,23 +309,6 @@ const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floati
   </section>
 
   <!-- GitHub Call-to-Action -->
-  <section class="container mx-auto px-6 pb-20">
-    <div class="text-center w-full max-w-[1400px] mx-auto">
-      <Alert className="py-6">
-        <AlertDescription className="text-lg">
-          Join thousands of developers building the future with ONE.
-          <a href="https://github.com/one-ie/one" class="inline-block">
-            <Button
-              variant="link"
-              className="ml-3 text-lg text-foreground hover:text-foreground"
-            >
-              Star on GitHub <GitHubLogoIcon className="ml-2 w-5 h-5" />
-            </Button>
-          </a>
-        </AlertDescription>
-      </Alert>
-    </div>
-  </section>
 </Layout>
 
 <style>
@@ -455,7 +329,9 @@ const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floati
 
     if (copyButton && copyMessage) {
       copyButton.addEventListener("click", () => {
-        navigator.clipboard.writeText("git clone https://github.com/one-ie/one.git");
+        navigator.clipboard.writeText(
+          "git clone https://github.com/one-ie/one.git",
+        );
         copyMessage.classList.remove("opacity-0");
         setTimeout(() => copyMessage.classList.add("opacity-0"), 2000);
       });
