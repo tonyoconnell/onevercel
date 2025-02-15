@@ -212,36 +212,17 @@ const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floati
   rightPanelMode={rightPanelMode}
 >
   <section
-    class="relative pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32 bg-neutral-900 overflow-hidden border-b border-neutral-800"
-  >
-    <div class="absolute inset-0">
-      <Squares
-        client:load
-        direction="diagonal"
-        speed={0.5}
-        squareSize={40}
-        borderColor="#404040"
-        hoverFillColor="#333"
-      />
-    </div>
-    <div
-      class="relative z-10 max-w-[64rem] flex flex-col items-center gap-8 text-center mx-auto px-4"
-    >
-      <h1
-        class="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight text-neutral-100"
-      >
-        Build{" "}
-        <span class="text-blue-500">AI-Powered</span>{" "}
-        <span class="text-neutral-100">Businesses</span>
+    class="container mx-auto px-6 py-20 border-b border-neutral-800">
+    <div class="w-full max-w-[1400px] mx-auto flex flex-col items-center gap-8 text-center">
+      <h1 class="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight text-neutral-100">
+        Build <span class="text-blue-500">AI-Powered</span> <span class="text-neutral-100">Businesses</span>
       </h1>
       <div class="flex flex-col items-center gap-6 max-w-[800px]">
-        <p
-          class="text-lg sm:text-xl md:text-2xl text-neutral-400 leading-relaxed tracking-wide max-w-2xl"
-        >
-          Create intelligent businesses with AI agents, automated content,
-          websites, and accept payments. Free forever, open-source, and
+        <p class="text-lg sm:text-xl md:text-2xl text-neutral-400 leading-relaxed tracking-wide max-w-2xl">
+          Create intelligent businesses with AI agents, automated content, websites, and accept payments. Free forever, open-source, and
           enterprise-ready.
         </p>
+        
       </div>
     </div>
   </section>
@@ -326,6 +307,7 @@ const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floati
   document.addEventListener("DOMContentLoaded", () => {
     const copyButton = document.getElementById("copyCloneCommand");
     const copyMessage = document.getElementById("copyMessage");
+    const getStartedBtn = document.getElementById("getStartedBtn");
 
     if (copyButton && copyMessage) {
       copyButton.addEventListener("click", () => {
@@ -334,6 +316,15 @@ const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floati
         );
         copyMessage.classList.remove("opacity-0");
         setTimeout(() => copyMessage.classList.add("opacity-0"), 2000);
+      });
+    }
+
+    if (getStartedBtn) {
+      getStartedBtn.addEventListener("click", () => {
+        const installSection = document.querySelector(".container");
+        if (installSection) {
+          installSection.scrollIntoView({ behavior: "smooth" });
+        }
       });
     }
   });
