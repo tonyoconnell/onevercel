@@ -85,7 +85,7 @@ export default function Header() {
       {/* Mobile Menu */}
       {isMobile && (
         <div
-          className={`fixed inset-0 w-screen h-screen bg-zinc-50 dark:bg-zinc-900 z-[9999] transition-all duration-300 ${isSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          className={`fixed inset-0 w-screen h-screen bg-zinc-50 dark:bg-zinc-900 z-[99999] transition-all duration-300 ${isSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         >
           <div className="h-screen w-full flex items-center justify-center">
             <div className={`flex flex-col items-center space-y-6 transition-all duration-300 transform ${isSidebarOpen ? 'translate-y-0' : '-translate-y-8'}`}>
