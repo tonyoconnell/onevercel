@@ -2,7 +2,7 @@
 title: "The Meme Machines: How AI Is Reshaping Value Creation"
 description: "Special Report: Inside the AI Systems Engineering Viral Narratives"
 date: 2025-01-09
-picture: "src/assets/meme-machines.webp"
+picture: "/images/posts/meme-machines.webp"
 ---
 
 By Anthony O'Connell
