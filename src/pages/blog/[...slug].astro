@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 type Props = {
-	entry: CollectionEntry<'blog'>;
+	entry: CollectionEntry<'blog'>;  
 };
 
 const { entry } = Astro.props;
@@ -22,7 +22,5 @@ const { Content } = await entry.render();
 ---
 
 <BlogPost entry={entry}>
-	<div class="px-4 sm:px-6">
-		<Content />
-	</div>
+	<Content />
 </BlogPost>
