@@ -1,5 +1,6 @@
 // src/components/Header.tsx
 import {
+  Home,
   Newspaper,
   Headphones,
   Download,
@@ -10,6 +11,7 @@ import { useState, useEffect } from 'react';
 
 // Default navigation items
 const defaultNavigation = [
+  { title: 'Home', path: '/', icon: Home },
   { title: 'Blog', path: '/blog', icon: Newspaper },
   { title: 'Podcast', path: '/podcast', icon: Headphones },
   { title: 'Download', path: '/download', icon: Download },
