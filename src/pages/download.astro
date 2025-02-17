@@ -10,11 +10,10 @@ import {
   DownloadIcon,
   CheckIcon,
 } from '@radix-ui/react-icons';
+import { GitSection } from "@/components/GitSection";
 
 // Import license content
 import License from '../../LICENSE?raw';
-import FaqAccordion from "../components/FaqAccordion";
-
 const SYSTEM_REQUIREMENTS = [
   "Node.js 18.x or higher",
   "pnpm package manager",
@@ -133,36 +132,6 @@ const getGitHubStats = async () => {
 
 const stats = await getGitHubStats();
 
-const faqs = [
-  {
-    question: "Is ONE really free?",
-    answer: "Yes! ONE is 100% free and open source forever. The core framework, including AI agents, payment processing, and all features are completely free to use. There are no hidden costs or proprietary lock-in."
-  },
-  {
-    question: "How quickly can I deploy?",
-    answer: "Deployment is super fast and flexible! You can:\n• Deploy to Vercel in under 5 minutes\n• Use your own server infrastructure\n• Host on AWS, Google Cloud, or Azure\n• Use any Node.js compatible platform\n\nThe framework is platform-agnostic and runs anywhere."
-  },
-  {
-    question: "What payment methods can I integrate?",
-    answer: "ONE supports comprehensive payment options:\n• Cryptocurrencies: BTC, ETH, SOL\n• Traditional: Credit cards, bank transfers\n• Digital wallets: Apple Pay, Google Pay\n• Global options: Alipay, Klarna\n\nAll payment methods include real-time verification and automated processing."
-  },
-  {
-    question: "How do I create AI agents?",
-    answer: "Creating AI agents is simple:\n1. Choose agent type (sales, support, content)\n2. Configure AI model and behaviors\n3. Train on your data and content\n4. Set up payment processing if needed\n5. Deploy to your website\n\nFull documentation available at https://one.ie/docs/ai-agents"
-  },
-  {
-    question: "What can AI agents do?",
-    answer: "ONE's AI agents can:\n• Handle complete sales processes\n• Generate and optimize content\n• Process payments and orders\n• Provide 24/7 customer support\n• Create marketing materials\n• Manage social media\n• Operate in multiple languages"
-  },
-  {
-    question: "Can I modify the source code?",
-    answer: "Yes! You own any modifications you make. You can customize:\n• AI agent behaviors\n• Payment flows\n• UI/UX design\n• Business logic\n• Integration points\n• Training data\n\nAll while maintaining compatibility with our token system."
-  },
-  {
-    question: "What about enterprise needs?",
-    answer: "For enterprise users holding 50,000+ ONE tokens, we provide:\n• Priority support\n• Custom AI training\n• Advanced features\n• Strategy consulting\n• Team training\n• Custom integrations\n• Dedicated account manager"
-  }
-];
 ---
 
 <Layout
@@ -303,10 +272,6 @@ const faqs = [
       </Card>
     </section>
 
-    <section class="w-full max-w-[1400px] mb-20">
-      <h2 class="text-4xl font-bold mb-10 text-center">Frequently Asked Questions</h2>
-      <FaqAccordion client:idle faqs={faqs} />
-    </section>
 
     <section class="text-center mb-16 w-full max-w-[1400px]">
       <Alert className="py-6">

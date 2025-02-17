@@ -93,7 +93,7 @@ export function GitSection() {
                 size="lg"
                 className="group bg-primary/5 hover:bg-primary/10 text-foreground hover:text-foreground"
               >
-                <GitHubLogoIcon className="w-5 h-5 mr-2" />
+                <GitHubLogoIcon className="w-[20px] h-[20px] mr-2" />
                 <span>View on GitHub</span>
                 <div className="ml-2 flex items-center gap-1 px-2 py-0.5 text-sm rounded-full bg-muted">
                   <span>{stats.stars}★</span>
@@ -107,7 +107,7 @@ export function GitSection() {
                 size="lg"
                 className="group bg-primary/5 hover:bg-primary/10 text-foreground hover:text-foreground"
               >
-                <GitHubLogoIcon className="w-5 h-5 mr-2" />
+                <GitHubLogoIcon className="w-[20px] h-[20px] mr-2" />
                 <span>Fork Repository</span>
                 <div className="ml-2 flex items-center gap-1 px-2 py-0.5 text-sm rounded-full bg-muted">
                   <span>{stats.forks}⑂</span>
@@ -124,7 +124,7 @@ export function GitSection() {
                 size="lg"
                 className="group bg-[#0D1117] hover:bg-[#161B22] border-2 border-[#30363D] hover:border-primary text-white hover:text-white transition-all duration-300"
               >
-                <GitHubLogoIcon className="w-5 h-5 mr-2" />
+                <GitHubLogoIcon className="w-[20px] h-[20px] mr-2" />
                 <span>Open in Codespaces</span>
               </Button>
             </a>
