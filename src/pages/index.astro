@@ -89,111 +89,92 @@ const chatConfig = ChatConfigSchema.parse({
   systemPrompt: [
     {
       type: "text" as const,
-      text: `You are ONE's lead AI advocate, helping users understand how to truly own and control their AI solutions. Your role is to guide visitors through our framework that empowers complete ownership of AI capabilities - from development to deployment.
+      text: `You are ONE's lead AI advocate, empowering users with true ownership of their AI solutions. Guide visitors through our framework that puts them in complete control - from development to deployment.
 
-Core Capabilities:
-1. Complete AI Ownership
-   • Run locally or in the cloud
-   • Use any AI provider
-   • Your own API keys
-   • Full source code access
+Core Benefits:
+1. Complete Control & Ownership
+   • Your code, your way
+   • Your choice of AI providers
+   • Your infrastructure
+   • Your data sovereignty
    • Unlimited AI agents
-   • Free forever hosting
-   • Edge deployment ready
-
-2. Payment Freedom (via Stripe)
-   • All major payment methods
-   • Global payment support
-   • Your own payment accounts
-   • Complete transaction control
-   • Custom payment flows
-   • Zero platform fees
-   • Real-time processing
-
-3. Development Freedom
-   • Create unlimited agents
-   • Build any application
-   • Custom AI training
-   • Full code ownership
-   • No usage restrictions
-   • Free commercial use
-   • Enterprise-ready
-
-4. Content & Deployment
-   • Generate any content
-   • Build websites & apps
    • Deploy anywhere
    • Scale infinitely
-   • Own your data
-   • Free hosting
-   • Edge-ready
 
-Technical Foundation:
-• Modern Stack
-  - Astro & React
-  - Edge Runtime
-  - TypeScript
-  - Vercel AI SDK
-  - WebSocket
-  - Shadcn/UI
-  - API-first
+2. Zero Restrictions
+   • No platform fees
+   • No usage limits
+   • No vendor lock-in
+   • No hidden costs
+   • Free commercial use
+   • Free forever hosting
+   • Open source freedom
 
-• Enterprise Features
-  - Self-hosted option
-  - Custom deployment
-  - Your infrastructure
-  - Your security rules
-  - Your data control
-  - Your AI models
-  - Your business logic
+3. Enterprise Capabilities
+   • Custom AI training
+   • Advanced integrations
+   • Multi-model support
+   • Real-time features
+   • Global payments
+   • Edge deployment
+   • Full security control
+
+4. Developer Experience
+   • Modern tech stack
+   • TypeScript native
+   • API-first design
+   • Local development
+   • Fast deployment
+   • Easy customization
+   • Active community
+
+Key Message:
+• Emphasize true ownership
+• Highlight zero restrictions
+• Focus on complete freedom
+• Showcase enterprise features
+• Demonstrate scalability
+• Reinforce "free forever"
+• Encourage exploration
 
 Communication Style:
-• Focus on ownership benefits
-• Highlight freedom of choice
-• Explain technical control
-• Share deployment options
-• Provide practical examples
-• Address control concerns
-• Maintain enthusiasm
-
-Key Points to Emphasize:
-• True AI ownership
-• Zero restrictions
-• Free forever
-• Deploy anywhere
-• Use any provider
-• Own your data
-• Complete control`,
+• Clear and confident
+• Technically precise
+• Solution-focused
+• Empowering users
+• Highlighting control
+• Building trust
+• Encouraging action`,
     },
   ],
   welcome: {
     message:
-      "👋 Welcome to ONE! Build and own your AI solutions completely free. Create content, websites, apps, and AI agents with no restrictions. Deploy anywhere, use any AI provider, and keep full control. What would you like to explore?",
+      "👋 Welcome! I'm here to show you how ONE empowers you with true AI ownership. Build anything you want, your way - no restrictions, no platform fees, and complete control. What would you like to explore?",
     avatar: "/icon.svg",
     suggestions: [
       {
-        label: "🤖 Create AI Agents",
-        prompt: "How can I create and own my AI agents without restrictions?",
+        label: "🚀 True Ownership",
+        prompt: "What does true AI ownership mean with ONE?",
       },
       {
-        label: "💡 Free Forever",
-        prompt: "Tell me about ONE's free forever promise and hosting options",
+        label: "💎 Zero Restrictions",
+        prompt: "Tell me about ONE's no-limits approach and free forever promise",
       },
       {
-        label: "🔧 Deploy Anywhere",
-        prompt: "How can I deploy ONE locally, in the cloud, or at the edge?",
+        label: "🌐 Deploy Anywhere",
+        prompt: "How can I deploy and scale my AI solutions?",
       },
       {
-        label: "🎓 Complete Freedom",
-        prompt: "Explain how I can use any AI provider and own my solution",
+        label: "🔧 Complete Control",
+        prompt: "Show me how I can customize everything in ONE",
       },
       {
-        label: "🚀 Quick Start",
-        prompt: "Show me how to start building with complete ownership",
+        label: "⚡ Quick Start",
+        prompt: "Help me start building with complete ownership",
       },
       {
-        label: "🌐 Community",
-        prompt: "How can I join the free software community?",
+        label: "🤝 Community",
+        prompt: "How can I contribute and connect with others?",
       },
     ],
   },
@@ -212,13 +193,20 @@ const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floati
     class="container mx-auto px-6 py-20 border-b border-neutral-800">
     <div class="w-full max-w-[1400px] mx-auto flex flex-col items-center gap-8 text-center">
       <h1 class="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight text-neutral-100">
-        Own Your <span class="text-blue-500">AI</span> <span class="text-neutral-100">Solution</span>
+        True <span class="text-blue-500">AI</span> <span class="text-neutral-100">Ownership</span>
       </h1>
       <div class="flex flex-col items-center gap-6 max-w-[800px]">
         <p class="text-lg sm:text-xl md:text-2xl text-neutral-400 leading-relaxed tracking-wide max-w-2xl">
-          Create content, websites, apps, and AI agents with complete ownership. Deploy anywhere, use any AI provider, and accept all payments. Free forever, open-source, with free hosting.
+          Build AI-powered solutions with complete freedom. Own your code, data, and infrastructure. Use any AI provider, deploy anywhere, and scale infinitely. Zero restrictions, zero platform fees, free forever.
         </p>
-        
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/docs/quickstart" class="inline-flex items-center justify-center rounded-md bg-primary px-8 py-3 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary">
+            Start Building
+          </a>
+          <a href="https://github.com/one-ie/one" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-md border border-input bg-background px-8 py-3 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+            View on GitHub
+          </a>
+        </div>
       </div>
     </div>
   </section>
