@@ -8,6 +8,7 @@ import {
   GitHubLogoIcon,
   CodeIcon,
   DownloadIcon,
+  CheckIcon,
 } from '@radix-ui/react-icons';
 
 // Import license content
@@ -180,6 +181,41 @@ const faqs = [
         ONE is completely free and open source. Get started in minutes with zero setup complexity.
         Deploy anywhere - from Vercel to your own infrastructure.
       </p>
+    </section>
+
+    <!-- System Requirements Section -->
+    <section class="w-full max-w-4xl mx-auto mb-16">
+      <h2 class="text-3xl font-bold mb-8 text-center">System Requirements</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {SYSTEM_REQUIREMENTS.map((requirement) => (
+          <Card className="p-6 flex items-start space-x-4">
+            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <CheckIcon className="w-5 h-5 text-primary" />
+            </div>
+            <p class="text-muted-foreground">{requirement}</p>
+          </Card>
+        ))}
+      </div>
+    </section>
+
+    <!-- Installation Guide Section -->
+    <section class="w-full max-w-4xl mx-auto mb-16">
+      <h2 class="text-3xl font-bold mb-8 text-center">Installation Guide</h2>
+      <div class="space-y-6">
+        {INSTALLATION_STEPS.map((step, index) => (
+          <Card className="p-6">
+            <div class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <span class="text-primary font-semibold">{index + 1}</span>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold mb-2">{step.title}</h3>
+                <p class="text-muted-foreground">{step.description}</p>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
     </section>
 
     <!-- Download Options Grid -->

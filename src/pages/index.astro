@@ -6,32 +6,7 @@ import { CheckIcon } from "@radix-ui/react-icons";
 import { GitSection } from "@/components/GitSection";
 import FaqAccordion from "../components/FaqAccordion";
 
-const SYSTEM_REQUIREMENTS = [
-  "Node.js 18.x or higher",
-  "pnpm package manager",
-  "Modern web browser (Chrome, Firefox, Safari, Edge)",
-  "Any modern operating system (Windows, macOS, Linux)",
-  "Deploy on Vercel, Netlify, AWS or any Node.js server",
-];
 
-const INSTALLATION_STEPS = [
-  {
-    title: "Download the Source",
-    description: "Download the ZIP file or clone the repository using Git",
-  },
-  {
-    title: "Install Dependencies",
-    description: "Run 'pnpm install' to install required packages",
-  },
-  {
-    title: "Configuration",
-    description: "Set up your environment variables following the .env.example",
-  },
-  {
-    title: "Start Development",
-    description: "Run 'pnpm dev' to start the development server",
-  },
-];
 
 const faqs = [
   // Core Features
@@ -206,53 +181,25 @@ const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floati
       </div>
     </div>
   </section>
-  <GitSection client:load />
-
-  <!-- System Requirements & Installation -->
-  <section class="container mx-auto px-6 py-20 border-t">
-    <div class="w-full max-w-[1400px] mx-auto grid md:grid-cols-2 gap-8">
-      <Card className="p-8">
-        <h2 class="text-2xl font-bold mb-6">System Requirements</h2>
-        <ul class="space-y-4">
-          {
-            SYSTEM_REQUIREMENTS.map((req) => (
-              <li class="flex items-start">
-                <CheckIcon className="w-5 h-5 mr-2 text-green-500 flex-shrink-0 mt-1" />
-                <span>{req}</span>
-              </li>
-            ))
-          }
-        </ul>
-      </Card>
-
-      <Card className="p-8">
-        <h2 class="text-2xl font-bold mb-6">Installation Guide</h2>
-        <div class="space-y-6">
-          {
-            INSTALLATION_STEPS.map((step, index) => (
-              <div class="flex items-start">
-                <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-4 flex-shrink-0">
-                  <span class="font-bold text-primary">{index + 1}</span>
-                </div>
-                <div>
-                  <h3 class="font-semibold mb-1">{step.title}</h3>
-                  <p class="text-muted-foreground text-sm">
-                    {step.description}
-                  </p>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </Card>
-    </div>
   </section>
+
+  <GitSection client:load />
 
   <!-- Features Section -->
   <section class="container mx-auto px-6 py-20 border-t">
     <div class="w-full max-w-[1400px] mx-auto">
-      <h2 class="text-4xl font-bold mb-10 text-center">Powerful Features</h2>
+      <h2 class="text-4xl font-bold mb-10 text-center">Build Anything with Complete Freedom</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <Card className="p-8">
+          <div class="flex flex-col gap-4">
+            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h3 class="text-xl font-semibold">AI Agents</h3>
+            <p class="text-muted-foreground">Build powerful enterprise-grade AI agents that handle sales, content generation, and autonomous transactions with multi-language support.</p>
+          </div>
+        </Card>
+
         <Card className="p-8">
           <div class="flex flex-col gap-4">
             <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -260,16 +207,6 @@ const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floati
             </div>
             <h3 class="text-xl font-semibold">AI Powered Website</h3>
             <p class="text-muted-foreground">Create intelligent, dynamic websites that adapt and respond to user interactions using advanced AI technology.</p>
-          </div>
-        </Card>
-
-        <Card className="p-8">
-          <div class="flex flex-col gap-4">
-            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-            </div>
-            <h3 class="text-xl font-semibold">Enterprise Security</h3>
-            <p class="text-muted-foreground">Full control over your data with enterprise-grade security features and complete data sovereignty.</p>
           </div>
         </Card>
 
