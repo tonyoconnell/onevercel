@@ -11,7 +11,6 @@ import {
   InfoCircledIcon,
   LightningBoltIcon,
   CodeIcon,
-  QuestionMarkIcon,
   ArrowRightIcon,
 } from "@radix-ui/react-icons";
 import { ChatConfigSchema } from '../../schema/chat';
@@ -35,11 +34,13 @@ const sections = entries.reduce((acc: DocSection, entry: DocEntry) => {
 
 // Sort sections in desired order
 const orderedSections: DocSection = {
-  "Introduction": sections["Introduction"] || [],
-  "Core Features": sections["Core Features"] || [],
-  "Tutorials": sections["Tutorials"] || [],
-  "Development": sections["Development"] || [],
-  ...sections
+  "Getting Started": sections["Introduction"] || [],
+  "Level 2 - Core Concepts": sections["Core Concepts"] || [],
+  "Level 3 - Advanced Features": sections["Advanced Features"] || [],
+  // Filter out sections that are already included
+  ...Object.entries(sections)
+    .filter(([key]) => !['Introduction', 'Core Concepts', 'Advanced Features'].includes(key))
+    .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})
 };
 
 // Configure AI assistant for docs
@@ -77,10 +78,9 @@ type IconMap = {
 };
 
 const iconMap: IconMap = {
-  "Introduction": RocketIcon,
-  "Core Features": LayersIcon,
-  "Tutorials": ReaderIcon,
-  "Development": CodeIcon,
+  "Quick Start": RocketIcon,
+  "Development": LayersIcon,
+  "Deployment": LightningBoltIcon,
   "Other": InfoCircledIcon
 };
 
@@ -95,32 +95,6 @@ interface LearningPathStep {
   level: string;
 }
 
-const learningPath: LearningPathStep[] = [
-  {
-    title: "Quick Start",
-    description: "Set up your first AI-powered application",
-    icon: RocketIcon,
-    level: "Level 1",
-  },
-  {
-    title: "Core Concepts",
-    description: "Master the fundamental features",
-    icon: LayersIcon,
-    level: "Level 2",
-  },
-  {
-    title: "Advanced Features",
-    description: "Build complex applications",
-    icon: LightningBoltIcon,
-    level: "Level 3",
-  },
-  {
-    title: "Resources",
-    description: "Find help and community",
-    icon: QuestionMarkIcon,
-    level: "Support",
-  }
-];
 ---
 
 <Layout
@@ -138,46 +112,14 @@ const learningPath: LearningPathStep[] = [
       <p class="mx-auto max-w-2xl text-lg text-muted-foreground mb-8">
         Everything you need to build intelligent applications with ONE framework
       </p>
-      <div class="flex justify-center gap-4">
-        <a href="/docs/get-started">
-          <Button className="gap-2">
-            <RocketIcon className="w-4 h-4" />
-            Quick Start
-          </Button>
-        </a>
-        <a href="/docs/create-a-chatbot-with-markdown">
-          <Button variant="outline" className="gap-2">
-            <ReaderIcon className="w-4 h-4" />
-            Tutorials
-          </Button>
-        </a>
-      </div>
-    </div>
+     </div>
 
-    <!-- Learning Path -->
-    <div class="mb-16">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        {learningPath.map((step) => (
-          <Card className="p-6">
-            <div class="flex items-center gap-4 mb-4">
-              <div class="p-2 rounded-lg bg-primary/10">
-                <step.icon className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <p class="text-sm font-medium text-muted-foreground">{step.level}</p>
-                <h3 class="font-semibold">{step.title}</h3>
-              </div>
-            </div>
-            <p class="text-sm text-muted-foreground">{step.description}</p>
-          </Card>
-        ))}
-      </div>
-    </div>
+  
 
     <!-- Documentation Sections -->
     <div class="space-y-16">
       {Object.entries(orderedSections).map(([section, entries]) => entries.length > 0 && (
-        <section>
+        <section id={section.toLowerCase().replace(/ /g, "-")}>
           <div class="flex items-center gap-2 mb-8">
             {(() => {
               const Icon = getSectionIcon(section);
@@ -209,5 +151,7 @@ const learningPath: LearningPathStep[] = [
         </section>
       ))}
     </div>
+
+  
   </div>
 </Layout>
