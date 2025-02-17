@@ -87,4 +87,3 @@ We're committed to:
   <h3 class="text-lg font-semibold text-green-900">Working Together</h3>
   <p class="text-green-800">These terms reflect our commitment to building a platform that serves your needs while maintaining the trust you place in us.</p>
 </div>
-

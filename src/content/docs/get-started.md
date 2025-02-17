@@ -14,7 +14,7 @@ This guide will help you set up and start building AI-powered applications using
 
 Before you begin, ensure you have:
 - Node.js 18 or higher installed
-- pnpm package manager (`npm install -g pnpm`)
+- pnpm package manager (`npm install -g pnpm`) is recommend but you can use NPM (npm install) or Yarn
 - An OpenAI API key (for AI capabilities)
 - Basic knowledge of Astro and React
 

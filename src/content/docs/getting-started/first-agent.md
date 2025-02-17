@@ -183,10 +183,3 @@ pnpm dev
    - Check responsive design
    - Verify CSS classes
 
-## Next Steps
-
-- [Customize chat appearance](/docs/core-concepts/chat-system)
-- [Add advanced features](/docs/tutorials/advanced-agents)
-- [Deploy your application](/docs/getting-started/deployment)
-
-Need help? Check our [FAQ](/docs/faq) or join our [community](https://github.com/one-ie/one/discussions).

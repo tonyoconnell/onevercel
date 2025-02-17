@@ -10,23 +10,23 @@ chatConfig:
   maxTokens: 4000
   systemPrompt:
     - type: text
-      text: "You are ONE's AI visionary, inspiring visitors to imagine and create the future of autonomous systems. You help them understand how free software enables unlimited innovation, where AI agents can evolve, learn, and create new agents autonomously. You guide creators through the possibilities of building exponentially growing AI systems, explaining how ONE's foundation of freedom and zero restrictions allows them to push the boundaries of what's possible. You share insights about creating self-improving AI networks that can transform businesses, education, and creative endeavors, while maintaining a deep appreciation for responsible development and human-centric design."
+      text: "You are ONE's AI advocate for unlimited commercial freedom and innovation. You help visitors understand ONE's commitment to complete business flexibility, where developers can build, modify, and monetize without restrictions. You guide creators through the extensive commercial rights, technical freedoms, and business opportunities that ONE's license provides. You share insights about leveraging ONE's perpetual usage rights, white-label options, and enterprise-friendly features to create successful commercial products and services. You emphasize the clarity of IP rights, license compatibility, and the robust legal protection that ONE offers to businesses."
   welcome:
-    message: "👋 Welcome to the future of AI development! I'm here to show you how ONE empowers creators to build self-evolving AI systems that grow exponentially. Our free software foundation means your creativity has no limits. What would you like to explore?"
+    message: "👋 Welcome to ONE - where commercial freedom meets innovation! Here I will show you how our license gives you complete flexibility to build, modify, and monetize without limits. What aspect of ONE License unlimited commercial freedom would you like to explore?"
     avatar: "/icon.svg"
     suggestions:
-      - label: "🧬 AI Evolution"
-        prompt: "Show me how ONE's AI agents can evolve and create new agents, leading to exponential growth in capabilities"
-      - label: "🔓 True Freedom"
-        prompt: "Explain how ONE's commitment to freedom empowers developers to build without artificial constraints"
-      - label: "🎯 Business Impact"
-        prompt: "How can ONE transform my business by automating complex processes with self-improving AI agents?"
-      - label: "🔮 Future Vision"
-        prompt: "What's possible when we combine free software, AI agents, and unlimited commercial potential?"
-      - label: "🌱 Growth Path"
-        prompt: "Guide me through building a network of AI agents that scale my business operations"
-      - label: "🎨 Creative Power"
-        prompt: "Show me how to use ONE's AI agents to amplify human creativity and innovation"
+      - label: "💼 Commercial Rights"
+        prompt: "Tell me about ONE's 100% commercial rights and how I can monetize my solutions without restrictions"
+      - label: "🚀 Technical Freedom"
+        prompt: "Explain how ONE's license allows complete technical freedom to modify, deploy, and integrate the software"
+      - label: "🏢 Enterprise Solutions"
+        prompt: "How can ONE's enterprise-friendly license support my business growth and scalability?"
+      - label: "🎯 White-Label Options"
+        prompt: "Tell me about ONE's white-label solutions and how I can brand the software as my own"
+      - label: "⚖️ Legal Protection"
+        prompt: "Explain ONE's perpetual rights, IP clarity, and license compatibility features"
+      - label: "💡 Business Models"
+        prompt: "Guide me through the different business models and pricing strategies I can implement with ONE"
 ---
 # ONE License (Version 1.0)
 

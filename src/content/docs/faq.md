@@ -23,10 +23,10 @@ Common questions and answers about developing applications with ONE framework.
 **A:** Use the following commands:
 ```bash
 # Create new project
-pnpm create astro@latest my-one-app -- --template one
+git clone https://github.com/one-ie/one.git
 
 # Install dependencies
-cd my-one-app
+cd one
 pnpm install
 ```
 
@@ -36,9 +36,10 @@ pnpm install
 OPENAI_API_KEY=your_api_key_here
 ```
 
+You can copy the .env.example to .env 
 ## Chat System
 
-### Q: How do I add a chat interface to my page?
+### Q: How do I add chat to my page?
 **A:** Add chat configuration to your page's frontmatter:
 ```yaml
 ---
@@ -84,7 +85,7 @@ chatConfig:
 **A:** Create a markdown file with chat configuration in the frontmatter:
 ```markdown
 ---
-layout: ../layouts/Text.astro
+layout: ../layouts/Layout.astro
 title: "Your Title"
 chatConfig:
   systemPrompt:
@@ -95,6 +96,7 @@ chatConfig:
 Your content here
 ```
 
+See the tutorial [[create-a-chatbot-with-markdown]]
 ### Q: How do I organize my documentation?
 **A:** Use the following structure:
 ```
@@ -105,14 +107,6 @@ src/content/docs/
 └── api/           # API documentation
 ```
 
-### Q: How do I add images and assets?
-**A:** Place them in the `public` directory:
-```
-public/
-├── images/    # For images
-├── icons/     # For icons
-└── assets/    # For other assets
-```
 
 ## Styling and Theming
 
@@ -137,24 +131,6 @@ export default {
 import { useTheme } from "@/hooks/use-theme";
 
 const { theme, setTheme } = useTheme();
-```
-
-## Performance
-
-### Q: How do I optimize chat performance?
-**A:** Several ways:
-1. Use edge runtime
-2. Implement proper caching
-3. Optimize response sizes
-4. Use streaming responses
-
-### Q: How do I implement caching?
-**A:** Use edge caching for API responses:
-```typescript
-export const config = {
-  runtime: 'edge',
-  regions: ['all'],
-};
 ```
 
 ## Troubleshooting
@@ -184,16 +160,15 @@ export const config = {
 
 ### Q: How do I deploy my ONE application?
 **A:** Several options:
-1. Vercel (recommended)
+1. Vercel 
 2. Netlify
-3. CloudFlare
-4. Custom server
+3. CloudFlare (under development)
+4. Any Node.js server - AWS, Google Cloud or using Coolify on Hetzner is a great option
 
 ### Q: How do I handle environment variables in production?
 **A:** Set them in your hosting platform:
 ```env
 OPENAI_API_KEY=production_key
-API_ENDPOINT=production_endpoint
 ```
 
 ## Development Best Practices
@@ -238,20 +213,14 @@ const testConfig = {
 ### Q: Can I use ONE in a commercial project?
 **A:** Yes, ONE License provides:
 - Full commercial rights
-- White-label options
 - No royalty fees
-- Enterprise support
-
-### Q: How do I remove ONE branding?
-**A:** Contact [agent@one.ie](mailto:agent@one.ie) for white-label rights.
-
 ## Support and Resources
 
 ### Q: Where can I get help?
 **A:** Several options:
-1. [Documentation](/docs)
-3. [GitHub Issues](https://github.com/one-ie/one/issues)
-4. Email support@one.ie
+5. [Documentation](/docs)
+6. [GitHub Issues](https://github.com/one-ie/one/issues)
+7. Email support@one.ie
 
 ### Q: How do I report bugs?
 **A:** Open an issue on GitHub with:
