@@ -143,7 +143,7 @@ Choose from different display modes:
 pnpm dev
 ```
 
-2. Visit `http://localhost:3000/my-agent`
+2. Visit `http://localhost:4321/my-agent`
 3. Try different prompts and interactions
 4. Refine the system prompt based on responses
 

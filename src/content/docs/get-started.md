@@ -62,7 +62,7 @@ OPENAI_API_KEY=your_api_key_here
 pnpm dev
 ```
 
-Visit `http://localhost:3000` to see your application running.
+Visit `http://localhost:4321` to see your application running.
 
 ## Project Structure
 
