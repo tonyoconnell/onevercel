@@ -1,6 +1,7 @@
 ---
 title: Schema Documentation
 description: Understanding Content Configuration and Schema Design
+date: 2024-01-01
 ---
 
 Below is an example of how you might rewrite your schemas using both `.optional()` and `.nullable()` for clarity and flexibility. The comments tell the story of our content—how each field is designed to be forgiving, ensuring our app can gracefully handle missing or intentionally empty data.
