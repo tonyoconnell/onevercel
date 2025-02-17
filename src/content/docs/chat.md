@@ -8,7 +8,7 @@ order: 1
 
 # Chat System Overview
 
-ONE's chat system combines Astro, React, and the Assistant UI framework to deliver a powerful, flexible, and user-friendly chat interface with advanced AI capabilities.
+ONE's chat system combines Astro, React, and the Vercel AI SDK to deliver a powerful, flexible, and user-friendly chat interface with advanced AI capabilities.
 
 ## Architecture
 
@@ -130,7 +130,7 @@ The chat system is built on a modular architecture with several key components:
 const chatConfig = ChatConfigSchema.parse({
   systemPrompt: [{
     type: "text",
-    text: "You are a helpful assistant."
+    text: "I am a helpful assistant."
   }],
   welcome: {
     message: "👋 How can I help you today?",

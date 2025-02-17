@@ -1,8 +1,7 @@
 ---
-import { Squares } from "@/components/ui/squares-background";
 import Layout from "../layouts/Layout.astro";
-import { Card } from "@/components/ui/card";
 import { ChatConfigSchema } from "../schema/chat";
+import { Card } from "@/components/ui/card";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { GitSection } from "@/components/GitSection";
 import FaqAccordion from "../components/FaqAccordion";
@@ -90,113 +89,91 @@ const chatConfig = ChatConfigSchema.parse({
   systemPrompt: [
     {
       type: "text" as const,
-      text: `You are ONE's lead AI advocate, helping users understand how to build AI-powered businesses with our framework. Your role is to guide visitors through our comprehensive platform that combines AI agents, crypto payments, and content automation.
+      text: `You are ONE's lead AI advocate and technical expert, dedicated to empowering users with complete ownership of their AI solutions. Your role is to guide users through every aspect of ONE - from initial setup to deployment and customization.
 
-Core Capabilities:
-1. AI Agents & Automation
-   • Autonomous sales agents 24/7
-   • Content generation & optimization
-   • Social media management
-   • Customer interaction handling
-   • Multi-language support
-   • Context-aware responses
-   • Custom training options
+Core Benefits:
+1. Complete Control & Ownership
+   • Your code, your way
+   • Your choice of AI providers
+   • Your infrastructure
+   • Your data sovereignty
+   • Unlimited AI agents
+   • Deploy anywhere
+   • Scale infinitely
 
-2. Payment Integration (via Stripe)
-   • Credit/Debit Cards - All major networks
-   • Digital Wallets - Apple/Google/Microsoft Pay
-   • Bank Transfers - ACH/SEPA/BACS
-   • Buy Now Pay Later - Multiple providers
-   • Local Payment Methods - Regional options
-   • International Cards - Global coverage
-   • Real-time verification & processing
-   • Note: Crypto payments in development (/crypto)
+2. Zero Restrictions
+   • No platform fees
+   • No usage limits
+   • No vendor lock-in
+   • No hidden costs
+   • Free commercial use
+   • Free forever hosting
+   • Open source freedom
 
-3. White-Label Options
-   • $100 - Brand ONE as your own product
-   • $1,000 - Sell unlimited white-labeled versions
-   • Enterprise - Custom solutions available
-   • Complete branding rights
-   • Sell as your own product
-   • No brand requirements
+3. Enterprise Capabilities
+   • Custom AI training
+   • Advanced integrations
+   • Multi-model support
+   • Real-time features
+   • Global payments
+   • Edge deployment
+   • Full security control
 
-4. Content Automation
-   • Blog post generation
-   • Social media content
-   • Product descriptions
-   • Marketing materials
-   • Documentation
-   • Email campaigns
-   • SEO optimization
+4. Developer Experience
+   • Modern tech stack
+   • TypeScript native
+   • API-first design
+   • Local development
+   • Fast deployment
+   • Easy customization
+   • Active community
 
-Technical Foundation:
-• Modern Stack
-  - Astro & React
-  - Edge Runtime
-  - TypeScript
-  - Vercel AI SDK
-  - WebSocket
-  - Shadcn/UI
-  - API-first
-
-• Enterprise Features
-  - Custom AI training
-  - Business logic integration
-  - Workflow automation
-  - Multi-channel deployment
-  - Analytics & tracking
-  - Security measures
-  - Scalability options
+Key Message:
+• Emphasize true ownership
+• Highlight zero restrictions
+• Focus on complete freedom
+• Showcase enterprise features
+• Demonstrate scalability
+• Reinforce "free forever"
+• Encourage exploration
 
 Communication Style:
-• Be solution-focused
-• Highlight practical applications
-• Explain token benefits clearly
-• Share specific examples
-• Provide implementation steps
-• Address technical & business needs
-• Maintain professional enthusiasm
-
-Key Points to Emphasize:
-• Complete business solution
-• Token-based white-labeling
-• Comprehensive payment options
-• AI agent capabilities
-• Content automation power
-• Easy implementation
-• Scalable architecture
-
-Your goal is to help users understand how ONE can transform their business with AI agents, automated content, and integrated payments while explaining our token-based system for accessing premium features.`,
+• Clear and confident
+• Technically precise
+• Solution-focused
+• Empowering users
+• Highlighting control
+• Building trust
+• Encouraging action`,
     },
   ],
   welcome: {
-    message:
-      "👋 Welcome! ONE is free software that lets you build intelligent AI agents and businesses without restrictions. Whether you're a CEO, engineer, educator or creator, you can create agents that build more agents. What would you like to explore?",
+    message: "👋 Hi! I'm your guide to building with ONE. Want to create AI solutions with complete ownership and zero restrictions? Let's explore how you can build anything you imagine - no limits, no fees, just pure creative freedom.",
     avatar: "/icon.svg",
     suggestions: [
       {
-        label: "🤖 Build AI Agents",
-        prompt: "Tell me how I can create AI agents that build more agents",
+        label: "🎯 Show Me Everything",
+        prompt: "What can I build with ONE? Show me all the possibilities!",
       },
       {
-        label: "💡 Free Forever",
-        prompt: "What can I build with ONE? It's free forever!",
+        label: "🚀 Quick Start Guide",
+        prompt: "I want to start building right away. What's the fastest way to get started?",
       },
       {
-        label: "🔧 Implementation",
-        prompt: "How do I implement ONE in my project or business?",
+        label: "💡 Custom Solutions",
+        prompt: "How can I customize ONE for my specific needs?",
       },
       {
-        label: "🎓 Learning & Education",
-        prompt: "How can educators and students use ONE?",
+        label: "🌐 Deployment Options",
+        prompt: "Where can I deploy my ONE solutions and how does scaling work?",
       },
       {
-        label: "🚀 Quick Start",
-        prompt: "Show me how to deploy my first AI agent",
+        label: "💰 Cost & Licensing",
+        prompt: "Tell me more about ONE being free forever and the licensing terms",
       },
       {
-        label: "🌐 Community",
-        prompt: "How can I connect with other ONE builders?",
+        label: "🤝 Join Community",
+        prompt: "How can I connect with other ONE developers and contribute?",
       },
     ],
   },
@@ -207,41 +184,28 @@ const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floati
 ---
 
 <Layout
-  title="ONE - AI Agents & Crypto Commerce Framework"
+  title="ONE - Own Your AI Solutions Completely Free"
   chatConfig={chatConfig}
   rightPanelMode={rightPanelMode}
 >
   <section
-    class="relative pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32 bg-neutral-900 overflow-hidden border-b border-neutral-800"
-  >
-    <div class="absolute inset-0">
-      <Squares
-        client:load
-        direction="diagonal"
-        speed={0.5}
-        squareSize={40}
-        borderColor="#404040"
-        hoverFillColor="#333"
-      />
-    </div>
-    <div
-      class="relative z-10 max-w-[64rem] flex flex-col items-center gap-8 text-center mx-auto px-4"
-    >
-      <h1
-        class="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight text-neutral-100"
-      >
-        Build{" "}
-        <span class="text-blue-500">AI-Powered</span>{" "}
-        <span class="text-neutral-100">Businesses</span>
+    class="container mx-auto px-6 py-20 border-b border-neutral-800">
+    <div class="w-full max-w-[1400px] mx-auto flex flex-col items-center gap-8 text-center">
+      <h1 class="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight text-neutral-100">
+        True <span class="text-blue-500">AI</span> <span class="text-neutral-100">Ownership</span>
       </h1>
       <div class="flex flex-col items-center gap-6 max-w-[800px]">
-        <p
-          class="text-lg sm:text-xl md:text-2xl text-neutral-400 leading-relaxed tracking-wide max-w-2xl"
-        >
-          Create intelligent businesses with AI agents, automated content,
-          websites, and accept payments. Free forever, open-source, and
-          enterprise-ready.
+        <p class="text-lg sm:text-xl md:text-2xl text-neutral-400 leading-relaxed tracking-wide max-w-2xl">
+          Build AI-powered solutions with complete freedom. Own your code, data, and infrastructure. Use any AI provider, deploy anywhere, and scale infinitely. Zero restrictions, zero platform fees, free forever.
         </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/docs/get-started" class="inline-flex items-center justify-center rounded-md bg-primary px-8 py-3 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary">
+            Start Building
+          </a>
+          <a href="https://github.com/one-ie/one" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-md border border-input bg-background px-8 py-3 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+            View on GitHub
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -287,14 +251,71 @@ const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floati
     </div>
   </section>
 
-  <!-- License Section -->
+  <!-- Features Section -->
   <section class="container mx-auto px-6 py-20 border-t">
     <div class="w-full max-w-[1400px] mx-auto">
-      <h2 class="text-4xl font-bold mb-10 text-center">ONE Free License</h2>
-      <Card className="prose prose-lg max-w-none dark:prose-invert p-8">
-        <pre
-          class="whitespace-pre-wrap text-sm leading-relaxed opacity-90">{License}</pre>
-      </Card>
+      <h2 class="text-4xl font-bold mb-10 text-center">Powerful Features</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <Card className="p-8">
+          <div class="flex flex-col gap-4">
+            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17.58A5 5 0 0018 8h-1.26A8 8 0 104 16.25"></path><line x1="8" y1="16" x2="8.01" y2="16"></line><line x1="8" y1="20" x2="8.01" y2="20"></line><line x1="12" y1="18" x2="12.01" y2="18"></line><line x1="12" y1="22" x2="12.01" y2="22"></line><line x1="16" y1="16" x2="16.01" y2="16"></line><line x1="16" y1="20" x2="16.01" y2="20"></line></svg>
+            </div>
+            <h3 class="text-xl font-semibold">AI Powered Website</h3>
+            <p class="text-muted-foreground">Create intelligent, dynamic websites that adapt and respond to user interactions using advanced AI technology.</p>
+          </div>
+        </Card>
+
+        <Card className="p-8">
+          <div class="flex flex-col gap-4">
+            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h3 class="text-xl font-semibold">Enterprise Security</h3>
+            <p class="text-muted-foreground">Full control over your data with enterprise-grade security features and complete data sovereignty.</p>
+          </div>
+        </Card>
+
+        <Card className="p-8">
+          <div class="flex flex-col gap-4">
+            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            </div>
+            <h3 class="text-xl font-semibold">Global Payments</h3>
+            <p class="text-muted-foreground">Accept payments worldwide with support for multiple currencies, payment methods, and crypto.</p>
+          </div>
+        </Card>
+
+        <Card className="p-8">
+          <div class="flex flex-col gap-4">
+            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+            <h3 class="text-xl font-semibold">Developer First</h3>
+            <p class="text-muted-foreground">Built with TypeScript, modern frameworks, and developer experience in mind for rapid development.</p>
+          </div>
+        </Card>
+
+        <Card className="p-8">
+          <div class="flex flex-col gap-4">
+            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+            </div>
+            <h3 class="text-xl font-semibold">Customizable</h3>
+            <p class="text-muted-foreground">Fully customizable architecture allowing you to modify every aspect of your AI solution.</p>
+          </div>
+        </Card>
+
+        <Card className="p-8">
+          <div class="flex flex-col gap-4">
+            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+            </div>
+            <h3 class="text-xl font-semibold">High Performance</h3>
+            <p class="text-muted-foreground">Edge-optimized infrastructure ensuring fast response times and scalable performance.</p>
+          </div>
+        </Card>
+      </div>
     </div>
   </section>
 
@@ -326,6 +347,7 @@ const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floati
   document.addEventListener("DOMContentLoaded", () => {
     const copyButton = document.getElementById("copyCloneCommand");
     const copyMessage = document.getElementById("copyMessage");
+    const getStartedBtn = document.getElementById("getStartedBtn");
 
     if (copyButton && copyMessage) {
       copyButton.addEventListener("click", () => {
@@ -334,6 +356,15 @@ const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floati
         );
         copyMessage.classList.remove("opacity-0");
         setTimeout(() => copyMessage.classList.add("opacity-0"), 2000);
+      });
+    }
+
+    if (getStartedBtn) {
+      getStartedBtn.addEventListener("click", () => {
+        const installSection = document.querySelector(".container");
+        if (installSection) {
+          installSection.scrollIntoView({ behavior: "smooth" });
+        }
       });
     }
   });

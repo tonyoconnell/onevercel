@@ -302,10 +302,3 @@ const workflows = {
 };
 ```
 
-## Next Steps
-
-- [Advanced Chat Features](/docs/advanced/chat-features)
-- [AI Prompt Engineering](/docs/advanced/prompt-engineering)
-- [Deployment Strategies](/docs/deployment/production)
-
-Need help? Join our [Discord community](https://discord.gg/one) or check the [FAQ](/docs/faq).

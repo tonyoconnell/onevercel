@@ -2,7 +2,7 @@
 import Layout from "./Layout.astro";
 import type { CollectionEntry } from "astro:content";
 import { ChatConfigSchema } from "../schema/chat";
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 
 interface Props {
   entry: CollectionEntry<"blog">;
@@ -50,53 +50,86 @@ const pageData = {
   content: rawContent,
 };
 
-const mainContentClass = "prose dark:prose-invert max-w-none mx-auto prose-lg prose-headings:font-normal prose-p:text-gray-600 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-headings:text-gray-900 dark:prose-headings:text-gray-100 prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-img:rounded-lg prose-blockquote:border-l-4 prose-blockquote:border-gray-300 dark:prose-blockquote:border-gray-700 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-700 dark:prose-blockquote:text-gray-300 prose-blockquote:my-8";
+const mainContentClass =
+  "prose dark:prose-invert max-w-none mx-auto prose-lg prose-headings:font-normal prose-p:text-gray-600 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-headings:text-gray-900 dark:prose-headings:text-gray-100 prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-img:rounded-lg prose-blockquote:border-l-4 prose-blockquote:border-gray-300 dark:prose-blockquote:border-gray-700 prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-gray-700 dark:prose-blockquote:text-gray-300 prose-blockquote:my-8";
 ---
 
 <Layout {...pageData}>
-  {entry.data.picture && (
-    <div class="relative w-full h-[60vh] mb-8">
-      <Image
-        src={entry.data.picture}
-        alt={entry.data.title}
-        width={1920}
-        height={1080}
-        quality={90}
-        class="w-full h-full object-cover"
-      />
-      <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent">
-        <div class="container mx-auto h-full flex items-end pb-12 px-8">
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-4xl">
-            {entry.data.title}
-          </h1>
+  {
+    entry.data.picture && (
+      <div class="relative w-full h-[60vh] mb-8">
+        <Image
+          src={entry.data.picture}
+          alt={entry.data.title}
+          width={1920}
+          height={1080}
+          quality={90}
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent">
+          <div class="container mx-auto h-full flex items-end pb-12 px-8">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white max-w-4xl">
+              {entry.data.title}
+            </h1>
+          </div>
         </div>
       </div>
-    </div>
-  )}
+    )
+  }
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <article class={mainContentClass} style="max-width: 850px;">
       <slot />
     </article>
-    <nav class="mt-16 mb-8 flex justify-between items-center max-w-[850px] mx-auto border-t dark:border-gray-800 pt-8">
+    <nav
+      class="mt-16 mb-8 flex justify-between items-center max-w-[850px] mx-auto border-t dark:border-gray-800 pt-8"
+    >
       <div class="flex-1">
-        {entry.data.previous && (
-          <a href={`/blog/${entry.data.previous.slug}`} class="group flex items-center text-lg text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-            </svg>
-            {entry.data.previous.title}
-          </a>
-        )}
+        {
+          entry.data.previous && (
+            <a
+              href={`/blog/${entry.data.previous.slug}`}
+              class="group flex items-center text-lg text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              {entry.data.previous.title}
+            </a>
+          )
+        }
       </div>
       <div class="flex-1 text-right">
-        {entry.data.next && (
-          <a href={`/blog/${entry.data.next.slug}`} class="group flex items-center justify-end text-lg text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
-            {entry.data.next.title}
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-            </svg>
-          </a>
-        )}
+        {
+          entry.data.next && (
+            <a
+              href={`/blog/${entry.data.next.slug}`}
+              class="group flex items-center justify-end text-lg text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
+            >
+              {entry.data.next.title}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 ml-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </a>
+          )
+        }
       </div>
     </nav>
   </div>

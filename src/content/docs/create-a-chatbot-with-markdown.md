@@ -8,11 +8,11 @@ order: 3
 
 # Creating a Chatbot with Markdown
 
-This tutorial will show you how to create a specialized AI chatbot using markdown files in ONE. We'll use the license page as an example to demonstrate how to create a knowledgeable AI assistant for your content.
+This tutorial will show you how to create a specialized AI chatbot a single markdown files in ONE. 
 
 ## Step 1: Create Your Markdown File
 
-Create a new markdown file in your pages directory (e.g., `src/pages/your-page.md`):
+Create a new markdown file in your pages directory (e.g., `src/pages/your-page.md`): You can make a copy of chat-template.md to get started faster or just copy the text into a markdown file below. 
 
 ```markdown
 ---
@@ -63,7 +63,7 @@ systemPrompt:
     text: "You are an expert in [your topic] focused on helping visitors understand [specific aspects]. You provide clear, accurate information about [key areas]."
 ```
 
-Example from the license page:
+Example prompt for a license page: 
 ```yaml
 systemPrompt:
   - type: text
@@ -143,7 +143,7 @@ Contact [support@example.com](mailto:support@example.com) for assistance.
 
 ## Real-World Example
 
-Here's how the license page implements these concepts:
+Here's how a license page can implement these concepts:
 
 ```markdown
 ---
@@ -231,8 +231,3 @@ After creating your chatbot:
 3. Add more suggestions
 4. Monitor user interactions
 5. Update content as needed
-
-For more advanced features and customization options, check out:
-- [Chat Configuration Guide](/docs/chat-config)
-- [AI Prompt Engineering](/docs/prompts)
-- [Styling and Theming](/docs/styling)

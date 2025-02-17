@@ -143,7 +143,7 @@ Choose from different display modes:
 pnpm dev
 ```
 
-2. Visit `http://localhost:3000/my-agent`
+2. Visit `http://localhost:4321/my-agent`
 3. Try different prompts and interactions
 4. Refine the system prompt based on responses
 
@@ -183,10 +183,3 @@ pnpm dev
    - Check responsive design
    - Verify CSS classes
 
-## Next Steps
-
-- [Customize chat appearance](/docs/core-concepts/chat-system)
-- [Add advanced features](/docs/tutorials/advanced-agents)
-- [Deploy your application](/docs/getting-started/deployment)
-
-Need help? Check our [FAQ](/docs/faq) or join our [community](https://github.com/one-ie/one/discussions).

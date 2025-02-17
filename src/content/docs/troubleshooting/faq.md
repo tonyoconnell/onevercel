@@ -38,12 +38,6 @@ cd my-one-app
 pnpm install
 ```
 
-### Q: How do I update ONE?
-**A:** Update dependencies:
-```bash
-pnpm update @one/core @one/ui @one/chat
-```
-
 ### Q: Can I use npm or yarn instead of pnpm?
 **A:** While possible, we recommend pnpm for better performance and consistency. If you must use npm:
 ```bash
@@ -174,39 +168,18 @@ try {
 3. Use streaming responses
 4. Optimize assets
 
-### Q: How do I implement caching?
-**A:** Use the built-in caching system:
-```typescript
-import { cache } from '@one/core';
-
-const cachedResponse = await cache.wrap(
-  key,
-  async () => generateResponse(),
-  { ttl: 3600 }
-);
-```
-
-### Q: How do I monitor performance?
-**A:** Use the monitoring tools:
-```typescript
-import { metrics } from '@one/core';
-
-metrics.timing('chat.response', responseTime);
-metrics.increment('chat.requests');
-```
-
 ## Deployment
 
 ### Q: How do I deploy to production?
 **A:** Multiple options:
-1. Vercel (recommended):
+1. Vercel 
 ```bash
 vercel deploy
 ```
 
 2. Cloudflare:
 ```bash
-wrangler deploy
+wrangler deploy (under development)
 ```
 
 3. Custom server:
@@ -221,20 +194,6 @@ node server.js
 # .env.production
 OPENAI_API_KEY=prod_key
 DATABASE_URL=prod_url
-```
-
-### Q: How do I enable SSL?
-**A:** Most platforms handle SSL automatically. For custom servers:
-```typescript
-import https from 'https';
-import { readFileSync } from 'fs';
-
-const options = {
-  key: readFileSync('private.key'),
-  cert: readFileSync('certificate.crt')
-};
-
-https.createServer(options, app);
 ```
 
 ## Troubleshooting
@@ -276,8 +235,7 @@ pnpm tsc --noEmit
 **A:** Several options:
 1. [Documentation](/docs)
 2. [GitHub Issues](https://github.com/one-ie/one/issues)
-3. [Discord Community](https://discord.gg/one)
-4. Email: support@one.ie
+3. Email: support@one.ie
 
 ### Q: How do I report bugs?
 **A:** Open an issue with:

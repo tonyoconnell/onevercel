@@ -12,7 +12,7 @@ This guide covers everything you need to know about deploying ONE applications t
 
 ## Deployment Options
 
-### 1. Vercel (Recommended)
+### 1. Vercel 
 
 The simplest way to deploy your ONE application:
 
@@ -46,7 +46,7 @@ EDGE_CONFIG=your_edge_config
 
 ### 2. Cloudflare Pages
 
-Note: This is under active development 
+Note: This is under development 
 
 ```bash
 # Install Wrangler
