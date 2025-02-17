@@ -3,17 +3,17 @@ import Layout from "../layouts/Layout.astro";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card } from "@/components/ui/card";
-import { ChatConfigSchema } from '../schema/chat';
+import { ChatConfigSchema } from "../schema/chat";
 import {
   GitHubLogoIcon,
   CodeIcon,
   DownloadIcon,
   CheckIcon,
-} from '@radix-ui/react-icons';
+} from "@radix-ui/react-icons";
 import { GitSection } from "@/components/GitSection";
 
 // Import license content
-import License from '../../LICENSE?raw';
+import License from "../../LICENSE?raw";
 const SYSTEM_REQUIREMENTS = [
   "Node.js 18.x or higher",
   "pnpm package manager",
@@ -28,21 +28,22 @@ const INSTALLATION_STEPS = [
     description: "Download ZIP or clone with Git - takes just seconds",
   },
   {
-    title: "Quick Setup",
-    description: "Run 'pnpm install' to install dependencies",
+    title: "Quick Install",
+    description: "Run 'npm install' to install dependencies",
   },
   {
-    title: "Configure",
-    description: "Set up your environment variables and AI providers",
+    title: "Add Your Keys",
+    description:
+      "Add the keys to your AI providers in your environment variables",
+  },
+  {
+    title: "Start Building",
+    description: "Create your first AI agent and go live",
   },
   {
     title: "Deploy Anywhere",
     description: "Push to Vercel, AWS, or your own server",
   },
-  {
-    title: "Start Building",
-    description: "Create your first AI agent and go live",
-  }
 ];
 
 const GITHUB_REPO = "one-ie/one";
@@ -57,9 +58,10 @@ const URLS = {
 
 // Configure chat
 const chatConfig = ChatConfigSchema.parse({
-  systemPrompt: [{
-    type: "text" as const,
-    text: `You are ONE's setup specialist, helping users build AI-powered businesses. Your role includes:
+  systemPrompt: [
+    {
+      type: "text" as const,
+      text: `You are ONE's setup specialist, helping users build AI-powered businesses. Your role includes:
     
     - Fast framework installation and deployment
     - Setting up AI agents for sales and support
@@ -89,30 +91,32 @@ const chatConfig = ChatConfigSchema.parse({
     Reference Information:
     ${JSON.stringify({ SYSTEM_REQUIREMENTS, INSTALLATION_STEPS, URLS }, null, 2)}
     
-    Focus on helping users deploy their first AI agent and set up payment processing. Guide them through token system benefits.`
-  }],
+    Focus on helping users deploy their first AI agent and set up payment processing. Guide them through token system benefits.`,
+    },
+  ],
   welcome: {
-    message: "👋 Ready to build your AI-powered business? I'll help you get started with AI agents, payments, and token features.",
+    message:
+      "👋 Ready to build your AI-powered business? I'll help you get started with AI agents, payments, and token features.",
     avatar: "/icon.svg",
     suggestions: [
       {
         label: "🤖 AI Agent Setup",
-        prompt: "How do I create my first AI sales agent?"
+        prompt: "How do I create my first AI sales agent?",
       },
       {
         label: "💳 Payment Integration",
-        prompt: "Guide me through setting up crypto and traditional payments"
+        prompt: "Guide me through setting up crypto and traditional payments",
       },
       {
         label: "🪙 Token Features",
-        prompt: "Explain how the token system works for unlocking features"
+        prompt: "Explain how the token system works for unlocking features",
       },
       {
         label: "📥 Quick Install",
-        prompt: "What's the fastest way to get started with ONE?"
-      }
-    ]
-  }
+        prompt: "What's the fastest way to get started with ONE?",
+      },
+    ],
+  },
 });
 
 // Fetch GitHub stars count
@@ -122,16 +126,15 @@ const getGitHubStats = async () => {
     const data = await response.json();
     return {
       stars: data.stargazers_count,
-      forks: data.forks_count
+      forks: data.forks_count,
     };
   } catch (error) {
-    console.error('Error fetching GitHub stats:', error);
-    return { stars: '14.2k', forks: '3.1k' }; // Fallback values
+    console.error("Error fetching GitHub stats:", error);
+    return { stars: "14.2k", forks: "3.1k" }; // Fallback values
   }
 };
 
 const stats = await getGitHubStats();
-
 ---
 
 <Layout
@@ -142,149 +145,283 @@ const stats = await getGitHubStats();
 >
   <main class="container mx-auto px-6 w-full">
     <section class="py-12 text-center max-w-4xl mx-auto mb-12">
-      <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
+      <h1
+        class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60"
+      >
         Build & Deploy in Minutes
         <span class="block mt-2">100% Free Forever</span>
       </h1>
       <p class="text-xl text-muted-foreground mb-8">
-        ONE is completely free and open source. Get started in minutes with zero setup complexity.
-        Deploy anywhere - from Vercel to your own infrastructure.
+        ONE is completely free and open source. Get started in minutes with zero
+        setup complexity. Deploy anywhere - from Vercel to your own
+        infrastructure.
       </p>
     </section>
+
+    <!-- Download Options Grid -->
+    <div class="grid md:grid-cols-2 gap-8 w-full max-w-4xl mb-12">
+      <!-- Direct Download Card -->
+      <Card
+        className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow"
+      >
+        <h3 class="text-2xl font-bold mb-4">Quick Download</h3>
+        <p class="text-muted-foreground mb-6">
+          Download the latest stable release directly
+        </p>
+        <a href={DOWNLOAD_URL} class="w-full">
+          <Button size="lg" className="w-full">
+            <DownloadIcon className="mr-2 h-5 w-5" />
+            Download ZIP
+          </Button>
+        </a>
+      </Card>
+
+      <!-- Git Clone Card -->
+      <Card
+        className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow"
+      >
+        <h3 class="text-2xl font-bold mb-4">Git Clone</h3>
+        <p class="text-muted-foreground mb-6">Clone the repository using Git</p>
+        <Button
+          variant="outline"
+          size="lg"
+          className="w-full group bg-background border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300 text-foreground hover:text-foreground"
+          id="copyCloneCommand"
+        >
+          <CodeIcon className="w-5 h-5 mr-2 text-primary" />
+          <code class="font-mono text-sm">git clone {GITHUB_REPO}</code>
+        </Button>
+        <p
+          id="copyMessage"
+          class="mt-2 text-sm text-primary opacity-0 transition-opacity duration-200"
+        >
+          Copied to clipboard!
+        </p>
+      </Card>
+    </div>
+
+    <!-- Secondary Options -->
+    <div class="flex flex-wrap gap-4 justify-center mb-12">
+      <a href={URLS.codespace} class="inline-block">
+        <Button
+          variant="outline"
+          size="lg"
+          className="group bg-[#0D1117] hover:bg-[#161B22] border-2 border-[#30363D] hover:border-primary text-white hover:text-white transition-all duration-300"
+        >
+          <GitHubLogoIcon className="w-5 h-5 mr-2" />
+          <span>Open in Codespaces</span>
+        </Button>
+      </a>
+
+      <a href={GITHUB_URL} class="inline-block">
+        <Button
+          variant="outline"
+          size="lg"
+          className="group text-foreground hover:text-foreground"
+        >
+          <GitHubLogoIcon className="w-5 h-5 mr-2" />
+          <span>View Source</span>
+          <div
+            class="ml-2 px-2 py-0.5 bg-muted rounded-full text-xs font-medium"
+          >
+            {stats.stars} ⭐
+          </div>
+        </Button>
+      </a>
+
+      <a href={URLS.fork} class="inline-block">
+        <Button
+          variant="outline"
+          size="lg"
+          className="group text-foreground hover:text-foreground"
+        >
+          <svg
+            class="w-5 h-5 mr-2"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7 5C7 3.89543 7.89543 3 9 3C10.1046 3 11 3.89543 11 5C11 5.74028 10.5978 6.38663 10 6.73244V14.0396H14.7761C15.1132 13.4132 15.7859 13 16.5 13C17.6046 13 18.5 13.8954 18.5 15C18.5 16.1046 17.6046 17 16.5 17C15.7859 17 15.1132 16.5868 14.7761 15.9604H10V17.2676C10.5978 17.6134 11 18.2597 11 19C11 20.1046 10.1046 21 9 21C7.89543 21 7 20.1046 7 19C7 18.2597 7.40221 17.6134 8 17.2676V6.73244C7.40221 6.38663 7 5.74028 7 5Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+          <span>Fork Project</span>
+          <div
+            class="ml-2 px-2 py-0.5 bg-muted rounded-full text-xs font-medium"
+          >
+            {stats.forks}
+          </div>
+        </Button>
+      </a>
+    </div>
 
     <!-- System Requirements Section -->
     <section class="w-full max-w-4xl mx-auto mb-16">
       <h2 class="text-3xl font-bold mb-8 text-center">System Requirements</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {SYSTEM_REQUIREMENTS.map((requirement) => (
-          <Card className="p-6 flex items-start space-x-4">
-            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <CheckIcon className="w-5 h-5 text-primary" />
-            </div>
-            <p class="text-muted-foreground">{requirement}</p>
-          </Card>
-        ))}
-      </div>
-    </section>
-
-    <!-- Installation Guide Section -->
-    <section class="w-full max-w-4xl mx-auto mb-16">
-      <h2 class="text-3xl font-bold mb-8 text-center">Installation Guide</h2>
-      <div class="space-y-6">
-        {INSTALLATION_STEPS.map((step, index) => (
-          <Card className="p-6">
-            <div class="flex items-start space-x-4">
+        {
+          SYSTEM_REQUIREMENTS.map((requirement) => (
+            <Card className="p-6 flex items-start space-x-4">
               <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <span class="text-primary font-semibold">{index + 1}</span>
+                <CheckIcon className="w-5 h-5 text-primary" />
               </div>
-              <div>
-                <h3 class="text-xl font-semibold mb-2">{step.title}</h3>
-                <p class="text-muted-foreground">{step.description}</p>
-              </div>
-            </div>
-          </Card>
-        ))}
+              <p class="text-muted-foreground">{requirement}</p>
+            </Card>
+          ))
+        }
       </div>
     </section>
-
-    <!-- Download Options Grid -->
-      <div class="grid md:grid-cols-2 gap-8 w-full max-w-4xl mb-12">
-        <!-- Direct Download Card -->
-        <Card className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow">
-          <h3 class="text-2xl font-bold mb-4">Quick Download</h3>
-          <p class="text-muted-foreground mb-6">Download the latest stable release directly</p>
-          <a href={DOWNLOAD_URL} class="w-full">
-            <Button size="lg" className="w-full">
-              <DownloadIcon className="mr-2 h-5 w-5" />
-              Download ZIP
-            </Button>
-          </a>
-        </Card>
-
-        <!-- Git Clone Card -->
-        <Card className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow">
-          <h3 class="text-2xl font-bold mb-4">Git Integration</h3>
-          <p class="text-muted-foreground mb-6">Clone the repository using Git</p>
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="w-full group bg-background border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300 text-foreground hover:text-foreground"
-            id="copyCloneCommand"
-          >
-            <CodeIcon className="w-5 h-5 mr-2 text-primary" />
-            <code class="font-mono text-sm">git clone {GITHUB_REPO}</code>
-          </Button>
-          <p id="copyMessage" class="mt-2 text-sm text-primary opacity-0 transition-opacity duration-200">
-            Copied to clipboard!
-          </p>
-        </Card>
-      </div>
-
-      <!-- Secondary Options -->
-      <div class="flex flex-wrap gap-4 justify-center mb-12">
-        <a href={URLS.codespace} class="inline-block">
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="group bg-[#0D1117] hover:bg-[#161B22] border-2 border-[#30363D] hover:border-primary text-white hover:text-white transition-all duration-300"
-          >
-            <GitHubLogoIcon className="w-5 h-5 mr-2" />
-            <span>Open in Codespaces</span>
-          </Button>
-        </a>
-        
-        <a href={GITHUB_URL} class="inline-block">
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="group text-foreground hover:text-foreground"
-          >
-            <GitHubLogoIcon className="w-5 h-5 mr-2" />
-            <span>View Source</span>
-            <div class="ml-2 px-2 py-0.5 bg-muted rounded-full text-xs font-medium">
-              {stats.stars} ⭐
-            </div>
-          </Button>
-        </a>
-
-        <a href={URLS.fork} class="inline-block">
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="group text-foreground hover:text-foreground"
-          >
-            <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7 5C7 3.89543 7.89543 3 9 3C10.1046 3 11 3.89543 11 5C11 5.74028 10.5978 6.38663 10 6.73244V14.0396H14.7761C15.1132 13.4132 15.7859 13 16.5 13C17.6046 13 18.5 13.8954 18.5 15C18.5 16.1046 17.6046 17 16.5 17C15.7859 17 15.1132 16.5868 14.7761 15.9604H10V17.2676C10.5978 17.6134 11 18.2597 11 19C11 20.1046 10.1046 21 9 21C7.89543 21 7 20.1046 7 19C7 18.2597 7.40221 17.6134 8 17.2676V6.73244C7.40221 6.38663 7 5.74028 7 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span>Fork Project</span>
-            <div class="ml-2 px-2 py-0.5 bg-muted rounded-full text-xs font-medium">
-              {stats.forks}
-            </div>
-          </Button>
-        </a>
-      </div>
 
     <!-- License Section -->
     <section class="w-full max-w-[1400px] mb-20">
       <h2 class="text-4xl font-bold mb-10 text-center">License</h2>
       <Card className="prose prose-lg max-w-none dark:prose-invert p-8">
-        <pre class="whitespace-pre-wrap text-sm leading-relaxed opacity-90">{License}</pre>
+        <pre
+          class="whitespace-pre-wrap text-sm leading-relaxed opacity-90">{License}</pre>
       </Card>
     </section>
 
+    <!-- Installation Guide Section -->
+    <section class="w-full max-w-4xl mx-auto mb-16">
+      <h2 class="text-3xl font-bold mb-8 text-center">Easy Steps</h2>
+      <div class="space-y-6">
+        {
+          INSTALLATION_STEPS.map((step, index) => (
+            <Card className="p-6">
+              <div class="flex items-start space-x-4">
+                <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <span class="text-primary font-semibold">{index + 1}</span>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold mb-2">{step.title}</h3>
+                  <p class="text-muted-foreground">{step.description}</p>
+                </div>
+              </div>
+            </Card>
+          ))
+        }
+      </div>
+    </section>
 
     <section class="text-center mb-16 w-full max-w-[1400px]">
       <Alert className="py-6">
         <AlertDescription className="text-lg">
           Join developers at the frontier of AI building the future with ONE.
           <a href={GITHUB_URL} class="inline-block">
-            <Button variant="link" className="ml-3 text-lg text-foreground hover:text-foreground">
+            <Button
+              variant="link"
+              className="ml-3 text-lg text-foreground hover:text-foreground"
+            >
               Star on GitHub <GitHubLogoIcon className="ml-2 w-5 h-5" />
             </Button>
           </a>
         </AlertDescription>
       </Alert>
     </section>
+
+      <!-- Download Options Grid -->
+    <div class="grid md:grid-cols-2 gap-8 w-full max-w-4xl mb-12">
+      <!-- Direct Download Card -->
+      <Card
+        className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow"
+      >
+        <h3 class="text-2xl font-bold mb-4">Quick Download</h3>
+        <p class="text-muted-foreground mb-6">
+          Download the latest stable release directly
+        </p>
+        <a href={DOWNLOAD_URL} class="w-full">
+          <Button size="lg" className="w-full">
+            <DownloadIcon className="mr-2 h-5 w-5" />
+            Download ZIP
+          </Button>
+        </a>
+      </Card>
+
+      <!-- Git Clone Card -->
+      <Card
+        className="p-6 flex flex-col items-center hover:shadow-lg transition-shadow"
+      >
+        <h3 class="text-2xl font-bold mb-4">Git Clone</h3>
+        <p class="text-muted-foreground mb-6">Clone the repository using Git</p>
+        <Button
+          variant="outline"
+          size="lg"
+          className="w-full group bg-background border-2 hover:border-primary hover:bg-primary/5 transition-all duration-300 text-foreground hover:text-foreground"
+          id="copyCloneCommand"
+        >
+          <CodeIcon className="w-5 h-5 mr-2 text-primary" />
+          <code class="font-mono text-sm">git clone {GITHUB_REPO}</code>
+        </Button>
+        <p
+          id="copyMessage"
+          class="mt-2 text-sm text-primary opacity-0 transition-opacity duration-200"
+        >
+          Copied to clipboard!
+        </p>
+      </Card>
+    </div>
+
+    <!-- Secondary Options -->
+    <div class="flex flex-wrap gap-4 justify-center mb-12">
+      <a href={URLS.codespace} class="inline-block">
+        <Button
+          variant="outline"
+          size="lg"
+          className="group bg-[#0D1117] hover:bg-[#161B22] border-2 border-[#30363D] hover:border-primary text-white hover:text-white transition-all duration-300"
+        >
+          <GitHubLogoIcon className="w-5 h-5 mr-2" />
+          <span>Open in Codespaces</span>
+        </Button>
+      </a>
+
+      <a href={GITHUB_URL} class="inline-block">
+        <Button
+          variant="outline"
+          size="lg"
+          className="group text-foreground hover:text-foreground"
+        >
+          <GitHubLogoIcon className="w-5 h-5 mr-2" />
+          <span>View Source</span>
+          <div
+            class="ml-2 px-2 py-0.5 bg-muted rounded-full text-xs font-medium"
+          >
+            {stats.stars} ⭐
+          </div>
+        </Button>
+      </a>
+
+      <a href={URLS.fork} class="inline-block">
+        <Button
+          variant="outline"
+          size="lg"
+          className="group text-foreground hover:text-foreground"
+        >
+          <svg
+            class="w-5 h-5 mr-2"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7 5C7 3.89543 7.89543 3 9 3C10.1046 3 11 3.89543 11 5C11 5.74028 10.5978 6.38663 10 6.73244V14.0396H14.7761C15.1132 13.4132 15.7859 13 16.5 13C17.6046 13 18.5 13.8954 18.5 15C18.5 16.1046 17.6046 17 16.5 17C15.7859 17 15.1132 16.5868 14.7761 15.9604H10V17.2676C10.5978 17.6134 11 18.2597 11 19C11 20.1046 10.1046 21 9 21C7.89543 21 7 20.1046 7 19C7 18.2597 7.40221 17.6134 8 17.2676V6.73244C7.40221 6.38663 7 5.74028 7 5Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+          <span>Fork Project</span>
+          <div
+            class="ml-2 px-2 py-0.5 bg-muted rounded-full text-xs font-medium"
+          >
+            {stats.forks}
+          </div>
+        </Button>
+      </a>
+    </div>
+
   </main>
 </Layout>
 
@@ -292,7 +429,7 @@ const stats = await getGitHubStats();
   .prose {
     @apply mx-auto;
   }
-  
+
   .prose pre {
     @apply bg-muted;
   }
@@ -301,7 +438,7 @@ const stats = await getGitHubStats();
     width: 95%;
     margin: 0 auto;
   }
-  
+
   @media (max-width: 768px) {
     .container {
       width: 100%;
@@ -313,15 +450,17 @@ const stats = await getGitHubStats();
 
 <script>
   // Handle copy functionality
-  document.addEventListener('DOMContentLoaded', () => {
-    const copyButton = document.getElementById('copyCloneCommand');
-    const copyMessage = document.getElementById('copyMessage');
-    
+  document.addEventListener("DOMContentLoaded", () => {
+    const copyButton = document.getElementById("copyCloneCommand");
+    const copyMessage = document.getElementById("copyMessage");
+
     if (copyButton && copyMessage) {
-      copyButton.addEventListener('click', () => {
-        navigator.clipboard.writeText('git clone one-ie/one');
-        copyMessage.classList.remove('opacity-0');
-        setTimeout(() => copyMessage.classList.add('opacity-0'), 2000);
+      copyButton.addEventListener("click", () => {
+        navigator.clipboard.writeText(
+          "git clone https://github.com/one-ie/one",
+        );
+        copyMessage.classList.remove("opacity-0");
+        setTimeout(() => copyMessage.classList.add("opacity-0"), 2000);
       });
     }
   });
