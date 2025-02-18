@@ -19,19 +19,20 @@ I achieve simplicity, intelligence, and synchronicity through a powerful ontolog
    - System architecture
 
 3. **Grow (I.GROW)**
-   - Evolution and learning
-   - Pattern recognition
-   - Adaptive capabilities
-
-4. **Connect (I.CONNECT)**
    - Knowledge connection
    - System integration
    - Pattern matching
+   - Evolution and learning
+   - Pattern recognition
+   - Adaptive capabilities
 
 ## Goal
 
 Build AI Agent Swarms and AI Agents
 
+## How 
+
+Generate options, plans, tasks and tests. Send prompt chains and loops for inference from the right models. 
 
 ## Interaction Model
 
@@ -46,6 +47,7 @@ const Interact = {
   CHAT: 'chat',  // Chat
   SPEAK: 'speak',  // Speak
   LISTEN: 'listen',  // Listen
+    TRANSACT: 'transact',  // Buy and sell
 };
 ```
 

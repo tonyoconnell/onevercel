@@ -1,6 +1,5 @@
 import * as React from "react"
 import { Moon, Sun } from "lucide-react"
-
 import { Button } from "@/components/ui/button"
 
 export function ModeToggle() {
@@ -25,6 +24,7 @@ export function ModeToggle() {
             size="icon"
             className="h-[50px] w-[50px]"
             onClick={() => setThemeState(theme === "dark" ? "theme-light" : "dark")}
+            aria-label="Toggle theme"
         >
             <Sun className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             <Moon className="absolute h-6 w-6 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />

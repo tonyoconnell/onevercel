@@ -5,23 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { Check, ArrowRight, Mail, Calendar } from 'lucide-react';
 import type { Stripe as StripeType } from 'stripe';
-import { ChatConfigSchema } from "../schema/chat";
 const rightPanelMode = "half"; // You can change this to 'full', 'half', 'floating', or 'icon'
-
-const page = {
-  title: "Thank You | ONE",
-  description: "Thank you for your subscription",
-  showHeader: true,
-  showFooter: false,
-  showSidebar: true,
-  showChat: false,
-  seo: {
-    metaTitle: "Thank You | ONE",
-    metaDescription: "Thank you for subscribing to ONE",
-    metaKeywords: ["thank you", "subscription", "ONE"],
-  },
-};
-
 
 const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY) as StripeType;
 const sessionId = Astro.url.searchParams.get('session_id');

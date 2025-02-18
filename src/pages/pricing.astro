@@ -1,0 +1,302 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Button } from "../components/ui/button";
+import { Badge } from "../components/ui/badge";
+import { Card } from "../components/ui/card";
+import { CheckCircle, Zap, Brain, Rocket } from "lucide-react";
+import { AccordionWrapper } from "../components/AccordionWrapper";
+
+interface PricingTask {
+  name: string;
+  price: string;
+}
+
+interface PricingGroup {
+  title: string;
+  content: string;
+  tasks: PricingTask[];
+}
+
+interface Feature {
+  title: string;
+  description: string;
+}
+
+interface Category {
+  name: string;
+  tasks: number;
+  icon: any;
+}
+
+interface IncludedItem {
+  title: string;
+  icon: any;
+}
+
+interface PageConfig {
+  meta: {
+    title: string;
+    description: string;
+  };
+  hero: {
+    badge: string;
+    title: string;
+    subtitle: string;
+  };
+  features: {
+    title: string;
+    subtitle: string;
+    items: Feature[];
+  };
+  pricing: {
+    badge: string;
+    title: string;
+    description: string;
+    originalPrice: string;
+    salePrice: string;
+    totalValue: string;
+    categories: Category[];
+    included: IncludedItem[];
+    cta: string;
+    guarantee: string;
+  };
+}
+
+const page: PageConfig = {
+  meta: {
+    title: "Build Your AI Brand - Complete Course",
+    description: "Learn to build, customize, and deploy your own AI-powered brand. From setup to sales, master every aspect of modern AI business.",
+  },
+  hero: {
+    badge: "Complete Course • $100/month • Step-by-Step Guide",
+    title: "Build Your AI Brand From Scratch",
+    subtitle: "Master the complete process: Setup, Branding, Deployment, Content, and Sales - all powered by AI"
+  },
+  features: {
+    title: "Why Take This Course?",
+    subtitle: "Master AI brand building from start to finish",
+    items: [
+      {
+        title: "Comprehensive Learning",
+        description: "From setup to sales, learn every aspect of building an AI-powered brand."
+      },
+      {
+        title: "Practical Experience",
+        description: "Build your own AI brand while learning, with real-world deployment."
+      },
+      {
+        title: "Future-Proof Skills",
+        description: "Master the tools and technologies shaping the future of business."
+      }
+    ]
+  },
+  pricing: {
+    badge: "AI Quickstart • $100",
+    title: "Hit the ground running with your own AI brand",
+    description: "Learn how to build your AI enterprise, school, or audience with free and open software. Get started quickly.",
+    originalPrice: "1,000",
+    salePrice: "100",
+    totalValue: "$1,000+ Monthly Value",
+    categories: [
+      { name: "Setup", tasks: 5, icon: Rocket },
+      { name: "Brand", tasks: 6, icon: Brain },
+      { name: "Deploy", tasks: 4, icon: Zap },
+      { name: "Content", tasks: 5, icon: CheckCircle },
+      { name: "Sales", tasks: 3, icon: Rocket }
+    ],
+    included: [
+      { title: "Step-by-Step Video Guides", icon: CheckCircle },
+      { title: "Complete Source Code", icon: CheckCircle },
+      { title: "Brand Customization Tutorial", icon: CheckCircle },
+      { title: "Deployment Templates", icon: CheckCircle },
+      { title: "Credit card and crypto payments", icon: CheckCircle },
+      { title: "Community Support", icon: CheckCircle }
+    ],
+    cta: "YES! Build My AI Brand Now",
+    guarantee: "🔒 Secure Payment • Instant Access • Limited Time Offer: $100/month"
+  }
+};
+
+const title = page.meta.title;
+const description = page.meta.description;
+
+const pricingGroups: PricingGroup[] = [
+  {
+    title: `Setup (${page.pricing.categories[0]?.tasks ?? 0} Tasks)`,
+    content: "Initial system setup and configuration",
+    tasks: [
+      {
+        name: "Download & Install",
+        price: "Complete step-by-step guide"
+      },
+      {
+        name: "Setup Development Environment",
+        price: "Configure development environment"
+      },
+      {
+        name: "Add Your API Keys",
+        price: "Add keys to AI providers and APIs"
+      },
+      {
+        name: "Local Testing",
+        price: "Verify your installation"
+      },
+      {
+        name: "Initial Configuration",
+        price: "Basic system customization"
+      }
+    ]
+  },
+  {
+    title: `Brand (${page.pricing.categories[1]?.tasks ?? 0} Tasks)`,
+    content: "Complete brand customization",
+    tasks: [
+      {
+        name: "Business Details",
+        price: "Update company information"
+      },
+      {
+        name: "Logo & Colors",
+        price: "Configure brand identity"
+      },
+      {
+        name: "Typography",
+        price: "Font selection and setup"
+      },
+      {
+        name: "Image Assets",
+        price: "OG image, favicon, icons"
+      },
+      {
+        name: "Theme Setup",
+        price: "Dark/light mode configuration"
+      },
+      {
+        name: "Brand Voice",
+        price: "AI personality customization"
+      }
+    ]
+  },
+  {
+    title: `Deploy (${page.pricing.categories[2]?.tasks ?? 0} Tasks)`,
+    content: "Production deployment setup",
+    tasks: [
+      {
+        name: "Your Repo",
+        price: "Source control on Github"
+      },
+      {
+        name: "Select Host",
+        price: "Choose and setup hosting"
+      },
+      {
+        name: "Environment Keys",
+        price: "Add environment configuration keys"
+      },
+      {
+        name: "Production Testing",
+        price: "Verify live deployment"
+      }
+    ]
+  },
+  {
+    title: `Content (${page.pricing.categories[3]?.tasks ?? 0} Tasks)`,
+    content: "Website content and pages",
+    tasks: [
+      {
+        name: "Create a web page with markdown",
+        price: "Content structure setup"
+      },
+      {
+        name: "Astro Pages",
+        price: "Key page creation"
+      },
+      {
+        name: "About Section",
+        price: "Company information"
+      },
+      {
+        name: "Documentation",
+        price: "Product documentation"
+      },
+      {
+        name: "Blog Setup",
+        price: "Blog configuration"
+      }
+    ]
+  },
+  {
+    title: `Sales (${page.pricing.categories[4]?.tasks ?? 0} Tasks)`,
+    content: "Payment and transaction setup",
+    tasks: [
+      {
+        name: "Stripe Integration",
+        price: "Credit card payments"
+      },
+      {
+        name: "Crypto Setup",
+        price: "Cryptocurrency payments"
+      },
+      {
+        name: "Test Payments",
+        price: "Transaction verification"
+      }
+    ]
+  },
+];
+
+---
+
+<Layout {title} {description}>
+  <div class="container">
+    <Card className="p-8 border-primary">
+      <div class="text-center">
+        <Badge variant="secondary" className="mb-4 animate-pulse">
+          {page.pricing.badge}
+        </Badge>
+        
+        <h2 class="text-4xl font-bold mb-4">
+          <span class="line-through text-muted-foreground">
+            ${page.pricing.originalPrice}
+          </span>
+          <span class="text-primary"> ${page.pricing.salePrice}</span>
+        </h2>
+        <p class="text-xl text-muted-foreground mb-8">
+          {page.pricing.description}
+        </p>
+
+        <div class="max-w-3xl mx-auto mb-8">
+          <AccordionWrapper items={pricingGroups} client:load />
+        </div>
+
+        <div class="bg-primary/5 p-6 rounded-lg mb-8">
+          <h3 class="font-bold mb-4">Included in Your Build</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+            {page.pricing.included.map(item => (
+              <div class="flex items-center gap-2">
+                <item.icon className="w-4 h-4 text-primary" />
+                <span>{item.title}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <Button
+          size="lg"
+          variant="outline"
+          className="animate-pulse w-full md:w-auto bg-white hover:bg-white/90 text-primary hover:text-primary border-2 border-primary hover:border-primary font-bold text-lg tracking-wide shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+          asChild
+        >
+          <a href="/stripe">
+            {page.pricing.cta} ✨
+          </a>
+        </Button>
+
+        <p class="mt-4 text-sm text-muted-foreground">
+          {page.pricing.guarantee}
+        </p>
+      </div>
+    </Card>
+  </div>
+</Layout>
+

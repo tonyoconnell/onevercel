@@ -2,15 +2,12 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
   RocketIcon,
   LayersIcon,
-  ReaderIcon,
   InfoCircledIcon,
   LightningBoltIcon,
-  CodeIcon,
   ArrowRightIcon,
 } from "@radix-ui/react-icons";
 import { ChatConfigSchema } from '../../schema/chat';
@@ -87,14 +84,6 @@ const iconMap: IconMap = {
 const getSectionIcon = (section: string) => {
   return iconMap[section] || InfoCircledIcon;
 };
-
-interface LearningPathStep {
-  title: string;
-  description: string;
-  icon: typeof RocketIcon;
-  level: string;
-}
-
 ---
 
 <Layout
