@@ -1,6 +1,5 @@
 ---
 import { Stripe as StripeClient } from "stripe";
-import Layout from "../layouts/Layout.astro";
 
 let session;
 let error: string | null = null;
@@ -42,20 +41,4 @@ try {
   error = e instanceof Error ? e.message : 'An error occurred with the payment system';
 }
 ---
-
-<Layout title="Stripe Payment">
-  <main className="container mx-auto px-4 py-8">
-    {error ? (
-      <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative" role="alert">
-        <strong className="font-bold">Error: </strong>
-        <span className="block sm:inline">{error}</span>
-      </div>
-    ) : (
-      <p className="text-gray-600">Processing your payment...</p>
-    )}
-    
-    <div className="mt-4">
-      <p className="text-sm text-gray-500">Note: Change the price ID to match what you have in Stripe</p>
-    </div>
-  </main>
-</Layout>
+Update price to match the subscription plan you created in your Stripe Dashboard. The `success_url` and `cancel_url` are set to `/thankyou` and `/stripe` respectively. You can update these URLs to match your site's structure.
