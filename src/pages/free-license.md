@@ -1,5 +1,6 @@
 ---
 layout: ../layouts/Text.astro
+
 title: "ONE License"  
 description: "Maximum Freedom. Zero Restrictions"
 chatConfig:
@@ -29,95 +30,65 @@ chatConfig:
         prompt: "Guide me through the different business models and pricing strategies I can implement with ONE"
 ---
 # ONE License (Version 1.0)
+## Maximum Freedom, Minimum Restrictions.
 
-## Unlimited Commercial Freedom
+This license empowers you with complete commercial freedom to use, reuse, modify, sell and resell the software, AI and data, at any price you wish.
 
-<div class="text-sm text-slate-600">
-Copyright (c) 2025 ONE (https://one.ie/)
-</div>
+No usage limits. No royalty fees. Just pure, unrestricted ability to innovate and profit from the software.
 
-ONE License gives you complete commercial freedom. Build products, create services, and generate revenue without restrictions. No usage limits. No royalty fees. Just pure business potential.
+You are free to run ONE locally, on your own servers, in the cloud and at the edge. 
 
-## Key Benefits
+You receive:
 
-- **✨ 100% Commercial Rights** - Sell products and services at any price point
-- **🚀 Full Modification Rights** - Customize and adapt the software freely
-- **💼 White-Label Ready** - Brand as your own solution
-- **🔄 Perpetual Usage** - Rights never expire
-- **🤝 Enterprise-Friendly** - Compatible with all major licenses
+1. Unlimited Rights
+   You have unrestricted rights to use, modify, license, sublicense, distribute, sell, resell and monetize 
+   the Software without restrictions.
 
-## Core Freedoms
+2. Permitted Actions
+   Including, but not limited to:
+   • Commercial use and integration into any systems
+   • Creation and sale of derivative works
+   • Providing software as a service
+   • AI training and content generation
+   • Patenting innovations based on the Software
+   • Open source applications and integrations
 
-1. **Commercial Use**
-   - Build commercial products
-   - Create SaaS offerings
-   - Integrate into any system
-   - No revenue sharing required
+3. License Compatibility
+   This license is compatible with all major open-source licenses, including:
+   • MIT License
+   • Apache License 2.0
+   • GNU General Public License (GPL)
+   • BSD Licenses
+   • Mozilla Public License
 
-2. **Technical Freedom**
-   - Run anywhere (cloud, local, edge)
-   - Modify source code
-   - Create derivative works
-   - Use with AI and ML systems
+4. Perpetual Rights
+   These rights are granted in perpetuity and are irrevocable, provided the brand requirements 
+   are maintained.
 
-3. **Business Freedom**
-   - Set your own pricing
-   - Choose your business model
-   - Distribute as you wish
-   - Patent your innovations
+5. Intellectual Property
+   • We retain ownership of the original Software
+   • You own any modifications you make
+   • You never have to share your code
 
-## Getting Started
+6. Liability and Warranty
+   The Software is provided "AS IS". We bear no liability for its use.
 
-Free forever, with three simple options:
+7. Brand Requirements
+   The only obligation is to:
+   • Display Powered by ONE text and logo linked to https://one.ie/ in the footer.  
 
-1. **Free** - Use ONE with minimal branding requirements
-2. **White-Label** - Remove branding from $100
-3. **Enterprise** - Custom solutions for your business
+8. Termination
+   This license only terminates if you remove or hide our brand. Reinstatement is available through written permission.
 
-Register at [one.ie](https://one.ie) to get started
+9. Dispute Resolution
+   • Resolved through good faith negotiation
+   • Mediation if needed
+   • Binding arbitration as last resort
 
-## White-Label Options
+10. Education
+    Find out how to build AI Agents for individuals and organizations at https://one.ie/learn
 
-Simple pricing to remove our branding:
-
-- **Free** - Complete freedom to use, modify, sell, or give away as brand partners
-- **$100** - White-label rights for a single project
-- **$1,000** - Unlimited white-label rights for all projects
-- **Enterprise** - Custom solutions and support available
-
-Benefits include:
-- Complete branding removal
-- Full commercial rights
-- Access to private Github repo (Enterprise)
-
-### White-Label Features
-
-1. **Instant Activation**
-   - Choose your plan
-   - Make a payment
-   - Immediately remove branding
-
-2. **Flexible Options**
-   - Pay with credit card
-   - Bank transfer available
-   - Subscription or one-time
-
-3. **Enterprise Benefits**
-   - Custom solutions
-   - Multi-project deployment
-   - Priority support and updates
-
-Contact [sales@one.ie](mailto:sales@one.ie) to discuss white-label options or visit our [pricing page](https://one.ie/pricing).
-
-## Legal Protection
-
-- **Perpetual Rights** - Your rights cannot be revoked if you follow the requirements
-- **IP Clarity** - You own your modifications
-- **License Compatibility** - Works with MIT, Apache 2.0, GPL, BSD, and Mozilla licenses
-- **Clear Dispute Resolution** - Simple three-step process:
-  1. Good faith negotiation
-  2. Mediation if needed
-  3. Binding arbitration as last resort
+This license is designed to maximise freedom to innovate and profit from free software, open source without restrictions. Therre is no copyleft requirement to share any code making it suitable for enterprise use. 
 
 ## Enterprise Solutions
 
@@ -128,5 +99,4 @@ Building something big? We're here to help:
 - Enterprise: Full support and deployment assistance
 - Training: Help getting your team started
 
-Our focus is on giving you maximum freedom with minimum restrictions.
-Contact [sales@one.ie](mailto:sales@one.ie) to discuss your needs.
+Contact [agent@one.ie](mailto:agent@one.ie) to share your needs.
