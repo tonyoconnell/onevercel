@@ -1,0 +1,60 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Stripe as StripeClient } from "stripe";
+import type { Stripe as StripeType } from 'stripe';
+
+const page = {
+  title: "Subscription | ONE",
+  description: "Subscribe to ONE's premium features",
+  showHeader: true,
+  showFooter: false,
+  showSidebar: true,
+  showChat: false,
+  seo: {
+    metaTitle: "Subscribe to ONE",
+    metaDescription: "Get access to premium features with ONE subscription",
+    metaKeywords: ["subscription", "premium", "ONE", "features"],
+  },
+};
+
+let session;
+let error = null;
+
+try {
+  const stripeKey = import.meta.env.STRIPE_SECRET_KEY;
+  if (!stripeKey) {
+    throw new Error('Stripe secret key is not configured');
+  }
+
+  const stripe = new StripeClient(stripeKey, {
+    apiVersion: '2025-01-27.acacia' // Add explicit API version
+  });
+  
+  const { origin } = Astro.url;
+  console.log('Creating Stripe session with origin:', origin); // Debug log
+  
+  session = await stripe.checkout.sessions.create({
+    mode: "subscription",
+    line_items: [
+      {
+        price: "price_0MC5WIqs14Mpveu1bfwvrkq6",
+        quantity: 1,
+      },
+    ],
+    success_url: `${origin}/thankyou?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${origin}/stripe`,
+  });
+
+  if (session.url) {
+    return Astro.redirect(session.url);
+  }
+} catch (e) {
+  console.error('Stripe error details:', {
+    error: e,
+    message: e instanceof Error ? e.message : 'Unknown error',
+    env: !!import.meta.env.STRIPE_SECRET_KEY ? 'Key exists' : 'Key missing'
+  });
+  error = e instanceof Error ? e.message : 'An error occurred with the payment system';
+}
+---
+<p>Fill in your product ID above and link to this page</p>
